@@ -29,7 +29,7 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
-
+	
 	<!-- 한글처리 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
