@@ -47,3 +47,17 @@ hr {
 	border-radius: 50px;
 	cursor: pointer;
 }
+
+.btn_purple {
+	font-weight: bold;
+	width: auto;
+	background: #8000ff;
+	padding: 10px 20px;
+	margin: 0 auto;
+	color: #ffffff;
+	text-align: center;
+	text-decoration: none;
+	border: none;
+	border-radius: 50px;
+	cursor: pointer;
+}

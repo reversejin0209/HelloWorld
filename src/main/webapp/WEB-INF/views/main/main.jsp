@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="conPath" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html>
@@ -17,12 +17,13 @@
 			<div class="visual_items">
 				<div class="main_item">
 					<div>
-					~ 06.09
-					<h1>
-						홈페이지 신규가입<br>특별우대
-					</h1>
-					<p>스마트예약<p><br>
-					<h2>25,000원 ~</h2>
+						~ 06.09
+						<h1>
+							홈페이지 신규가입<br>특별우대
+						</h1>
+						<p>스마트예약
+						<p><br>
+						<h2>25,000원 ~</h2>
 					</div>
 					<div>
 						<button class="btn_white" onclick="">예매하러 가기 &#128073;</button>
@@ -30,10 +31,30 @@
 				</div>
 				<!-- main_item -->
 				<div class="item_box">
-					<div class="item">날씨</div>
-					<div class="item">별점 기준 가장 인기있는 놀이기구 또는 놀이기구 위치 확인</div>
-					<div class="item">공연정보 01</div>
-					<div class="item">공연정보 02</div>
+					<div class="sub_item item1">
+						<h2>날씨</h2>
+					</div>
+					<div class="sub_item item2">
+						<div class="normal_box">
+							<h2>별점 기준 가장 인기있는 놀이기구 확인</h2>
+						</div>
+					</div>
+					<div class="sub_item item3">
+						<div class="normal_box">
+							<h2>렛츠 고! 코딩</h2>
+						</div>
+					</div>
+					<div class="sub_item item4">
+						<div class="normal_box">
+							<h2>코코의 모험:사이버 어드벤처</h2>
+						</div>
+						<!-- <div class="hover_box">
+							<h2>코코의 모험:사이버 어드벤처</h2>
+							<p>사이버 대마왕 자바에게 붙잡힌 딩딩을 구출하기 위해 모험을 떠나는 코코의 모험</p>
+							<button class="btn_white">예약하러가기</button>
+						</div> -->
+
+					</div>
 				</div>
 			</div>
 		</div>
@@ -44,7 +65,7 @@
 				<p class="main_today_title">TIME</p>
 				<h3>
 					<c:set var="now" value="<%=new java.util.Date()%>" />
-					<fmt:formatDate value="${now }" dateStyle="full"/>
+					<fmt:formatDate value="${now }" dateStyle="full" />
 				</h3>
 				<h1 class="main_clock">10:00 - 22:00</h1>
 			</div>
@@ -80,7 +101,11 @@
 		</div>
 		<!-- main_news -->
 
-		<div id="notice_box"></div>
+		<div id="notice_box">
+			<p>event</p>
+			<h1>공연 후기를 작성하고 티켓을 받아가세요!</h1>
+		</div>
 	</div>
+	<jsp:include page="../main/footer.jsp" />
 </body>
 </html>
