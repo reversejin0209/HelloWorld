@@ -13,19 +13,16 @@
 <body>
 	<div class="util">
 		<div class="utill_inner">
-			<div class="utill_inner_left">
-				KOR▾
-			</div>
+			<div class="utill_inner_left">KOR▾</div>
 			<div class="login">
-				<a href="">로그인</a>
-				<a href="">회원가입</a>
+				<a href="">로그인</a> <a href="">회원가입</a>
 			</div>
 		</div>
 	</div>
 	<header>
 		<div class="header_inner">
 			<div class="logo">
-				<h1>Hello World</h1>
+				<img alt="헬로월드 로고" src="${conPath }/img/logo.png">
 			</div>
 			<nav>
 				<ul>
