@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lec.helloworld.dao.QnaBoardDao">
+	<resultMap type="QnaBoard" id="QnaBoardResult">
+		<result property="qanum" column="qanum"/>
+		<result property="mid" column="mid"/>
+		<result property="adid" column="adid"/>
+		<result property="qacat" column="qacat"/>
+		<result property="qatitle" column="qatitle"/>
+		<result property="qacontent" column="qacontent"/>
+		<result property="qapw" column="qapw"/>
+		<result property="qaimg" column="qaimg"/>
+		<result property="qardate" column="qardate"/>
+		<result property="qahit" column="qahit"/>
+		<result property="qagroup" column="qagroup"/>
+		<result property="qastep" column="qastep"/>
+		<result property="qaindent" column="qaindent"/>
+		<result property="qaip" column="qaip"/>
+	</resultMap>
+	
+	<!-- Qna게시판 목록 -->
+	<select id="qnaBoardList" parameterType="QnaBoard" resultMap="QnaBoardResult">
+		<!-- 전체 출력 -->
+		SELECT * 
+		  FROM (SELECT ROWNUM RN, QNA.* 
+                	  FROM (SELECT * FROM QNABOARD 
+                       	 ORDER BY QAGROUP DESC, QASTEP) QNA)
+       	 WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<!-- Qna게시판 총 글 갯수  -->
+	<select id="totCntQna" parameterType="QnaBoard" resultType="int">
+		<!-- 전체 글 갯수 -->
+		SELECT COUNT(*) FROM QNABOARD
+	</select>
+</mapper>

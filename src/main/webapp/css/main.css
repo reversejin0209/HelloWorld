@@ -1,0 +1,117 @@
+@charset "UTF-8";
+
+#main {
+	
+}
+
+/* visual */
+#visual {
+	background-color: #fafafa;
+}
+
+#main #visual .visual_items {
+	width: 1140px;
+	margin: 0 auto;
+	height: 640px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+/* main_item */
+#main #visual .visual_items .main_item {
+	width: 360px;
+	height: 540px;
+	border-radius: 14px;
+	box-sizing: border-box;
+	padding: 40px 30px;
+	color: #ffffff;
+	/* background-color: #8000ff; */
+	background: linear-gradient(#8000ff, #6800ea);
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+}
+
+/* item_box */
+#main #visual .visual_items .item_box {
+	width: 750px;
+	height: 540px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-content: space-between;
+}
+
+#main #visual .visual_items .item_box .sub_item {
+	width: 360px;
+	height: 255px;
+	background-color: #ffffff;
+	border-radius: 14px;
+	box-sizing: border-box;
+	padding: 40px 30px;
+	overflow: hidden;
+}
+
+.sub_item.item4 {
+	/* width: 280px;
+	height: 195px; */
+	background-image: url('../img/main_item04.png');
+	color: white;
+}
+
+/* main_today */
+#main_today, #main_news {
+	width: 1140px;
+	margin: 0 auto;
+	height: 200px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+#main_today>div {
+	width: 570px;
+	padding: 0 60px;
+}
+
+#main_today .main_today_left {
+	border-right: 1px solid #efefef;
+}
+
+.main_today_title {
+	margin: 10px 0;
+}
+
+h1.main_clock {
+	font-family: 'Poppins', sans-serif;
+	font-size: 50px;
+	color: #8000ff;
+}
+
+/* main_news */
+#main_news {
+	width: 1020px;
+	margin: 0 auto;
+	height: 300px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+#main_news>div {
+	width: 490px;
+}
+
+/* notice_box */
+#notice_box {
+	width: 1140px;
+	height: 200px;
+	margin: 0 auto;
+	padding: 40px;
+	box-sizing: border-box;
+	/* background-color: #353535; */
+	background: linear-gradient(#353535, #282828);
+	border-radius: 14px;
+	color: #ffffff;
+}

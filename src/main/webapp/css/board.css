@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+/* 공통 */
+.title{
+	width: 580px;
+}
+
+/* 공지사항 등 정보 테이블 */
+.list_table{
+	margin: 40px 0;
+	border-collapse: collapse;
+}
+
+.list_table tr{
+	text-align: center;
+	cursor: pointer;
+}
+
+.list_table th{
+	font-size: 16px;
+	background-color: #fafafa;
+	border-top: 1px solid #282828;
+	color: #353535;
+	padding: 16px;
+}
+
+.list_table td{
+	font-size: 16px;
+	color: #686868;
+	border-bottom: 1px solid #bfbfbf;
+	padding: 12px;
+}
