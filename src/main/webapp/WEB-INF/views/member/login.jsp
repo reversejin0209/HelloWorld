@@ -19,7 +19,7 @@
 	<c:if test="${joinResult eq FAIL}">
 		<script>
 			alert('회원가입 실패되었습니다. 다시 확인해주세요');
-			location.href = '${conPath }/joinView.do';
+			location.href = '${conPath }/member/mJoin';
 		</script>
 	</c:if>
 	<jsp:include page="../main/header.jsp"/>
