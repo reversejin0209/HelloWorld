@@ -48,15 +48,8 @@ public class MemberController {
 	
 	@RequestMapping(value="mJoin", method=RequestMethod.POST)
 	public String mJoin(Member member, Model model, HttpSession httpSession) {
-		int tempResult = memberService.memberJoin(member);
-		String joinResult = null;
-		if(tempResult==1) {
-			model.addAttribute(joinResult, "회원가입 성공했습니다. 환영합니다");
-			return "main/main";
-		} else {
-			model.addAttribute(joinResult, "회원가입 실패했습니다. 다시 확인해주세요");
-			return "main/main";
-		}
+		model.addAttribute("joinResult", memberService.memberJoin(member, httpSession));
+		return "member/login";
 	}
 	
 	@RequestMapping(value="mIdConfirm", method={RequestMethod.GET, RequestMethod.POST})
@@ -67,13 +60,13 @@ public class MemberController {
 	
 	@RequestMapping(value="mTelConfirm", method={RequestMethod.GET, RequestMethod.POST})
 	public String mTelConfirm(String mtel, Model model) {
-		model.addAttribute("idConfirmResult", memberService.memberTelConfirm(mtel));
+		model.addAttribute("telConfirmResult", memberService.memberTelConfirm(mtel));
 		return "member/mTelConfirm";
 	}
 	
 	@RequestMapping(value="mEmConfirm", method={RequestMethod.GET, RequestMethod.POST})
 	public String mEmConfirm(String mmail, Model model) {
-		model.addAttribute("idConfirmResult", memberService.memberEmConfirm(mmail));
+		model.addAttribute("emailConfirmResult", memberService.memberEmConfirm(mmail));
 		return "member/mMailConfirm";
 	}
 }

@@ -15,7 +15,7 @@ public class QnaBoardController {
 
 	@Autowired
 	private QnaBoardService qBoardService;
-	
+
 	@RequestMapping(value = "qBoardList")
 	public String qBoardList(QnaBoard qnaBoard, String pageNum, Model model) {
 		model.addAttribute("qnaList", qBoardService.qnaBoardList(qnaBoard, pageNum));

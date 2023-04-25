@@ -42,6 +42,10 @@ INSERT INTO MEMBER (MID, MMAIL, MPW, MNAME, MTEL)
     VALUES ('fff', 'hong@hong.com', '11', '홍길동', '010-9999-9999');
 INSERT INTO MEMBER (MID, MMAIL, MPW, MNAME, MTEL)
     VALUES ('sss', 'song@song.com', '11', '송길동', '010-9999-8888');
+INSERT INTO MEMBER (MID, MMAIL, MPW, MNAME, MTEL)
+    VALUES ('bbb', 'back@back.com', '11', '백길동', '010-0100-0100');
+INSERT INTO MEMBER (mID, mMAIL, mPW, mNAME, MTEL)
+    VALUES ('aaa', 'aaa@naver.com', '111', '에이길동', '010-1111-1111');
 INSERT INTO MEMBER (MID, MMAIL, MPW, MNAME, MTEL, MVISIT)
      VALUES ('zzz', 'aaa@gmail.com', '111', '제트길동', '010-3333-3333', 11);
 INSERT INTO MEMBER (MID, MMAIL, MPW, MNAME, MTEL)
@@ -107,43 +111,37 @@ INSERT INTO TICKET (TCODE, TNAME, TTYPE, TPRICE)
      VALUES ('TI' || LPAD(TICKET_SEQ.NEXTVAL, 4, 0)
            , '헬로월드 종일권'
            , '대인'
-           , '68000'
-);
-
+           , '68000');
+           
 INSERT INTO TICKET (TCODE, TNAME, TTYPE, TPRICE)
      VALUES ('TI' || LPAD(TICKET_SEQ.NEXTVAL, 4, 0)
            , '헬로월드 종일권'
            , '청소년'
-           , '62000'
-);
-    
+           , '62000'); 
+           
 INSERT INTO TICKET (TCODE, TNAME, TTYPE, TPRICE)
      VALUES ('TI' || LPAD(TICKET_SEQ.NEXTVAL, 4, 0)
            , '헬로월드 종일권'
            , '소인/경로'
-           , '52000'
-);
+           , '52000');
 
 INSERT INTO TICKET (TCODE, TNAME, TTYPE, TPRICE)
      VALUES ('TI' || LPAD(TICKET_SEQ.NEXTVAL, 4, 0)
            , '헬로월드 종일권(삼성카드 할인)'
            , '대인'
-           , '32000'
-);
+           , '32000');
 
 INSERT INTO TICKET (TCODE, TNAME, TTYPE, TPRICE)
      VALUES ('TI' || LPAD(TICKET_SEQ.NEXTVAL, 4, 0)
            , '헬로월드 오후권'
            , '대인'
-           , '46000'
-);
+           , '46000');
 
 INSERT INTO TICKET (TCODE, TNAME, TTYPE, TPRICE)
      VALUES ('TI' || LPAD(TICKET_SEQ.NEXTVAL, 4, 0)
            , '헬로월드 오후권'
            , '청소년'
-           , '42000'
-);
+           , '42000');
 
 -- TICKET_RES ------------------------------------------------------------------
 INSERT INTO TICKET_RES (TRCODE, MID, TRTOTPRICE)
@@ -154,14 +152,14 @@ INSERT INTO TICKET_RES (TRCODE, MID, TRTOTPRICE)
 -- TICKET_RESDETAIL ------------------------------------------------------------
 INSERT INTO TICKET_RESDETAIL (TRDCODE, TRCODE, TCODE, TRDCNT, TRDDATE)
      VALUES (TICKET_RESDETAIL_SEQ.NEXTVAL
-           , '202304240001'
+           , '202304190001'
            , 'TI0001'
            , 2
            , '2023/04/01');
 
 INSERT INTO TICKET_RESDETAIL (TRDCODE, TRCODE, TCODE, TRDCNT, TRDDATE)
      VALUES (TICKET_RESDETAIL_SEQ.NEXTVAL
-           , '202304240001'
+           , '202304190001'
            , 'TI0002'
            , 1
            , '2023/04/01');
@@ -174,8 +172,7 @@ INSERT INTO TICKET_RESDETAIL (TRDCODE, TRCODE, TCODE, TRDCNT, TRDDATE)
            , '2023/04/01');
            
 -- QNABOARD --------------------------------------------------------------------
-INSERT INTO QNABOARD
-            (QANUM, MID, ADID, QATITLE, QACONTENT
+INSERT INTO QNABOARD (QANUM, MID, ADID, QATITLE, QACONTENT
            , QAPW, QAIMG, QAGROUP, QASTEP, QAINDENT, QAIP)
      VALUES (QNABOARD_SEQ.NEXTVAL
            , 'aaa'
@@ -189,6 +186,4 @@ INSERT INTO QNABOARD
            , 0
            , '195.0.0.1'); 
 
-
-
-
+COMMIT;

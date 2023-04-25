@@ -8,7 +8,6 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<link href="${conPath }/css/member/join.css" rel="stylesheet">
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
   <script>
@@ -42,7 +41,7 @@
   				$('#telConfirmResult').html('<b>전화번호 형식을 지켜주세요</b>');
   			} else {
 	  			$.ajax({
-	  				url : '${conPath}/member/mtelConfirm.do',
+	  				url : '${conPath}/member/mTelConfirm.do',
 	  				type : 'get',
 	  				data : 'mtel='+mtel,
 	  				dataType : 'html',
@@ -54,17 +53,17 @@
   		}); 
   		// keyup event(email 중복 확인용)   		
   		var patternMemail = /^[a-zA-Z0-9_\.]+@[a-zA-Z0-9_]+(\.\w+){1,2}$/;
-  		$('input[name="memail"]').keyup(function(){
-  			var memail = $(this).val().trim();
-  			if(memail==""){
+  		$('input[name="mmail"]').keyup(function(){
+  			var mmail = $(this).val().trim();
+  			if(mmail==""){
   				$('#emailConfirmResult').html('&nbsp; &nbsp; &nbsp;');
-  			} else if(!memail.match(patternMemail)){
+  			} else if(!mmail.match(patternMemail)){
   				$('#emailConfirmResult').html('<b>메일 형식을 지켜 주세요</b>');
   			} else{
   				$.ajax({
-  					url : '${conPath}/member/memailConfirm.do',
+  					url : '${conPath}/member/mEmConfirm.do',
   					type : 'get',
-  					data : 'memail='+memail,
+  					data : 'mmail='+mmail,
   					dataType : 'html',
   					success : function(data){
   						$('#emailConfirmResult').html(data);
@@ -116,7 +115,7 @@
 <body>
 	<jsp:include page="../main/header.jsp"/>
 	<div id="joinForm_wrap">
-		<form action="${conPath }/join.do" method="post">
+		<form action="${conPath }/member/mJoin.do" method="post">
 			<div id="join_title">회원가입</div>
 			<table>
 				<tr>
@@ -142,8 +141,8 @@
 					</td>
 				</tr>
 				<tr>
-					<th><label for="mkname">이름</label></th>
-					<td><input type="text" name="mkname" id="mkname" class="mkname" required="required"></td>
+					<th><label for="mname">이름</label></th>
+					<td><input type="text" name="mname" id="mname" class="mname" required="required"></td>
 				</tr>
 				<tr>
 					<th><label for="mtel">연락처</label></th>
@@ -153,9 +152,9 @@
 					</td>
 				</tr>
 				<tr>
-					<th><label for="memail">이메일</label></th>
+					<th><label for="mmail">이메일</label></th>
 					<td>
-						<input type="text" name="memail" id="memail" class="memail" required="required">
+						<input type="text" name="mmail" id="mmail" class="mmail" required="required">
 						<div id="emailConfirmResult"> &nbsp; &nbsp; &nbsp; </div>
 					</td>
 				</tr>			

@@ -20,7 +20,7 @@
 	<insert id="memberJoin" parameterType="Member">
 		<!-- 회원 가입 -->
 		INSERT INTO MEMBER (MID, MMAIL, MPW, MNAME, MTEL)
-    		 VALUES (#{mid}, #{mmail}, #{mpw}, #{mname}, #{mtel});
+    		 VALUES (#{mid}, #{mmail}, #{mpw}, #{mname}, #{mtel})
 	</insert>
 	
 	<select id="memberIdConfirm" parameterType="String" resultType="int">
@@ -29,12 +29,13 @@
 	</select>
 	
     <select id="memberTelConfirm" parameterType="String" resultType="int">
-		tel 중복확인
+		<!-- tel 중복확인 -->
 		SELECT COUNT(*) FROM MEMBER WHERE mTEL = #{mtel}
 	</select>
 	
 	<select id="memberEmConfirm" parameterType="String" resultType="int">
-		email 중복확인
+		<!-- email 중복확인 -->
 		SELECT COUNT(*) FROM MEMBER WHERE mMAIL = #{mmail}
 	</select>
+	
 </mapper>

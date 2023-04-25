@@ -71,8 +71,8 @@ UPDATE TICKET_RES
 --        GROUP BY RES.TRCODE) SUM
 -- WHERE RES.TRCODE = SUM.TRCODE;
 
--- QNABOARD
 
+-- QNABOARD
 -- id = registerQnA
 -- 질문 등록
 -- 이미지 첨부한 경우
@@ -155,3 +155,68 @@ SELECT * FROM (SELECT ROWNUM RN, QNA.*
 -- 게시글 삭제(답변까지 삭제 되도록)
 DELETE FROM QNABOARD
     WHERE QAGROUP = 2;
+    -- 전체 출력
+    SELECT LIST.*,
+           (SELECT MID FROM MEMBER WHERE LIST.MID = MID) ||
+           (SELECT ADID FROM ADMIN WHERE LIST.ADID = ADID) WRITER
+      FROM (SELECT ROWNUM RN, QNA.* 
+              FROM (SELECT * FROM QNABOARD 
+                     ORDER BY QAGROUP DESC, QASTEP) QNA) LIST
+     WHERE RN BETWEEN 1 AND 8;
+    
+    -- 검색: All
+    SELECT LIST.*,
+           (SELECT MID FROM MEMBER WHERE LIST.MID = MID) ||
+           (SELECT ADID FROM ADMIN WHERE LIST.ADID = ADID) WRITER
+      FROM (SELECT ROWNUM RN, QNA.* 
+              FROM (SELECT * 
+                      FROM QNABOARD 
+                     WHERE MID LIKE '%'||''||'%'
+                       AND QATITLE LIKE '%'||'문의'||'%'
+                     ORDER BY QAGROUP DESC, QASTEP) QNA) LIST
+    WHERE RN BETWEEN 1 AND 8;
+    
+    -- 검색: title
+    SELECT LIST.*,
+           (SELECT MID FROM MEMBER WHERE LIST.MID = MID) ||
+           (SELECT ADID FROM ADMIN WHERE LIST.ADID = ADID) WRITER
+      FROM (SELECT ROWNUM RN, QNA.* 
+              FROM (SELECT * 
+                      FROM QNABOARD 
+                     WHERE QATITLE LIKE '%'||'문의'||'%'
+                     ORDER BY QAGROUP DESC, QASTEP) QNA) LIST
+    WHERE RN BETWEEN 1 AND 8;
+    
+    -- 검색: writer
+    SELECT LIST.*,
+           (SELECT MID FROM MEMBER WHERE LIST.MID = MID) ||
+           (SELECT ADID FROM ADMIN WHERE LIST.ADID = ADID) WRITER
+      FROM (SELECT ROWNUM RN, QNA.* 
+              FROM (SELECT * 
+                      FROM QNABOARD 
+                     WHERE MID LIKE '%'||'aaa'||'%'
+                     ORDER BY QAGROUP DESC, QASTEP) QNA) LIST
+    WHERE RN BETWEEN 1 AND 8;
+
+-- id = totCntQna        
+-- QNA 게시판 총 글 갯수
+    -- 전체 출력
+    SELECT COUNT(*) FROM QNABOARD;
+    
+    -- 검색: ALL
+    SELECT COUNT(*) 
+      FROM QNABOARD
+     WHERE MID LIKE '%'||''||'%'
+       AND QATITLE LIKE '%'||'문의'||'%';
+    -- 검색: TITLE
+    SELECT COUNT(*) 
+      FROM QNABOARD
+     WHERE QATITLE LIKE '%'||'문의'||'%';
+    -- 검색: WRITER
+    SELECT COUNT(*) 
+      FROM QNABOARD
+     WHERE MID LIKE '%'||'aaa'||'%';
+    
+-- 게시글 삭제(답변까지 삭제 되도록)
+DELETE FROM QNABOARD
+ WHERE QAGROUP = 2;

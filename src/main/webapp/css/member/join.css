@@ -42,7 +42,7 @@
 	text-align: center;
 }
 
-.mkname, .mename, .mid, .mpw, .mpwChk, .mbirth, .mtel, .memail, .mgender, .mnation {
+.mname, .mid, .mpw, .mpwChk, .mtel, .mmail {
 	border: 1px solid #FFFFFF; 
 	height: 32px;	
 	width: 95%; 
@@ -79,4 +79,5 @@ input:focus {
 
 #idConfirmResult, #pwChkResult, #telConfirmResult, #emailConfirmResult {
 	font-size: 0.8em;
+	height: 25px;
 }

@@ -10,10 +10,13 @@
 <title>Insert title here</title>
 <link href="${conPath }/css/style.css" rel="stylesheet">
 <link href="${conPath }/css/board.css" rel="stylesheet">
+<!-- 검색 아이콘 -->
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
 	$(document).ready(function() {
-		
+
 	});
 </script>
 </head>
@@ -21,9 +24,27 @@
 	<jsp:include page="../main/header.jsp" />
 	<div id="wrap">
 		<h1 class="center">QnA 질문게시판</h1>
-		<div>
-			<div class="board_left"></div>
-			<div class="board_right"></div>
+		<div class="search_box">
+			<form action="${conPath }/qnaBoard/qBoardList.do" method="get"
+				class="right">
+				<select name="schItem">
+					<option value=""
+						<c:if test="${param.schItem eq '' }" >selected="selected"</c:if>>검색
+						조건</option>
+					<option value="all"
+						<c:if test="${param.schItem eq 'all' }" >selected="selected"</c:if>>전체검색</option>
+					<option value="btitle"
+						<c:if test="${param.schItem eq 'title' }" >selected="selected"</c:if>>제목</option>
+					<option value="bwriter"
+						<c:if test="${param.schItem eq 'writer' }" >selected="selected"</c:if>>작성자</option>
+				</select>
+				<div class="search">
+					<input type="text" name="schWord" value="${param.schWord }">
+					<button>
+						<span class="material-symbols-rounded"> search </span>
+					</button>
+				</div>
+			</form>
 		</div>
 		<table class="list_table">
 			<tr>
@@ -44,32 +65,49 @@
 				<c:forEach var="qna" items="${qnaList }">
 					<tr>
 						<td>${qna.qanum }</td>
-						<td class="title left">
-							<c:forEach var="i" begin="1" end="${qna.qaindent }">
+						<td class="title left"><c:forEach var="i" begin="1"
+								end="${qna.qaindent }">
 								<c:if test="${i != qna.qaindent }">
 									 &nbsp; &nbsp; 
 								</c:if>
 								<c:if test="${i == qna.qaindent }">
 									 ㄴ
 								</c:if>
-							</c:forEach>
-							${qna.qatitle }
-							<c:if test="${qna.qahit > 10}">&#127752;<b class="red">인기글</b>
-							</c:if>
-							<!-- 인기글 -->
-							<c:if test="${not empty review.rphoto}">&#128196;</c:if>
-							<!-- 파일첨부 -->
-						</td>
+							</c:forEach> ${qna.qatitle } <c:if test="${qna.qahit > 10}">&#127752;<b
+									class="red">인기글</b>
+							</c:if> <!-- 인기글 --> <c:if test="${not empty review.rphoto}">&#128196;</c:if>
+							<!-- 파일첨부 --></td>
 						<td>${qna.mid }</td>
 						<td>${qna.qahit }</td>
-						<td>
-							<fmt:formatDate value="${qna.qardate }" type="date" dateStyle="short" />
-						</td>
+						<td><fmt:formatDate value="${qna.qardate }" type="date"
+								dateStyle="short" /></td>
 					</tr>
 				</c:forEach>
 			</c:if>
 		</table>
 
+		<div id="paging">
+			<c:if test="${paging.startPage>paging.blockSize}">
+				<a
+					href="${conPath }/qnaBoard/qBoardList.do?pageNum=${paging.startPage-1 }&schItem=${param.schItem }&schWord=${param.schWord}">이전</a>
+			</c:if>
+
+			<c:forEach var="i" begin="${paging.startPage}"
+				end="${paging.endPage }">
+				<c:if test="${paging.currentPage==i }">
+					<span>${i }</span>
+				</c:if>
+				<c:if test="${paging.currentPage != i }">
+					<a
+						href="${conPath }/qnaBoard/qBoardList.do?method=list&pageNum=${i }&schItem=${param.schItem }&schWord=${param.schWord}">${i }</a>
+				</c:if>
+			</c:forEach>
+
+			<c:if test="${paging.endPage<paging.pageCnt }">
+				<a
+					href="${conPath }/qnaBoard/qBoardList.do&pageNum=${paging.endPage+1 }&schItem=${param.schItem }&schWord=${param.schWord}">다음</a>
+			</c:if>
+		</div>
 	</div>
 	<jsp:include page="../main/footer.jsp" />
 </body>

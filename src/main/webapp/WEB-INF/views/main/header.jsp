@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="conPath" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
@@ -27,7 +28,8 @@
 	<nav>
 		<div class=nav_inner>
 			<div class="logo">
-				<img alt="헬로월드 로고" src="${conPath }/img/logo.png" onclick="location.href='${conPath}/main.do'">
+				<img alt="헬로월드 로고" src="${conPath }/img/logo.png"
+					onclick="location.href='${conPath}/main.do'">
 			</div>
 			<ul class="menu_item">
 				<li><a href="#">이용정보</a></li>
@@ -80,9 +82,9 @@
 					</ul></li>
 				<li><a href="#">더 알아보기</a></li>
 			</ul>
-		<div class="promotion">
-			<img alt="할인프로모션" src="${conPath }/img/header_nPay.png">
-		</div>
+			<div class="promotion">
+				<img alt="할인프로모션" src="${conPath }/img/header_nPay.png">
+			</div>
 		</div>
 	</nav>
 </body>
