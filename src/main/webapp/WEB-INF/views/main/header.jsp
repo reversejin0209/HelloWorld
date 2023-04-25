@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="conPath" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
@@ -14,11 +15,7 @@
 		<div class="utill_inner">
 			<div class="utill_inner_left">KOR▾</div>
 			<div class="login">
-<<<<<<< HEAD
-				<a href="">로그인</a> <a href="">회원가입</a>
-=======
 				<a href="${conPath }/ member/mLogin.do">로그인</a> <a href="">회원가입</a>
->>>>>>> fd63761d6249ab010c16fc3c0ca2764353067aee
 			</div>
 		</div>
 	</div>
@@ -26,7 +23,8 @@
 	<nav>
 		<div class=nav_inner>
 			<div class="logo">
-				<img alt="헬로월드 로고" src="${conPath }/img/logo.png" onclick="location.href='${conPath}/main.do'">
+				<img alt="헬로월드 로고" src="${conPath }/img/logo.png"
+					onclick="location.href='${conPath}/main.do'">
 			</div>
 			<ul class="menu_item">
 				<li><a href="#">이용정보</a></li>
@@ -79,9 +77,9 @@
 					</ul></li>
 				<li><a href="#">더 알아보기</a></li>
 			</ul>
-		<div class="promotion">
-			<img alt="할인프로모션" src="${conPath }/img/header_nPay.png">
-		</div>
+			<div class="promotion">
+				<img alt="할인프로모션" src="${conPath }/img/header_nPay.png">
+			</div>
 		</div>
 	</nav>
 </body>

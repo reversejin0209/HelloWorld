@@ -1,39 +1,96 @@
 @charset "UTF-8";
 
 /* 공통 */
-.title{
+.title {
 	width: 580px;
 }
 
+/* 검색 */
+.search_box>form {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.search_box select {
+	width: 110px;
+	height: 42px;
+	padding: 8px 12px;
+	box-sizing: border-box;
+	border: 1px solid #a0a0a0;
+	border-radius: 8px;
+}
+
+.search_box .search {
+	height: 42px;
+	padding: 8px 12px;
+	box-sizing: border-box;
+	border: 1px solid #a0a0a0;
+	border-radius: 8px;
+	margin-left: 10px;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.search_box .search>input {
+	border: 0px;
+	outline: none;
+}
+
+.search_box .search>button {
+	border: 0px;
+	outline: none;
+	background: #ffffff;
+	padding-top: 5px;
+	cursor: pointer;
+}
+
+/* ---------- 테이블 ---------- */
 /* 공지사항 등 정보 테이블 */
-.list_table{
-	margin: 40px 0;
+.list_table {
+	margin: 20px 0;
 	border-collapse: collapse;
 }
 
-.list_table tr{
+.list_table tr {
 	text-align: center;
 	cursor: pointer;
 }
 
-.list_table th{
+.list_table th {
 	font-size: 16px;
 	background-color: #fafafa;
 	border-top: 1px solid #282828;
 	color: #353535;
-<<<<<<< HEAD
-	padding: 20px;
-=======
 	padding: 16px;
->>>>>>> fd63761d6249ab010c16fc3c0ca2764353067aee
 }
 
-.list_table td{
+.list_table td {
 	font-size: 16px;
 	color: #686868;
 	border-bottom: 1px solid #bfbfbf;
-<<<<<<< HEAD
-=======
 	padding: 12px;
->>>>>>> fd63761d6249ab010c16fc3c0ca2764353067aee
+}
+
+/* 페이징 */
+#paging {
+	text-align: center;
+}
+
+#paging>span {
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	border-radius: 22px;
+	background: #8000ff;
+	color: #ffffff;
+	border-radius: 22px;
+}
+
+#paging>a {
+	display: inline-block;
+	width: 40px;
+	color: #686868;
 }

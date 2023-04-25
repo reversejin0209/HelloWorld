@@ -4,14 +4,14 @@
 INSERT INTO MEMBER (MID, MMAIL, MPW, MNAME, MTEL)
      VALUES ('aaa', 'aaa.gmail.com', '111', 'SCOTT', '010-1111-1111');
     --> 1-2. ID Confirm
-SELECT * FROM MEMBER WHERE mID = 'aaa';
+SELECT COUNT(*) FROM MEMBER WHERE mID = 'aaa';
     --> 1-3. Tel Confirm
-SELECT * FROM MEMBER WHERE mTEL = '010-1111-1111';
+SELECT COUNT(*) FROM MEMBER WHERE mTEL = '010-1111-1111';
     --> 1-4. Emial Confirm
-SELECT * FROM MEMBER WHERE mMAIL = 'aaa.gmail.com';
+SELECT COUNT(*) FROM MEMBER WHERE mMAIL = 'aaa.gmail.com';
 
 -- 2. 로그인
-SELECT * FROM MEMBER WHERE mID = 'aaa' AND mPW = '111';
+SELECT COUNT(*) FROM MEMBER WHERE mID = 'aaa' AND mPW = '111';
 
 -- 3. 정보수정
 UPDATE MEMBER 
@@ -30,12 +30,9 @@ SELECT * FROM (SELECT ROWNUM RW, A.* FROM (SELECT * FROM THREVIEW WHERE mID = 'a
 -- 5. 회원 등급 조정
 SELECT M.*, G.GRADE FROM MEMBER M, MEMBER_GRADE G
     WHERE M.MVISIT > G.LOWVI AND M.mVISIT < G.HIGHVI;
-
+    
 -- 6. 회원 탈퇴
 DELETE MEMBER WHERE mID = 'aaa';
-
--- 7. 회원 상세보기 (마이페이지 용)
-SELECT * FROM MEMBER WHERE mID = 'aaa';
 
 SELECT * FROM MEMBER;
 ---------------------------------- THEATER -------------------------------------
