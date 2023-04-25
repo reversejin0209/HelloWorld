@@ -167,3 +167,7 @@ nav .nav_inner {
 .nav_inner .promotion {
 	line-height: 0px;
 }
+
+.nav_inner .promotion img{
+	height: 40px;
+}
