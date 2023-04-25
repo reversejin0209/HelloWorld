@@ -15,7 +15,12 @@
 		<div class="utill_inner">
 			<div class="utill_inner_left">KOR▾</div>
 			<div class="login">
-				<a href="${conPath }/ member/mLogin.do">로그인</a> <a href="">회원가입</a>
+				<c:if test="${empty member }">
+					<a href="${conPath }/member/mLogin.do">로그인</a> <a href="${conPath }/member/mJoin.do">회원가입</a>
+				</c:if>
+				<c:if test="${not empty member }">
+					<a href="#">${member.mname }님</a> <a href="${conPath }/member/mLogout.do">로그아웃</a>
+				</c:if>
 			</div>
 		</div>
 	</div>

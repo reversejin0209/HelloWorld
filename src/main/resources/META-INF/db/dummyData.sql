@@ -112,13 +112,13 @@ INSERT INTO TICKET (TCODE, TNAME, TTYPE, TPRICE)
            , '헬로월드 종일권'
            , '대인'
            , '68000');
-
+           
 INSERT INTO TICKET (TCODE, TNAME, TTYPE, TPRICE)
      VALUES ('TI' || LPAD(TICKET_SEQ.NEXTVAL, 4, 0)
            , '헬로월드 종일권'
            , '청소년'
-           , '62000');
-    
+           , '62000'); 
+           
 INSERT INTO TICKET (TCODE, TNAME, TTYPE, TPRICE)
      VALUES ('TI' || LPAD(TICKET_SEQ.NEXTVAL, 4, 0)
            , '헬로월드 종일권'
@@ -166,18 +166,17 @@ INSERT INTO TICKET_RESDETAIL (TRDCODE, TRCODE, TCODE, TRDCNT, TRDDATE)
            
 INSERT INTO TICKET_RESDETAIL (TRDCODE, TRCODE, TCODE, TRDCNT, TRDDATE)
      VALUES (TICKET_RESDETAIL_SEQ.NEXTVAL
-           , '202304190002'
+           , '202304240002'
            , 'TI0006'
            , 2
            , '2023/04/01');
            
 -- QNABOARD --------------------------------------------------------------------
-INSERT INTO QNABOARD
-            (QANUM, MID, QACAT, QATITLE, QACONTENT
+INSERT INTO QNABOARD (QANUM, MID, ADID, QATITLE, QACONTENT
            , QAPW, QAIMG, QAGROUP, QASTEP, QAINDENT, QAIP)
      VALUES (QNABOARD_SEQ.NEXTVAL
-           , 'sss'
-           , '이용문의'
+           , 'aaa'
+           , NULL
            , '문의드립니다'
            , '문의 내용'
            , '111'
@@ -188,5 +187,3 @@ INSERT INTO QNABOARD
            , '195.0.0.1'); 
 
 COMMIT;
-
-SELECT * FROM MEMBER;

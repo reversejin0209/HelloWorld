@@ -71,39 +71,40 @@ UPDATE TICKET_RES
 --        GROUP BY RES.TRCODE) SUM
 -- WHERE RES.TRCODE = SUM.TRCODE;
 
--- QNABOARD --------------------------------------------------------------------
+
+-- QNABOARD
 -- id = registerQnA
 -- 질문 등록
 -- 이미지 첨부한 경우
 INSERT INTO QNABOARD
-            (QANUM, MID, QACAT, QATITLE, QACONTENT
+            (QANUM, MID, ADID, QATITLE, QACONTENT
            , QAPW, QAIMG, QAGROUP, QASTEP, QAINDENT, QAIP)
      VALUES (QNABOARD_SEQ.NEXTVAL
-           , 'ccc'
-           , '이용문의'
+           , 'aaa'
+           , NULL
            , '문의드립니다'
            , '문의 내용'
            , '111'
-           , 'noimg.png'
+           , NULL
            , QNABOARD_SEQ.CURRVAL
            , 0
            , 0
-           , '195.0.0.1'); 
+           , '195.0.0.1');
            
 -- 이미지 첨부 안한 경우
 INSERT INTO QNABOARD
-            (QANUM, MID, QACAT, QATITLE, QACONTENT
+            (QANUM, MID, ADID, QATITLE, QACONTENT
            , QAPW, QAGROUP, QASTEP, QAINDENT, QAIP)
      VALUES (QNABOARD_SEQ.NEXTVAL
-           , 'ccc'
-           , '이용문의'
+           , 'aaa'
+           , NULL
            , '문의드립니다'
            , '문의 내용'
            , '111'
            , QNABOARD_SEQ.CURRVAL
            , 0
            , 0
-           , '195.0.0.1'); 
+           , '195.0.0.1');
            
 -- 조회수 증가
 UPDATE QNABOARD
@@ -117,8 +118,7 @@ SELECT * FROM QNABOARD
 -- 질문 수정
 -- id = modifyQnA
 UPDATE QNABOARD 
-   SET QACAT = '분실문의'
-     , QATITLE = '수정테스트'
+   SET QATITLE = '수정테스트'
      , QACONTENT = '수정테스트입니다.'
      , QAIMG = NULL
      , QAIP = '201.0.0.1'
@@ -126,17 +126,15 @@ UPDATE QNABOARD
 
 -- 답변 작성
     -- STEP 1
-    UPDATE QNABOARD 
-       SET QASTEP = QASTEP + 1
-     WHERE QAGROUP = 2 
-       AND QASTEP > 0;
+    UPDATE QNABOARD SET QASTEP = QASTEP + 1
+                  WHERE QAGROUP = 2 AND QASTEP > 0;
     -- STEP 2
     INSERT INTO QNABOARD
-            (QANUM, ADID, QACAT, QATITLE, QACONTENT
+            (QANUM, MID, ADID, QATITLE, QACONTENT
            , QAPW, QAIMG, QAGROUP, QASTEP, QAINDENT, QAIP)
      VALUES (QNABOARD_SEQ.NEXTVAL
+           , NULL
            , 'dbswls0209'
-           , '답변'
            , '안녕하세요, 헬로월드입니다.'
            , '답변 내용'
            , '111'
@@ -147,6 +145,16 @@ UPDATE QNABOARD
            , '195.0.0.1');
            
 -- 목록 출력
+SELECT * FROM (SELECT ROWNUM RN, QNA.* 
+                 FROM (SELECT * FROM QNABOARD 
+                        ORDER BY QAGROUP DESC, QASTEP) QNA)
+        WHERE RN BETWEEN 1 AND 8;
+    -- QNA 게시판 총 글 갯수
+    SELECT COUNT(*) FROM QNABOARD;
+    
+-- 게시글 삭제(답변까지 삭제 되도록)
+DELETE FROM QNABOARD
+    WHERE QAGROUP = 2;
     -- 전체 출력
     SELECT LIST.*,
            (SELECT MID FROM MEMBER WHERE LIST.MID = MID) ||

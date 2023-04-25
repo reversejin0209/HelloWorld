@@ -10,8 +10,8 @@ SELECT COUNT(*) FROM MEMBER WHERE mTEL = '010-1111-1111';
     --> 1-4. Emial Confirm
 SELECT COUNT(*) FROM MEMBER WHERE mMAIL = 'aaa.gmail.com';
 
--- 2. 로그인
-SELECT COUNT(*) FROM MEMBER WHERE mID = 'aaa' AND mPW = '111';
+-- 2. 회원정보 가져오기
+SELECT * FROM MEMBER WHERE mID = 'aaa';
 
 -- 3. 정보수정
 UPDATE MEMBER 
@@ -80,7 +80,7 @@ SELECT *
     FROM (SELECT ROWNUM RW, A.* FROM (SELECT TR.*, T.thNAME, T.thLOC 
                                         FROM THEATER_RES TR, THEATER T 
                                         WHERE TR.thCODE = T.thCODE AND mID = 'aaa' 
-                                        ORDER BY T.thDATE) A)
+                                        ORDER BY TR.thrDATE) A)
     WHERE RW BETWEEN 1 AND 5;
 
 -- 3. 예매 내역 상세보기

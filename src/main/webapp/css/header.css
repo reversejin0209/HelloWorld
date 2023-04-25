@@ -26,14 +26,13 @@
 /* 메뉴 사이 border */
 .util .utill_inner a:not(:first-child) {
 	border-left: 1px solid #dedede;
-	
 }
 
 /* nav */
 nav {
 	/* position: fixed; */
 	position: sticky;
-	top:0;
+	top: 0;
 	z-index: 99;
 	width: 100%;
 	background: #ffffff;
@@ -53,8 +52,12 @@ nav .nav_inner {
 }
 
 /* 로고 */
-.nav_inner .logo  {
+.nav_inner .logo {
 	line-height: 0px;
+}
+
+.nav_inner .logo img {
+	cursor: pointer;
 }
 
 /* 메뉴 */
@@ -80,7 +83,6 @@ nav .nav_inner {
 	color: #7800f8;
 }
 
-
 /* drop-menu */
 .menu_item .drop-menu {
 	position: absolute;
@@ -101,7 +103,7 @@ nav .nav_inner {
 	visibility: visible;
 }
 
-.drop-menu li > a {
+.drop-menu li>a {
 	width: 100%;
 	display: block;
 	padding: 0 0 0 20px;
