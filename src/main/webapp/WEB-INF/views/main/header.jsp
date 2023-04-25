@@ -14,7 +14,11 @@
 		<div class="utill_inner">
 			<div class="utill_inner_left">KOR▾</div>
 			<div class="login">
+<<<<<<< HEAD
+				<a href="">로그인</a> <a href="">회원가입</a>
+=======
 				<a href="${conPath }/ member/mLogin.do">로그인</a> <a href="">회원가입</a>
+>>>>>>> fd63761d6249ab010c16fc3c0ca2764353067aee
 			</div>
 		</div>
 	</div>

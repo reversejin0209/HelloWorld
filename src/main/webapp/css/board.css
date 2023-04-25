@@ -21,12 +21,19 @@
 	background-color: #fafafa;
 	border-top: 1px solid #282828;
 	color: #353535;
+<<<<<<< HEAD
+	padding: 20px;
+=======
 	padding: 16px;
+>>>>>>> fd63761d6249ab010c16fc3c0ca2764353067aee
 }
 
 .list_table td{
 	font-size: 16px;
 	color: #686868;
 	border-bottom: 1px solid #bfbfbf;
+<<<<<<< HEAD
+=======
 	padding: 12px;
+>>>>>>> fd63761d6249ab010c16fc3c0ca2764353067aee
 }
