@@ -5,8 +5,10 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.lec.helloworld.vo.QnaBoard" alias="QnaBoard"/>
+		<typeAlias type="com.lec.helloworld.vo.Member" alias="Member"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="META-INF/sqlmap/mappers/qnaBoard.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/member.xml"/>
 	</mappers>
 </configuration>
