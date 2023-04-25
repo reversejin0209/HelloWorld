@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<<<<<<< HEAD
+=======
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+>>>>>>> fd63761d6249ab010c16fc3c0ca2764353067aee
 <c:set var="conPath" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html>
@@ -40,6 +44,7 @@
 				</tr>
 			</c:if>
 			<c:if test="${totCnt != 0}">
+<<<<<<< HEAD
 				<c:forEach var="review" items="${reviewList }">
 					<tr>
 						<td>${review.rno }</td>
@@ -54,15 +59,38 @@
 							</c:forEach>
 							${review.rtitle }
 							<c:if test="${review.rhit > 10}">&#127752;<b class="red">인기글</b>
+=======
+				<c:forEach var="qna" items="${qnaList }">
+					<tr>
+						<td>${qna.qanum }</td>
+						<td class="title left">
+							<c:forEach var="i" begin="1" end="${qna.qaindent }">
+								<c:if test="${i != qna.qaindent }">
+									 &nbsp; &nbsp; 
+								</c:if>
+								<c:if test="${i == qna.qaindent }">
+									 ㄴ
+								</c:if>
+							</c:forEach>
+							${qna.qatitle }
+							<c:if test="${qna.qahit > 10}">&#127752;<b class="red">인기글</b>
+>>>>>>> fd63761d6249ab010c16fc3c0ca2764353067aee
 							</c:if>
 							<!-- 인기글 -->
 							<c:if test="${not empty review.rphoto}">&#128196;</c:if>
 							<!-- 파일첨부 -->
 						</td>
+<<<<<<< HEAD
 						<td>${review.name }</td>
 						<td>${review.rhit }</td>
 						<td>
 							<fmt:formatDate value="${review.rrdate }" type="date" dateStyle="short" />
+=======
+						<td>${qna.mid }</td>
+						<td>${qna.qahit }</td>
+						<td>
+							<fmt:formatDate value="${qna.qardate }" type="date" dateStyle="short" />
+>>>>>>> fd63761d6249ab010c16fc3c0ca2764353067aee
 						</td>
 					</tr>
 				</c:forEach>

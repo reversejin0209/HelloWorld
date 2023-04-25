@@ -15,6 +15,10 @@
 /* wrap */
 div#wrap {
 	width: 1140px;
+<<<<<<< HEAD
+=======
+	min-height: 600px;
+>>>>>>> fd63761d6249ab010c16fc3c0ca2764353067aee
 	margin: 0 auto;
 	padding: 0;
 	/* 컨테이너가 세로로 배치 */
@@ -24,8 +28,21 @@ div#wrap {
 }
 
 /* 배치 */
+<<<<<<< HEAD
 .right {
 	float: right;
+=======
+.center {
+	text-align: center;
+}
+
+.left {
+	text-align: left;
+}
+
+.right {
+	text-align: right;
+>>>>>>> fd63761d6249ab010c16fc3c0ca2764353067aee
 }
 
 /* hr */
