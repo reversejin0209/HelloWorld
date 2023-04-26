@@ -19,7 +19,7 @@ public class QnaBoard {
 	private String qatitle;
 	private String qacontent;
 	private String qapw;
-	private String qaimg;
+	private String qafile;
 	private Timestamp qardate;
 	private int qahit;
 	private int qagroup;

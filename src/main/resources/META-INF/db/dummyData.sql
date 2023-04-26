@@ -172,11 +172,12 @@ INSERT INTO TICKET_RESDETAIL (TRDCODE, TRCODE, TCODE, TRDCNT, TRDDATE)
            , '2023/04/01');
            
 -- QNABOARD --------------------------------------------------------------------
-INSERT INTO QNABOARD (QANUM, MID, ADID, QATITLE, QACONTENT
-           , QAPW, QAIMG, QAGROUP, QASTEP, QAINDENT, QAIP)
+INSERT INTO QNABOARD (QANUM, MID, ADID, QACAT, QATITLE, QACONTENT
+           , QAPW, QAFILE, QAGROUP, QASTEP, QAINDENT, QAIP)
      VALUES (QNABOARD_SEQ.NEXTVAL
            , 'aaa'
            , NULL
+           , '이용문의'
            , '문의드립니다'
            , '문의 내용'
            , '111'

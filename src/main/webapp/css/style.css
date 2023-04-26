@@ -5,18 +5,21 @@
 	;
 
 * {
-	font-family: 'Noto Sans KR', sans-serif;
 	padding: 0;
 	margin: 0;
 	list-style: none;
 	text-decoration: none;
 }
 
+*:not(.qes) {
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
 /* wrap */
 div#wrap {
 	width: 1140px;
-	min-height: 600px;
-	margin: 40px auto;
+	min-height: 400px;
+	margin: 50px auto;
 	padding: 0;
 	/* 컨테이너가 세로로 배치 */
 	display: flex;
@@ -43,6 +46,7 @@ hr {
 }
 
 /* button */
+/* 메인에 사용*/
 .btn_white {
 	font-weight: bold;
 	width: auto;
@@ -69,4 +73,44 @@ hr {
 	border: none;
 	border-radius: 50px;
 	cursor: pointer;
+}
+
+/* 게시판에 사용 */
+.btn_grey {
+	font-weight: bold;
+	width: auto;
+	background: #fafafa;
+	padding: 6px 14px;
+	margin: 0 auto;
+	color: #686868;
+	font-size: 14px;
+	text-align: center;
+	text-decoration: none;
+	border: 1px solid #686868;
+	border-radius: 6px;
+	cursor: pointer;
+}
+
+.btn_submit {
+	font-weight: bold;
+	width: auto;
+	background: #ffffff;
+	padding: 10px 20px;
+	margin: 0 auto;
+	color: #686868;
+	text-align: center;
+	text-decoration: none;
+	border: 1px solid #8000ff;
+	border-radius: 6px;
+	cursor: pointer;
+}
+
+.btn_submit:hover {
+	background: #8000ff;
+	color: #ffffff;
+}
+
+/* b Tag */
+.purple {
+	color: #9729ff;
 }

@@ -17,14 +17,19 @@
 	color: #838383;
 }
 
-.util .utill_inner a {
+.util .utill_inner .login ul li{
+	float: left;
 	padding: 0 10px;
+}
+
+.util .utill_inner .login ul li a{
 	font-size: 13px;
 	color: #838383;
 }
 
 /* 메뉴 사이 border */
-.util .utill_inner a:not(:first-child) {
+.util .utill_inner .login ul li:last-child {
+	padding: 0 0 0 10px;
 	border-left: 1px solid #dedede;
 }
 
@@ -37,7 +42,7 @@ nav {
 	width: 100%;
 	background: #ffffff;
 	margin-top: 1px;
-	border-bottom: 2px solid #efefef;
+	border-bottom: 2px solid #8000ff;
 }
 
 nav .nav_inner {
@@ -123,7 +128,7 @@ nav .nav_inner {
 }
 
 .mega-box .content {
-	background: #ffffff;
+	background: #9729ff;
 	padding: 20px 20px;
 	display: flex;
 	width: 100%;
@@ -138,7 +143,7 @@ nav .nav_inner {
 }
 
 .mega-box .content .row:not(:last-child) {
-	border-right: 1px solid #8f1fff;
+	border-right: 1px solid #ffffff;
 }
 
 .content .row img {
@@ -148,13 +153,15 @@ nav .nav_inner {
 }
 
 .content .row header {
-	color: #353535;
+	/* color: #353535; */
+	color: #ffffff;
 	font-size: 20px;
 	font-weight: 400;
 }
 
 .row .mega-items li a {
-	color: #686868;
+	/* color: #686868; */
+	color: #ffffff;
 	font-size: 18px;
 	font-weight: 300;
 	display: block;
