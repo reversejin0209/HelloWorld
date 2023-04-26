@@ -1,10 +1,5 @@
 @charset "UTF-8";
 
-/* 공통 */
-.title {
-	width: 580px;
-}
-
 /* 검색 */
 .search_box>form {
 	display: flex;
@@ -47,9 +42,9 @@
 }
 
 /* ---------- 테이블 ---------- */
-/* 공지사항 등 정보 테이블 */
+/* 공지사항 등 리스트 테이블 */
 .list_table {
-	margin: 20px 0;
+	margin: 10px 0;
 	border-collapse: collapse;
 }
 
@@ -58,19 +53,89 @@
 	cursor: pointer;
 }
 
-.list_table th {
+.list_table th,
+.content_table th {
 	font-size: 16px;
 	background-color: #fafafa;
 	border-top: 1px solid #282828;
-	color: #353535;
+	color: #686868;
 	padding: 16px;
 }
 
-.list_table td {
+.list_table td{
 	font-size: 16px;
 	color: #686868;
 	border-bottom: 1px solid #bfbfbf;
 	padding: 12px;
+}
+
+.list_table tr td.title:hover{
+	text-decoration: underline;
+}
+
+/* 상세보기 테이블 */
+.content_table{
+	width: 860px;
+	margin: 10px auto;
+	border-collapse: collapse;
+}
+
+.content_table td {
+	font-size: 16px;
+	color: #686868;
+	border-bottom: 1px solid #bfbfbf;
+	padding: 12px;
+	text-align: center;
+}
+
+.content_table td.content {
+	font-size: 16px;
+	border-bottom: 1px solid #bfbfbf;
+	padding: 40px 60px;
+	text-align: left;
+}
+
+.content_table td > input {
+	height: 32px;
+	padding: 6px 12px;
+	box-sizing: border-box;
+	border-radius: 8px;
+	border: 1px solid #686868;
+}
+
+.content_table td > input:focus {
+	border: 0;
+	outline: 1px solid #7800f8;
+}
+
+/* 수정 및 삭제 버튼 공간 */
+.content_table td.btnBox {
+	border: 0px;
+}
+
+/* 질문 표시: Q. */
+.content_table .qes{
+	font-family: 'Poppins', sans-serif;
+	font-size: 42px;
+	font-weight: bold;
+	color: #8000ff;
+	padding-right: 5px;
+}
+
+.notice_box{
+	width: 860px;
+	margin: 20px auto;
+	padding: 20px 40px;
+	box-sizing: border-box;
+	border-radius: 10px;
+	background-color: #9729ff;
+	color: #ffffff;
+}
+
+/* 공통 */
+.title {
+	width: 40%;
+	color: #353535;
 }
 
 /* 페이징 */

@@ -28,7 +28,7 @@
 			<table>
 				<caption>
 					<img alt="헬로월드 로고" src="${conPath }/img/logo.png" onclick="location.href='${conPath}/main.do'" style="size: 1.4em;"><br>
-					<span>하이하이</span>
+					<span>로그인 후 더 많은 서비스를 즐겨보세요.</span>
 				</caption>
 				<tr>
 					<td>

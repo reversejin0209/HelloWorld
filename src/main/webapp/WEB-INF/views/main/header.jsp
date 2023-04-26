@@ -16,10 +16,16 @@
 			<div class="utill_inner_left">KOR▾</div>
 			<div class="login">
 				<c:if test="${empty member }">
-					<a href="${conPath }/member/mLogin.do">로그인</a> <a href="${conPath }/member/mJoin.do">회원가입</a>
+					<ul>
+						<li><a href="${conPath }/member/mJoin.do">회원가입</a></li>
+						<li><a href="${conPath }/member/mLogin.do">로그인</a></li>
+					</ul>
 				</c:if>
 				<c:if test="${not empty member }">
-					<a href="#">${member.mname }님</a> <a href="${conPath }/member/mLogout.do">로그아웃</a>
+					<ul>
+						<li><b>${member.mname }</b>님▾</li>
+						<li><a href="${conPath }/member/mLogout.do">로그아웃</a></li>
+					</ul>
 				</c:if>
 			</div>
 		</div>
@@ -35,10 +41,10 @@
 				<li><a href="#">이용정보</a></li>
 				<li><a href="#">요금/프로모션</a>
 					<ul class="drop-menu">
-						<li><a href="#">Drop menu 1</a></li>
-						<li><a href="#">Drop menu 2</a></li>
-						<li><a href="#">Drop menu 3</a></li>
-						<li><a href="#">Drop menu 4</a></li>
+						<li><a href="#">이용요금</a></li>
+						<li><a href="#">이달의 혜택</a></li>
+						<li><a href="#">연간이용</a></li>
+						<li><a href="#">운영/운휴</a></li>
 					</ul></li>
 				<li><a href="#">즐길거리</a>
 					<div class="mega-box">
@@ -49,19 +55,19 @@
 							<div class="row">
 								<header>어트랙션</header>
 								<ul class="mega-items">
-									<li><a href="#">추천코스</a></li>
-									<li><a href="#">어트랙션 검색</a></li>
+									<li><a href="#">어트랙션 소개</a></li>
 									<li><a href="#">어트랙션 위치 확인</a></li>
 									<li><a href="#">어트랙션 QnA</a></li>
+									<li><a href="#">추천코스</a></li>
 								</ul>
 							</div>
 							<div class="row">
 								<header>공연</header>
 								<ul class="mega-items">
-									<li><a href="#">전체</a></li>
+									<li><a href="#">예약하기</a></li>
 									<li><a href="#">스테이지</a></li>
 									<li><a href="#">퍼레이드</a></li>
-									<li><a href="#">기타공연</a></li>
+									<li><a href="#">공연후기</a></li>
 								</ul>
 							</div>
 							<div class="row">
@@ -77,7 +83,7 @@
 				<li><a href="#">소통서비스</a>
 					<ul class="drop-menu">
 						<li><a href="#">공지사항</a></li>
-						<li><a href="#">QnA</a></li>
+						<li><a href="#">1:1문의</a></li>
 						<li><a href="#">고객소리함</a></li>
 					</ul></li>
 				<li><a href="#">더 알아보기</a></li>
