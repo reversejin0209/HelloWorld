@@ -12,7 +12,15 @@ INSERT INTO MEMBER_GRADE (GRADE, LOWVI, HIGHVI, DISC)
 INSERT INTO MEMBER (MID, MMAIL, MPW, MNAME, MTEL)
      VALUES ('aaa', 'aaa.gmail.com', '111', 'SCOTT', '010-1111-1111');
 INSERT INTO MEMBER (mID, mMAIL, mPW, mNAME, mTEL)
-    VALUES ('bbb', 'bbb@naver.com', '111', '비길동', '010-2222-2222');
+    VALUES ('bbb', 'bbb@naver.com', '111', '비길동', '010-3333-3333');
+INSERT INTO MEMBER (MID, MMAIL, MPW, MNAME, MTEL)
+    VALUES ('fff', 'hong@hong.com', '11', '홍길동', '010-9999-9999');
+INSERT INTO MEMBER (MID, MMAIL, MPW, MNAME, MTEL)
+    VALUES ('sss', 'song@song.com', '11', '송길동', '010-9999-8888');
+INSERT INTO MEMBER (MID, MMAIL, MPW, MNAME, MTEL, MVISIT)
+     VALUES ('zzz', 'aaa@gmail.com', '111', '제트길동', '010-3333-3333', 11);
+INSERT INTO MEMBER (MID, MMAIL, MPW, MNAME, MTEL)
+    VALUES ('ccc', 'ccc@naver.com', '111', '시길동', '010-2222-2222');
     
 ---------------------------------- THEATER -------------------------------------
 -- 1. 공연 추가
@@ -30,26 +38,8 @@ INSERT INTO THEATER_RES (thrCODE, mID, thCODE, thrCNT, thrORDERDATE, thrREVIEW, 
 
 ---------------------------------- THREVIEW ------------------------------------
 -- 1. 공연 리뷰 글 쓰기
-INSERT INTO THREVIEW (thrNUM, thrCODE, thrTITLE, thrCONTENT, thrRDATE) 
-    VALUES (THREVIEW_SEQ.NEXTVAL, '230420TH11', '하이하이', '본문임', SYSDATE);
-    
-COMMIT;
-
---------------------------------------------------------------------------------
------------------------------------- MEMBER  -----------------------------------
---------------------------------------------------------------------------------
-INSERT INTO MEMBER (MID, MMAIL, MPW, MNAME, MTEL)
-    VALUES ('fff', 'hong@hong.com', '11', '홍길동', '010-9999-9999');
-INSERT INTO MEMBER (MID, MMAIL, MPW, MNAME, MTEL)
-    VALUES ('sss', 'song@song.com', '11', '송길동', '010-9999-8888');
-INSERT INTO MEMBER (MID, MMAIL, MPW, MNAME, MTEL)
-    VALUES ('bbb', 'back@back.com', '11', '백길동', '010-0100-0100');
-INSERT INTO MEMBER (mID, mMAIL, mPW, mNAME, MTEL)
-    VALUES ('aaa', 'aaa@naver.com', '111', '에이길동', '010-1111-1111');
-INSERT INTO MEMBER (MID, MMAIL, MPW, MNAME, MTEL, MVISIT)
-     VALUES ('zzz', 'aaa@gmail.com', '111', '제트길동', '010-3333-3333', 11);
-INSERT INTO MEMBER (MID, MMAIL, MPW, MNAME, MTEL)
-    VALUES ('ccc', 'ccc@naver.com', '111', '시길동', '010-2222-2222');
+INSERT INTO THREVIEW (thrNUM, thrCODE, mID, thrTITLE, thrCONTENT, thrRDATE) 
+    VALUES (THREVIEW_SEQ.NEXTVAL, '230420TH11', 'aaa', '하이하이', '본문임', SYSDATE);
 
 --------------------------------------------------------------------------------
 -------------------------------------- ADMIN -----------------------------------

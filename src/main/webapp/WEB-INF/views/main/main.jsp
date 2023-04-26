@@ -5,12 +5,73 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link href="${conPath }/css/style.css" rel="stylesheet" type="text/css">
-<link href="${conPath }/css/main.css" rel="stylesheet" type="text/css">
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link href="${conPath }/css/style.css" rel="stylesheet" type="text/css">
+	<link href="${conPath }/css/main.css" rel="stylesheet" type="text/css">
+	<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+	<script>
+		$(document).ready(function(){
+			// ex.json내용을 table안에 출력
+			var date = new Date();
+			var todayDate = date.getFullYear() + ('0'+(date.getMonth()+1)).slice(-2) + ('0'+date.getDate()).slice(-2);
+			// 20230426
+			var todayTime = date.getHours() + '00';
+			// 1600
+			$.ajax({
+				url : "https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=nWZqKfrh%2BZYh8lZYkihm6Bx7az0QutJg%2B6Tw6qrssK64j%2FX4sWNTlRfyi6%2FyYXRnnwziW4S7%2FVADwA5zjN9C5g%3D%3D&pageNo=1&numOfRows=1000&dataType=JSON&base_date="+todayDate+"&base_time=0500&nx=60&ny=120",
+				dataType : 'json',
+				success : function(data){ 
+					let dataItem = data.response.body.items.item;
+					var out = '<tr>';
+					$.each(dataItem, function(idx, item){
+						if(item.fcstDate==todayDate) {
+							if(item.fcstTime==todayTime) {
+								if(item.category=='PTY' && item.fcstValue==0) {
+									out += '<td>' + '비' + '</td>'; 
+								} else if(item.category=='SNO' && item.fcstValue>1) {
+									
+								}
+							}
+						}
+					}); // each()함수
+					out += '</tr>';
+					$('table#dataShow').html(out);
+				},
+			});
+		});
+	</script>
 </head>
 <body>
+	<!-- 로그인 처리 -->
+	<c:if test="${member.mwith eq 1}">
+		<script>
+			alert("탈퇴 처리된 회원입니다.");
+			location.href="${conPath}/member/mLogout.do?after=member/login";
+		</script>
+	</c:if>
+	
+	<c:if test="${loginResult eq 'ID 혹은 PW 오류'}">
+		<script>
+			alert('${loginResult}');
+			history.back();
+		</script>
+	</c:if>
+	
+	<!-- 회원 탈퇴 처리 -->
+	<c:if test="${withdrawalResult eq 1}">
+		<script>
+			alert('회원 탈퇴 성공하였습니다');
+		</script>
+	</c:if>
+	
+	<c:if test="${withdrawalResult eq 0}">
+		<script>
+			alert('회원 탈퇴 실패하였습니다. 다시 확인해주세요');
+			history.back();
+		</script>
+	</c:if>
+	
 	<jsp:include page="../main/header.jsp" />
 	<div id="main">
 		<div id="visual">
@@ -33,6 +94,7 @@
 				<div class="item_box">
 					<div class="sub_item item1">
 						<h2>날씨</h2>
+						<table id="dataShow"></table>
 					</div>
 					<div class="sub_item item2">
 						<div class="normal_box">
@@ -79,7 +141,7 @@
 		<hr>
 		<div id="main_news">
 			<div class="main_news_left">
-				공지사항
+				공지사항 ${member.mwith }
 				<hr>
 				<ul>
 					<li>01</li>

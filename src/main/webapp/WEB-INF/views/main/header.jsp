@@ -15,16 +15,16 @@
 		<div class="utill_inner">
 			<div class="utill_inner_left">KOR▾</div>
 			<div class="login">
-				<c:if test="${empty member }">
+				<c:if test="${empty sessionScope.member }">
 					<ul>
-						<li><a href="${conPath }/member/mJoin.do">회원가입</a></li>
 						<li><a href="${conPath }/member/mLogin.do">로그인</a></li>
+						<li><a href="${conPath }/member/mJoin.do">회원가입</a></li>
 					</ul>
 				</c:if>
-				<c:if test="${not empty member }">
+				<c:if test="${not empty sessionScope.member }">
 					<ul>
-						<li><b>${member.mname }</b>님▾</li>
-						<li><a href="${conPath }/member/mLogout.do">로그아웃</a></li>
+						<li><a href="${conPath }/member/mModify.do">${sessionScope.member.mname }님▾</a><li>
+						<li><a href="${conPath }/member/mLogout.do?after=main/main">로그아웃</a></li>
 					</ul>
 				</c:if>
 			</div>

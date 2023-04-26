@@ -11,4 +11,6 @@ public interface MemberDao {
 	public int memberIdConfirm(String mid);
 	public int memberTelConfirm(String mtel);
 	public int memberEmConfirm(String mmail);
+	public int memberModify(Member member);
+	public int memberWithdrawal(String mid);
 }

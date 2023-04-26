@@ -17,8 +17,8 @@
   			var mid = $(this).val().trim();
   			if(mid == "") {
   				$('#idConfirmResult').html('&nbsp; &nbsp; &nbsp;');
-  			} else if(mid.length<3) {
-  				$('#idConfirmResult').html('<b>아이디는 3글자 이상 입력해주세요</b>');
+  			} else if(mid.length<3 || mid.length>13) {
+  				$('#idConfirmResult').html('<b>아이디는 3글자 이상 혹은 13글자 이하로 입력해주세요</b>');
   			} else {
   				$.ajax({
   					url : '${conPath }/member/mIdConfirm.do',
@@ -38,7 +38,7 @@
   			if(mtel == "") {
   				$('#telConfirmResult').html('&nbsp; &nbsp; &nbsp;');
   			} else if(!mtel.match(patternTel)) {
-  				$('#telConfirmResult').html('<b>전화번호 형식을 지켜주세요</b>');
+  				$('#telConfirmResult').html('<b>연락처 형식을 지켜주세요</b>');
   			} else {
 	  			$.ajax({
 	  				url : '${conPath}/member/mTelConfirm.do',
@@ -57,7 +57,7 @@
   			var mmail = $(this).val().trim();
   			if(mmail==""){
   				$('#emailConfirmResult').html('&nbsp; &nbsp; &nbsp;');
-  			} else if(!mmail.match(patternMemail)){
+  			} else if(!mmail.match(patternMemail) || mmail.length>40){
   				$('#emailConfirmResult').html('<b>메일 형식을 지켜 주세요</b>');
   			} else{
   				$.ajax({

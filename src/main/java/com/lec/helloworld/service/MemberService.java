@@ -12,4 +12,6 @@ public interface MemberService {
 	public int memberIdConfirm(String mid);
 	public int memberTelConfirm(String mtel);
 	public int memberEmConfirm(String mmail);
+	public int memberModify(Member member, HttpSession httpSession);
+	public int memberWithdrawal(String mid);
 }

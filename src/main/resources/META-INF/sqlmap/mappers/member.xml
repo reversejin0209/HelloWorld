@@ -10,6 +10,8 @@
 		<result property="mname" column="mname"/>
 		<result property="mtel" column="mtel"/>
 		<result property="mvisit" column="mvisit"/>
+		<result property="mwith" column="mwith"/>
+		<result property="grade" column="grade"/>
 	</resultMap>
 	
 	<select id="memberGetDetail" parameterType="String" resultType="Member">
@@ -37,5 +39,22 @@
 		<!-- email 중복확인 -->
 		SELECT COUNT(*) FROM MEMBER WHERE mMAIL = #{mmail}
 	</select>
+	
+	<update id="memberModify" parameterType="Member">
+		<!-- 회원 정보 수정 -->
+		UPDATE MEMBER 
+		    SET mMAIL = #{mmail},
+		        mPW   = #{mpw},
+		        mNAME = #{mname},
+		        mTEL  = #{mtel}
+		    WHERE mID = #{mid}
+	</update>
+	
+	<update id="memberWithdrawal" parameterType="String">
+		<!-- 회원 탈퇴 처리 -->
+		UPDATE MEMBER 
+		    SET mWITH = 1
+		    WHERE mID = #{mid}
+	</update>
 	
 </mapper>

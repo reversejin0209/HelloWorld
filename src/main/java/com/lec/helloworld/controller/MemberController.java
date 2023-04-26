@@ -18,6 +18,7 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
+	/* 로그인, 로그아웃 */
 	@RequestMapping(value="mLogin", method=RequestMethod.GET)
 	public String mLoginChkView() {
 		return "member/login";
@@ -27,7 +28,6 @@ public class MemberController {
 	public String mLoginChk(String mid, String mpw, Model model, HttpSession httpSession) {
 		String loginResult = memberService.loginChk(mid, mpw, httpSession);
 		if(loginResult.equals("로그인 성공")) {
-			model.addAttribute("loginResult", loginResult);
 			return "main/main";
 		} else {
 			model.addAttribute("loginResult", loginResult);
@@ -36,11 +36,12 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="mLogout", method=RequestMethod.GET)
-	public String mLogout(HttpSession httpSession) {
+	public String mLogout(String after, HttpSession httpSession) {
 		memberService.logout(httpSession);
-		return "main/main";
+		return after;
 	}
 	
+	/* 회원가입 */
 	@RequestMapping(value="mJoin", method=RequestMethod.GET)
 	public String mJoinView() {
 		return "member/mJoin";
@@ -49,6 +50,7 @@ public class MemberController {
 	@RequestMapping(value="mJoin", method=RequestMethod.POST)
 	public String mJoin(Member member, Model model, HttpSession httpSession) {
 		model.addAttribute("joinResult", memberService.memberJoin(member, httpSession));
+		memberService.logout(httpSession);
 		return "member/login";
 	}
 	
@@ -68,5 +70,25 @@ public class MemberController {
 	public String mEmConfirm(String mmail, Model model) {
 		model.addAttribute("emailConfirmResult", memberService.memberEmConfirm(mmail));
 		return "member/mMailConfirm";
+	}
+	
+	/* 회원정보 수정 */
+	@RequestMapping(value="mModify", method=RequestMethod.GET)
+	public String mModifyView() {
+		return "member/mModify";
+	}
+	
+	@RequestMapping(value="mModify", method=RequestMethod.POST)
+	public String mModify(Member member, Model model, HttpSession httpSession) {
+		model.addAttribute("modifyResult", memberService.memberModify(member, httpSession));
+		return "forward:mModify.do";
+	}
+	
+	/* 회원 탈퇴 */
+	@RequestMapping(value="mWithdrawal", method={RequestMethod.GET, RequestMethod.POST})
+	public String mWithdrawal(String mid, HttpSession httpSession, Model model) {
+		model.addAttribute("withdrawalResult", memberService.memberWithdrawal(mid));
+		memberService.logout(httpSession);
+		return "main/main";
 	}
 }

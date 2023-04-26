@@ -20,11 +20,13 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public Member memberGetDetail(String mid) {
+		/* 회원 아이디로 회원 정보 가져오기 */
 		return memberDao.memberGetDetail(mid);
 	}
 
 	@Override
 	public String loginChk(String mid, String mpw, HttpSession httpSession) {
+		/* 로그인 확인 */
 		Member member = memberDao.memberGetDetail(mid);
 		String result = null;
 		if(member != null && member.getMpw().equals(mpw)) {
@@ -38,11 +40,13 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void logout(HttpSession httpSession) {
+		/* 로그아웃 */
 		httpSession.invalidate();
 	}
 
 	@Override
 	public int memberJoin(final Member member, HttpSession httpSession) {
+		/* 회원 가입 */
 //		MimeMessagePreparator message = new MimeMessagePreparator() {
 //			String content = "<div style=\"width:500px; margin: 0 auto\">\n" + 
 //					"		<h1>"+ member.getMname() +"님의 회원가입 감사합니다</h1>\n" + 
@@ -73,17 +77,33 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int memberIdConfirm(String mid) {
+		/* ID 중복 확인 */
 		return memberDao.memberIdConfirm(mid);
 	}
 
 	@Override
 	public int memberTelConfirm(String mtel) {
+		/* TEL 중복 확인 */
 		return memberDao.memberTelConfirm(mtel);
 	}
 
 	@Override
 	public int memberEmConfirm(String mmail) {
+		/* EMAIL 중복 확인 */
 		return memberDao.memberEmConfirm(mmail);
+	}
+
+	@Override
+	public int memberModify(Member member, HttpSession httpSession) {
+		/* 회원 정보 수정 */
+		httpSession.setAttribute("member", member);
+		return memberDao.memberModify(member);
+	}
+
+	@Override
+	public int memberWithdrawal(String mid) {
+		/* 회원 탈퇴 */
+		return memberDao.memberWithdrawal(mid);
 	}
 
 }

@@ -14,5 +14,6 @@ public class Member {
 	private String mname;
 	private String mtel;
 	private String mvisit;
+	private int    mwith;
 	private String grade;
 }

@@ -15,16 +15,19 @@ SELECT * FROM MEMBER WHERE mID = 'aaa';
 
 -- 3. 정보수정
 UPDATE MEMBER 
-    SET mMAIL = 'bbb@naver.com',
+    SET mMAIL = 'asdf@naver.com',
+        mPW   = '222',
         mNAME = '수정길동',
-        mTEL = '010-2222-2222'
+        mTEL  = '010-1234-5283'
     WHERE mID = 'aaa';
 
 -- 4. 내가 쓴 공연 리뷰 게시판(페이징)
     --> 3-1. 내가 쓴 공연 리뷰 총 갯수
 SELECT COUNT(*) FROM THREVIEW WHERE mID = 'aaa';
     --> 3-2. 내가 쓴 공연 리뷰 게시판
-SELECT * FROM (SELECT ROWNUM RW, A.* FROM (SELECT * FROM THREVIEW WHERE mID = 'aaa' ORDER BY thrRDATE) A)
+SELECT * FROM (SELECT ROWNUM RW, A.* FROM (SELECT *
+                                            FROM THREVIEW 
+                                            WHERE mID = 'aaa' ORDER BY thrRDATE) A)
     WHERE RW BETWEEN 1 AND 5;
 
 -- 5. 회원 등급 조정
@@ -32,7 +35,9 @@ SELECT M.*, G.GRADE FROM MEMBER M, MEMBER_GRADE G
     WHERE M.MVISIT > G.LOWVI AND M.mVISIT < G.HIGHVI;
     
 -- 6. 회원 탈퇴
-DELETE MEMBER WHERE mID = 'aaa';
+UPDATE MEMBER 
+    SET mWITH = 1
+    WHERE mID = 'aaa';
 
 SELECT * FROM MEMBER;
 ---------------------------------- THEATER -------------------------------------
