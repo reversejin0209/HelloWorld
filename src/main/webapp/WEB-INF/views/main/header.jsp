@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Hello World</title>
 <link href="${conPath }/css/style.css" rel="stylesheet">
 <link href="${conPath }/css/header.css" rel="stylesheet">
 </head>
@@ -23,13 +23,13 @@
 				</c:if>
 				<c:if test="${not empty sessionScope.member }">
 					<ul>
-						<li><a href="${conPath }/member/mModify.do">${sessionScope.member.mname }님▾</a><li>
+						<li><a href="${conPath }/member/mMypage.do?mid=${mid}">${member.mname }님</a><li>
 						<li><a href="${conPath }/member/mLogout.do?after=main/main">로그아웃</a></li>
 					</ul>
 				</c:if>
 				<c:if test="${not empty sessionScope.admin }">
 					<ul>
-						<li><a href="#">${sessionScope.admin.adname }(관리자)님▾</a><li>
+						<li><a href="#">관리자(${sessionScope.admin.adname })님</a><li>
 						<li><a href="${conPath }/admin/adLogout.do?after=main/main">로그아웃</a></li>
 					</ul>
 				</c:if>
@@ -62,7 +62,7 @@
 								<header>어트랙션</header>
 								<ul class="mega-items">
 									<li><a href="${conPath }/attraction/listAtc.do">어트랙션 소개</a></li>
-									<li><a href="#">어트랙션 위치 확인</a></li>
+									<li><a href="${conPath }/attraction/listAtc.do">어트랙션 위치 확인</a></li>
 									<li><a href="#">어트랙션 QnA</a></li>
 									<li><a href="#">추천코스</a></li>
 								</ul>
@@ -89,7 +89,7 @@
 				<li><a href="#">소통서비스</a>
 					<ul class="drop-menu">
 						<li><a href="${conPath }/notice/noticeList.do">공지사항</a></li>
-						<li><a href="#">1:1문의</a></li>
+						<li><a href="${conPath }/qnaBoard/qBoardList.do">1:1문의</a></li>
 						<li><a href="#">고객소리함</a></li>
 					</ul></li>
 				<li><a href="#">더 알아보기</a></li>

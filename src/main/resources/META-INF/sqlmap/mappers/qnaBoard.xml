@@ -11,7 +11,6 @@
 		<result property="qatitle" column="qatitle"/>
 		<result property="qacontent" column="qacontent"/>
 		<result property="qapw" column="qapw"/>
-		<result property="qafile" column="qafile"/>
 		<result property="qardate" column="qardate"/>
 		<result property="qahit" column="qahit"/>
 		<result property="qagroup" column="qagroup"/>
@@ -98,7 +97,7 @@
 	</select>
 	
 	<!-- 조회 수 증가 -->
-	<update id="hitUpQna">
+	<update id="hitUpQna" parameterType="int">
 		UPDATE QNABOARD
 		   SET QAHIT = QAHIT + 1
 		 WHERE QANUM = #{qanum}
@@ -111,56 +110,35 @@
 	</select>
 	
 	<!-- 게시글 작성: 회원 -->
-	<insert id="writeQna">
-		<!-- 이미지 첨부한 경우 -->
-			<if test="qaimg != ''">
-				INSERT INTO QNABOARD
-				            (QANUM, MID, QACAT, QATITLE, QACONTENT
-				           , QAPW, QAFILE, QAGROUP, QASTEP, QAINDENT, QAIP)
-				     VALUES (QNABOARD_SEQ.NEXTVAL
-				           , #{mid}
-				           , #{qacat}
-				           , #{qatitle}
-				           , #{qacontent}
-				           , #{qapw}
-				           , #{qafile}
-				           , QNABOARD_SEQ.CURRVAL
-				           , 0
-				           , 0
-				           , #{qaip})
-			</if>
-		<!-- 이미지 첨부 안 한 경우 -->
-			<if test="qaimg == ''">
-				INSERT INTO QNABOARD
-				            (QANUM, MID, QACAT, QATITLE, QACONTENT
-				           , QAPW, QAGROUP, QASTEP, QAINDENT, QAIP)
-				     VALUES (QNABOARD_SEQ.NEXTVAL
-				           , #{mid}
-				           , #{qacat}
-				           , #{qatitle}
-				           , #{qacontent}
-				           , #{qapw}
-				           , QNABOARD_SEQ.CURRVAL
-				           , 0
-				           , 0
-				           , #{qaip})
-			</if>
+	<insert id="writeQna" parameterType="QnaBoard">
+		INSERT INTO QNABOARD
+	           (QANUM, MID, QACAT, QATITLE, QACONTENT
+	          , QAPW, QAGROUP, QASTEP, QAINDENT, QAIP)
+	    VALUES (QNABOARD_SEQ.NEXTVAL
+	          , #{mid}
+	          , #{qacat}
+	          , #{qatitle}
+	          , #{qacontent}
+	          , #{qapw}
+	          , QNABOARD_SEQ.CURRVAL
+	          , 0
+	          , 0
+	          , #{qaip})
 	</insert>
 	
 	<!-- 게시글 수정 -->
-	<update id="modifyQna">
+	<update id="modifyQna" parameterType="QnaBoard">
 		UPDATE QNABOARD 
 		   SET QACAT = #{qacat}
 		     , QATITLE = #{qatitle}
 		     , QACONTENT = #{qacontent}
-		     , QAFILE = #{qafile}
 		     , QAIP = #{qaip}
 		 WHERE QANUM = #{qanum}
 	</update>
 	
 	<!-- 답변글 작성: 관리자 -->
 	<!-- 글 작성 전 preStep: 한 게시물에 답변글을 여러개 달 수 있도록 -->
-	<update id="replyStepQna">
+	<update id="replyStepQna" parameterType="QnaBoard">
 		UPDATE QNABOARD 
 	       SET QASTEP = QASTEP + 1
 	     WHERE QAGROUP = #{qagroup}
@@ -168,17 +146,16 @@
 	</update>
 	
 	<!-- 답변 작성 -->
-	<insert id="replyQna">
+	<insert id="replyQna" parameterType="QnaBoard">
 		INSERT INTO QNABOARD
 		            (QANUM, ADID, QACAT, QATITLE, QACONTENT
-		           , QAPW, QAFILE, QAGROUP, QASTEP, QAINDENT, QAIP)
+		           , QAPW, QAGROUP, QASTEP, QAINDENT, QAIP)
 		     VALUES (QNABOARD_SEQ.NEXTVAL
 		           , #{adid}
 		           , #{qacat}
 		           , #{qatitle}
 		           , #{qacontent}
 		           , #{qapw}
-		           , #{qafile}
 		           , #{qagroup}
 		           , #{qastep} +1
 		           , #{qaindent} +1
@@ -186,7 +163,7 @@
 	</insert>
 	
 	<!-- 게시글 삭제: 답변글까지 모두 삭제 -->
-	<delete id="deleteQna">
+	<delete id="deleteQna" parameterType="int">
 		DELETE FROM QNABOARD
 			  WHERE QAGROUP = #{qagroup}
 	</delete>

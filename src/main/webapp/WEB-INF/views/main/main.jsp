@@ -127,14 +127,9 @@
 						<div class="normal_box">
 							<h2>코코의 모험:사이버 어드벤처</h2>
 						</div>
-						<!-- <div class="hover_box">
-							<h2>코코의 모험:사이버 어드벤처</h2>
-							<p>사이버 대마왕 자바에게 붙잡힌 딩딩을 구출하기 위해 모험을 떠나는 코코의 모험</p>
-							<button class="btn_white">예약하러가기</button>
-						</div> -->
-
 					</div>
-				</div>
+				</div><!-- main_item -->
+				
 			</div>
 		</div>
 		<!-- visual -->
@@ -142,14 +137,15 @@
 		<div id="main_today">
 			<div class="main_today_left">
 				<p class="main_today_title">TIME</p>
-				<h3>
+				<h4>
 					<c:set var="now" value="<%=new java.util.Date()%>" />
 					<fmt:formatDate value="${now }" dateStyle="full" />
-				</h3>
+				</h4>
 				<h1 class="main_clock">10:00 - 22:00</h1>
 			</div>
 			<div class="main_today_right">
-				<p class="main_today_title">WEATHER</p> <table id="weatherShow"></table>
+				<p class="main_today_title">WEATHER</p> 
+				<table id="weatherShow"></table>
 			</div>
 		</div>
 		<!-- main_today -->

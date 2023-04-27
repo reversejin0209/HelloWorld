@@ -11,6 +11,7 @@
 	text-decoration: none;
 }
 
+/* 1:1문의 게시판: Q. */
 *:not(.qes) {
 	font-family: 'Noto Sans KR', sans-serif;
 }
@@ -51,7 +52,7 @@ hr {
 	font-weight: bold;
 	width: auto;
 	background: #ffffff;
-	padding: 10px 20px;
+	padding: 10px 25px;
 	margin: 0 auto;
 	color: #7800f8;
 	text-align: center;
@@ -59,6 +60,13 @@ hr {
 	border: none;
 	border-radius: 50px;
 	cursor: pointer;
+}
+
+.btn_white:hover {
+	background-color: #7800f8;
+	border: 1px solid #ffffff;
+	box-sizing: border-box;
+	color: #ffffff;
 }
 
 .btn_purple {
@@ -117,4 +125,8 @@ hr {
 
 .red {
 	color: red;
+}
+
+.grey {
+	color: #a0a0a0;
 }

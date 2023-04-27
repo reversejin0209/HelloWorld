@@ -39,17 +39,14 @@
 				<th>상담구분</th>
 				<th class="title">상담제목</th>
 				<th>작성자</th>
-				<th>작성일</th>
 			</tr>
 			<tr>
 				<td>${qna.qacat }</td>
 				<td class="title">${qna.qatitle }</td>
 				<td>${qna.mid }</td>
-				<td><fmt:formatDate value="${qna.qardate }" type="date"
-						pattern="yyyy-MM-dd HH:mm:ss" /></td>
 			</tr>
 			<tr>
-				<td colspan="4" class="content"><span class="qes">Q.</span>${qna.qacontent }</td>
+				<td colspan="3" class="content"><span class="qes">Q.</span>${qna.qacontent }</td>
 			</tr>
 			<!-- 첨부 이미지가 있는 경우 출력 -->
 			<c:if test="${not empty review.rphoto}">
@@ -58,12 +55,22 @@
 						src="${conPath }/reviewBoardUp/${review.rphoto}"></td>
 				</tr>
 			</c:if>
+			<tr>
+				<td>작성일</td>
+				<td colspan="2"><fmt:formatDate value="${qna.qardate }" type="date"
+						pattern="yyyy-MM-dd HH:mm:ss" /></td>
+			</tr>
+			<tr>
+				<td>IP</td>
+				<td colspan="2">${qna.qaip }</td>
+			</tr>
+			
 			<!-- 회원: 자신이 작성한 글만 수정 및 삭제 가능 -->
 			<c:if test="${member.mid eq qna.mid}">
 				<tr>
-					<td colspan="4" class="btnBox">
-						<input type="button" onclick="location.href=''" value="수정" class="btn_submit">
-						<input type="button" onclick="location.href='${conPath}/qnaBoard/qBoardDelete.do?qagroup=${qna.qagroup }'" value="삭제" class="btn_submit">
+					<td colspan="3" class="btnBox">
+						<input type="button" onclick="location.href='${conPath}/qnaBoard/qBoardModify.do?qanum=${qna.qanum }&pageNum=${param.pageNum }'" value="수정" class="btn_submit">
+						<input type="button" onclick="location.href='${conPath}/qnaBoard/qBoardList.do?pageNum=${param.pageNum }&schItem=${param.schItem}&schWord=${param.schWord}'" value="목록" class="btn_submit">
 					</td>
 				</tr>
 			</c:if>

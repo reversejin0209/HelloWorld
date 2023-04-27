@@ -1,0 +1,62 @@
+@charset "UTF-8";
+
+/* myPage */
+#myPage {
+	width: 1140px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+}
+
+/* left: myContent */
+#myPage .myContent ul{
+	margin: 20px 0;
+}
+
+/* right: myInfo */
+#myPage .myPage_right {
+	width: 860px;
+}
+
+#myPage .myPage_right .info_box{
+	width: 100%;
+	height: 100px;
+	background-color: #fafafa;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-top: 3px solid #8000ff;
+	border-bottom: 3px solid #8000ff;
+	padding: 30px;
+}
+
+#myPage .myPage_right .info_box>div{
+	width: 370px;
+	padding: 0 30px;/*  */
+	height: 100%;
+	color: #353535;
+}
+
+#myPage .myPage_right .info_box>.info_box_left{
+	border-right: 1px solid #dedede;
+}
+
+/* item_box */
+.mypage .myPage_right .visual_items .item_box {
+	width: 750px;
+	height: 540px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-content: space-between;
+}
+
+.mypage .myPage_right .visual_items .item_box .sub_item {
+	width: 360px;
+	height: 255px;
+	background-color: #ffffff;
+	border-radius: 14px;
+	box-sizing: border-box;
+	padding: 40px 30px;
+	overflow: hidden;
+}

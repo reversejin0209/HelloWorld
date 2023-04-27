@@ -20,6 +20,34 @@
 	<jsp:include page="../main/header.jsp" />
 	<div id="wrap">
 		<h1 class="center">공지사항</h1>
+		
+		<!-- 검색 -->
+		<!-- ** 데이터 수정 필요 ** -->
+		<div class="search_box">
+			<form action="${conPath }/qnaBoard/qBoardList.do" method="get"
+				class="right">
+				<select name="schItem">
+					<option value=""
+						<c:if test="${param.schItem eq '' }" >selected="selected"</c:if>>검색
+						조건</option>
+					<option value="all"
+						<c:if test="${param.schItem eq 'all' }" >selected="selected"</c:if>>전체검색</option>
+					<option value="title"
+						<c:if test="${param.schItem eq 'title' }" >selected="selected"</c:if>>제목</option>
+					<option value="writer"
+						<c:if test="${param.schItem eq 'writer' }" >selected="selected"</c:if>>작성자</option>
+				</select>
+				<div class="search">
+					<input type="text" name="schWord" value="${param.schWord }"
+						placeholder="검색어를 입력하세요">
+					<button>
+						<!-- <span class="material-symbols-rounded"> search </span> -->
+						<img alt="검색 아이콘" src="${conPath }/img/search_FILL0_wght400_GRAD0_opsz24.svg">
+					</button>
+				</div>
+			</form>
+		</div>
+		
 		<table class="list_table">
 			<tr>
 				<th>번호</th>

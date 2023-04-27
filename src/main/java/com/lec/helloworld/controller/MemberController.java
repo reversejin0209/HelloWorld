@@ -73,6 +73,13 @@ public class MemberController {
 		return "member/mMailConfirm";
 	}
 	
+	/* 마이페이지 */
+	@RequestMapping(value="mMypage", method=RequestMethod.GET)
+	public String mMypage(String mid, Model model) {
+		model.addAttribute("memberVo", memberService.memberGetDetail(mid));
+		return "member/mMypage";
+	}
+	
 	/* 회원정보 수정 */
 	@RequestMapping(value="mModify", method=RequestMethod.GET)
 	public String mModifyView() {
