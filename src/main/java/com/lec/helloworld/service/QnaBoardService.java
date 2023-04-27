@@ -15,10 +15,11 @@ public interface QnaBoardService {
 	public int totCntQna(QnaBoard qnaBoard);
 	// public void hitUpQna(int qanum);
 	public QnaBoard contentQna(int qanum);
-	public void writeQna(QnaBoard qnaBoard, MultipartHttpServletRequest mRequest, Model model);
-	public void modifyQna(QnaBoard qnaBoard, MultipartHttpServletRequest mRequest, Model model);
+	public void writeQna(QnaBoard qnaBoard, HttpServletRequest request, Model model);
+	public void modifyQna(QnaBoard qnaBoard, HttpServletRequest request, Model model);
 	// public void replyStepQna(QnaBoard qnaBoard);
-	public void replyQna(QnaBoard qnaBoard, MultipartHttpServletRequest mRequest, Model model);
+	public void replyQna(QnaBoard qnaBoard, HttpServletRequest request, Model model);
 	public int deleteQna(int qagroup, Model model);
 	public void imageUpload(HttpServletRequest req, HttpServletResponse resp, MultipartHttpServletRequest multiFile);
+
 }

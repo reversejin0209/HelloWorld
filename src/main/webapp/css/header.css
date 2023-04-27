@@ -88,19 +88,6 @@ nav .nav_inner {
 	color: #7800f8;
 }
 
-/* drop-menu */
-.menu_item .drop-menu {
-	position: absolute;
-	background: #ffffff;
-	width: 180px;
-	line-height: 46px;
-	top: 87px;
-	padding: 15px 0 10px 0;
-	opacity: 0;
-	visibility: hidden;
-	box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
-}
-
 .menu_item li:hover .drop-menu, .menu_item li:hover .mega-box {
 	transition: all 0.3s ease;
 	top: 87px;
@@ -108,11 +95,31 @@ nav .nav_inner {
 	visibility: visible;
 }
 
+/* drop-menu */
+.menu_item .drop-menu {
+	position: absolute;
+	background: #ffffff;
+	width: 180px;
+	line-height: 44px;
+	top: 87px;
+	padding: 15px 0 10px 0;
+	opacity: 0;
+	visibility: hidden;
+	box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
+	overflow: hidden;
+}
+
 .drop-menu li>a {
-	width: 100%;
+	width: 100% - 20px;
 	display: block;
 	padding: 0 0 0 20px;
 	font-weight: 300;
+	color: #686868;
+	border-radius: 0px;
+}
+
+.drop-menu li>a:hover {
+	background-color: #efefef;
 	color: #686868;
 }
 
@@ -147,8 +154,10 @@ nav .nav_inner {
 }
 
 .content .row img {
-	width: 100%;
-	height: 100%;
+	/* width: 100%;
+	height: 100%; */
+	width: 254px;
+	height: 200px;
 	object-fit: cover;
 }
 
@@ -156,7 +165,8 @@ nav .nav_inner {
 	/* color: #353535; */
 	color: #ffffff;
 	font-size: 20px;
-	font-weight: 400;
+	font-weight: 500;
+	padding: 0 15px;
 }
 
 .row .mega-items li a {
@@ -165,11 +175,11 @@ nav .nav_inner {
 	font-size: 18px;
 	font-weight: 300;
 	display: block;
-	padding: 0;
+	padding: 0 15px;
 }
 
 .row .mega-items li a:hover {
-	color: #8000ff;
+	background-color: #8813ff;
 }
 
 /* 프로모션 이미지 */

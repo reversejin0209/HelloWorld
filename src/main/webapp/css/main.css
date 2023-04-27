@@ -100,11 +100,11 @@ h1.main_clock {
 }
 
 #weatherShow tr td:nth-child(1) { /* 최저 기온 */
-	color: lightblue;
+	color: #73aaff;
 }
 
 #weatherShow tr td:nth-child(3) { /* 최고 기온 */
-	color: red;
+	color: #ea8891;
 }
 
 #weatherShow tr td:nth-child(4) { /* 날씨 표시 */
@@ -132,6 +132,7 @@ h1.main_clock {
 	margin: 0 auto;
 	padding: 40px;
 	box-sizing: border-box;
+	box-shadow: 0 8px 32px rgba(0,0,0,0.24);
 	/* background-color: #353535; */
 	background: linear-gradient(#353535, #282828);
 	border-radius: 14px;

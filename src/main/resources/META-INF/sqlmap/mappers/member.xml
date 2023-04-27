@@ -16,7 +16,11 @@
 	
 	<select id="memberGetDetail" parameterType="String" resultType="Member">
 		<!-- 회원 아이디로 회원 정보 가져오기 -->
-		SELECT * FROM MEMBER WHERE mID = #{mid}	
+		<!-- SELECT * FROM MEMBER WHERE mID = #{mid} -->
+		SELECT *
+	      FROM MEMBER, MEMBER_GRADE
+	     WHERE MVISIT BETWEEN LOWVI AND HIGHVI
+	       AND mID = #{mid}	
 	</select>
 	
 	<insert id="memberJoin" parameterType="Member">

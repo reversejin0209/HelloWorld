@@ -11,7 +11,7 @@
 <link href="${conPath }/css/style.css" rel="stylesheet">
 <link href="${conPath }/css/board.css" rel="stylesheet">
 <!-- 검색 아이콘 -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,500,0,0" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
 	$(document).ready(function() {
@@ -27,13 +27,14 @@
 </script>
 </head>
 <body>
-	<c:set var="SUCCESS" value="1" />
-	<c:set var="FAIL" value="0" />
-
-	<!-- 게시글 삭제 실행 유무 -->
-	<c:if test="${not empty deleteResult }">
+	<c:if test="${not empty successMsg }">
 		<script>
-			alert("게시글 삭제가 완료되었습니다.");
+			alert('${successMsg}');
+		</script>
+	</c:if>
+	<c:if test="${not empty failMsg}">
+		<script>
+			alert('${failMsg}');
 		</script>
 	</c:if>
 	
@@ -59,7 +60,8 @@
 					<input type="text" name="schWord" value="${param.schWord }"
 						placeholder="검색어를 입력하세요">
 					<button>
-						<span class="material-symbols-rounded">search</span>
+						<!-- <span class="material-symbols-rounded"> search </span> -->
+						<img alt="검색 아이콘" src="${conPath }/img/search_FILL0_wght400_GRAD0_opsz24.svg">
 					</button>
 				</div>
 			</form>
@@ -114,12 +116,13 @@
 		</table>
 		<div class="right">
 			<c:if test="${empty member }">
-				글쓰기는 로그인 후 이용할 수 있습니다.
+				<b class="grey">글쓰기는 로그인 후 이용할 수 있습니다.</b>
 			</c:if>
 			<c:if test="${not empty member }">
 				<button onclick="location.href='${conPath}/qnaBoard/qBoardWrite.do'" class="btn_submit">글쓰기</button>
 			</c:if>
 		</div>
+		
 		<!-- 페이징 -->
 		<div id="paging">
 			<c:if test="${paging.startPage>paging.blockSize}">

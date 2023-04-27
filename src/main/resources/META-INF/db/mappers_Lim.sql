@@ -12,6 +12,11 @@ SELECT COUNT(*) FROM MEMBER WHERE mMAIL = 'aaa.gmail.com';
 
 -- 2. 회원정보 가져오기
 SELECT * FROM MEMBER WHERE mID = 'aaa';
+    --> 2-1. 회원 등급까지 출력
+    SELECT *
+      FROM MEMBER, MEMBER_GRADE
+     WHERE MVISIT BETWEEN LOWVI AND HIGHVI
+       AND mID = 'aaa';
 
 -- 3. 정보수정
 UPDATE MEMBER 
