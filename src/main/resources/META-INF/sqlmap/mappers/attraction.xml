@@ -1,0 +1,127 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lec.helloworld.dao.AttractionDao">
+	<resultMap type="Attraction" id="AttractionResult">
+		<result property="atcode" column="atcode"/>
+		<result property="atname" column="atname"/>
+		<result property="atcontent" column="atcontent"/>
+		<result property="ataddr" column="ataddr"/>
+		<result property="atimage" column="atimage"/>
+		<result property="atrdate" column="atrdate"/>
+		<result property="atold" column="atold"/>
+		<result property="atheight" column="atheight"/>
+		<result property="atweight" column="atweight"/>
+		<result property="atlat" column="atlat"/>
+		<result property="atlng" column="atlng"/>
+		<result property="adid" column="adid"/>
+		<result property="zname" column="zname"/>
+		<result property="atyoutube" column="atyoutube"/>
+		<result property="atnop" column="atnop"/>
+	</resultMap>
+<!-- 기구 모든 리스트(새로 등록된 기구 순) -->
+<select id="mainAtc" resultMap="AttractionResult">
+	SELECT * FROM (SELECT ROWNUM RN, A.* 
+	    FROM (SELECT ATCODE, ATNAME, ATCONTENT, ATADDR, ATIMAGE, ATRDATE, ATOLD, ATHEIGHT, ATLAT, ATLNG, ADID, Z.ZNAME
+	        FROM ATTRACTION A, ZONE Z WHERE A.ZNAME = Z.ZNAME ORDER BY ATCODE DESC)A)
+	    WHERE RN BETWEEN #{startRow} AND #{endRow}
+</select>
+<!-- 기구 리스트 보기 출력 (새로 등록 된 기구 순 startRow~endRow번째 까지) -->
+	<select id="ListAtc" parameterType="Attraction" resultMap="AttractionResult">
+		<if test="schItem=='all'">
+			SELECT * FROM (SELECT ROWNUM RN, A.* 
+			    FROM (SELECT ATCODE, ATNAME, ATCONTENT, ATADDR, ATIMAGE, ATRDATE, ATOLD, ATHEIGHT, ATLAT, ATLNG, ADID, Z.ZNAME
+			        FROM ATTRACTION A, ZONE Z WHERE A.ZNAME = Z.ZNAME  AND Z.ZNAME = #{zname} AND ATOLD >=#{atold}AND ATHEIGHT>=#{atheight} ORDER BY ATCODE DESC)A)
+			    WHERE RN BETWEEN #{startRow} AND #{endRow}
+		</if>
+		<if test="schItem=='zname'">
+			SELECT * FROM (SELECT ROWNUM RN, A.* 
+			    FROM (SELECT ATCODE, ATNAME, ATCONTENT, ATADDR, ATIMAGE, ATRDATE, ATOLD, ATHEIGHT, ATLAT, ATLNG, ADID, Z.ZNAME 
+			        FROM ATTRACTION A, ZONE Z WHERE  A.ZNAME = Z.ZNAME  AND Z.ZNAME = #{zname} ORDER BY ATCODE DESC)A)
+			     WHERE RN BETWEEN #{startRow} AND #{endRow}
+		</if>
+		<if test="schItem=='atold'">
+			SELECT * FROM (SELECT ROWNUM RN, A.* 
+			    FROM (SELECT ATCODE, ATNAME, ATCONTENT, ATADDR, ATIMAGE, ATRDATE, ATOLD, ATHEIGHT, ATLAT, ATLNG, ADID, Z.ZNAME
+			        FROM ATTRACTION A, ZONE Z WHERE A.ZNAME = Z.ZNAME AND ATOLD >=#{atold} ORDER BY ATCODE DESC)A)
+			    WHERE RN BETWEEN #{startRow} AND #{endRow}
+		</if>
+		<if test="schItem=='atheight'">
+			SELECT * FROM (SELECT ROWNUM RN, A.* 
+			    FROM (SELECT ATCODE, ATNAME, ATCONTENT, ATADDR, ATIMAGE, ATRDATE, ATOLD, ATHEIGHT, ATLAT, ATLNG, ADID, Z.ZNAME
+			        FROM ATTRACTION A, ZONE Z WHERE A.ZNAME = Z.ZNAME AND ATHEIGHT>=#{atheight} ORDER BY ATCODE DESC)A)
+				WHERE RN BETWEEN #{startRow} AND #{endRow}
+		</if>
+		<if test="atold!='' and atheight == '' and zname!=''">
+			SELECT * FROM (SELECT ROWNUM RN, A.* 
+			    FROM (SELECT ATCODE, ATNAME, ATCONTENT, ATADDR, ATIMAGE, ATRDATE, ATOLD, ATHEIGHT, ATLAT, ATLNG, ADID, Z.ZNAME
+			        FROM ATTRACTION A, ZONE Z WHERE A.ZNAME = Z.ZNAME AND Z.ZNAME = #{zname} AND ATOLD >=#{atold ORDER BY ATCODE DESC)A)
+			    WHERE RN BETWEEN #{startRow} AND #{endRow}
+		</if>
+		<if test="atold=='' and atheight != '' and zname!=''">
+			SELECT * FROM (SELECT ROWNUM RN, A.* 
+			    FROM (SELECT ATCODE, ATNAME, ATCONTENT, ATADDR, ATIMAGE, ATRDATE, ATOLD, ATHEIGHT, ATLAT, ATLNG, ADID, Z.ZNAME
+			        FROM ATTRACTION A, ZONE Z WHERE A.ZNAME = Z.ZNAME  AND Z.ZNAME = #{zname} AND ATHEIGHT>=#{atheight} ORDER BY ATCODE DESC)A)
+			    WHERE RN BETWEEN #{startRow} AND #{endRow}
+		</if>
+		<if test="atold!='' and atheight != '' and zname=''">
+			SELECT * FROM (SELECT ROWNUM RN, A.* 
+			    FROM (SELECT ATCODE, ATNAME, ATCONTENT, ATADDR, ATIMAGE, ATRDATE, ATOLD, ATHEIGHT, ATLAT, ATLNG, Z.ZNAME
+			         FROM ATTRACTION A, ZONE Z WHERE A.ZNAME = Z.ZNAME  AND ATOLD >=#{atold}AND ATHEIGHT>=#{atheight} ORDER BY ATCODE DESC)A)
+			    WHERE RN BETWEEN #{startRow} AND #{endRow}
+		</if>
+	</select>
+<!-- 페이징을 위한 schitem 별 목록갯수-->
+	<select id="totCntAtc" resultType="int">
+		<if test="schItem==null or schItem==''">
+			SELECT COUNT(*) FROM ATTRACTION
+		</if>
+		<if test="schItem=='all'">
+			SELECT COUNT(*) FROM ATTRACTION A, ZONE Z WHERE ATOLD >=#{atold, jdbcType=VARCHAR} AND ATHEIGHT>=#{atheight, jdbcType=VARCHAR} AND Z.ZNAME = #{zname} AND  A.ZNAME = Z.ZNAME
+		</if>
+		<if test="schItem=='zname'">
+			SELECT COUNT(*) FROM ATTRACTION A, ZONE Z WHERE  A.ZNAME = Z.ZNAME AND Z.ZNAME = #{zname}
+		</if>
+		<if test="schItem=='atold'">
+			SELECT COUNT(*) FROM ATTRACTION A, ZONE Z WHERE  A.ZNAME = Z.ZNAME AND ATOLD >= #{atold, jdbcType=VARCHAR}
+		</if>
+		<if test="schItem=='atheight'">
+			SELECT COUNT(*) FROM ATTRACTION A, ZONE Z WHERE  A.ZNAME = Z.ZNAME AND ATHEIGHT>=#{atheight, jdbcType=VARCHAR}
+		</if>
+		<if test="schItem== 'zname' and 'atold' ">
+			SELECT COUNT(*) FROM ATTRACTION A, ZONE Z WHERE  A.ZNAME = Z.ZNAME AND Z.ZNAME = #{zname} AND ATOLD >=#{atold, jdbcType=VARCHAR}
+		</if>
+		<if test="schItem== 'zname' and 'atheight' ">
+			SELECT COUNT(*) FROM ATTRACTION A, ZONE Z WHERE  A.ZNAME = Z.ZNAME AND Z.ZNAME = #{zname} AND ATHEIGHT>=#{atheight, jdbcType=VARCHAR}
+		</if>
+		<if test="schItem== 'atold' and 'atheight' ">
+			SELECT COUNT(*) FROM ATTRACTION A, ZONE Z WHERE  A.ZNAME = Z.ZNAME AND ATOLD >=#{atold, jdbcType=VARCHAR} AND ATHEIGHT>=#{atheight, jdbcType=VARCHAR}
+		</if>
+	</select>
+<!-- 기구 상세보기 -->
+<select id="DetailAtc" parameterType="int" resultType="Attraction">
+	SELECT * FROM ATTRACTION WHERE ATCODE = #{atcode}
+</select>
+<!-- 기구 등록 -->
+<insert id="InsertAtc" parameterType="Attraction" >
+	INSERT INTO ATTRACTION (atCODE, atNAME, atCONTENT, atADDR, atOLD, atHEIGHT, atLAT, atLNG, adID, zNAME )
+    VALUES (ATTRACTION_SEQ.NEXTVAL, #{atname}, #{atcontent}, #{ataddr}, #{atold}, #{atheight},  #{atlat}, #{atlng}, #{adid}, #{zname})
+</insert>
+<!-- 기구 수정 -->
+<update id="ModifyAtc" parameterType="Attraction">
+	UPDATE ATTRACTION SET
+	    atNAME = #{atname},
+	    atCONTENT = #{atcontent},
+	    atADDR = #{ataddr},
+	    atOLD = #{atold},
+	    atHEIGHT = #{atheight},
+	    atLAT = #{atlat},
+	    atLNG = #{atlng},
+	    zNAME = #{zname}
+    	WHERE atCODE = #{atcode}
+</update>
+<!-- 기구 삭제 -->
+<delete id="DeleteAtc" parameterType="int">
+	DELETE FROM ATTRACTION WHERE ATCODE = #{atcode}
+</delete>
+</mapper>

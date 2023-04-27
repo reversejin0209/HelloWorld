@@ -1,5 +1,7 @@
 package com.lec.helloworld.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.lec.helloworld.vo.Member;
@@ -13,4 +15,6 @@ public interface MemberDao {
 	public int memberEmConfirm(String mmail);
 	public int memberModify(Member member);
 	public int memberWithdrawal(String mid);
+	public int memberTotCnt(Member member);
+	public List<Member> memberList(Member member);
 }

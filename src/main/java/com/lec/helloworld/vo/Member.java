@@ -16,4 +16,8 @@ public class Member {
 	private String mvisit;
 	private int    mwith;
 	private String grade;
+	
+	// paging
+	private int startRow;
+	private int endRow;
 }

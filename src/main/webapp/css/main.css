@@ -89,6 +89,29 @@ h1.main_clock {
 	color: #8000ff;
 }
 
+/* weather api */
+#weatherShow {
+	font-size: 50px;
+	font-weight: bold;
+}
+
+#weatherShow tr td {
+	padding: 0 10px 0 10px;
+}
+
+#weatherShow tr td:nth-child(1) { /* 최저 기온 */
+	color: lightblue;
+}
+
+#weatherShow tr td:nth-child(3) { /* 최고 기온 */
+	color: red;
+}
+
+#weatherShow tr td:nth-child(4) { /* 날씨 표시 */
+	font-size: 23px;
+	padding-top: 14px;
+}
+
 /* main_news */
 #main_news {
 	width: 1020px;
@@ -102,7 +125,6 @@ h1.main_clock {
 #main_news>div {
 	width: 490px;
 }
-
 /* notice_box */
 #notice_box {
 	width: 1140px;

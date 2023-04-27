@@ -7,10 +7,18 @@
 		<typeAlias type="com.lec.helloworld.vo.QnaBoard" alias="QnaBoard"/>
 		<typeAlias type="com.lec.helloworld.vo.Member" alias="Member"/>
 		<typeAlias type="com.lec.helloworld.vo.ThRev" alias="ThRev"/>
+		<typeAlias type="com.lec.helloworld.vo.Theater" alias="Theater"/>
+		<typeAlias alias="Notice" type="com.lec.helloworld.vo.Notice"/>
+		<typeAlias type="com.lec.helloworld.vo.Admin" alias="Admin"/>
+		<typeAlias type="com.lec.helloworld.vo.Attraction" alias="Attraction"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="META-INF/sqlmap/mappers/qnaBoard.xml"/>
 		<mapper resource="META-INF/sqlmap/mappers/member.xml"/>
 		<mapper resource="META-INF/sqlmap/mappers/thRev.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/theater.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/notice.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/admin.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/attraction.xml"/>
 	</mappers>
 </configuration>

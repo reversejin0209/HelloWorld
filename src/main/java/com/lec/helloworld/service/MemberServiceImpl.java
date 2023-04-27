@@ -94,8 +94,11 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int memberModify(Member member, HttpSession httpSession) {
+	public int memberModify(Member member, String oldMpw, HttpSession httpSession) {
 		/* 회원 정보 수정 */
+		if(member.getMpw()==null || member.getMpw()=="") {
+			member.setMpw(oldMpw);
+		}
 		httpSession.setAttribute("member", member);
 		return memberDao.memberModify(member);
 	}

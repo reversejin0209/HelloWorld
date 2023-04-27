@@ -42,11 +42,13 @@
 	
 	<update id="memberModify" parameterType="Member">
 		<!-- 회원 정보 수정 -->
-		UPDATE MEMBER 
-		    SET mMAIL = #{mmail},
-		        mPW   = #{mpw},
-		        mNAME = #{mname},
-		        mTEL  = #{mtel}
+		UPDATE MEMBER  
+			SET mMAIL = #{mmail, jdbcType=VARCHAR},
+			<if test="mpw!=null and mpw!=''">
+				mPW = #{mpw, jdbcType=VARCHAR},
+			</if>
+	        	mNAME = #{mname},
+				mTEL = #{mtel, jdbcType=VARCHAR}
 		    WHERE mID = #{mid}
 	</update>
 	
@@ -56,5 +58,20 @@
 		    SET mWITH = 1
 		    WHERE mID = #{mid}
 	</update>
+	
+	<select id="memberTotCnt">
+		<!-- 전체 회원 수 -->
+		SELECT COUNT(*) FROM MEMBER 
+	</select>
+	
+	<select id="memberList" resultType="Member" parameterType="Member">
+		<!-- 전체 회원 리스트 출력 -->
+		SELECT * 
+			FROM (SELECT ROWNUM RN, A.*
+					FROM (SELECT * 
+							FROM MEMBER 
+							ORDER BY MNAME) A)
+					WHERE RN BETWEEN #{startRow} AND #{endRow} 
+	</select>
 	
 </mapper>

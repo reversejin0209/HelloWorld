@@ -23,20 +23,38 @@
 				dataType : 'json',
 				success : function(data){ 
 					let dataItem = data.response.body.items.item;
-					var out = '<tr>';
+					var pty;
+					var tmn;
+					var tmx;
+					var sch;
 					$.each(dataItem, function(idx, item){
 						if(item.fcstDate==todayDate) {
 							if(item.fcstTime==todayTime) {
-								if(item.category=='PTY' && item.fcstValue==0) {
-									out += '<td>' + '비' + '</td>'; 
-								} else if(item.category=='SNO' && item.fcstValue>1) {
-									
+								if(item.category=='PTY' && item.fcstValue>=1) {
+									pty = '<td>' + '비' + '</td>'; 
+								} else if(item.category=='SNO' && item.fcstValue>=1) {
+									pty = '<td>' + '눈' + '</td>'; 
+								} else if(item.category=='SKY' && item.fcstValue<=2) {
+									pty = '<td>' + '맑음' + '</td>'; 
+								} else if(item.category=='SKY' && item.fcstValue>2) {
+									pty = '<td>' + '흐림' + '</td>'; 
 								}
+							}
+							if(item.category=='TMP' && item.fcstTime=='0600') { // or 삭제, 첫번째 out 삭제
+								tmn = '<td>' + Math.floor(item.fcstValue) + '°' + '</td>';
+							}
+							if(item.category=='TMP' && item.fcstTime=='1500') {
+								sch = '<td>' + '/' + '</td>';
+								tmx = '<td>' + Math.floor(item.fcstValue) + '°' + '</td>';
 							}
 						}
 					}); // each()함수
-					out += '</tr>';
-					$('table#dataShow').html(out);
+					var out = '<tr>';
+					out += tmn;
+					out += sch;
+					out += tmx;
+					out += pty;
+					$('table#weatherShow').html(out);
 				},
 			});
 		});
@@ -94,7 +112,6 @@
 				<div class="item_box">
 					<div class="sub_item item1">
 						<h2>날씨</h2>
-						<table id="dataShow"></table>
 					</div>
 					<div class="sub_item item2">
 						<div class="normal_box">
@@ -132,7 +149,7 @@
 				<h1 class="main_clock">10:00 - 22:00</h1>
 			</div>
 			<div class="main_today_right">
-				<p class="main_today_title">WEATHER</p> 날씨
+				<p class="main_today_title">WEATHER</p> <table id="weatherShow"></table>
 			</div>
 		</div>
 		<!-- main_today -->

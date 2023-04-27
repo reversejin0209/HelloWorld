@@ -1,5 +1,6 @@
 package com.lec.helloworld.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,9 +80,9 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="mModify", method=RequestMethod.POST)
-	public String mModify(Member member, Model model, HttpSession httpSession) {
-		model.addAttribute("modifyResult", memberService.memberModify(member, httpSession));
-		return "forward:mModify.do";
+	public String mModify(Member member, String oldMpw, Model model, HttpSession httpSession, HttpServletRequest request) {
+		model.addAttribute("modifyResult", memberService.memberModify(member, oldMpw, httpSession));
+		return "main/main";
 	}
 	
 	/* 회원 탈퇴 */

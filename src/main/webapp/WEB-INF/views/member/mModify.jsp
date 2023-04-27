@@ -7,11 +7,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${conPath }/css/member/modify.css" rel="stylesheet">
-<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-<script>
+	<link href="${conPath }/css/member/modify.css" rel="stylesheet">
+	<link href="${conPath }/css/style.css" rel="stylesheet">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+	<script>
   	$(function(){
   	// keyup event(tel 중복 확인용) 
   		var patternTel = /^\d{3}-\d{3,4}-\d{4}$/;
@@ -21,7 +22,7 @@
   			if(mtel == "" || mtel == dbmtel) {
   				$('#telConfirmResult').html('&nbsp; &nbsp; &nbsp;');
   			} else if(!mtel.match(patternTel)) {
-  				$('#telConfirmResult').html('<b>전화번호 형식을 지켜주세요</b>');
+  				$('#telConfirmResult').html('<b class="red">전화번호 형식을 지켜주세요</b>');
   			} else {
 	  			$.ajax({
 	  				url : '${conPath}/member/mTelConfirm.do',
@@ -36,13 +37,13 @@
   		}); 
   		// keyup event(email 중복 확인용)   		
   		var patternMemail = /^[a-zA-Z0-9_\.]+@[a-zA-Z0-9_]+(\.\w+){1,2}$/;
-  		var dbmemail = '${member.mmail }'
+  		var dbmemail = '${member.mmail }';
   		$('input[name="mmail"]').keyup(function(){
   			var memail = $(this).val().trim();
   			if(memail=="" || memail == dbmemail){
   				$('#emailConfirmResult').html('&nbsp; &nbsp; &nbsp;');
   			} else if(!memail.match(patternMemail)){
-  				$('#emailConfirmResult').html('<b>메일 형식을 지켜 주세요</b>');
+  				$('#emailConfirmResult').html('<b class="red">메일 형식을 지켜 주세요</b>');
   			} else{
   				$.ajax({
   					url : '${conPath}/member/mEmConfirm.do',
@@ -59,26 +60,28 @@
   		var patternPw = /^[A-Za-z0-9]{6,12}$/;
   		$('#oldMpw, #mpw').keyup(function(){
   			var oldMpw = $('#oldMpw').val().trim();
-  			var curMpw = '${member.mpw }'
+  			var curMpw = '${member.mpw }';
   			var mpw    = $('#mpw').val().trim();  			
   			if(!oldMpw.match(curMpw)) {
-  				$('#pwChkResult').html('<b>현재 비밀번호를 다시 확인해주세요</b>'); 
-  			} else if(mpw=="" && pwChk=="") {
+  				$('#pwChkResult').html('<b class="red">현재 비밀번호를 다시 확인해주세요</b>'); 
+  			} else if(mpw=="" || oldMpw=="") {
   				$('#pwChkResult').html('&nbsp; &nbsp; &nbsp;');
   			} else if(!mpw.match(patternPw)) {
-  				$('#pwChkResult').html('<b>숫자 또는 문자 6~12자리 이내로 입력해주세요</b>'); 
+  				$('#pwChkResult').html('<b class="red">숫자 또는 문자 6~12자리 이내로 입력해주세요</b>'); 
+  			} else if(mpw.match(curMpw)){
+  				$('#pwChkResult').html('<b class="red">현재 비밀번호와 다른 비밀번호를 입력해주세요</b>');
   			} else {
-  				$('#pwChkResult').html('<b>비밀번호 일치</b>');
-  			} 
+  				$('#pwChkResult').html('<b class="purple">비밀번호 확인</b>');
+  			}
   		}); 
   		// submit 조건
   		$('form').submit(function(){
-  	  		var pwChkResult         = $('#pwChkResult').text().trim();
-  	  		var telConfirmResult    = $('#telConfirmResult').text().trim();
-  	  		var inputMtel           = $('#mtel').value();
-  	  		var emailConfirmResult  = $('#emailConfirmResult').text().trim();
-  	  		var inputMemail         = $('#mmail').value();
-  	  		if(pwChkResult != '비밀번호 일치') {
+  	  		var pwChkResult        = $('#pwChkResult').text().trim();
+  	  		var telConfirmResult   = $('#telConfirmResult').text().trim();
+  	  		var inputMtel          = $('#mtel').value();
+  	  		var emailConfirmResult = $('#emailConfirmResult').text().trim();
+  	  		var inputMemail        = $('#mmail').value();
+  	  		if(pwChkResult != '비밀번호 확인' || pwChkResult == "") {
   	  			alert('비밀번호를 확인하세요');
   	  			$('#mpw').focus();
   	  			return false;
@@ -99,7 +102,6 @@
 	<jsp:include page="../main/header.jsp" />
 	<div id="modifyForm_wrap">
 		<form action="${conPath }/member/mModify.do" method="post">
-			<input type="hidden" name="dbMpw" value="${member.mpw }">
 			<div id="modify_title">정보수정</div>
 			<table>
 				<tr>

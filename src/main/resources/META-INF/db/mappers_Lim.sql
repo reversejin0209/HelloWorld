@@ -15,11 +15,11 @@ SELECT * FROM MEMBER WHERE mID = 'aaa';
 
 -- 3. 정보수정
 UPDATE MEMBER 
-    SET mMAIL = 'asdf@naver.com',
+    SET mMAIL = 'bbb@naver.com',
         mPW   = '222',
         mNAME = '수정길동',
-        mTEL  = '010-1234-5283'
-    WHERE mID = 'aaa';
+        mTEL  = '010-0000-0000'
+    WHERE mID = 'bbb';
 
 -- 4. 내가 쓴 공연 리뷰 게시판(페이징)
     --> 3-1. 내가 쓴 공연 리뷰 총 갯수
@@ -47,7 +47,8 @@ INSERT INTO THEATER (thCODE, thNAME, thPART, thTIME, thLOC, thSEAT, thPRICE, thI
     
 -- 2. 스케쥴별로 공연 출력
 SELECT * FROM THEATER 
-    WHERE thSCHEDULE = 0;
+    WHERE thSCHEDULE = 0
+    ORDER BY THCODE;
     
 -- 3. 공연 상세보기
 SELECT * FROM THEATER 

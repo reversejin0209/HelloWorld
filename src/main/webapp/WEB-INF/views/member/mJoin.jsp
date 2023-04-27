@@ -8,6 +8,7 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<link href="${conPath }/css/member/join.css" rel="stylesheet">
+	<link href="${conPath }/css/style.css" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
   <script>
@@ -18,7 +19,7 @@
   			if(mid == "") {
   				$('#idConfirmResult').html('&nbsp; &nbsp; &nbsp;');
   			} else if(mid.length<3 || mid.length>13) {
-  				$('#idConfirmResult').html('<b>아이디는 3글자 이상 혹은 13글자 이하로 입력해주세요</b>');
+  				$('#idConfirmResult').html('<b class="purple">아이디는 3글자 이상 혹은 13글자 이하로 입력해주세요</b>');
   			} else {
   				$.ajax({
   					url : '${conPath }/member/mIdConfirm.do',
@@ -38,7 +39,7 @@
   			if(mtel == "") {
   				$('#telConfirmResult').html('&nbsp; &nbsp; &nbsp;');
   			} else if(!mtel.match(patternTel)) {
-  				$('#telConfirmResult').html('<b>연락처 형식을 지켜주세요</b>');
+  				$('#telConfirmResult').html('<b class="purple">연락처 형식을 지켜주세요</b>');
   			} else {
 	  			$.ajax({
 	  				url : '${conPath}/member/mTelConfirm.do',
@@ -58,7 +59,7 @@
   			if(mmail==""){
   				$('#emailConfirmResult').html('&nbsp; &nbsp; &nbsp;');
   			} else if(!mmail.match(patternMemail) || mmail.length>40){
-  				$('#emailConfirmResult').html('<b>메일 형식을 지켜 주세요</b>');
+  				$('#emailConfirmResult').html('<b class="purple">메일 형식을 지켜 주세요</b>');
   			} else{
   				$.ajax({
   					url : '${conPath}/member/mEmConfirm.do',
@@ -77,13 +78,13 @@
   			var mpw = $('#mpw').val().trim();
   			var pwChk = $('#mpwChk').val().trim();  			
   			if(!mpw.match(patternPw)) {
-  				$('#pwChkResult').html('<b>숫자 또는 문자 6~12자리 이내로 입력해주세요</b>'); 
-  			} else if(mpw=="" || pwChk=="") {
+  				$('#pwChkResult').html('<b class="purple">숫자 또는 문자 6~12자리 이내로 입력해주세요</b>'); 
+  			} else if(mpw=="" && pwChk=="") {
   				$('#pwChkResult').html('&nbsp; &nbsp; &nbsp;');
   			} else if(mpw == pwChk) {
   				$('#pwChkResult').text('비밀번호 일치');
-  			} else {
-  				$('#pwChkResult').html('<b>비밀번호 불일치</b>');
+  			} else if(mpw != pwChk){
+  				$('#pwChkResult').html('<b class="purple">비밀번호 불일치</b>');
   			} 
   		}); 
   		// submit 조건
@@ -119,7 +120,7 @@
 			<div id="join_title">회원가입</div>
 			<table>
 				<tr>
-					<th><label for="mid">아이디</label></th>
+					<th><label for="mid">아이디 <b class="purple">*</b></label></th>
 					<td>
 						<input type="text" name="mid" id="mid" class="mid" required="required"
 								placeholder="3글자 이상 입력해주세요">
@@ -127,32 +128,32 @@
 					</td>
 				</tr>
 				<tr>
-					<th><label for="mpw">비밀번호</label></th>
+					<th><label for="mpw">비밀번호 <b class="purple">*</b></label></th>
 					<td>
 						<input type="password" name="mpw" id="mpw" class="mpw" 
 									 required="required" placeholder="숫자 또는 문자 6~12자리 이내로 입력해주세요">
 					</td>
 				</tr>
 				<tr>
-					<th><label for="mpwChk">비밀번호 확인</label></th>
+					<th><label for="mpwChk">비밀번호 확인 <b class="purple">*</b></label></th>
 					<td>
 						<input type="password" name="mpwChk" id="mpwChk" class="mpwChk" required="required">
 						<div id="pwChkResult"> &nbsp; &nbsp; &nbsp; </div>
 					</td>
 				</tr>
 				<tr>
-					<th><label for="mname">이름</label></th>
+					<th><label for="mname">이름 <b class="purple">*</b></label></th>
 					<td><input type="text" name="mname" id="mname" class="mname" required="required"></td>
 				</tr>
 				<tr>
-					<th><label for="mtel">연락처</label></th>
+					<th><label for="mtel">연락처 <b class="purple">*</b></label></th>
 					<td>
 						<input type="text" name="mtel" id="mtel" class="mtel" required="required">
 						<div id="telConfirmResult"> &nbsp; &nbsp; &nbsp; </div>
 					</td>
 				</tr>
 				<tr>
-					<th><label for="mmail">이메일</label></th>
+					<th><label for="mmail">이메일 <b class="purple">*</b></label></th>
 					<td>
 						<input type="text" name="mmail" id="mmail" class="mmail" required="required">
 						<div id="emailConfirmResult"> &nbsp; &nbsp; &nbsp; </div>

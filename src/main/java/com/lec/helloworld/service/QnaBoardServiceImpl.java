@@ -62,7 +62,7 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 				if(is!=null) {
 					is.close();
 				}
-			}catch (Exception e) {
+			} catch (Exception e) {
 			}
 		}
 		return isCopy;
