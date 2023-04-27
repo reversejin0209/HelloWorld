@@ -16,7 +16,10 @@ public class TheaterServiceImpl implements TheaterService {
 	private String backupPath = "D:/webPro/project/helloWorld/helloworld/src/main/webapp/theaterFileUp/";
 	
 	@Override
-	public List<Theater> theaterList(int thschedule) {
+	public List<Theater> theaterList(int thschedule, String schWord) {
+		if(schWord!="" && thschedule == 2) {
+			thschedule = Integer.parseInt(schWord.substring(8))%2;
+		}
 		return theaterDao.theaterList(thschedule);
 	}
 

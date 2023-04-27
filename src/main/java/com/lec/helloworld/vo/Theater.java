@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class Theater {
 	private String thcode;
 	private String thname;
+	private String thcontent;
 	private int thpart;
 	private String thtime;
 	private String thloc;
@@ -17,4 +18,5 @@ public class Theater {
 	private int thprice;
 	private String thimg1;
 	private int thschedule;
+	
 }
