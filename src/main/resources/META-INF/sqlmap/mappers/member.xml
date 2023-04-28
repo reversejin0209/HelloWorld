@@ -68,7 +68,7 @@
 		SELECT COUNT(*) FROM MEMBER 
 	</select>
 	
-	<select id="memberList" resultType="Member" parameterType="Member">
+	<select id="memberList" parameterType="Member" resultMap="MemberResult">
 		<!-- 전체 회원 리스트 출력 -->
 		SELECT * 
 			FROM (SELECT ROWNUM RN, A.*
