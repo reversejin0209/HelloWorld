@@ -6,9 +6,14 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>Hello World</title>
 	<link href="${conPath }/css/style.css" rel="stylesheet" type="text/css">
 	<link href="${conPath }/css/main.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		#notice_box{
+			background-image: url(${conPath}/img/main_ticket.png);
+		}
+	</style>
 	<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
 	<script>
 		$(document).ready(function(){
@@ -111,12 +116,14 @@
 				<!-- main_item -->
 				<div class="item_box">
 					<div class="sub_item item1">
-						<h2>날씨</h2>
+						<img alt="티켓 예매 아이콘" src="https://em-content.zobj.net/thumbs/120/twitter/322/ticket_1f3ab.png">
+						<p>홈페이지에서 예약하면 언제 취소해도<br>
+						이용하지 못해도 100% 환불!</p>
+						<h1>티켓 예매</h1>
 					</div>
 					<div class="sub_item item2">
-						<div class="normal_box">
-							<h2>별점 기준 가장 인기있는 놀이기구 확인</h2>
-						</div>
+						<img alt="별 아이콘" src="https://em-content.zobj.net/thumbs/120/twitter/322/star_2b50.png">
+						<h2>별점 기준 가장 인기있는 놀이기구 확인</h2>
 					</div>
 					<div class="sub_item item3">
 						<div class="normal_box">
@@ -174,11 +181,9 @@
 				</ul>
 			</div>
 		</div>
-		<!-- main_news -->
-
+		<!-- main_notice -->
 		<div id="notice_box">
-			<p>event</p>
-			<h1>공연 후기를 작성하고 티켓을 받아가세요!</h1>
+		&nbsp;
 		</div>
 	</div>
 	<jsp:include page="../main/footer.jsp" />
