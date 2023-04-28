@@ -15,6 +15,20 @@
 		}
 	</style>
 	<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+	
+	<!-- 메인 item 경로 -->
+	<script>
+		$(document).ready(function(){
+			$('.item1').click(function(){
+				location.href='${conPath}/ticket/ticketList.do';
+			});
+			$('.qBoardListBtn').click(function(){
+				location.href='${conPath}/qnaBoard/qBoardList.do?pageNum=${param.pageNum}&schItem=${param.schItem}&schWord=${param.schWord}';
+			});
+		});
+	</script>
+
+	<!-- 날씨 출력 -->
 	<script>
 		$(document).ready(function(){
 			// ex.json내용을 table안에 출력
@@ -100,43 +114,69 @@
 		<div id="visual">
 			<div class="visual_items">
 				<div class="main_item">
+					<p class="eng">EVENT</p>
+					<img alt="이벤트 아이콘" src="https://em-content.zobj.net/source/microsoft-teams/337/party-popper_1f389.png" width="240px;">
 					<div>
-						~ 06.09
 						<h1>
-							홈페이지 신규가입<br>특별우대
+							홈페이지 신규가입
+							<br>
+							특별우대
 						</h1>
-						<p>스마트예약
-						<p><br>
 						<h2>25,000원 ~</h2>
 					</div>
 					<div>
-						<button class="btn_white" onclick="">예매하러 가기 &#128073;</button>
+						<button class="btn_white" onclick="">예매하러 가기 ></button>
 					</div>
 				</div>
 				<!-- main_item -->
 				<div class="item_box">
 					<div class="sub_item item1">
-						<img alt="티켓 예매 아이콘" src="https://em-content.zobj.net/thumbs/120/twitter/322/ticket_1f3ab.png">
-						<p>홈페이지에서 예약하면 언제 취소해도<br>
-						이용하지 못해도 100% 환불!</p>
-						<h1>티켓 예매</h1>
+						<img alt="티켓 예매 아이콘" src="https://em-content.zobj.net/source/microsoft-teams/337/ticket_1f3ab.png">
+						<div class="sub_item_text">
+							<p>
+								홈페이지에서 예약하면 언제 취소해도
+								<br>
+								이용하지 못해도 100% 환불!
+							</p>
+							<h1>티켓 예매</h1>
+						</div>
 					</div>
 					<div class="sub_item item2">
-						<img alt="별 아이콘" src="https://em-content.zobj.net/thumbs/120/twitter/322/star_2b50.png">
-						<h2>별점 기준 가장 인기있는 놀이기구 확인</h2>
+						<img alt="회전목마 아이콘" src="https://em-content.zobj.net/source/microsoft-teams/337/carousel-horse_1f3a0.png">
+						<div class="sub_item_text">
+							<p>
+								언제나 새롭고 즐거운 경험을 주는
+								<br>
+								헬로월드 어트랙션
+							</p>
+							<h2>HOT 어트랙션</h2>
+						</div>
 					</div>
 					<div class="sub_item item3">
-						<div class="normal_box">
-							<h2>렛츠 고! 코딩</h2>
+						<img alt="공연 아이콘" src="https://em-content.zobj.net/source/microsoft-teams/337/admission-tickets_1f39f-fe0f.png">
+						<div class="sub_item_text">
+							<p>
+								다양한 공연 및 퍼레이드 정보를 한눈에!
+								<br>
+								다양한 공연 정보를 확인해 보세요.
+							</p>
+							<h2>공연 정보 확인</h2>
 						</div>
 					</div>
 					<div class="sub_item item4">
-						<div class="normal_box">
-							<h2>코코의 모험:사이버 어드벤처</h2>
+						<img alt="이 달의 공연 아이콘" src="https://em-content.zobj.net/source/microsoft-teams/337/sparkles_2728.png">
+						<div class="sub_item_text">
+							<p>
+								위험에 빠진 딩딩이를 
+								<br>
+								구하러 가는 코코의 모험!
+							</p>
+							<h2>코코의 모험: 코딩 어드벤처</h2>
 						</div>
 					</div>
-				</div><!-- main_item -->
-				
+				</div>
+				<!-- main_item -->
+
 			</div>
 		</div>
 		<!-- visual -->
