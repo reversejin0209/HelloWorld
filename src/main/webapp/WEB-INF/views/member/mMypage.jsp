@@ -25,7 +25,8 @@
 			<div class="myContent">
 				<ul>
 					<li>
-						<h1>${member.mname }님</h1>
+						<h1>안녕하세요<br>${member.mname } 님</h1>
+						<br>
 					</li>
 					<li>
 						<ul>
@@ -37,7 +38,7 @@
 
 						<ul>
 							<li><h4>나의 계정설정</h4></li>
-							<li><a href="">회원정보 수정</a></li>
+							<li><a href="${conPath }/member/mModify.do">회원정보 수정</a></li>
 							<li><a href="">회원등급</a></li>
 						</ul>
 
@@ -63,6 +64,7 @@
 					<div class="info_box_right">
 						<p>회원등급</p><br>
 						<h1>${member.grade }</h1>
+						<b>${(member.highvi +1) - member.mvisit }회</b> 추가 방문 시 등급 UP!
 					</div>
 				</div>
 				<!-- info_box -->
