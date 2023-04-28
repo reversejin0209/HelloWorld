@@ -11,8 +11,13 @@
 	text-decoration: none;
 }
 
+.eng{
+	font-family: 'Poppins', sans-serif;
+	font-weight: bold;
+}
+
 /* 1:1문의 게시판: Q. */
-*:not(.qes) {
+*:not(.qes, .eng) {
 	font-family: 'Noto Sans KR', sans-serif;
 }
 
@@ -23,7 +28,7 @@ div#wrap {
 	margin: 50px auto;
 	padding: 0;
 	/* 컨테이너가 세로로 배치 */
-	display: flex;
+	display: block;
 	justify-content: center;
 	flex-direction: column;
 }

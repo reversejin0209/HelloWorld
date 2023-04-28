@@ -24,13 +24,14 @@
 	height: 540px;
 	border-radius: 14px;
 	box-sizing: border-box;
-	padding: 40px 30px;
+	padding: 30px 30px;
 	color: #ffffff;
 	/* background-color: #8000ff; */
 	background: linear-gradient(#baa1f9, #a57ff4);
 	display: flex;
 	justify-content: space-between;
 	flex-direction: column;
+	cursor: pointer;
 }
 
 /* item_box */
@@ -48,14 +49,24 @@
 	height: 255px;
 	border-radius: 14px;
 	box-sizing: border-box;
-	padding: 40px 30px;
+	padding: 40px 30px 30px 30px;
 	overflow: hidden;
+	display: flex;
+	justify-content: space-between;
+	align-content: space-between;
+	flex-direction: column;
+	cursor: pointer;
 }
 
 #main #visual .visual_items .item_box .sub_item>img{
 	width: 40px;
 	margin-bottom: 20px;
 }	
+
+#main #visual .visual_items .item_box .sub_item .sub_item_text >p{
+	margin: 10px 0;
+}	
+
 
 .sub_item.item1, .sub_item.item3{
 	background-color: #ffffff;
@@ -144,4 +155,5 @@ h1.main_clock {
 	height: 200px;
 	display: block;
 	margin: 0 auto;
+	
 }
