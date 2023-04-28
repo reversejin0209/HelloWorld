@@ -21,4 +21,10 @@ public class TheaterController {
 		return "theater/theaterList";
 	}
 	
+	@RequestMapping(value="theaterContent", method = RequestMethod.GET)
+	public String theaterContent(String thname, Model model) {
+		model.addAttribute("thcon", theaterService.theaterContent(thname));
+		return "theater/theaterContent";
+	}
+	
 }

@@ -44,6 +44,7 @@
 /* ---------- 테이블 ---------- */
 /* 공지사항 등 리스트 테이블 */
 .list_table {
+	width: 100%;
 	margin: 10px 0;
 	border-collapse: collapse;
 }

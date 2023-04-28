@@ -1,3 +1,4 @@
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -109,6 +110,10 @@
 		</script>
 	</c:if>
 	
+	<!-- 공연 날짜 계산 -->
+	<c:set var="nowDate" value="<%=new Date(System.currentTimeMillis()).getDate() %>"/>
+	<c:set var="nowSchedule" value="${nowDate%2 }"/>
+	
 	<jsp:include page="../main/header.jsp" />
 	<div id="main">
 		<div id="visual">
@@ -152,7 +157,7 @@
 							<h2>HOT 어트랙션</h2>
 						</div>
 					</div>
-					<div class="sub_item item3">
+					<div class="sub_item item3" onclick="location.href='${conPath }/theater/theaterList.do?thschedule=${nowSchedule }&schWord='">
 						<img alt="공연 아이콘" src="https://em-content.zobj.net/source/microsoft-teams/337/admission-tickets_1f39f-fe0f.png">
 						<div class="sub_item_text">
 							<p>

@@ -47,8 +47,14 @@ UPDATE MEMBER
 SELECT * FROM MEMBER;
 ---------------------------------- THEATER -------------------------------------
 -- 1. 공연 추가
-INSERT INTO THEATER (thCODE, thNAME, thPART, thTIME, thLOC, thSEAT, thPRICE, thIMG1, thSCHEDULE)
-    VALUES ('TH'||THCODE_SEQ.NEXTVAL, '돌고래 쇼', SYSDATE, '60'||'분', '익스트림 존', 40, 7000, 'NOIMG.JPG', 0);
+    -- 1-1. 공연 추가 전 최대 갯수 확인
+SELECT COUNT(*) 
+    FROM THEATER
+    WHERE thPART = 1;
+    -- 1-2. 공연 추가
+INSERT INTO THEATER (thCODE, thNAME, thCONTENT, thPART, thTIME, thLOC, thSEAT, thPRICE, thIMG1, thSCHEDULE)
+    VALUES ('TH'||THCODE_SEQ.NEXTVAL, '돌고래 쇼', '위험에 빠진 딩딩이를 구하러 가는 코코의 모험!', 1, '60'||'분', '익스트림 존', 40, 7000, 'theater.png', 0);
+
     
 -- 2. 스케쥴별로 공연 출력
 SELECT * FROM THEATER 
@@ -57,7 +63,7 @@ SELECT * FROM THEATER
     
 -- 3. 공연 상세보기
 SELECT * FROM THEATER 
-    WHERE thCODE = 'TH1';
+    WHERE thNAME = '돌고래 쇼';
 
 -- 4. 공연 삭제
 DELETE THEATER WHERE thCode = 'TH1';

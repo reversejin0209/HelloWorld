@@ -9,4 +9,6 @@ import com.lec.helloworld.vo.Theater;
 @Mapper
 public interface TheaterDao {
 	public List<Theater> theaterList(int thschedule);
+	public Theater theaterContent(String thname);
+	public int theaterInsert(Theater theater);
 }
