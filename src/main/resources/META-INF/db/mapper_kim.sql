@@ -2,9 +2,14 @@
 
 -- id = ticketList
 -- 티켓 목록 출력
-SELECT DISTINCT TNAME FROM TICKET;
+SELECT DISTINCT TNAME, TSUB, TIMG FROM TICKET;
 
--- id = ticketTypeList
+-- id = getTicket
+SELECT DISTINCT TNAME, TSUB, TCONTENT, TIMG 
+           FROM TICKET
+          WHERE TNAME = '헬로월드 종일권';
+
+-- id = ticketDetail
 -- 해당 티켓 구분(대인, 청소년, 소인/경로) 출력
 SELECT * FROM TICKET
         WHERE TNAME = '헬로월드 종일권';
@@ -25,11 +30,11 @@ INSERT INTO TICKET_RESDETAIL (TRDCODE, TRCODE, TCODE, TRDCNT, TRDDATE)
            , 2
            , '2023/04/01');
 
--- id = tOrderList 
+-- id = torderList 
 -- 총 주문 LIST(관리자)
 SELECT * FROM (SELECT ROWNUM RN, RES.* 
-                 FROM (SELECT * FROM TICKET_RES RES) RES)
-        WHERE RN BETWEEN 2 AND 4;
+                 FROM (SELECT * FROM TICKET_RES) RES)
+        WHERE RN BETWEEN 1 AND 4;
     
     -- id = tOrderListTotCnt 
     -- 총 주문 LIST 확인(관리자): 총 수량
@@ -37,10 +42,10 @@ SELECT * FROM (SELECT ROWNUM RN, RES.*
 
 -- id = tMemberOrderList
 -- 나의 주문 LIST(회원)
-SELECT * FROM (SELECT ROWNUM RN, DETAIL.* 
+SELECT * FROM (SELECT ROWNUM RN, RES.* 
                  FROM (SELECT * FROM TICKET_RES 
-                        WHERE MID = 'aaa') DETAIL)
-        WHERE RN BETWEEN 2 AND 4;
+                        WHERE MID = 'aaa') RES)
+        WHERE RN BETWEEN 1 AND 4;
 
     -- id = tMemberOrderListTotCnt
     -- 나의 주문 LIST(회원): 총 수량

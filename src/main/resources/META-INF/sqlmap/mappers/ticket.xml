@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lec.helloworld.dao.TicketDao">
+	<resultMap type="Ticket" id="TicketResult">
+		<result property="tcode" column="tcode" />
+		<result property="tname" column="tname" />
+		<result property="tsub" column="tsub" />
+		<result property="ttype" column="ttype" />
+		<result property="tprice" column="tprice" />
+		<result property="tcontent" column="tcontent" />
+		<result property="timg" column="timg" />
+	</resultMap>
+
+	<!-- 티켓 목록 출력 -->
+	<select id="ticketList" resultMap="TicketResult">
+		SELECT DISTINCT TNAME, TSUB,
+		TIMG FROM TICKET
+	</select>
+
+	<select id="getTicket" parameterType="String" resultType="Ticket">
+		SELECT DISTINCT TNAME, TSUB, TCONTENT, TIMG
+				   FROM TICKET
+				  WHERE TNAME = #{tname}
+	</select>
+
+	<!-- 티켓 상세보기: 티켓 구분 출력 -->
+	<select id="ticketContent" parameterType="String" resultMap="TicketResult">
+		SELECT * FROM TICKET
+		WHERE TNAME = #{tname}
+	</select>
+</mapper>
+
