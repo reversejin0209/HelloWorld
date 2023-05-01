@@ -16,7 +16,7 @@
 			$('.qtyplus').click(
 				function() {
 					fieldName = $(this).attr('field');
-					alert(fieldName);
+					/* alert(fieldName); */
 					var currentVal = parseInt($(
 							'input[name=' + fieldName + ']').val());
 					if (!isNaN(currentVal)) {
@@ -31,7 +31,7 @@
 			$(".qtyminus").click(
 				function() {
 					fieldName = $(this).attr('field');
-					alert(fieldName);
+					/* alert(fieldName); */
 					var currentVal = parseInt($(
 							'input[name=' + fieldName + ']').val());
 					if (!isNaN(currentVal) && currentVal > 0) {
