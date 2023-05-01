@@ -146,6 +146,7 @@ hr {
 	color: #a0a0a0;
 }
 
+<<<<<<< HEAD
 /* 페이지 상단 이미지 배경 */
 #head_background {
 	width: 100%;
@@ -165,4 +166,9 @@ hr {
 
 .head_background_inner>h1 {
 	margin-bottom: 10px;	
+=======
+/* 글씨색 */
+.cBlack {
+	color: black;
+>>>>>>> 0beee7ecec74c44d948505776bfd1b6b999fe35c
 }

@@ -23,4 +23,15 @@ public class TheaterServiceImpl implements TheaterService {
 		return theaterDao.theaterList(thschedule);
 	}
 
+	@Override
+	public Theater theaterContent(String thname) {
+		return theaterDao.theaterContent(thname);
+	}
+
+	@Override
+	public int theaterInsert(Theater theater) {
+		
+		return 0;
+	}
+
 }

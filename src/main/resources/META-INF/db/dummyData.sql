@@ -17,19 +17,17 @@ INSERT INTO MEMBER (MID, MMAIL, MPW, MNAME, MTEL)
     VALUES ('fff', 'hong@hong.com', '11', '홍길동', '010-9999-9999');
 INSERT INTO MEMBER (MID, MMAIL, MPW, MNAME, MTEL)
     VALUES ('sss', 'song@song.com', '11', '송길동', '010-9999-8888');
-INSERT INTO MEMBER (MID, MMAIL, MPW, MNAME, MTEL, MVISIT)
-     VALUES ('zzz', 'aaa@gmail.com', '111', '제트길동', '010-3333-3333', 11);
 INSERT INTO MEMBER (MID, MMAIL, MPW, MNAME, MTEL)
     VALUES ('ccc', 'ccc@naver.com', '111', '시길동', '010-2222-2222');
     
 ---------------------------------- THEATER -------------------------------------
 -- 1. 공연 추가
-INSERT INTO THEATER (thCODE, thNAME, thPART, thTIME, thLOC, thSEAT, thPRICE, thIMG1, thSCHEDULE)
-    VALUES ('TH'||THCODE_SEQ.NEXTVAL, '돌고래 쇼', 1, '60'||'분', '익스트림 존', 40, 7000, 'NOIMG.JPG', 0);
-INSERT INTO THEATER (thCODE, thNAME, thPART, thTIME, thLOC, thSEAT, thPRICE, thIMG1, thSCHEDULE)
-    VALUES ('TH'||THCODE_SEQ.NEXTVAL, '물개 쇼', 0, '80'||'분', '익스트림 존', 40, 9000, 'NOIMG.JPG', 1);
-INSERT INTO THEATER (thCODE, thNAME, thPART, thTIME, thLOC, thSEAT, thPRICE, thIMG1, thSCHEDULE)
-    VALUES ('TH'||THCODE_SEQ.NEXTVAL, '나무와 정령', 1, '40'||'분', '패밀리 존', 40, 5000, 'NOIMG.JPG', 0);
+INSERT INTO THEATER (thCODE, thNAME, thCONTENT, thPART, thTIME, thLOC, thSEAT, thPRICE, thIMG1, thSCHEDULE)
+    VALUES ('TH'||THCODE_SEQ.NEXTVAL, '돌고래 쇼', '위험에 빠진 딩딩이를 구하러 가는 코코의 모험!', 1, '60'||'분', '익스트림 존', 40, 7000, 'theater.png', 0);
+INSERT INTO THEATER (thCODE, thNAME, thCONTENT, thPART, thTIME, thLOC, thSEAT, thPRICE, thIMG1, thSCHEDULE)
+    VALUES ('TH'||THCODE_SEQ.NEXTVAL, '코코의 모험: 코딩 어드벤처', '위험에 빠진 딩딩이를 구하러 가는 코코의 모험!', 0, '80'||'분', '쿼리어려워 존', 40, 9000, 'cocoAdven.png', 1);
+INSERT INTO THEATER (thCODE, thNAME, thCONTENT, thPART, thTIME, thLOC, thSEAT, thPRICE, thIMG1, thSCHEDULE)
+    VALUES ('TH'||THCODE_SEQ.NEXTVAL, '나무와 정령', '나무정령의 정령', 1, '40'||'분', '패밀리 존', 40, 5000, 'NOIMG.JPG', 0);
 
 --------------------------------- THEATER_RES ----------------------------------
 -- 1. 공연 예매
@@ -86,8 +84,6 @@ INSERT INTO ATTRACTION (atCODE, atNAME, atCONTENT, atADDR, atOLD, atLAT, atLNG, 
 --------------------------------------------------------------------------------
 ------------------------------------- AT_RPLY ----------------------------------
 --------------------------------------------------------------------------------
--- 글쓰기 
-SELECT * FROM AT_RPLY;
 INSERT INTO AT_RPLY (APYNUM, MID, ATCODE, APYTITLE, APYCONTENT, APYGROUP, APYSTEP, APYINDENT, APYIP)
     VALUES (AT_RPLY_SEQ.NEXTVAL, 'aaa', '1', '탑승관련', '어린 아이는 몇 살부터 탑승 가능 할까요?', AT_RPLY_SEQ.CURRVAL, 0, 0, '194.161.13.11');
 INSERT INTO AT_RPLY (APYNUM, MID, ATCODE, APYTITLE, APYCONTENT, APYGROUP, APYSTEP, APYINDENT, APYIP)
@@ -147,25 +143,37 @@ INSERT INTO TICKET_RES (TRCODE, MID, TRTOTPRICE)
      VALUES ( TO_CHAR(SYSDATE, 'YYYYMMDD') || LPAD(TICKET_RES_SEQ.NEXTVAL, 4, 0)
             , 'aaa'
             , 84000);
-
+SELECT * FROM TICKET_RES;
 -- TICKET_RESDETAIL ------------------------------------------------------------
 INSERT INTO TICKET_RESDETAIL (TRDCODE, TRCODE, TCODE, TRDCNT, TRDDATE)
      VALUES (TICKET_RESDETAIL_SEQ.NEXTVAL
+<<<<<<< HEAD
            , '202304270001'
+=======
+           , '202304280001'
+>>>>>>> 0beee7ecec74c44d948505776bfd1b6b999fe35c
            , 'TI0001'
            , 2
            , '2023/04/01');
 
 INSERT INTO TICKET_RESDETAIL (TRDCODE, TRCODE, TCODE, TRDCNT, TRDDATE)
      VALUES (TICKET_RESDETAIL_SEQ.NEXTVAL
+<<<<<<< HEAD
            ,'202304270001'
+=======
+           , '202304280001'
+>>>>>>> 0beee7ecec74c44d948505776bfd1b6b999fe35c
            , 'TI0002'
            , 1
            , '2023/04/01');
            
 INSERT INTO TICKET_RESDETAIL (TRDCODE, TRCODE, TCODE, TRDCNT, TRDDATE)
      VALUES (TICKET_RESDETAIL_SEQ.NEXTVAL
+<<<<<<< HEAD
            , '202304270001'
+=======
+           , '202304280001'
+>>>>>>> 0beee7ecec74c44d948505776bfd1b6b999fe35c
            , 'TI0006'
            , 2
            , '2023/04/01');

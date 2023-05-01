@@ -68,11 +68,11 @@
 }	
 
 
-.sub_item.item1, .sub_item.item3{
+.sub_item.item2, .sub_item.item3{
 	background-color: #ffffff;
 }
 
-.sub_item.item2 {
+.sub_item.item1 {
 	background-color: #def0c7;
 }
 

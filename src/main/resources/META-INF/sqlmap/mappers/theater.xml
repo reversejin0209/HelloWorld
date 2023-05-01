@@ -22,4 +22,14 @@
    			 ORDER BY THCODE
 	</select>
 	
+	<select id="theaterContent" parameterType="String" resultType="Theater">
+		SELECT * FROM THEATER 
+    	WHERE thNAME = #{thname}
+	</select>
+	
+	<insert id="theaterInsert" parameterType="Theater">
+		INSERT INTO THEATER (thCODE, thNAME, thCONTENT, thPART, thTIME, thLOC, thSEAT, thPRICE, thIMG1, thSCHEDULE)
+    	VALUES ('TH'||THCODE_SEQ.NEXTVAL, #{thname}, #{thcontent}, #{thpart}, #{thtime}||'분', #{thloc}, 40, #{thprice}, #{thimg1}, #{thschedule});
+	</insert>
+	
 </mapper>

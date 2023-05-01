@@ -12,8 +12,11 @@
 <link href="${conPath }/css/header.css" rel="stylesheet">
 </head>
 <body>
+
+	<!-- 공연 날짜 계산 -->
 	<c:set var="nowDate" value="<%=new Date(System.currentTimeMillis()).getDate() %>"/>
 	<c:set var="nowSchedule" value="${nowDate%2 }"/>
+	
 	<div class="util">
 		<div class="utill_inner">
 			<div class="utill_inner_left">KOR▾</div>
@@ -73,7 +76,7 @@
 							<div class="row">
 								<header>공연</header>
 								<ul class="mega-items">
-									<li><a href="${conPath }/theater/theaterList.do?thschedule=${nowSchedule }&schWord=">예약하기</a></li>
+									<li><a href="${conPath }/theater/theaterList.do?thschedule=${nowSchedule }&schWord=">공연목록</a></li>
 									<li><a href="#">스테이지</a></li>
 									<li><a href="#">퍼레이드</a></li>
 									<li><a href="#">공연후기</a></li>
