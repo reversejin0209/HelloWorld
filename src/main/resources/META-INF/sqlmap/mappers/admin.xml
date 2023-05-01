@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lec.helloworld.dao.AdminDao">
+	<resultMap type="Admin" id="AdminResult">
+		<result property="adid" column="adid"/>
+		<result property="adpw" column="adpw"/>
+		<result property="adname" column="adname"/>
+		<result property="adnum" column="adnum"/>
+		<result property="ademail" column="ademail"/>
+	</resultMap>
+	<!-- 관리자 로그인 체크 -->
+	<select id="adLoginCheck" parameterType="String" resultType="int">
+		SELECT * FROM ADMIN WHERE ADID = #{adid} AND ADPW=#{adpw}
+	</select>
+	<!-- 관리자 로그인 정보 세션 -->
+	<select id="getAdmin" parameterType="String" resultType="Admin">
+		SELECT * FROM ADMIN WHERE ADID = #{adid}
+	</select>
+</mapper>

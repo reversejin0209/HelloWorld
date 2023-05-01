@@ -1,0 +1,159 @@
+@charset "UTF-8";
+
+#main {
+	
+}
+
+/* visual */
+#visual {
+	background-color: #fafafa;
+}
+
+#main #visual .visual_items {
+	width: 1140px;
+	margin: 0 auto;
+	height: 640px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+/* main_item */
+#main #visual .visual_items .main_item {
+	width: 360px;
+	height: 540px;
+	border-radius: 14px;
+	box-sizing: border-box;
+	padding: 30px 30px;
+	color: #ffffff;
+	/* background-color: #8000ff; */
+	background: linear-gradient(#baa1f9, #a57ff4);
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+	cursor: pointer;
+}
+
+/* item_box */
+#main #visual .visual_items .item_box {
+	width: 750px;
+	height: 540px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-content: space-between;
+}
+
+#main #visual .visual_items .item_box .sub_item {
+	width: 360px;
+	height: 255px;
+	border-radius: 14px;
+	box-sizing: border-box;
+	padding: 40px 30px 30px 30px;
+	overflow: hidden;
+	display: flex;
+	justify-content: space-between;
+	align-content: space-between;
+	flex-direction: column;
+	cursor: pointer;
+}
+
+#main #visual .visual_items .item_box .sub_item>img{
+	width: 40px;
+	margin-bottom: 20px;
+}	
+
+#main #visual .visual_items .item_box .sub_item .sub_item_text >p{
+	margin: 10px 0;
+}	
+
+
+.sub_item.item2, .sub_item.item3{
+	background-color: #ffffff;
+}
+
+.sub_item.item1 {
+	background-color: #def0c7;
+}
+
+.sub_item.item4 {
+	/* width: 280px;
+	height: 195px; */
+	background-image: url('../img/main_item04.png');
+	color: white;
+}
+
+/* main_today */
+#main_today, #main_news {
+	width: 1140px;
+	margin: 0 auto;
+	height: 200px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+#main_today>div {
+	width: 570px;
+	padding: 0 60px;
+}
+
+#main_today .main_today_left {
+	border-right: 1px solid #efefef;
+}
+
+.main_today_title {
+	margin: 10px 0;
+}
+
+h1.main_clock {
+	font-family: 'Poppins', sans-serif;
+	font-size: 50px;
+	color: #a57ff4;
+}
+
+/* weather api */
+#weatherShow {
+	font-size: 50px;
+	font-weight: bold;
+}
+
+#weatherShow tr td {
+	padding: 0 10px 0 10px;
+}
+
+#weatherShow tr td:nth-child(1) { /* 최저 기온 */
+	color: #73aaff;
+}
+
+#weatherShow tr td:nth-child(3) { /* 최고 기온 */
+	color: #ea8891;
+}
+
+#weatherShow tr td:nth-child(4) { /* 날씨 표시 */
+	font-size: 23px;
+	padding-top: 14px;
+}
+
+/* main_news */
+#main_news {
+	width: 1020px;
+	margin: 0 auto;
+	height: 300px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+#main_news>div {
+	width: 490px;
+}
+
+/* notice_box */
+#notice_box {
+	width: 1140px;
+	height: 200px;
+	display: block;
+	margin: 0 auto;
+	
+}

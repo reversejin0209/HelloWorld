@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lec.helloworld.dao.NoticeDao">
+	<resultMap type="Notice" id="NoticeResult">
+		<result property="nno" column="nno"/>
+		<result property="ntitle" column="ntitle"/>
+		<result property="ncontent" column="ncontent"/>
+		<result property="nrdate" column="nrdate"/>
+		<result property="ntype" column="ntype"/>
+		<result property="adid" column="adid"/>
+		<result property="adname" column="adname"/>
+		<result property="writer" column="writer"/>
+	</resultMap>
+	
+	<!-- 공지사항 모든 리스트(새 글 순서) -->
+	<select id="noticeList" parameterType="Notice" resultMap="NoticeResult">
+		SELECT N.*,
+		    (SELECT ADNAME FROM ADMIN WHERE N.ADID = ADID)ADNAME
+		    FROM (SELECT ROWNUM RN, B.*
+		        FROM (SELECT * FROM NOTICE ORDER BY NNO DESC) B)N
+		    WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<!-- 검색 -->
+	<select id="">
+		
+	</select>
+	
+	<!-- 공지사항 전체갯수 (페이징 용) -->
+	<select id="totCntNotice" parameterType="Notice" resultType="int">
+		<!-- 전체 글 갯수 -->
+		<if test="schItem == null or schItem == ''">
+			SELECT COUNT(*) FROM NOTICE
+		</if>
+	</select>
+	
+	<!-- 공지사항 입력하기 -->
+	<insert id="noticeWriteView" parameterType="Notice">
+		INSERT INTO NOTICE(NNO, NTITLE, NTYPE, ADID)
+    VALUES(NOTICE_SEQ.NEXTVAL, #{ntitle}, #{ntype}, #{adid))
+	</insert>
+	
+	<!-- 공지사항 상세보기 -->
+	<select id="noticeContent" parameterType="int" resultType="Notice">
+		SELECT N.*,
+		    (SELECT ADNAME FROM ADMIN WHERE N.ADID = ADID)ADNAME
+		    FROM (SELECT ROWNUM RN, B.*
+		        FROM (SELECT * FROM NOTICE ORDER BY NNO DESC) B)N
+		    WHERE NNO=#{nno}
+	</select>
+	
+	<!-- 공지사항 수정하기 -->
+	<update id="noticeModifyView" parameterType="Notice">
+		SET NTITLE = #{ntitle},
+	        NCONTENT = #{ncontent},
+	        NTYPE = #{ntype}
+	    WHERE NNO = #{nno}
+	</update>
+	
+	<!-- 공지사항 삭제하기 -->
+	<delete id="noticeDelete" parameterType="int">
+		DELETE FROM NOTICE WHERE NNO = #{nno}
+	</delete>
+</mapper>

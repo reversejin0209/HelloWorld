@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lec.helloworld.dao.QnaBoardDao">
+	<resultMap type="QnaBoard" id="QnaBoardResult">
+		<result property="qanum" column="qanum"/>
+		<result property="mid" column="mid"/>
+		<result property="adid" column="adid"/>
+		<result property="qacat" column="qacat"/>
+		<result property="qatitle" column="qatitle"/>
+		<result property="qacontent" column="qacontent"/>
+		<result property="qapw" column="qapw"/>
+		<result property="qardate" column="qardate"/>
+		<result property="qahit" column="qahit"/>
+		<result property="qagroup" column="qagroup"/>
+		<result property="qastep" column="qastep"/>
+		<result property="qaindent" column="qaindent"/>
+		<result property="qaip" column="qaip"/>
+		<result property="writer" column="writer"/>
+	</resultMap>
+	
+	<!-- Qna게시판 목록 -->
+	<select id="qnaBoardList" parameterType="QnaBoard" resultMap="QnaBoardResult">
+		<!-- 전체 출력 -->
+		<if test="schItem == null or schItem == ''">
+			SELECT LIST.*,
+		           (SELECT MID FROM MEMBER WHERE LIST.MID = MID) ||
+		           (SELECT ADID FROM ADMIN WHERE LIST.ADID = ADID) WRITER
+		      FROM (SELECT ROWNUM RN, QNA.* 
+		              FROM (SELECT * FROM QNABOARD 
+		                     ORDER BY QAGROUP DESC, QASTEP) QNA) LIST
+		     WHERE RN BETWEEN #{startRow} AND #{endRow}
+		</if>
+		
+		<!-- 검색 -->
+		<if test="schItem == 'all'">
+			SELECT LIST.*,
+		           (SELECT MID FROM MEMBER WHERE LIST.MID = MID) ||
+		           (SELECT ADID FROM ADMIN WHERE LIST.ADID = ADID) WRITER
+		      FROM (SELECT ROWNUM RN, QNA.* 
+		              FROM (SELECT * 
+		                      FROM QNABOARD 
+		                     WHERE MID LIKE '%'||#{schWord}||'%'
+		                        OR QATITLE LIKE '%'||#{schWord}||'%'
+		                     ORDER BY QAGROUP DESC, QASTEP) QNA) LIST
+		    WHERE RN BETWEEN #{startRow} AND #{endRow}
+		</if>
+		<if test="schItem == 'title'">
+			SELECT LIST.*,
+		           (SELECT MID FROM MEMBER WHERE LIST.MID = MID) ||
+		           (SELECT ADID FROM ADMIN WHERE LIST.ADID = ADID) WRITER
+		      FROM (SELECT ROWNUM RN, QNA.* 
+		              FROM (SELECT * 
+		                      FROM QNABOARD 
+		                     WHERE QATITLE LIKE '%'||#{schWord}||'%'
+		                     ORDER BY QAGROUP DESC, QASTEP) QNA) LIST
+		    WHERE RN BETWEEN #{startRow} AND #{endRow}
+		</if>
+		<if test="schItem == 'writer'">
+			SELECT LIST.*,
+		           (SELECT MID FROM MEMBER WHERE LIST.MID = MID) ||
+		           (SELECT ADID FROM ADMIN WHERE LIST.ADID = ADID) WRITER
+		      FROM (SELECT ROWNUM RN, QNA.* 
+		              FROM (SELECT * 
+		                      FROM QNABOARD 
+		                     WHERE MID LIKE '%'||#{schWord}||'%'
+		                     ORDER BY QAGROUP DESC, QASTEP) QNA) LIST
+		    WHERE RN BETWEEN #{startRow} AND #{endRow}
+		</if>
+	</select>
+	
+	<!-- Qna게시판 총 글 갯수  -->
+	<select id="totCntQna" parameterType="QnaBoard" resultType="int">
+		<!-- 전체 글 갯수 -->
+		<if test="schItem == null or schItem == ''">
+			SELECT COUNT(*) FROM QNABOARD
+		</if>
+		
+		<!-- 검색 시 글 갯수 -->
+		<if test="schItem == 'all'">
+			SELECT COUNT(*) 
+		      FROM QNABOARD
+		     WHERE MID LIKE '%'||#{schWord}||'%'
+		       AND QATITLE LIKE '%'||#{schWord}||'%'
+		</if>
+		<if test="schItem == 'title'">
+			SELECT COUNT(*) 
+		      FROM QNABOARD
+		     WHERE QATITLE LIKE '%'||#{schWord}||'%'
+		</if>
+		<if test="schItem == 'writer'">
+			SELECT COUNT(*) 
+		      FROM QNABOARD
+		     WHERE MID LIKE '%'||#{schWord}||'%'
+		</if>
+	</select>
+	
+	<!-- 조회 수 증가 -->
+	<update id="hitUpQna" parameterType="int">
+		UPDATE QNABOARD
+		   SET QAHIT = QAHIT + 1
+		 WHERE QANUM = #{qanum}
+	</update>
+	
+	<!-- 게시글 상세보기 -->
+	<select id="contentQna" parameterType="int" resultType="QnaBoard">
+		SELECT * FROM QNABOARD
+        		WHERE QANUM = #{qanum}
+	</select>
+	
+	<!-- 게시글 작성: 회원 -->
+	<insert id="writeQna" parameterType="QnaBoard">
+		INSERT INTO QNABOARD
+	           (QANUM, MID, QACAT, QATITLE, QACONTENT
+	          , QAPW, QAGROUP, QASTEP, QAINDENT, QAIP)
+	    VALUES (QNABOARD_SEQ.NEXTVAL
+	          , #{mid}
+	          , #{qacat}
+	          , #{qatitle}
+	          , #{qacontent}
+	          , #{qapw}
+	          , QNABOARD_SEQ.CURRVAL
+	          , 0
+	          , 0
+	          , #{qaip})
+	</insert>
+	
+	<!-- 게시글 수정 -->
+	<update id="modifyQna" parameterType="QnaBoard">
+		UPDATE QNABOARD 
+		   SET QACAT = #{qacat}
+		     , QATITLE = #{qatitle}
+		     , QACONTENT = #{qacontent}
+		     , QAIP = #{qaip}
+		 WHERE QANUM = #{qanum}
+	</update>
+	
+	<!-- 답변글 작성: 관리자 -->
+	<!-- 글 작성 전 preStep: 한 게시물에 답변글을 여러개 달 수 있도록 -->
+	<update id="replyStepQna" parameterType="QnaBoard">
+		UPDATE QNABOARD 
+	       SET QASTEP = QASTEP + 1
+	     WHERE QAGROUP = #{qagroup}
+	       AND QASTEP > #{qastep}
+	</update>
+	
+	<!-- 답변 작성 -->
+	<insert id="replyQna" parameterType="QnaBoard">
+		INSERT INTO QNABOARD
+		            (QANUM, ADID, QACAT, QATITLE, QACONTENT
+		           , QAPW, QAGROUP, QASTEP, QAINDENT, QAIP)
+		     VALUES (QNABOARD_SEQ.NEXTVAL
+		           , #{adid}
+		           , #{qacat}
+		           , #{qatitle}
+		           , #{qacontent}
+		           , #{qapw}
+		           , #{qagroup}
+		           , #{qastep} +1
+		           , #{qaindent} +1
+		           , #{qaip})
+	</insert>
+	
+	<!-- 게시글 삭제: 답변글까지 모두 삭제 -->
+	<delete id="deleteQna" parameterType="int">
+		DELETE FROM QNABOARD
+			  WHERE QAGROUP = #{qagroup}
+	</delete>
+</mapper>

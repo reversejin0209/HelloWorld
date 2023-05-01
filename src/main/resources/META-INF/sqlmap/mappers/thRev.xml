@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lec.helloworld.dao.ThRevDao">
+	<resultMap type="ThRev" id="ThRevResult">
+		<result property="thrnum" column="thrnum"/>
+		<result property="thrcode" column="thrcode"/>
+		<result property="thrtitle" column="thrtitle"/>
+		<result property="thrcontent" column="thrcontent"/>
+		<result property="thrrdate" column="thrrdate"/>
+	</resultMap>
+	
+	
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lec.helloworld.dao.TheaterDao">
+	<resultMap type="Theater" id="TheaterResult">
+		<result property="thcode" column="thcode"/>
+		<result property="thname" column="thname"/>
+		<result property="thcontent" column="thcontent"/>
+		<result property="thpart" column="thpart"/>
+		<result property="thtime" column="thtime"/>
+		<result property="thloc" column="thloc"/>
+		<result property="thseat" column="thseat"/>
+		<result property="thprice" column="thprice"/>
+		<result property="thimg1" column="thimg1"/>
+		<result property="thschedule" column="thschedule"/>
+	</resultMap>
+	
+	<select id="theaterList" parameterType="int" resultMap="TheaterResult">
+		SELECT * FROM THEATER 
+   			 WHERE thSCHEDULE = #{thschedule}
+   			 ORDER BY THCODE
+	</select>
+	
+	<select id="theaterContent" parameterType="String" resultType="Theater">
+		SELECT * FROM THEATER 
+    	WHERE thNAME = #{thname}
+	</select>
+	
+	<insert id="theaterInsert" parameterType="Theater">
+		INSERT INTO THEATER (thCODE, thNAME, thCONTENT, thPART, thTIME, thLOC, thSEAT, thPRICE, thIMG1, thSCHEDULE)
+    	VALUES ('TH'||THCODE_SEQ.NEXTVAL, #{thname}, #{thcontent}, #{thpart}, #{thtime}||'분', #{thloc}, 40, #{thprice}, #{thimg1}, #{thschedule});
+	</insert>
+	
+</mapper>
