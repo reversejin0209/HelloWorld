@@ -15,7 +15,7 @@
 		#head_background {
 			background-image: url('${conPath}/img/head_background_03.png');
 		}
-</style>
+	</style>
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -100,7 +100,7 @@
 						<td class="left" colspan="3">
 							<ul>
 								<li class="thTitle">
-									<a href="${conPath}/theater/theaterContent.do?thname=${theater.thname }" class="cBlack">${theater.thname }</a>
+									<a href="${conPath}/theater/theaterContent.do?thname=${theater.thname }" class="black">${theater.thname }</a>
 								</li>
 								<li>
 									${theater.thcontent }

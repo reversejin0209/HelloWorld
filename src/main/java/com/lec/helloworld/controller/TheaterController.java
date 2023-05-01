@@ -38,7 +38,6 @@ public class TheaterController {
 	public String theaterInsert(Theater theater, MultipartHttpServletRequest mRequest, Model model) {
 		theaterService.theaterInsert(theater, mRequest, model);
 		return "admin/aMypage";
-		
 	}
 	
 	@RequestMapping(value="theaterCntChk", method = {RequestMethod.GET, RequestMethod.POST})

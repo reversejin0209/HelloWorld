@@ -23,11 +23,11 @@ INSERT INTO MEMBER (MID, MMAIL, MPW, MNAME, MTEL)
 ---------------------------------- THEATER -------------------------------------
 -- 1. 공연 추가
 INSERT INTO THEATER (thCODE, thNAME, thCONTENT, thTIME, thLOC, thSEAT, thPRICE, thIMG1, thSCHEDULE)
-    VALUES ('TH'||THCODE_SEQ.NEXTVAL, '돌고래 쇼', '위험에 빠진 딩딩이를 구하러 가는 코코의 모험!', '60'||'분', '익스트림 존', 40, 7000, 'theater.png', 0);
+    VALUES ('TH'||THCODE_SEQ.NEXTVAL, '못 말리는 그리피', '못 말리는 그리피와 함께하는 ', '60'||'분', '익스트림 존', 40, 7000, 'theater1.png', 0);
 INSERT INTO THEATER (thCODE, thNAME, thCONTENT, thTIME, thLOC, thSEAT, thPRICE, thIMG1, thSCHEDULE)
-    VALUES ('TH'||THCODE_SEQ.NEXTVAL, '코코의 모험: 코딩 어드벤처', '위험에 빠진 딩딩이를 구하러 가는 코코의 모험!', '80'||'분', '쿼리어려워 존', 40, 9000, 'cocoAdven.png', 1);
+    VALUES ('TH'||THCODE_SEQ.NEXTVAL, '코코의 모험: 코딩 어드벤처', '위험에 빠진 딩딩이를 구하러 가는 코코의 모험!', '80'||'분', '매지컬랜드', 40, 9000, 'cocoAdven.png', 1);
 INSERT INTO THEATER (thCODE, thNAME, thCONTENT, thTIME, thLOC, thSEAT, thPRICE, thIMG1, thSCHEDULE)
-    VALUES ('TH'||THCODE_SEQ.NEXTVAL, '나무와 정령', '나무정령의 정령', '40'||'분', '패밀리 존', 40, 5000, 'NOIMG.JPG', 0);
+    VALUES ('TH'||THCODE_SEQ.NEXTVAL, '락큰롤 빅 밴드 쇼', '이틀에 한번밖에 없는 락큰롤 빅 밴드 쇼!', '40'||'분', '어드벤처 존', 40, 5000, 'theater2.png', 0);
 
 --------------------------------- THEATER_RES ----------------------------------
 -- 1. 공연 예매
