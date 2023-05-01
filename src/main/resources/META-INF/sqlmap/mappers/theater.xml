@@ -7,7 +7,6 @@
 		<result property="thcode" column="thcode"/>
 		<result property="thname" column="thname"/>
 		<result property="thcontent" column="thcontent"/>
-		<result property="thpart" column="thpart"/>
 		<result property="thtime" column="thtime"/>
 		<result property="thloc" column="thloc"/>
 		<result property="thseat" column="thseat"/>
@@ -31,15 +30,20 @@
 	
 	<insert id="theaterInsert" parameterType="Theater">
 		<!-- 공연 추가 -->
-		INSERT INTO THEATER (thCODE, thNAME, thCONTENT, thPART, thTIME, thLOC, thSEAT, thPRICE, thIMG1, thSCHEDULE)
-    	VALUES ('TH'||THCODE_SEQ.NEXTVAL, #{thname}, #{thcontent}, #{thpart}, #{thtime}||'분', #{thloc}, 40, #{thprice}, #{thimg1}, #{thschedule})
+		INSERT INTO THEATER (thCODE, thNAME, thCONTENT, thTIME, thLOC, thSEAT, thPRICE, thIMG1, thSCHEDULE)
+    	VALUES ('TH'||THCODE_SEQ.NEXTVAL, #{thname}, #{thcontent}, #{thtime}||'분', #{thloc}, 40, #{thprice}, #{thimg1}, #{thschedule})
 	</insert>
 	
 	<select id="theaterCntChk" parameterType="int" resultType="int">
 		<!-- 공연 갯수 확인 (ajax) -->
 		SELECT COUNT(*) 
     	FROM THEATER
-    	WHERE thPART = #{thschedule}
+    	WHERE thSCHEDULE = #{thschedule}
+	</select>
+	
+	<select id="theaterDelete" parameterType="String">
+		<!-- 공연 삭제 -->
+		DELETE THEATER WHERE thCode = #{thcode}
 	</select>
 	
 </mapper>

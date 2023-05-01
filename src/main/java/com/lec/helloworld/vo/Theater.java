@@ -11,7 +11,6 @@ public class Theater {
 	private String thcode;
 	private String thname;
 	private String thcontent;
-	private int thpart;
 	private String thtime;
 	private String thloc;
 	private String thseat;

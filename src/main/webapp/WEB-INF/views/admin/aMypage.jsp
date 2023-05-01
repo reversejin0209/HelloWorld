@@ -17,6 +17,17 @@
 </script>
 </head>
 <body>
+	<c:if test="${not empty successMsg }">
+		<script>
+			alert('${successMsg }');
+		</script>
+	</c:if>
+	<c:if test="${not empty failMsg }">
+		<script>
+			alert('${failMsg }');
+			history.back();
+		</script>
+	</c:if>
 	<jsp:include page="../main/header.jsp" />
 	<div id="wrap">
 		<div id="myPage">

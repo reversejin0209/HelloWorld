@@ -8,11 +8,11 @@
 	<meta charset="UTF-8">
 </head>
 <body>
-	<c:if test="${thConfirmResult > 3 }">
-		<b style="color: red">한 스케쥴당 3개 이하만 등록할 수 있습니다.</b>
+	<c:if test="${thConfirmResult == 3 }">
+		<b style="color: red;">한 스케쥴당 4개 이하만 등록할 수 있습니다.</b>
 	</c:if>
 	<c:if test="${thConfirmResult < 3 }">
-		<b style="color: #9729ff">등록 가능</b>
+		<b style="color: #9729ff;">등록 가능</b>
 	</c:if>
 </body>
 </html>

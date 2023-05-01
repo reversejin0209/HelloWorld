@@ -12,4 +12,5 @@ public interface TheaterService {
 	public Theater theaterContent(String thname);
 	public void theaterInsert(Theater theater, MultipartHttpServletRequest mRequest, Model model);
 	public int theaterCntChk(int thschedule);
+	public int theaterDelete(String thcode);
 }

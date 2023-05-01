@@ -12,4 +12,5 @@ public interface TheaterDao {
 	public Theater theaterContent(String thname);
 	public int theaterInsert(Theater theater);
 	public int theaterCntChk(int thschedule);
+	public int theaterDelete(String thcode);
 }

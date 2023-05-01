@@ -11,32 +11,35 @@
 	<link href="${conPath }/css/theater/theaterInsert.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 	<script>
-		$(document).ready(function() {
-			$('input[name="mid"]').keyup(function(){
-	  			var mid = $(this).val();
-	  			if(mid == "") {
-	  				$('#thConfirmResult').html('&nbsp; &nbsp; &nbsp;');
-	  			} else if(mid.length<3 || mid.length>13) {
-	  				$('#thConfirmResult').html('<b class="purple">아이디는 3글자 이상 혹은 13글자 이하로 입력해주세요</b>');
-	  			} else {
-	  				$.ajax({
-	  					url : '${conPath }/theater/theaterCntChk.do',
-	  					type : 'get',
-	  					data : 'mid='+mid,
-	  					dataType : 'html',
-	  					success : function(data){
-	  						$('#thConfirmResult').html(data);
-	  					},
-	  				}); // ajax함수
-	  			}  // if
+		$(document).ready(function() {  
+			$('input[type="radio"]').click(function(){
+	  			var thschedule = $(this).val();
+  				$.ajax({
+  					url : '${conPath }/theater/theaterCntChk.do',
+  					type : 'get',
+  					data : 'thschedule='+thschedule,
+  					dataType : 'html',
+  					success : function(data){
+  						$('#thConfirmResult').html(data);
+  					}
+  				}); // ajax함수
 	  		}); 
+		
+			$('form').submit(function(){
+				var thConfirmResult  = $('#thConfirmResult').text().trim();
+				if(thConfirmResult == '한 스케쥴당 4개 이하만 등록할 수 있습니다.') {
+					alert('공연 스케쥴을 확인해 주세요');
+					$('#thConfirmResult').focus();
+					return false;
+				}
+			});
 		});
 	</script>
 </head>
 <body>
 	<jsp:include page="../main/header.jsp" />
 		<div id="joinForm_wrap">
-		<form action="${conPath }/theater/theaterInsert.do" method="post">
+		<form action="${conPath }/theater/theaterInsert.do" method="post" enctype="multipart/form-data">
 			<div id="join_title">공연 추가</div>
 			<table>
 				<tr>
@@ -59,7 +62,7 @@
 					</th>
 					<td>
 						<input type="number" name="thtime" id="thtime" class="thtime" required="required"
-										placeholder="10분 이상 120분 이하로 입력해주세요" min="10" max="120" >
+										placeholder="10분 이상 120분 이하로 입력해주세요" min="10" max="120">
 					</td>
 				</tr>
 				<tr>
@@ -87,7 +90,7 @@
 				</tr>			
 				<tr>
 					<th><label for="thimg1">공연 이미지</label></th>
-					<td><input type="file" name="thimg1" id="thimg1"></td>
+					<td><input type="file" name="thimg1temp" id="thimg1"></td>
 				</tr>
 				<tr>
 					<th><label for="thschedule">공연 스케쥴</label></th>

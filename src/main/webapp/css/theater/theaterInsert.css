@@ -64,6 +64,10 @@ input[type=radio] {
 	margin: 0 0 0 80px;
 }
 
+#thConfirmResult {
+	text-align: center;
+}
+
 .joinBtn_style {
 	color: #FFFFFF;       
 	background: #7800f8;
@@ -84,8 +88,4 @@ input[type=radio] {
 
 input:focus {
     outline: 1px solid #7800f8;
-}
-
-#idConfirmResult, #pwChkResult, #telConfirmResult, #emailConfirmResult {
-	font-size: 0.8em;
 }

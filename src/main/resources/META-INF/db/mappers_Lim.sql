@@ -50,7 +50,7 @@ SELECT * FROM MEMBER;
     -- 1-1. 공연 추가 전 최대 갯수 확인
 SELECT COUNT(*) 
     FROM THEATER
-    WHERE thPART = 1;
+    WHERE thSCHEDULE = 1;
     -- 1-2. 공연 추가
 INSERT INTO THEATER (thCODE, thNAME, thCONTENT, thPART, thTIME, thLOC, thSEAT, thPRICE, thIMG1, thSCHEDULE)
     VALUES ('TH'||THCODE_SEQ.NEXTVAL, '돌고래 쇼', '위험에 빠진 딩딩이를 구하러 가는 코코의 모험!', 1, '60'||'분', '익스트림 존', 40, 7000, 'theater.png', 0);

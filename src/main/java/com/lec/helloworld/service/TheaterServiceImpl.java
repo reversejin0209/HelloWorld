@@ -23,7 +23,6 @@ public class TheaterServiceImpl implements TheaterService {
 	
 	@Autowired
 	TheaterDao theaterDao;
-	private String backupPath = "D:/webPro/project/helloWorld/helloworld/src/main/webapp/theaterFileUp";
 	
 	@Override
 	public List<Theater> theaterList(int thschedule, String schWord) {
@@ -40,24 +39,25 @@ public class TheaterServiceImpl implements TheaterService {
 
 	@Override
 	public void theaterInsert(Theater theater, MultipartHttpServletRequest mRequest, Model model) {
+		String backupPath = "D:\\Dsilv\\source\\10_2ndTeamProject\\helloworld\\src\\main\\webapp\\theaterFileUp\\";
 		String uploadPath = mRequest.getRealPath("theaterFileUp/");
-		Iterator<String> params = mRequest.getFileNames(); // tempBimg1, tempBimg2
-		String[] bimg = new String[2];
+		Iterator<String> params = mRequest.getFileNames(); 
+		String[] thimg1 = new String[1];
 		int idx = 0;
 		while(params.hasNext()) {
 			String param = params.next();
 			MultipartFile mFile = mRequest.getFile(param); // 파라미터에 첨부된 파일 객체
-			bimg[idx] = mFile.getOriginalFilename();
-			if(bimg[idx]!=null && !bimg[idx].equals("")) { // 첨부함
-				if(new File(uploadPath + bimg[idx]).exists()) {
+			thimg1[idx] = mFile.getOriginalFilename();
+			if(thimg1[idx]!=null && !thimg1[idx].equals("")) { // 첨부함
+				if(new File(uploadPath + thimg1[idx]).exists()) {
 					// 서버에 같은 파일이름이 있을 경우(첨부파일과)
-					bimg[idx] = System.currentTimeMillis() + "_" + bimg[idx];
+					thimg1[idx] = System.currentTimeMillis() + "_" + thimg1[idx];
 				}//if
 				try {
-					mFile.transferTo(new File(uploadPath + bimg[idx])); // 서버에 저장
-					System.out.println("서버파일 : " + uploadPath + bimg[idx]);
-					System.out.println("백업파일 : " + backupPath + bimg[idx]);
-					boolean result = fileCopy(uploadPath + bimg[idx], backupPath + bimg[idx]);
+					mFile.transferTo(new File(uploadPath + thimg1[idx])); // 서버에 저장
+					System.out.println("서버파일 : " + uploadPath + thimg1[idx]);
+					System.out.println("백업파일 : " + backupPath + thimg1[idx]);
+					boolean result = fileCopy(uploadPath + thimg1[idx], backupPath + thimg1[idx]);
 					System.out.println(result ? idx+"번째 백업성공":idx+"번째 백업실패");
 				} catch (IOException e) {
 					System.out.println(e.getMessage());
@@ -65,6 +65,7 @@ public class TheaterServiceImpl implements TheaterService {
 			}else {
 				// 파일 첨부 안 하면 bimg[idx] = ""이다
 			} // if
+			theater.setThimg1(thimg1[0]);
 			idx++;
 		}
 		try {
@@ -79,6 +80,11 @@ public class TheaterServiceImpl implements TheaterService {
 	@Override
 	public int theaterCntChk(int thschedule) {
 		return theaterDao.theaterCntChk(thschedule);
+	}
+		
+	@Override
+	public int theaterDelete(String thcode) {
+		return theaterDao.theaterDelete(thcode);
 	}
 	
 	private boolean fileCopy(String serverFile, String backupFile) {
@@ -108,5 +114,6 @@ public class TheaterServiceImpl implements TheaterService {
 		}
 		return isCopy;
 	}
+
 
 }
