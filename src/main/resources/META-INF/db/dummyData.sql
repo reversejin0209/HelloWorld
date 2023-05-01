@@ -97,41 +97,50 @@ INSERT INTO AT_RPLY (APYNUM, ADID, MID, ATCODE, APYTITLE, APYCONTENT, APYRDATE, 
     VALUES(AT_RPLY_SEQ.NEXTVAL, 'dbswls0209', 'aaa', '1', '제목임', '만6세 이 후 부터 이용 가능합니다 감사합니다', SYSDATE, 0, 0, 0, '123-123');
 
 -- TICKET
-INSERT INTO TICKET (TCODE, TNAME, TTYPE, TPRICE)
+INSERT INTO TICKET (TCODE, TNAME, TSUB, TTYPE, TPRICE, TCONTENT, TIMG)
      VALUES ('TI' || LPAD(TICKET_SEQ.NEXTVAL, 4, 0)
            , '헬로월드 종일권'
+           , '헬로월드에서의 즐거운 하루'
            , '대인'
-           , '68000');
+           , '68000'
+           , '헬로월드 종일권 본문'
+           , 'ticket_timg_01.png');
            
-INSERT INTO TICKET (TCODE, TNAME, TTYPE, TPRICE)
+INSERT INTO TICKET (TCODE, TNAME, TSUB, TTYPE, TPRICE, TCONTENT, TIMG)
      VALUES ('TI' || LPAD(TICKET_SEQ.NEXTVAL, 4, 0)
            , '헬로월드 종일권'
+           , '헬로월드에서의 즐거운 하루'
            , '청소년'
-           , '62000'); 
+           , '62000'
+           , '헬로월드 종일권 본문'
+           , 'ticket_timg_01.png'); 
            
-INSERT INTO TICKET (TCODE, TNAME, TTYPE, TPRICE)
+INSERT INTO TICKET (TCODE, TNAME, TSUB, TTYPE, TPRICE, TCONTENT, TIMG)
      VALUES ('TI' || LPAD(TICKET_SEQ.NEXTVAL, 4, 0)
            , '헬로월드 종일권'
+           , '헬로월드에서의 즐거운 하루'
            , '소인/경로'
-           , '52000');
+           , '52000'
+           , '헬로월드 종일권 본문'
+           , 'ticket_timg_01.png');
 
-INSERT INTO TICKET (TCODE, TNAME, TTYPE, TPRICE)
-     VALUES ('TI' || LPAD(TICKET_SEQ.NEXTVAL, 4, 0)
-           , '헬로월드 종일권(삼성카드 할인)'
-           , '대인'
-           , '32000');
-
-INSERT INTO TICKET (TCODE, TNAME, TTYPE, TPRICE)
+INSERT INTO TICKET (TCODE, TNAME, TSUB, TTYPE, TPRICE, TCONTENT, TIMG)
      VALUES ('TI' || LPAD(TICKET_SEQ.NEXTVAL, 4, 0)
            , '헬로월드 오후권'
+           , '4시부터 폐장까지 짧고 굵게 놀자!'
            , '대인'
-           , '46000');
+           , '46000'
+           , '헬로월드 오후권 본문'
+           , 'ticket_timg_02.png');
 
-INSERT INTO TICKET (TCODE, TNAME, TTYPE, TPRICE)
+INSERT INTO TICKET (TCODE, TNAME, TSUB, TTYPE, TPRICE, TCONTENT, TIMG)
      VALUES ('TI' || LPAD(TICKET_SEQ.NEXTVAL, 4, 0)
            , '헬로월드 오후권'
+           ,'4시부터 폐장까지 짧고 굵게 놀자!'
            , '청소년'
-           , '42000');
+           , '42000'
+           , '헬로월드 오후권 본문'
+           , 'ticket_timg_02.png');
 
 -- TICKET_RES ------------------------------------------------------------------
 INSERT INTO TICKET_RES (TRCODE, MID, TRTOTPRICE)
@@ -142,21 +151,21 @@ INSERT INTO TICKET_RES (TRCODE, MID, TRTOTPRICE)
 -- TICKET_RESDETAIL ------------------------------------------------------------
 INSERT INTO TICKET_RESDETAIL (TRDCODE, TRCODE, TCODE, TRDCNT, TRDDATE)
      VALUES (TICKET_RESDETAIL_SEQ.NEXTVAL
-           , '202304190001'
+           , '202304270001'
            , 'TI0001'
            , 2
            , '2023/04/01');
 
 INSERT INTO TICKET_RESDETAIL (TRDCODE, TRCODE, TCODE, TRDCNT, TRDDATE)
      VALUES (TICKET_RESDETAIL_SEQ.NEXTVAL
-           , TO_CHAR(SYSDATE, YYYYMMDD)+'0001'
+           ,'202304270001'
            , 'TI0002'
            , 1
            , '2023/04/01');
            
 INSERT INTO TICKET_RESDETAIL (TRDCODE, TRCODE, TCODE, TRDCNT, TRDDATE)
      VALUES (TICKET_RESDETAIL_SEQ.NEXTVAL
-           , '202304270002'
+           , '202304270001'
            , 'TI0006'
            , 2
            , '2023/04/01');

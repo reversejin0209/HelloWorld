@@ -11,6 +11,9 @@
 		<typeAlias type="com.lec.helloworld.vo.Notice" alias="Notice" />
 		<typeAlias type="com.lec.helloworld.vo.Admin" alias="Admin"/>
 		<typeAlias type="com.lec.helloworld.vo.Attraction" alias="Attraction"/>
+		<typeAlias type="com.lec.helloworld.vo.Ticket" alias="Ticket"/>
+		<typeAlias type="com.lec.helloworld.vo.TicketRes" alias="TicketRes"/>
+		<typeAlias type="com.lec.helloworld.vo.TicketResDetail" alias="TicketResDetail"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="META-INF/sqlmap/mappers/member.xml"/>
@@ -20,5 +23,8 @@
 		<mapper resource="META-INF/sqlmap/mappers/notice.xml"/>
 		<mapper resource="META-INF/sqlmap/mappers/admin.xml"/>
 		<mapper resource="META-INF/sqlmap/mappers/attraction.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/ticket.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/ticketRes.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/ticketResDetail.xml"/>
 	</mappers>
 </configuration>

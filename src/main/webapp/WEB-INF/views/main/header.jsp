@@ -51,7 +51,7 @@
 				<li><a href="#">요금/프로모션</a>
 					<ul class="drop-menu">
 						<li><a href="#">이용요금</a></li>
-						<li><a href="#">이달의 혜택</a></li>
+						<li><a href="${conPath }/ticket/ticketList.do">이달의 혜택</a></li>
 						<li><a href="#">연간이용</a></li>
 						<li><a href="#">운영/운휴</a></li>
 					</ul></li>
