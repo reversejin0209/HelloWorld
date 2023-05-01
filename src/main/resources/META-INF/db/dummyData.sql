@@ -147,33 +147,21 @@ SELECT * FROM TICKET_RES;
 -- TICKET_RESDETAIL ------------------------------------------------------------
 INSERT INTO TICKET_RESDETAIL (TRDCODE, TRCODE, TCODE, TRDCNT, TRDDATE)
      VALUES (TICKET_RESDETAIL_SEQ.NEXTVAL
-<<<<<<< HEAD
-           , '202304270001'
-=======
            , '202304280001'
->>>>>>> 0beee7ecec74c44d948505776bfd1b6b999fe35c
            , 'TI0001'
            , 2
            , '2023/04/01');
 
 INSERT INTO TICKET_RESDETAIL (TRDCODE, TRCODE, TCODE, TRDCNT, TRDDATE)
      VALUES (TICKET_RESDETAIL_SEQ.NEXTVAL
-<<<<<<< HEAD
-           ,'202304270001'
-=======
            , '202304280001'
->>>>>>> 0beee7ecec74c44d948505776bfd1b6b999fe35c
            , 'TI0002'
            , 1
            , '2023/04/01');
            
 INSERT INTO TICKET_RESDETAIL (TRDCODE, TRCODE, TCODE, TRDCNT, TRDDATE)
      VALUES (TICKET_RESDETAIL_SEQ.NEXTVAL
-<<<<<<< HEAD
-           , '202304270001'
-=======
            , '202304280001'
->>>>>>> 0beee7ecec74c44d948505776bfd1b6b999fe35c
            , 'TI0006'
            , 2
            , '2023/04/01');
