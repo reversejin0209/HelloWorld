@@ -17,19 +17,29 @@
 	</resultMap>
 	
 	<select id="theaterList" parameterType="int" resultMap="TheaterResult">
+		<!-- 공연 목록 -->
 		SELECT * FROM THEATER 
    			 WHERE thSCHEDULE = #{thschedule}
    			 ORDER BY THCODE
 	</select>
 	
 	<select id="theaterContent" parameterType="String" resultType="Theater">
+		<!-- 공연 상세보기 -->
 		SELECT * FROM THEATER 
     	WHERE thNAME = #{thname}
 	</select>
 	
 	<insert id="theaterInsert" parameterType="Theater">
+		<!-- 공연 추가 -->
 		INSERT INTO THEATER (thCODE, thNAME, thCONTENT, thPART, thTIME, thLOC, thSEAT, thPRICE, thIMG1, thSCHEDULE)
-    	VALUES ('TH'||THCODE_SEQ.NEXTVAL, #{thname}, #{thcontent}, #{thpart}, #{thtime}||'분', #{thloc}, 40, #{thprice}, #{thimg1}, #{thschedule});
+    	VALUES ('TH'||THCODE_SEQ.NEXTVAL, #{thname}, #{thcontent}, #{thpart}, #{thtime}||'분', #{thloc}, 40, #{thprice}, #{thimg1}, #{thschedule})
 	</insert>
+	
+	<select id="theaterCntChk" parameterType="int" resultType="int">
+		<!-- 공연 갯수 확인 (ajax) -->
+		SELECT COUNT(*) 
+    	FROM THEATER
+    	WHERE thPART = #{thschedule}
+	</select>
 	
 </mapper>

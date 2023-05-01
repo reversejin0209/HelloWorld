@@ -35,7 +35,7 @@
 				</c:if>
 				<c:if test="${not empty sessionScope.admin }">
 					<ul>
-						<li><a href="#">관리자(${sessionScope.admin.adname })님</a><li>
+						<li><a href="${conPath }/admin/aMypage.do">관리자(${sessionScope.admin.adname })님</a><li>
 						<li><a href="${conPath }/admin/adLogout.do?after=main/main">로그아웃</a></li>
 					</ul>
 				</c:if>
@@ -98,7 +98,12 @@
 						<li><a href="${conPath }/qnaBoard/qBoardList.do">1:1문의</a></li>
 						<li><a href="#">고객소리함</a></li>
 					</ul></li>
-				<li><a href="#">더 알아보기</a></li>
+				<c:if test="${empty sessionScope.admin }">
+					<li><a href="#">더 알아보기</a></li>
+				</c:if>
+				<c:if test="${not empty sessionScope.admin }">
+					<li><a href="${conPath }/theater/theaterInsert.do">공연 추가하기</a></li>
+				</c:if>
 			</ul>
 			<div class="promotion">
 				<img alt="할인프로모션" src="${conPath }/img/header_nPay.png">

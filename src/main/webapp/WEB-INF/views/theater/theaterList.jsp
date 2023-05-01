@@ -12,8 +12,8 @@
 	<link href="${conPath }/css/theater/theater.css" rel="stylesheet">
 	<link href="${conPath }/css/style.css" rel="stylesheet">
 	<style type="text/css">
-		#theaterList_background {
-			background-image: url(${conPath}/img/theater_main1.jpg);
+		#head_background {
+			background-image: url('${conPath}/img/head_background_03.png');
 		}
 </style>
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -52,11 +52,12 @@
 	<fmt:formatDate value="${nowDate }" pattern="yyyy-MM-dd" var="today" />
 	<jsp:include page="../main/header.jsp" />
 	
-	<div id="theaterList_background">
-		<h2 class="cWhite">공연</h2>
-		<p class="h2Txt cWhite">
-			언제나 새롭고 즐거운 경험을 주는 Helloworld 공연을 소개합니다!
-		</p>
+	<!-- 상단 배경 이미지 -->
+	<div id="head_background">
+		<div class="head_background_inner">
+			<h1>공연</h1>
+			<p>우리의 추억이 더욱 특별해지는 꿈과 환상의 나라 헬로월드로 오세요!</p>
+		</div>
 	</div>
 	
 	<div id="wrap">

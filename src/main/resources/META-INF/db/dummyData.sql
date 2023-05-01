@@ -10,7 +10,7 @@ INSERT INTO MEMBER_GRADE (GRADE, LOWVI, HIGHVI, DISC)
 ----------------------------------- MEMBER -------------------------------------
 -- 1. 회원가입
 INSERT INTO MEMBER (MID, MMAIL, MPW, MNAME, MTEL)
-     VALUES ('aaa', 'aaa.gmail.com', '111', 'SCOTT', '010-1111-1111');
+     VALUES ('aaa', 'aaa.gmail.com', '111', '에이길동', '010-1111-1111');
 INSERT INTO MEMBER (mID, mMAIL, mPW, mNAME, mTEL)
     VALUES ('bbb', 'bbb@naver.com', '111', '비길동', '010-3333-3333');
 INSERT INTO MEMBER (MID, MMAIL, MPW, MNAME, MTEL)
@@ -22,17 +22,17 @@ INSERT INTO MEMBER (MID, MMAIL, MPW, MNAME, MTEL)
     
 ---------------------------------- THEATER -------------------------------------
 -- 1. 공연 추가
-INSERT INTO THEATER (thCODE, thNAME, thCONTENT, thPART, thTIME, thLOC, thSEAT, thPRICE, thIMG1, thSCHEDULE)
-    VALUES ('TH'||THCODE_SEQ.NEXTVAL, '돌고래 쇼', '위험에 빠진 딩딩이를 구하러 가는 코코의 모험!', 1, '60'||'분', '익스트림 존', 40, 7000, 'theater.png', 0);
-INSERT INTO THEATER (thCODE, thNAME, thCONTENT, thPART, thTIME, thLOC, thSEAT, thPRICE, thIMG1, thSCHEDULE)
-    VALUES ('TH'||THCODE_SEQ.NEXTVAL, '코코의 모험: 코딩 어드벤처', '위험에 빠진 딩딩이를 구하러 가는 코코의 모험!', 0, '80'||'분', '쿼리어려워 존', 40, 9000, 'cocoAdven.png', 1);
-INSERT INTO THEATER (thCODE, thNAME, thCONTENT, thPART, thTIME, thLOC, thSEAT, thPRICE, thIMG1, thSCHEDULE)
-    VALUES ('TH'||THCODE_SEQ.NEXTVAL, '나무와 정령', '나무정령의 정령', 1, '40'||'분', '패밀리 존', 40, 5000, 'NOIMG.JPG', 0);
+INSERT INTO THEATER (thCODE, thNAME, thCONTENT, thTIME, thLOC, thSEAT, thPRICE, thIMG1, thSCHEDULE)
+    VALUES ('TH'||THCODE_SEQ.NEXTVAL, '돌고래 쇼', '위험에 빠진 딩딩이를 구하러 가는 코코의 모험!', '60'||'분', '익스트림 존', 40, 7000, 'theater.png', 0);
+INSERT INTO THEATER (thCODE, thNAME, thCONTENT, thTIME, thLOC, thSEAT, thPRICE, thIMG1, thSCHEDULE)
+    VALUES ('TH'||THCODE_SEQ.NEXTVAL, '코코의 모험: 코딩 어드벤처', '위험에 빠진 딩딩이를 구하러 가는 코코의 모험!', '80'||'분', '쿼리어려워 존', 40, 9000, 'cocoAdven.png', 1);
+INSERT INTO THEATER (thCODE, thNAME, thCONTENT, thTIME, thLOC, thSEAT, thPRICE, thIMG1, thSCHEDULE)
+    VALUES ('TH'||THCODE_SEQ.NEXTVAL, '나무와 정령', '나무정령의 정령', '40'||'분', '패밀리 존', 40, 5000, 'NOIMG.JPG', 0);
 
 --------------------------------- THEATER_RES ----------------------------------
 -- 1. 공연 예매
-INSERT INTO THEATER_RES (thrCODE, mID, thCODE, thrCNT, thrORDERDATE, thrREVIEW, thrTOTPRICE, thrDATE)
-    VALUES (TO_CHAR(SYSDATE, 'YYMMDD')||'TH1'||THRCODE_SEQ.NEXTVAL, 'aaa', 'TH1', 2, SYSDATE, 0, 10000, SYSDATE);
+INSERT INTO THEATER_RES (thrCODE, mID, thCODE, thrCNT, thrORDERDATE, thrREVIEW, thrTOTPRICE, thrPART, thrDATE)
+    VALUES (TO_CHAR(SYSDATE, 'YYMMDD')||'TH1'||THRCODE_SEQ.NEXTVAL, 'aaa', 'TH1', 2, SYSDATE, 0, 10000, 1, SYSDATE);
 
 ---------------------------------- THREVIEW ------------------------------------
 -- 1. 공연 리뷰 글 쓰기
@@ -44,6 +44,8 @@ INSERT INTO THREVIEW (thrNUM, thrCODE, mID, thrTITLE, thrCONTENT, thrRDATE)
 --------------------------------------------------------------------------------
 INSERT INTO ADMIN (ADID, ADPW, ADNAME, ADNUM, ADEMAIL)
     VALUES ('dbswls0209', '111', '장길동', '010-7777-7777', 'dbswls0209@naver.com');
+INSERT INTO ADMIN (ADID, ADPW, ADNAME, ADNUM, ADEMAIL)
+    VALUES ('aaa', '111', '장길동', '010-7777-7777', 'dbswls0209@naver.com');
 --------------------------------------------------------------------------------
 -------------------------------------- NOTICE  ---------------------------------
 --------------------------------------------------------------------------------
