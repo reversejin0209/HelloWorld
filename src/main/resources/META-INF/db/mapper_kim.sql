@@ -1,5 +1,4 @@
 -- 티켓 예약 --------------------------------------------------------------------
-
 -- id = ticketList
 -- 티켓 목록 출력
 SELECT DISTINCT TNAME, TSUB, TIMG FROM TICKET;
@@ -13,22 +12,35 @@ SELECT DISTINCT TNAME, TSUB, TCONTENT, TIMG
 -- 해당 티켓 구분(대인, 청소년, 소인/경로) 출력
 SELECT * FROM TICKET
         WHERE TNAME = '헬로월드 종일권';
-
--- id = ticketReserve
+        
+-- 티켓 예약: 예약 진행 ----------------------------------------------------------
+-- id = tOrderReserve
 -- 주문 추가
 INSERT INTO TICKET_RES (TRCODE, MID, TRTOTPRICE)
      VALUES ( TO_CHAR(SYSDATE, 'YYYYMMDD') || LPAD(TICKET_RES_SEQ.NEXTVAL, 4, 0)
             , 'aaa'
             , 198000);
             
--- id = ticketReserveDetail
+select * from ticket_res;
+-- id = addTOrderDetail
 -- 예약한 티켓 정보 추가
-INSERT INTO TICKET_RESDETAIL (TRDCODE, TRCODE, TCODE, TRDCNT, TRDDATE)
+INSERT INTO TICKET_RESDETAIL (TRDCODE, TRCODE, TRDNAME, TRDTYPE ,TRDCNT, TRDDATE)
      VALUES (TICKET_RESDETAIL_SEQ.NEXTVAL
-           , '202304190001'
-           , 'TI0001'
+           , TO_CHAR(SYSDATE, 'YYYYMMDD') || LPAD(TICKET_RES_SEQ.CURRVAL, 4, 0)
+           , '헬로월드 종일권'
+           , '소인'
            , 2
-           , '2023/04/01');
+           , TO_DATE('2023-04-01', 'YYYY-MM-DD'));
+           
+SELECT MAX(TRCODE) FROM TICKET_RES;
+
+INSERT INTO TICKET_RESDETAIL (TRDCODE, TRCODE, TRDNAME, TRDTYPE ,TRDCNT, TRDDATE)
+     VALUES (TICKET_RESDETAIL_SEQ.NEXTVAL
+          , (SELECT MAX(TRCODE) FROM TICKET_RES)
+          , '헬로월드 종일권'
+          , '소인'
+          , 2
+          , TO_DATE('2023-04-01', 'YYYY-MM-DD'));
 
 -- id = torderList 
 -- 총 주문 LIST(관리자)
@@ -41,6 +53,8 @@ SELECT * FROM (SELECT ROWNUM RN, RES.*
     SELECT COUNT(*) FROM TICKET_RES;
 
 -- id = tMemberOrderList
+SELECT * FROM TICKET_RES;
+
 -- 나의 주문 LIST(회원)
 SELECT * FROM (SELECT ROWNUM RN, RES.* 
                  FROM (SELECT * FROM TICKET_RES 
@@ -54,14 +68,19 @@ SELECT * FROM (SELECT ROWNUM RN, RES.*
 -- id = getTicketDetail     
 -- 주문 내역 상세보기
 SELECT * FROM TICKET_RESDETAIL
-        WHERE TRCODE = '202304190001';
+        WHERE TRCODE = '202305020030';
 
 -- id = tReserveCancel           
 -- 주문 취소
 UPDATE TICKET_RES 
    SET TRRESULT = 1
- WHERE TRCODE = '202304190001';
+ WHERE TRCODE = '202305020001';
 
+-- id = usedTicket           
+-- 사용 티켓으로 변경
+UPDATE TICKET_RESDETAIL
+   SET TRDRESULT = 1
+ WHERE TRDCODE = '1';
 -- 총 수량 확인
 -- SELECT RES.TRCODE, SUM(TRDCNT)
 --          FROM TICKET_RES RES, TICKET_RESDETAIL DETAIL
@@ -77,7 +96,7 @@ UPDATE TICKET_RES
 -- WHERE RES.TRCODE = SUM.TRCODE;
 
 
--- QNABOARD
+-- QNABOARD --------------------------------------------------------------------
 -- id = registerQnA
 -- 질문 등록
 -- 이미지 첨부한 경우
@@ -225,3 +244,8 @@ DELETE FROM QNABOARD
 -- 게시글 삭제(답변까지 삭제 되도록)
 DELETE FROM QNABOARD
  WHERE QAGROUP = 2;
+
+--------------------------------------------------------------------------------
+SELECT * FROM TICKET;
+SELECT * FROM TICKET_RES;
+SELECT * FROM TICKET_RESDETAIL;

@@ -62,12 +62,12 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 			mid = member.getMid();
 		}
 		qnaBoard.setMid(mid);
+		qnaBoard.setQaip(request.getLocalAddr());
 		
 		try {
 			qnaBoardDao.writeQna(qnaBoard);
 			model.addAttribute("successMsg", "1:1 문의 작성이 완료되었습니다");
 		} catch (Exception e) {
-			System.out.println(qnaBoard);
 			model.addAttribute("failMsg", "1:1 문의 작성이 실패했습니다");
 		}
 	}

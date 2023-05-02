@@ -12,24 +12,17 @@
 	</resultMap>
 
 	<!-- 회원: 주문 추가 -->
-	<insert id="ticketReserve" parameterType="TicketRes">
+	<insert id="tOrderReserve" parameterType="TicketRes">
 		INSERT INTO TICKET_RES (TRCODE, MID, TRTOTPRICE)
 		     VALUES ( TO_CHAR(SYSDATE, 'YYYYMMDD') || LPAD(TICKET_RES_SEQ.NEXTVAL, 4, 0)
 		            , #{mid}
 		            , #{trtotPrice})
 	</insert>
 	
-	<!-- 관리자: 총 주문 리스트 출력 -->
-	<!-- <select id="tOrderList" parameterType="TicketRes" resultMap="TicketResResult">
-		SELECT * FROM (SELECT ROWNUM RN, RES.* 
-                 FROM (SELECT * FROM TICKET_RES RES) RES)
-        WHERE RN BETWEEN #{startRow} AND #{endRow}
-	</select> -->
-	
 	<!-- 총 주문 리스트 출력: 회원, 비회원 -->
 	<select id="tOrderList" parameterType="TicketRes" resultMap="TicketResResult">
 		SELECT * FROM (SELECT ROWNUM RN, RES.* 
-                 FROM (SELECT * FROM TICKET_RES 
+                 FROM (SELECT * FROM TICKET_RES
 		<!-- 회원: 나의 주문 리스트 -->
 		<if test="mid != null or mid != ''">
                         WHERE MID = #{mid}
@@ -46,5 +39,12 @@
                        WHERE MID = #{mid}
 		</if>
 	</select>
+	
+	<!-- 주문 취소: 회원 -->
+	<update id="tOrderCancel" parameterType="int">
+		UPDATE TICKET_RES 
+		   SET TRRESULT = 1
+		 WHERE TRCODE = #{trcode}
+	</update>
 </mapper>		
 		

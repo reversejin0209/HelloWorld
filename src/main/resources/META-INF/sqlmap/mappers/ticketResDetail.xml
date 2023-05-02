@@ -6,33 +6,34 @@
 	<resultMap type="TicketResDetail" id="TicketResDetailResult">
 		<result property="trdcode" column="trdcode"/>
 		<result property="trcode" column="trcode"/>
-		<result property="tcode" column="tcode"/>
+		<result property="trdname" column="trdname"/>
 		<result property="trdcnt" column="trdcnt"/>
 		<result property="trddate" column="trddate"/>
 		<result property="trdresult" column="trdresult"/>
 	</resultMap>
 
 	<!-- 회원: 예약한 티켓 정보 추가 -->
-	<insert id="tResDetail" parameterType="TicketResDetail">
-		INSERT INTO TICKET_RESDETAIL (TRDCODE, TRCODE, TCODE, TRDCNT, TRDDATE)
+	<insert id="addTOrderDetail" parameterType="TicketResDetail">
+		INSERT INTO TICKET_RESDETAIL (TRDCODE, TRCODE, TRDNAME, TRDTYPE ,TRDCNT, TRDDATE)
 		     VALUES (TICKET_RESDETAIL_SEQ.NEXTVAL
-		           , #{trcode}
-		           , #{tcode}
-		           , #{trdcnt}
-		           , #{trddate})
+		          , (SELECT MAX(TRCODE) FROM TICKET_RES)
+		          , #{trdname}
+		          , #{trdtype}
+		          , #{trdcnt}
+		          , TO_DATE(#{trddate}, 'YYYY-MM-DD'))
 	</insert>
-	
+
 	<!-- 주문 내역 상세보기 -->
-	<select id="tResGetContent" parameterType="int" resultType="TicketResDetail">
+	<select id="getTOrderDetail" parameterType="int" resultType="TicketResDetail">
 		SELECT * FROM TICKET_RESDETAIL
         		WHERE TRCODE = #{trcode}
 	</select>
 	
-	<!-- 회원: 주문 취소 -->
-	<update id="tResCancel" parameterType="int">
-		UPDATE TICKET_RES 
-		   SET TRRESULT = 1
-		 WHERE TRCODE = #{trcode}
+	<!-- 관리자: 사용 티켓으로 변경 -->
+	<update id="usedTicket" parameterType="int">
+		UPDATE TICKET_RESDETAIL
+		   SET TRDRESULT = 1
+		 WHERE TRDCODE = #{trdcode}
 	</update>
 	
 </mapper>		
