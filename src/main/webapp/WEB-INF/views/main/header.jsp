@@ -76,7 +76,7 @@
 							<div class="row">
 								<header>공연</header>
 								<ul class="mega-items">
-									<li><a href="${conPath }/theater/theaterList.do?thschedule=${nowSchedule }&schDate=">공연목록</a></li>
+									<li><a href="${conPath }/theater/theaterList.do?thschedule=${nowSchedule }&schWord=">공연목록</a></li>
 									<li><a href="#">스테이지</a></li>
 									<li><a href="#">퍼레이드</a></li>
 									<li><a href="#">공연후기</a></li>

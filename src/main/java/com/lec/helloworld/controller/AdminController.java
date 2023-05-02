@@ -1,5 +1,7 @@
 package com.lec.helloworld.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.lec.helloworld.service.AdminService;
+import com.lec.helloworld.vo.Admin;
 import com.lec.helloworld.vo.Member;
 
 @Controller
@@ -42,17 +45,12 @@ public class AdminController {
 
 	@RequestMapping(value = "allView", method=RequestMethod.GET)
 	public String memberList(Member member, String pageNum, Model model) {
-		model.addAttribute("admDto", adminService.memberList(pageNum, member, model));
-		return "admin/allview";
+		model.addAttribute("memberList", adminService.memberList(pageNum, member, model));
+		return "admin/allView";
 	}
 	@RequestMapping(value = "deleteMember", method=RequestMethod.GET)
 	public String deleteMember(String mid, Model model) {
 		model.addAttribute("dtMember", adminService.deleteMember(mid, model));
-		return "admin/allView";
-	}
-	
-	@RequestMapping(value = "aMypage", method=RequestMethod.GET)
-	public String aMypage() {
-		return "admin/aMypage";
+		return "main/main";
 	}
 }

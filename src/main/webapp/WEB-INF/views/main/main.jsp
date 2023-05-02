@@ -11,9 +11,16 @@
 	<link href="${conPath }/css/style.css" rel="stylesheet" type="text/css">
 	<link href="${conPath }/css/main.css" rel="stylesheet" type="text/css">
 	<style type="text/css">
+		.list_box {
+			overflow: hidden;
+		}
+		.date {
+			float: right;
+		}
 		#notice_box{
 			background-image: url(${conPath}/img/main_ticket.png);
-		}
+		{
+		 
 	</style>
 	<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
 	
@@ -157,7 +164,7 @@
 							<h2>HOT 어트랙션</h2>
 						</div>
 					</div>
-					<div class="sub_item item3" onclick="location.href='${conPath }/theater/theaterList.do?thschedule=${nowSchedule }&schDate='">
+					<div class="sub_item item3" onclick="location.href='${conPath }/theater/theaterList.do?thschedule=${nowSchedule }&schWord='">
 						<img alt="공연 아이콘" src="https://em-content.zobj.net/source/microsoft-teams/337/admission-tickets_1f39f-fe0f.png">
 						<div class="sub_item_text">
 							<p>
@@ -206,13 +213,19 @@
 		<hr>
 		<div id="main_news">
 			<div class="main_news_left">
-				공지사항 ${member.mwith }
+				<b onclick="location.href='${conPath }/notice/noticeList.do'">공지사항</b>
 				<hr>
-				<ul>
-					<li>01</li>
-					<li>02</li>
-					<li>03</li>
-					<li>04</li>
+				<ul class="list_box">
+					<c:forEach var="nList" items="${noticeMain}">
+						<li>
+							<span class="text"> 
+								<a href="${conPath }/notice/noticeContent.do?nno=${nList.nno }&pageNum=${pageNum}">${nList.ntitle } </a>
+							</span>
+							<span class="date">
+							 	<fmt:formatDate value="${nList.nrdate }" pattern="yyyy.MM.dd"/>
+							</span>
+						</li>
+					</c:forEach>
 				</ul>
 			</div>
 			<div class="main_news_right">

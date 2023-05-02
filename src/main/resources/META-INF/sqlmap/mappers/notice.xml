@@ -12,20 +12,52 @@
 		<result property="adid" column="adid"/>
 		<result property="adname" column="adname"/>
 		<result property="writer" column="writer"/>
+		<result property="prewrite" column="prewrite"/>
+		<result property="nextwrite" column="nextwrite"/>
 	</resultMap>
 	
 	<!-- 공지사항 모든 리스트(새 글 순서) -->
 	<select id="noticeList" parameterType="Notice" resultMap="NoticeResult">
-		SELECT N.*,
-		    (SELECT ADNAME FROM ADMIN WHERE N.ADID = ADID)ADNAME
-		    FROM (SELECT ROWNUM RN, B.*
-		        FROM (SELECT * FROM NOTICE ORDER BY NNO DESC) B)N
-		    WHERE RN BETWEEN #{startRow} AND #{endRow}
+		<if test="schItem == null or schItem == ''">
+			SELECT N.*,
+			    (SELECT ADNAME FROM ADMIN WHERE N.ADID = ADID)ADNAME
+			    FROM (SELECT ROWNUM RN, B.*
+			        FROM (SELECT * FROM NOTICE ORDER BY NNO DESC) B)N
+			    WHERE RN BETWEEN #{startRow} AND #{endRow}
+		</if>
+		
+		<!-- 검색  -->
+		<if test="schItem == 'all'">
+			SELECT N.*,
+			    (SELECT ADNAME FROM ADMIN WHERE N.ADID = ADID)ADNAME
+			    FROM (SELECT ROWNUM RN, B.*
+			        FROM (SELECT * FROM NOTICE WHERE NTITLE LIKE '%'||#{schWord}||'%' OR 
+			        NTYPE LIKE '%'||#{schWord}||'%' ORDER BY NNO DESC) B)N
+				WHERE RN BETWEEN #{startRow} AND #{endRow}	
+		</if>
+		<if test="schItem == 'title'">
+			SELECT N.*,
+			    (SELECT ADNAME FROM ADMIN WHERE N.ADID = ADID)ADNAME
+			    FROM (SELECT ROWNUM RN, B.*
+			        FROM (SELECT * FROM NOTICE WHERE NTITLE LIKE '%'||#{schWord}||'%' ORDER BY NNO DESC) B)N
+			    WHERE RN BETWEEN #{startRow} AND #{endRow}
+		</if>
+		<if test="schItem == 'ntype'">
+			SELECT N.*,
+			    (SELECT ADNAME FROM ADMIN WHERE N.ADID = ADID)ADNAME
+			    FROM (SELECT ROWNUM RN, B.*
+			        FROM (SELECT * FROM NOTICE WHERE NTYPE LIKE '%'||#{schWord}||'%' ORDER BY NNO DESC) B)N
+			   WHERE RN BETWEEN #{startRow} AND #{endRow}
+		</if>
 	</select>
 	
-	<!-- 검색 -->
-	<select id="">
-		
+	<!-- main에 들어갈 Notice 목록 -->
+	<select id="noticeMain" resultMap="NoticeResult">
+		    SELECT N.*,
+        		(SELECT ADNAME FROM ADMIN WHERE N.ADID = ADID)ADNAME
+        		FROM (SELECT ROWNUM RN, B.*
+            		FROM (SELECT * FROM NOTICE ORDER BY NRDATE DESC) B)N
+        	WHERE RN BETWEEN #{startRow} AND #{endRow}
 	</select>
 	
 	<!-- 공지사항 전체갯수 (페이징 용) -->
@@ -34,10 +66,21 @@
 		<if test="schItem == null or schItem == ''">
 			SELECT COUNT(*) FROM NOTICE
 		</if>
+		
+		<!-- 검색 후 글 갯수 -->
+		<if test="schItem == 'all'">
+			SELECT COUNT(*) FROM NOTICE WHERE NTITLE LIKE '%'||#{schWord}||'%' OR NTYPE LIKE '%'||#{schWord}||'%'
+		</if>
+		<if test="schItem == 'title'">
+			SELECT COUNT(*) FROM NOTICE WHERE NTITLE LIKE '%'||#{schWord}||'%'
+		</if>
+		<if test="schItem == 'ntype'">
+			SELECT COUNT(*) FROM NOTICE WHERE NTYPE LIKE '%'||#{schWord}||'%'
+		</if>
 	</select>
 	
 	<!-- 공지사항 입력하기 -->
-	<insert id="noticeWriteView" parameterType="Notice">
+	<insert id="noticeWrite" parameterType="Notice">
 		INSERT INTO NOTICE(NNO, NTITLE, NTYPE, ADID)
     VALUES(NOTICE_SEQ.NEXTVAL, #{ntitle}, #{ntype}, #{adid))
 	</insert>
@@ -52,10 +95,11 @@
 	</select>
 	
 	<!-- 공지사항 수정하기 -->
-	<update id="noticeModifyView" parameterType="Notice">
-		SET NTITLE = #{ntitle},
-	        NCONTENT = #{ncontent},
-	        NTYPE = #{ntype}
+	<update id="noticeModify" parameterType="Notice">
+		UPDATE NOTICE 
+			SET NTITLE = #{ntitle},
+		        NCONTENT = #{ncontent},
+		        NTYPE = #{ntype}
 	    WHERE NNO = #{nno}
 	</update>
 	
@@ -63,4 +107,25 @@
 	<delete id="noticeDelete" parameterType="int">
 		DELETE FROM NOTICE WHERE NNO = #{nno}
 	</delete>
+	
+	<!-- 이전 글 & 다음 글 -->	
+	
+	<select id="noticePre" parameterType="int" resultType="Notice">
+		SELECT * 
+		    FROM NOTICE 
+		    WHERE NNO IN ((SELECT MAX(NNO) 
+		                    FROM NOTICE 
+		                   <![CDATA[ WHERE NNO < #{nno}]]> )
+    )
+	</select>
+	
+	<select id="noticeNext" parameterType="int" resultType="Notice">
+		SELECT * 
+		    FROM NOTICE 
+		    WHERE NNO IN ((SELECT MIN(NNO) 
+		                    FROM NOTICE 
+		                  <![CDATA[ WHERE NNO > #{nno}]]> )
+    )
+	</select>
+	
 </mapper>
