@@ -18,12 +18,12 @@
 					fieldName = $(this).attr('field');
 					/* alert(fieldName); */
 					var currentVal = parseInt($(
-							'input[name=' + fieldName + ']').val());
+						'input[id=' + fieldName + ']').val());
 					if (!isNaN(currentVal)) {
-						$('input[name=' + fieldName + ']').val(
+						$('input[id=' + fieldName + ']').val(
 								currentVal + 1);
 					} else {
-						$('input[name=' + fieldName + ']').val(0);
+						$('input[id=' + fieldName + ']').val(0);
 					}
 					
 				});
@@ -33,12 +33,12 @@
 					fieldName = $(this).attr('field');
 					/* alert(fieldName); */
 					var currentVal = parseInt($(
-							'input[name=' + fieldName + ']').val());
+							'input[id=' + fieldName + ']').val());
 					if (!isNaN(currentVal) && currentVal > 0) {
-						$('input[name=' + fieldName + ']').val(
+						$('input[id=' + fieldName + ']').val(
 								currentVal - 1);
 					} else {
-						$('input[name=' + fieldName + ']').val(0);
+						$('input[id=' + fieldName + ']').val(0);
 					}
 				});
 		});
@@ -105,18 +105,23 @@
 
 			<!-- 우측: 주문 박스 -->
 			<div class="order_box">
+				<form action="${conPath }/ticketRes/tOrderReserve.do">
+				<input type="hidden" name="trdname" value="${ticket.tname }">
 				<div class="order_box_top">
 					<h4>예약옵션을 선택해 주세요.</h4>
-
+					<hr>
+					<h4>날짜선택</h4>
+					<input type="date" name="trddate">
 					<hr>
 					<h4>상품선택</h4>
 					<c:forEach var="ticket" items="${ticketType }">
 						<div class="flex_box">
 							<span>${ticket.tname} ${ticket.ttype } X ${ticket.tprice }(${ticket.tcode })</span>
 							<div class="count_control">
-								<input type="button" value="-" class="btn_plus_minus qtyminus" field="${ticket.tcode }" /><input 
-									   type="text" class="count_control" name="${ticket.tcode }" value="0"><input 
-									   type="button" value="+" class="btn_plus_minus qtyplus" field="${ticket.tcode }" />
+								<input type="hidden" name="trdtype" value="${ticket.ttype }">
+								<input type="button" value="-" class="btn_plus_minus qtyminus" field="${ticket.ttype }" /><input 
+									   type="text" class="count_control" id="${ticket.ttype }" name="trdcnt" value="0"><input 
+									   type="button" value="+" class="btn_plus_minus qtyplus" field="${ticket.ttype }" />
 							</div>
 						</div>
 					</c:forEach>
@@ -124,9 +129,13 @@
 					<h4>합계</h4>
 					<div class="flex_box">
 						<span>총 0매</span> <span style="font-size: 30px;">0 원</span>
+						<input type="hidden" name="trtotprice" value="0">
 					</div>
+					<button class="btn_submit">예약하기</button>
 				</div>
+				</form>
 				<!-- div class="order_box" -->
+
 				<div class="order_box_bottom"></div>
 			</div>
 

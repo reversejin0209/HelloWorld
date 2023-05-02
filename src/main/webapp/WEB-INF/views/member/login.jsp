@@ -19,6 +19,11 @@
 			alert('회원가입되었습니다. 감사합니다');
 		</script>
 	</c:if>
+	<c:if test="${not empty failMsg}">
+		<script>
+			alert('${failMsg}');
+		</script>
+	</c:if>
 	<jsp:include page="../main/header.jsp" />
 	<div id="login_form">
 		<form action="${conPath }/member/mLogin.do" method="post">

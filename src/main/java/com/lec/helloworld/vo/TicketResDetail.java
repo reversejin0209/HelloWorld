@@ -13,7 +13,8 @@ public class TicketResDetail {
 
 	private int trdcode;
 	private String trcode;
-	private String tcode;
+	private String trdname;
+	private String trdtype;
 	private int trdcnt;
 	private Date trddate;
 	private boolean trdresult;

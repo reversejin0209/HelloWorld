@@ -15,20 +15,21 @@
 
 	<!-- 티켓 목록 출력 -->
 	<select id="ticketList" resultMap="TicketResult">
-		SELECT DISTINCT TNAME, TSUB,
-		TIMG FROM TICKET
+		SELECT DISTINCT TNAME, TSUB, TIMG 
+		  FROM TICKET
 	</select>
 
+	<!-- 티켓 상세보기: 정보 출력 -->
 	<select id="getTicket" parameterType="String" resultType="Ticket">
 		SELECT DISTINCT TNAME, TSUB, TCONTENT, TIMG
-				   FROM TICKET
-				  WHERE TNAME = #{tname}
+		  FROM TICKET
+		 WHERE TNAME = #{tname}
 	</select>
 
 	<!-- 티켓 상세보기: 티켓 구분 출력 -->
 	<select id="ticketContent" parameterType="String" resultMap="TicketResult">
 		SELECT * FROM TICKET
-		WHERE TNAME = #{tname}
+		 WHERE TNAME = #{tname}
 	</select>
 </mapper>
 
