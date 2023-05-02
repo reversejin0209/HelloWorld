@@ -13,17 +13,17 @@
 	<script>
 		$(document).ready(function() {  
 			$('input[type="radio"]').click(function(){
-	  			var thschedule = $(this).val();
-  				$.ajax({
-  					url : '${conPath }/theater/theaterCntChk.do',
-  					type : 'get',
-  					data : 'thschedule='+thschedule,
-  					dataType : 'html',
-  					success : function(data){
-  						$('#thConfirmResult').html(data);
-  					}
-  				}); // ajax함수
-	  		}); 
+  			var thschedule = $(this).val();
+ 				$.ajax({
+ 					url : '${conPath }/theater/theaterCntChk.do',
+ 					type : 'get',
+ 					data : 'thschedule='+thschedule,
+ 					dataType : 'html',
+ 					success : function(data){
+ 						$('#thConfirmResult').html(data);
+ 					}
+ 				}); // ajax함수
+  		}); 
 		
 			$('form').submit(function(){
 				var thConfirmResult  = $('#thConfirmResult').text().trim();

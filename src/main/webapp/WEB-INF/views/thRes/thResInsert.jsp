@@ -11,19 +11,33 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
 	$(document).ready(function() {
-
+		$("input:checkbox[name='seatcode']").checked(function(){
+ 			var seatcode = $(this).val();
+			$.ajax({
+				url : '${conPath }/thRes/SeatCodeConfirm.do',
+				type : 'get',
+				data : 'seatcode='+seatcode,
+				dataType : 'html',
+				success : function(data){
+					$('#select_Result').html(data);
+				}
+			}); // ajax함수
+  	}); 
 	});
 </script>
 </head>
 <body>
 	<jsp:include page="../main/header.jsp" />
 	<div id="wrap">
-		${param.thrdate } ${param.thcode }
+		${param.thrdate } ${param.thcode }  ${param.thcnt } ${param.seatcode }
 		<div class="thResInsert">
 			<div class="thResInsert_inner">
 
-				<form action="${conPath }/thRes/thReserve.do">
-
+				<form action="${conPath }/thRes/thReserve.do" method="GET">
+					<input type="text" name="thrdate" value="${param.thrdate }">
+					<input type="text" name="thcode" value="${param.thcode }">
+					<input type="text" name="thcnt" value="2">
+					<input type="text" name="thrtotprice" value="24000">
 					<div class="stage_Box">
 						<b>S T A G E<b>
 					</div>
@@ -50,7 +64,8 @@
 					<hr>
 					
 					<div class="select_Seat">
-						선택한 좌석 <span id="select_Result">A1, A2, A3</span> 선택한 총 좌석 <span id="select_TotCnt">2</span>
+						<span class="small_font">선택한 좌석</span> <span id="select_Result">a1 a2 a3</span> <br>
+						<span class="small_font">선택한 총 좌석</span> <span id="select_TotCnt">2</span>
 						<br>
 						<input class="btn_submit" type="submit" value="예매하기">
 					</div>

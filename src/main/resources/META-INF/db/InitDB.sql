@@ -16,7 +16,7 @@ DROP TABLE ADMIN;
 DROP TABLE MEMBER_GRADE;
 DROP TABLE MEMBER;
 
--- SEQUENCE DROP\
+-- SEQUENCE DROP
 DROP SEQUENCE THREVIEW_SEQ;
 DROP SEQUENCE THRCODE_SEQ;
 DROP SEQUENCE THCODE_SEQ;
@@ -30,6 +30,7 @@ DROP SEQUENCE AT_REVIEW_SEQ;
 DROP SEQUENCE AT_RPLY_SEQ;
 
 SELECT * FROM TABS;
+
 ------------------------------ SEQUENCE CREATE ---------------------------------
 CREATE SEQUENCE TICKET_SEQ
     MAXVALUE 9999
@@ -77,6 +78,7 @@ CREATE SEQUENCE AT_RPLY_SEQ
     NOCYCLE;
 
 -------------------------------- TABLE CREATE ----------------------------------
+-- 회원 테이블
 -- MEMBER
 CREATE TABLE MEMBER_GRADE (
     GRADE VARCHAR2(10) PRIMARY KEY,
@@ -94,6 +96,7 @@ CREATE TABLE MEMBER (
     mVISIT NUMBER(3) DEFAULT 0 NOT NULL 
 );
 
+-- 관리자 테이블
 -- ADMIN
 CREATE TABLE ADMIN (
     adID    VARCHAR2(50) PRIMARY KEY,
@@ -103,14 +106,15 @@ CREATE TABLE ADMIN (
     adEMAIL VARCHAR2(50) NOT NULL
 );
 
+-- 공연 관련 테이블
 -- THEATER
 CREATE TABLE THEATER (
     thCODE    VARCHAR2(6) PRIMARY KEY,
     thNAME    VARCHAR2(50) NOT NULL,
-    thCONTENT VARCHAR2(300) NOT NULL,
+    thCONTENT VARCHAR2(100) NOT NULL,
     thTIME    VARCHAR2(10) NOT NULL,
     thLOC     VARCHAR2(50) NOT NULL,
-    thSEAT    NUMBER(2) NOT NULL,
+    thSEAT    VARCHAR2(2) NOT NULL,
     thPRICE   NUMBER(9) NOT NULL,
     thIMG1    VARCHAR2(100) NOT NULL,
     thSCHEDULE NUMBER(1) NOT NULL
@@ -144,6 +148,7 @@ CREATE TABLE THREVIEW (
     thrRDATE   DATE NOT NULL
 );
 
+-- 티켓 예약 테이블
 -- TICKET
 CREATE TABLE TICKET(
     tCODE VARCHAR2(6) PRIMARY KEY,
@@ -168,12 +173,69 @@ CREATE TABLE TICKET_RES(
 CREATE TABLE TICKET_RESDETAIL(
     trdCODE NUMBER(4) PRIMARY KEY,
     trCODE VARCHAR2(20) NOT NULL REFERENCES TICKET_RES(trCODE),
-    tCODE VARCHAR2(6) NOT NULL REFERENCES TICKET(tCODE),
+    trdNAME VARCHAR2(50) NOT NULL,
+    trdTYPE VARCHAR2(50) NOT NULL,
     trdCNT NUMBER(3) NOT NULL,
     trdDATE DATE NOT NULL,
     trdRESULT NUMBER(1) DEFAULT 0
 );
 
+-- 놀이동산 관련 테이블
+-- ZONE
+CREATE TABLE ZONE (
+    zNAME VARCHAR2(50) PRIMARY KEY,
+    zPLACE VARCHAR2 (100),
+    zLAT NUMBER(10,6), 
+    zLNG NUMBER(10,6)
+);
+
+-- ATTRACTION 
+CREATE TABLE ATTRACTION (
+    atCODE   NUMBER(3) PRIMARY KEY,
+    atNAME VARCHAR2(50) NOT NULL UNIQUE,
+    atCONTENT CLOB NOT NULL,
+    atADDR VARCHAR2 (100) NOT NULL,
+    atPOST NUMBER(5) NOT NULL,
+    atIMAGE VARCHAR2 (200) DEFAULT 'noImg.png',
+    atRDATE DATE DEFAULT SYSDATE NOT NULL,
+    atOLD NUMBER(3) DEFAULT 0 NOT NULL,
+    atHEIGHT NUMBER(3) DEFAULT 0 NOT NULL,
+    atWEIGHT NUMBER(3) DEFAULT 0 NOT NULL,
+    atLAT NUMBER(10,6), 
+    atLNG NUMBER(10,6),
+    atYOUTUBE VARCHAR2(200),
+    atNOP NUMBER(3),
+    adID  VARCHAR2(50) REFERENCES ADMIN(adID) NOT NULL,
+    zNAME VARCHAR2(50) REFERENCES ZONE(zNAME) NOT NULL
+);
+
+-- AT_REVIEW
+CREATE TABLE AT_REVIEW (
+    arvNUM NUMBER(7) PRIMARY KEY,
+    arvRDATE DATE DEFAULT SYSDATE NOT NULL,
+    arvCONTENT VARCHAR2(4000) NOT NULL,
+    arvRATING NUMBER(2,1) NOT NULL,
+    arv_HIT NUMBER(6) DEFAULT 0, 
+    atCODE NUMBER(3) REFERENCES ATTRACTION(atCODE) NOT NULL,
+    mID VARCHAR2(40) REFERENCES MEMBER(mID)
+);
+
+-- AT_RPLY
+CREATE TABLE AT_RPLY(
+    apyNum NUMBER(7) PRIMARY KEY,
+    adID VARCHAR2(50) REFERENCES ADMIN(adID),
+    mID VARCHAR2(50) REFERENCES MEMBER(mID),
+    atCODE NUMBER(3) REFERENCES ATTRACTION(atCODE) NOT NULL,
+    apyTITLE VARCHAR2(50) NOT NULL,
+    apyCONTENT VARCHAR2(4000) NOT NULL,
+    apyRDATE DATE DEFAULT SYSDATE NOT NULL,
+    apyGROUP NUMBER(7),
+    apySTEP NUMBER(7),
+    apyINDENT NUMBER(7),
+    apyIP VARCHAR2(30) 
+);
+
+-- 1:1 문의 게시판
 -- QNABOARD
 CREATE TABLE QNABOARD(
     qaNUM NUMBER(4) PRIMARY KEY,
@@ -191,37 +253,8 @@ CREATE TABLE QNABOARD(
     qaIP VARCHAR2(20) NOT NULL
 );
 
---------------------------------------------------------------------------------
-------------------------------------- ZONE -------------------------------------
---------------------------------------------------------------------------------
-CREATE TABLE ZONE (
-    zNAME VARCHAR2(50) PRIMARY KEY,
-    zPLACE VARCHAR2 (100),
-    zLAT NUMBER(10,6), 
-    zLNG NUMBER(10,6)
-);
-
---------------------------------------------------------------------------------
------------------------------------ ATTRACTION ---------------------------------
---------------------------------------------------------------------------------
-CREATE TABLE ATTRACTION (
-    atCODE   NUMBER(3) PRIMARY KEY,
-    atNAME VARCHAR2(50) NOT NULL,
-    atCONTENT VARCHAR2(4000) NOT NULL,
-    atADDR VARCHAR2 (100) NOT NULL,
-    atIMAGE VARCHAR2 (100) DEFAULT 'noImg.png' NOT NULL,
-    atRDATE DATE DEFAULT SYSDATE NOT NULL,
-    atOLD NUMBER(3) DEFAULT 0 NOT NULL,
-    atHEIGHT NUMBER(3) DEFAULT 0 NOT NULL,
-    atLAT NUMBER(10,6) NOT NULL, 
-    atLNG NUMBER(10,6) NOT NULL,
-    adID     VARCHAR2(50) REFERENCES ADMIN(adID) NOT NULL,
-    zNAME   VARCHAR2(50) REFERENCES ZONE(zNAME) NOT NULL
-);
-
---------------------------------------------------------------------------------
--------------------------------------- NOTICE  ---------------------------------
---------------------------------------------------------------------------------
+-- 공지사항 테이블
+-- NOTICE 
 CREATE TABLE NOTICE(
     nNO      NUMBER(5) PRIMARY KEY,
     nTITLE   VARCHAR2(50) NOT NULL,
@@ -231,33 +264,4 @@ CREATE TABLE NOTICE(
     adID     VARCHAR2(50) REFERENCES ADMIN(adID) NOT NULL
 );
 
---------------------------------------------------------------------------------
------------------------------------ AT_REVIEW --------------------------------
---------------------------------------------------------------------------------
-CREATE TABLE AT_REVIEW (
-    arvNUM NUMBER(7) PRIMARY KEY,
-    arvRDATE DATE DEFAULT SYSDATE NOT NULL,
-    arvCONTENT VARCHAR2(4000) NOT NULL,
-    arvRATING NUMBER(2,1) NOT NULL,
-    arv_HIT NUMBER(6) DEFAULT 0, 
-    atCODE NUMBER(3) REFERENCES ATTRACTION(atCODE) NOT NULL,
-    mID VARCHAR2(40) REFERENCES MEMBER(mID)
-);
-
---------------------------------------------------------------------------------
-------------------------------------- AT_RPLY ----------------------------------
---------------------------------------------------------------------------------
-CREATE TABLE AT_RPLY(
-    apyNum NUMBER(7) PRIMARY KEY,
-    adID VARCHAR2(50) REFERENCES ADMIN(adID),
-    mID VARCHAR2(50) REFERENCES MEMBER(mID),
-    atCODE NUMBER(3) REFERENCES ATTRACTION(atCODE) NOT NULL,
-    apyTITLE VARCHAR2(50) NOT NULL,
-    apyCONTENT VARCHAR2(4000) NOT NULL,
-    apyRDATE DATE DEFAULT SYSDATE NOT NULL,
-    apyGROUP NUMBER(7),
-    apySTEP NUMBER(7),
-    apyINDENT NUMBER(7),
-    apyIP VARCHAR2(30) 
-);
-
+COMMIT;
