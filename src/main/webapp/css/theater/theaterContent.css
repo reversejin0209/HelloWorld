@@ -64,13 +64,13 @@
 }
 
 .ticketContent_wrap>.ticket_content {
-	width: 550px;
+	width: 850px;
 	min-height: 400px;
 }
 
 /* 티켓 상품 안내 테이블 */
 .ticketContent_table {
-	width: 100%;
+	width: 80%;
 	margin: 10px auto;
 	border-collapse: collapse;
 }
@@ -102,8 +102,8 @@
 
 /* 주문 박스 */
 .ticketContent_wrap>.order_box {
-	width: 550px;
-	height: 300px;
+	width: 480px;
+	height: 450px;
 	position: sticky;
 	top: 110px;
 	display: block;
@@ -114,7 +114,7 @@
 }
 
 .order_box_top {
-	width: 550px;
+	width: 300px;
 	padding: 40px 30px;
 	box-sizing: border-box;
 	border: 1px solid #b089ff;
@@ -126,6 +126,55 @@
 	justify-content: space-between;
 	margin: 10px 0;
 }
+
+.order_box_bottom {
+	width: 300px;
+	height: 60px;
+	line-height: 60px;
+	text-align: center;
+}
+
+.resButton {
+	width: 300px;
+	height: 50px;
+	margin-top: 20px;
+	line-height: 50px;
+	border: 1px solid #b089ff;
+	border-radius: 8px;
+	cursor: pointer;
+}
+
+.resButton:active {
+	width: 300px;
+	height: 50px;
+	margin-top: 20px;
+	line-height: 50px;
+	background-color: #b089ff;
+	color: #ffffff;
+	border: 1px solid #ffffff;
+	border-radius: 8px;
+	cursor: pointer;
+}
+
+.thPartButton {
+	width: 150px;
+	height: 80px;
+	line-height: 80px;
+	text-align: center;
+	border: 1px solid #cde1b4;
+	color: #353535;
+	cursor: pointer;
+}
+
+.thPartButton:nth-child(1) {
+	border-radius: 5px 0 0 5px;
+}
+
+.thPartButton:nth-child(2){
+	border-radius: 0 5px 5px 0;
+}
+
+
 
 /* 상품선택 숫자 */
 .count_control>.btn_plus_minus {

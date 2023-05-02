@@ -62,15 +62,14 @@
 	
 	<div id="wrap">
 		<div class="search_box">
-			<form action="${conPath }/theater/theaterList.do" method="get"
-				class="right">
+			<form action="${conPath }/theater/theaterList.do" method="get" class="right">
 				<div class="search">
 					<input type="hidden" name="thschedule" value="2">
-					<c:if test="${param.schWord != '' }">
-						<input type="text" name="schWord" id="datepicker" readonly="readonly" value="${param.schWord }">
+					<c:if test="${param.schDate != '' }">
+						<input type="text" name="schDate" id="datepicker" readonly="readonly" value="${param.schDate }">
 					</c:if>
-					<c:if test="${param.schWord == '' }">
-						<input type="text" name="schWord" id="datepicker" readonly="readonly" value="${today }">
+					<c:if test="${param.schDate == '' }">
+						<input type="text" name="schDate" id="datepicker" readonly="readonly" value="${today }">
 					</c:if>
 					<button id="schButton">
 						<img alt="검색 아이콘" src="${conPath }/img/search_FILL0_wght400_GRAD0_opsz24.svg">
@@ -78,7 +77,7 @@
 				</div>
 			</form>
 		</div>
-		
+		<c:set var="schDate" value="${param.schDate eq '' ? today:param.schDate}"/>
 		<table class="list_table"> 
 			<tr>
 				<th colspan="4">공연정보</th>
@@ -100,7 +99,9 @@
 						<td class="left" colspan="3">
 							<ul>
 								<li class="thTitle">
-									<a href="${conPath}/theater/theaterContent.do?thname=${theater.thname }" class="black">${theater.thname }</a>
+									<a href="${conPath}/theater/theaterContent.do?thname=${theater.thname }
+									&schDate=${param.schDate eq '' ? today:param.schDate }&thcode=${theater.thcode }&thseat=${theater.thseat }" 
+									class="black">${theater.thname }</a>
 								</li>
 								<li>
 									${theater.thcontent }
@@ -113,7 +114,9 @@
 						<td colspan="2">
 							13:00 [1회차] <br>
 							17:00 [2회차] <br>
-							<button onclick="location.href='${conPath}/theater/theaterContent.do?thname=${theater.thname }'">공연 상세보기</button>
+							<button onclick="location.href='${conPath}/theater/theaterContent.do?thname=${theater.thname }&schDate=${param.schDate eq '' ? today:param.schDate }&thcode=${theater.thcode }&thseat=${theater.thseat }'">
+								공연 상세보기
+							</button>
 						</td>
 					</tr>
 				</c:forEach>

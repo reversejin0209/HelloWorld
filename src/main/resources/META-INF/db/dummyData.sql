@@ -23,7 +23,7 @@ INSERT INTO MEMBER (MID, MMAIL, MPW, MNAME, MTEL)
 ---------------------------------- THEATER -------------------------------------
 -- 1. 공연 추가
 INSERT INTO THEATER (thCODE, thNAME, thCONTENT, thTIME, thLOC, thSEAT, thPRICE, thIMG1, thSCHEDULE)
-    VALUES ('TH'||THCODE_SEQ.NEXTVAL, '못 말리는 그리피', '못 말리는 그리피와 함께하는 ', '60'||'분', '익스트림 존', 40, 7000, 'theater1.png', 0);
+    VALUES ('TH'||THCODE_SEQ.NEXTVAL, '못 말리는 그리피', '못 말리는 그리피와 함께하는 바다 여행', '60'||'분', '익스트림 존', 40, 7000, 'theater1.png', 0);
 INSERT INTO THEATER (thCODE, thNAME, thCONTENT, thTIME, thLOC, thSEAT, thPRICE, thIMG1, thSCHEDULE)
     VALUES ('TH'||THCODE_SEQ.NEXTVAL, '코코의 모험: 코딩 어드벤처', '위험에 빠진 딩딩이를 구하러 가는 코코의 모험!', '80'||'분', '매지컬랜드', 40, 9000, 'cocoAdven.png', 1);
 INSERT INTO THEATER (thCODE, thNAME, thCONTENT, thTIME, thLOC, thSEAT, thPRICE, thIMG1, thSCHEDULE)
@@ -31,8 +31,8 @@ INSERT INTO THEATER (thCODE, thNAME, thCONTENT, thTIME, thLOC, thSEAT, thPRICE, 
 
 --------------------------------- THEATER_RES ----------------------------------
 -- 1. 공연 예매
-INSERT INTO THEATER_RES (thrCODE, mID, thCODE, thrCNT, thrORDERDATE, thrREVIEW, thrTOTPRICE, thrPART, thrDATE)
-    VALUES (TO_CHAR(SYSDATE, 'YYMMDD')||'TH1'||THRCODE_SEQ.NEXTVAL, 'aaa', 'TH1', 2, SYSDATE, 0, 10000, 1, SYSDATE);
+INSERT INTO THEATER_RES (thrCODE, mID, thCODE, thrCNT, thrORDERDATE, thrREVIEW, thrTOTPRICE, thrDATE)
+    VALUES (TO_CHAR(SYSDATE, 'YYMMDD')||'TH1'||THRCODE_SEQ.NEXTVAL, 'aaa', 'TH1', 2, SYSDATE, 0, 10000, SYSDATE);
 
 ---------------------------------- THREVIEW ------------------------------------
 -- 1. 공연 리뷰 글 쓰기

@@ -1,0 +1,58 @@
+@charset "UTF-8";
+* {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	text-decoration: none;
+}
+
+#wrap {
+	background-color: #efefef;
+	text-align: center;
+}
+
+/* stage_Box */
+.stage_Box {
+	width: 450px;
+	margin: 80px auto;
+	height: 30px;
+	line-height: 30px;
+	background: repeating-linear-gradient(45deg, #444, #444 5px, #888 0, #888 10px);
+	background-color: #cecece;
+	color: white;
+}
+
+/* 좌석 */
+.seat_Box {
+	text-align: center;
+	height: 200px;
+}
+
+.small_font {
+	margin-right: 15px;
+	font-size: 13px;
+	color: gray;
+}
+
+.seat_Num{
+	margin: 2px;
+}
+/* select_Seat */
+.select_Seat {
+	text-align: center;
+}
+
+/* submit */
+.submit_Button {
+	text-align: right;
+	border-top: 1px solid gray;
+}
+
+.submit_Button input {
+	width: 100px;
+	height: 50px;
+	line-height: 50px;
+	cursor: pointer;
+	background-color: white;
+	border: 1px solid gray;
+}

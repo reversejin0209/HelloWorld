@@ -25,15 +25,15 @@ public class TheaterServiceImpl implements TheaterService {
 	TheaterDao theaterDao;
 	
 	@Override
-	public List<Theater> theaterList(int thschedule, String schWord) {
-		if(schWord!="" && thschedule == 2) {
-			thschedule = Integer.parseInt(schWord.substring(8))%2;
+	public List<Theater> theaterList(int thschedule, String schDate) {
+		if(schDate!="" && thschedule == 2) {
+			thschedule = Integer.parseInt(schDate.substring(8))%2;
 		}
 		return theaterDao.theaterList(thschedule);
 	}
 
 	@Override
-	public Theater theaterContent(String thname) {
+	public Theater theaterContent(String thname, String schDate, String thcode, int thseat) {
 		return theaterDao.theaterContent(thname);
 	}
 

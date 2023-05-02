@@ -18,14 +18,14 @@ public class TheaterController {
 	private TheaterService theaterService;
 	
 	@RequestMapping(value="theaterList", method = RequestMethod.GET)
-	public String theaterList(int thschedule, String schWord, Model model) {
-		model.addAttribute("theaterList", theaterService.theaterList(thschedule, schWord));
+	public String theaterList(int thschedule, String schDate, Model model) {
+		model.addAttribute("theaterList", theaterService.theaterList(thschedule, schDate));
 		return "theater/theaterList";
 	}
 	
 	@RequestMapping(value="theaterContent", method = RequestMethod.GET)
-	public String theaterContent(String thname, Model model) {
-		model.addAttribute("thcon", theaterService.theaterContent(thname));
+	public String theaterContent(String thname, String schDate, String thcode, int thseat, Model model) {
+		model.addAttribute("thcon", theaterService.theaterContent(thname, schDate, thcode, thseat));
 		return "theater/theaterContent";
 	}
 	

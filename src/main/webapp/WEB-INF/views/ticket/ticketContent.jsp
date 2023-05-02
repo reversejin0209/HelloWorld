@@ -107,7 +107,7 @@
 			<div class="order_box">
 				<div class="order_box_top">
 					<h4>예약옵션을 선택해 주세요.</h4>
-
+						
 					<hr>
 					<h4>상품선택</h4>
 					<c:forEach var="ticket" items="${ticketType }">
