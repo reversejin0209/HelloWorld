@@ -7,25 +7,38 @@
 }
 
 #wrap {
-	background-color: #efefef;
 	text-align: center;
+}
+
+.thResInsert{
+width: 100%;
+height: 100%;
+padding: 100px 0;
+background-color: #efefef;
+}
+
+.thResInsert_inner{
+	width: 600px;
+	border: 1px solid #a0a0a0;
+	border-radius: 10px;
+	margin: 0 auto; 
+	background-color: #ffffff; 
 }
 
 /* stage_Box */
 .stage_Box {
-	width: 450px;
+	width: 300px;
 	margin: 80px auto;
 	height: 30px;
 	line-height: 30px;
 	background: repeating-linear-gradient(45deg, #444, #444 5px, #888 0, #888 10px);
-	background-color: #cecece;
 	color: white;
 }
 
 /* 좌석 */
 .seat_Box {
 	text-align: center;
-	height: 200px;
+	height: 150px;
 }
 
 .small_font {
@@ -35,10 +48,12 @@
 }
 
 .seat_Num{
-	margin: 2px;
+	/* margin: 2px; */
 }
+
 /* select_Seat */
 .select_Seat {
+	height: 100px;
 	text-align: center;
 }
 
