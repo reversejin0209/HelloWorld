@@ -11,33 +11,38 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
 	$(document).ready(function() {
-		$("input:checkbox[name='seatcode']").checked(function(){
- 			var seatcode = $(this).val();
-			$.ajax({
-				url : '${conPath }/thRes/SeatCodeConfirm.do',
-				type : 'get',
-				data : 'seatcode='+seatcode,
-				dataType : 'html',
-				success : function(data){
-					$('#select_Result').html(data);
-				}
-			}); // ajax함수
-  	}); 
+		$('input[type="checkbox"]').click(function(){
+			var seatId = $(this).attr('id');
+			var checked = $(this).is(':checked');
+			if(checked){ // 체크함
+				$('.img'+seatId).attr('src','${conPath }/img/seat_chk.png');
+			}else { // 언체크함
+				$('.img'+seatId).attr('src','${conPath }/img/seat_line.png');
+			}
+		});
 	});
 </script>
 </head>
 <body>
+	<c:if test="${reserveChk >= 1 }">
+		<script>
+			alert('같은 공연은 한 아이디당 한번만 예매 가능합니다. \n단체 예약은 고객센터로 문의주세요');
+			history.back();
+		</script>
+	</c:if>
 	<jsp:include page="../main/header.jsp" />
 	<div id="wrap">
 		${param.thrdate } ${param.thcode }  ${param.thcnt } ${param.seatcode }
 		<div class="thResInsert">
 			<div class="thResInsert_inner">
 
-				<form action="${conPath }/thRes/thReserve.do" method="GET">
-					<input type="text" name="thrdate" value="${param.thrdate }">
+				<form action="${conPath }/thRes/thReserve.do" method="POST">
+					<%-- <input type="text" name="thrdate" value="${param.thrdate }"> --%>
 					<input type="text" name="thcode" value="${param.thcode }">
-					<input type="text" name="thcnt" value="2">
-					<input type="text" name="thrtotprice" value="24000">
+					<input type="text" name="thrcnt" value="2">
+					<input type="text" name="mid" value="${member.mid }">
+					<input type="text" name="thrdateStr" value="${param.thrdatetemp }">
+					<input type="text" name="thprice" value="${param.thprice }">
 					<div class="stage_Box">
 						<b>S T A G E<b>
 					</div>
@@ -45,19 +50,19 @@
 					<div class="seat_Box">
 						<span class="small_font">A</span>
 						<c:forEach var="i" begin="1" end="10">
-							<input type="checkbox" class="seat_Num" name="seatcode" value="a${i }">
+							<input type="checkbox" class="seat_Num" name="seatCode" value="a${i }">
 						</c:forEach>
 						<br> <span class="small_font">B</span>
 						<c:forEach var="i" begin="1" end="10">
-							<input type="checkbox" class="seat_Num" name="seatcode" value="b${i }">
+							<input type="checkbox" class="seat_Num" name="seatCode" value="b${i }">
 						</c:forEach>
 						<br> <span class="small_font">C</span>
 						<c:forEach var="i" begin="1" end="10">
-							<input type="checkbox" class="seat_Num" name="seatcode" value="c${i }">
+							<input type="checkbox" class="seat_Num" name="seatCode" value="c${i }">
 						</c:forEach>
 						<br> <span class="small_font">D</span>
 						<c:forEach var="i" begin="1" end="10">
-							<input type="checkbox" class="seat_Num" name="seatcode" value="d${i }">
+							<input type="checkbox" class="seat_Num" name="seatCode" value="d${i }">
 						</c:forEach>
 						<br>
 					</div>

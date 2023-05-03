@@ -18,22 +18,26 @@ public class ThResController {
 	
 	/* 예약 진행 */
 	@RequestMapping(value="thReserve", method=RequestMethod.GET)
-	public String thReserveView(String thrdate, String thrcode, String thcnt) {
+	public String thReserveView(ThRes thres, String thrdatetemp, Model model) {
+		System.out.println("컨트롤러 진입");
+		model.addAttribute("reserveChk", thresService.reserveChk(thres, thrdatetemp));
+		System.out.println("컨트롤러 빠져나감" + thres + thresService.reserveChk(thres, thrdatetemp));
 		return "thRes/thResInsert";
 	}
 	
 	@RequestMapping(value="thReserve", method=RequestMethod.POST)
-	public String thReserve(ThRes thres, Model model) {
-		System.out.println("컨트롤러 진입");
-		model.addAttribute("thResResult", thresService.thResInsert(thres));
-		System.out.println("컨트롤러 빠져나감");
-		return "main/main";
+	public String thReserve(ThRes thres, String thrdateStr, String[] seatCode, String thprice, Model model) {
+		System.out.println("thReserve 컨트롤러 진입" + thres);
+		model.addAttribute("thResResult", thresService.thResInsert(thres, thrdateStr, thprice, seatCode));
+		model.addAttribute("seatCode", seatCode);
+		System.out.println("thReserve 컨트롤러 빠져나감");
+		return "member/myPage";
 	}
 	
-	/* 좌석 확인 */
-	@RequestMapping(value="SeatCodeConfirm", method=RequestMethod.GET)
-	public String thSeatConfirm(String seatcode) {
-		return "thRes/seatCodeConfirm";
+	@RequestMapping(value="seatList")
+	public String seatReservation(ThRes thres, Model model, String mid) {
+		model.addAttribute("seats", thresService.seatList(thres));
+		return "seatList";
 	}
 	
 }

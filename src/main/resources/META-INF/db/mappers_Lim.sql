@@ -77,20 +77,15 @@ SELECT * FROM THEATER;
     --> 1-1. 예매 진행
 INSERT INTO THEATER_RES (thrCODE, mID, thCODE, thrCNT, thrORDERDATE, thrREVIEW, thrTOTPRICE, thrDATE)
     VALUES (TO_CHAR(SYSDATE, 'YYMMDD')||'TH1'||THRCODE_SEQ.NEXTVAL, 'aaa', 'TH1', 2, SYSDATE, 0, 10000, SYSDATE);
-    --> 1-2. 예매 완료 시 공연 좌석 차감
-UPDATE THEATER 
-    SET thSEAT = thSEAT - 2
-    WHERE thCODE = 'TH1';
-    --> 1-3. 예매 완료 시 구매 좌석 추가
+    --> 1-2. 예매 완료 시 구매 좌석 추가
 INSERT INTO THEATER_SEAT (SEATCODE, thrCODE)
     VALUES ('A1', '230502TH11');
 INSERT INTO THEATER_SEAT (SEATCODE, thrCODE)
     VALUES ('A2', '230502TH11');
-    --> 1-4. 예매 완료된 좌석 막기
-SELECT SEATCODE 
-    FROM THEATER_SEAT TS, THEATER_RES TR, THEATER T 
-    WHERE TS.thrCODE = TR.thrCODE AND TR.thCODE = T.thCODE AND
-          T.thCODE = 'TH1' AND (TO_CHAR(thrDATE, 'YYMMDD')=230420);
+    --> 1-3. 예매 완료된 좌석 막기
+SELECT TS.SEATCODE 
+    FROM THEATER_SEAT TS, THEATER_RES TR
+    WHERE TS.THRCODE = TR.THRCODE AND TS.THRCODE = '230503TH22' AND THRDATE = '23/05/03'; 
 
 -- 2. 예매 내역 리스트(페이징)
     --> 2-1. 예매 내역 총 갯수
@@ -115,8 +110,12 @@ DELETE THEATER_SEAT
     --> 4-2. 예약 내역 삭제
 DELETE THEATER_RES 
     WHERE thrCODE = '230419TH11';
+    
+-- 5. 공연 정보 가져오기 
+SELECT COUNT(*) FROM THEATER_RES WHERE mID = 'aaa' AND thCODE = 'TH1' AND thrDATE = '23/05/03';
 
 SELECT * FROM THEATER_RES;
+SELECT * FROM THEATER_SEAT;
 ---------------------------------- THREVIEW ------------------------------------
 -- 1. 공연 리뷰 작성
 INSERT INTO THREVIEW (thrNUM, thrCODE, thCODE, mID, thrTITLE, thrCONTENT) 
@@ -153,3 +152,4 @@ DELETE THREVIEW WHERE thrNUM = '2';
 
 SELECT * FROM THREVIEW;
 
+ROLLBACK;

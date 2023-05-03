@@ -100,7 +100,7 @@
 							<ul>
 								<li class="thTitle">
 									<a href="${conPath}/theater/theaterContent.do?thname=${theater.thname }
-									&schDate=${param.schDate eq '' ? today:param.schDate }&thcode=${theater.thcode }&thseat=${theater.thseat }" 
+									&schDate=${param.schDate eq '' ? today:param.schDate }&thcode=${theater.thcode }&thseat=${theater.thseat }&thprice=${theater.thprice }" 
 									class="black">${theater.thname }</a>
 								</li>
 								<li>
@@ -114,7 +114,7 @@
 						<td colspan="2">
 							13:00 [1회차] <br>
 							17:00 [2회차] <br>
-							<button onclick="location.href='${conPath}/theater/theaterContent.do?thname=${theater.thname }&schDate=${param.schDate eq '' ? today:param.schDate }&thcode=${theater.thcode }&thseat=${theater.thseat }'">
+							<button onclick="location.href='${conPath}/theater/theaterContent.do?thname=${theater.thname }&schDate=${param.schDate eq '' ? today:param.schDate }&thcode=${theater.thcode }&thseat=${theater.thseat }&thprice=${theater.thprice }'">
 								공연 상세보기
 							</button>
 						</td>

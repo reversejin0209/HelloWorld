@@ -24,7 +24,7 @@ public class TheaterController {
 	}
 	
 	@RequestMapping(value="theaterContent", method = RequestMethod.GET)
-	public String theaterContent(String thname, String schDate, String thcode, int thseat, Model model) {
+	public String theaterContent(String thname, String schDate, String thcode, int thseat, int thprice, Model model) {
 		model.addAttribute("thcon", theaterService.theaterContent(thname, schDate, thcode, thseat));
 		return "theater/theaterContent";
 	}

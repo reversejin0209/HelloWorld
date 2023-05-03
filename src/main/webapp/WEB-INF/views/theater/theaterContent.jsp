@@ -91,7 +91,7 @@
 				</div>
 				<!-- div class="order_box" -->
 				<div class="order_box_bottom">
-					<div class="resButton" onclick="location.href='${conPath }/thRes/thReserve.do?thrdate=${param.schDate }&thcode=${param.thcode }'">
+					<div class="resButton" onclick="location.href='${conPath }/thRes/thReserve.do?thrdatetemp=${param.schDate }&thcode=${param.thcode }&thprice=${param.thprice }&mid=${member.mid }'">
 						예약하기
 					</div>
 				</div>

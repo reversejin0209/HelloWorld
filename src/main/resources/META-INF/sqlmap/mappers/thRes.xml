@@ -19,9 +19,28 @@
 		<result property="seatcode" column="seatcode"/>
 	</resultMap>
 	
-	<select id="thResInsert" parameterType="ThRes" resultType="int">
+	<insert id="thResInsert" parameterType="ThRes">
 		INSERT INTO THEATER_RES (thrCODE, mID, thCODE, thrCNT, thrORDERDATE, thrREVIEW, thrTOTPRICE, thrDATE)
-    VALUES (TO_CHAR(SYSDATE, 'YYMMDD')||#{thcode}||THRCODE_SEQ.NEXTVAL, #{mid}, #{thcode}, #{thrcnt}, SYSDATE, 0, #{thrtotprice}, SYSDATE)
+    	VALUES (TO_CHAR(SYSDATE, 'YYMMDD')||#{thcode}||THRCODE_SEQ.NEXTVAL, #{mid}, #{thcode}, #{thrcnt}, SYSDATE, 0, #{thrtotprice}, #{thrdate})
+	</insert>
+	
+	<insert id="seatReserve" parameterType="ThRes">
+		INSERT INTO THEATER_SEAT (SEATCODE, thrCODE)
+    	VALUES (#{seatcode}, #{thrcode})
+	</insert>
+	
+	<select id="thrcodeChk" parameterType="ThRes" resultType="String">
+		SELECT thrCODE FROM THEATER_RES WHERE mID = #{mid} AND thCODE = #{thcode} AND thrDATE = #{thrdate}
+	</select>
+	
+	<select id="reserveChk" parameterType="ThRes" resultType="int">
+		SELECT COUNT(*) FROM THEATER_RES WHERE mID = #{mid} AND thCODE = #{thcode} AND thrDATE = #{thrdate}
+	</select>
+	
+	<select id="seatList" parameterType="ThRes" resultType="String">
+		SELECT TS.SEATCODE 
+    	FROM THEATER_SEAT TS, THEATER_RES TR
+   	 	WHERE TS.THRCODE = TR.THRCODE AND TS.THRCODE = #{thrcode} AND THRDATE = #{thrdate}
 	</select>
 	
 </mapper>

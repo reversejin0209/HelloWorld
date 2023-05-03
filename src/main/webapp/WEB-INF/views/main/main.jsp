@@ -31,7 +31,7 @@
 				location.href='${conPath}/ticket/ticketList.do';
 			});
 			$('.qBoardListBtn').click(function(){
-				location.href='${conPath}/qnaBoard/qBoardList.do?pageNum=${param.pageNum}&schItem=${param.schItem}&schWord=${param.schWord}';
+				location.href='${conPath}/qnaBoard/qBoardList.do?pageNum=${param.pageNum}&schItem=${param.schItem}&schWord=${param.schDate}';
 			});
 		});
 	</script>
