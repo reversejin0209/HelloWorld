@@ -19,9 +19,11 @@
 <body>
 	<jsp:include page="../main/header.jsp" />
 	<div id="wrap">
+		<div class="center">
 		${successMsg }
 		${failMsg }
 	
+		</div>
 	</div>
 	<jsp:include page="../main/footer.jsp" />
 </body>
