@@ -50,7 +50,7 @@ SELECT * FROM MEMBER;
     -- 1-1. 공연 추가 전 최대 갯수 확인
 SELECT COUNT(*) 
     FROM THEATER
-    WHERE thPART = 1;
+    WHERE thSCHEDULE = 1;
     -- 1-2. 공연 추가
 INSERT INTO THEATER (thCODE, thNAME, thCONTENT, thPART, thTIME, thLOC, thSEAT, thPRICE, thIMG1, thSCHEDULE)
     VALUES ('TH'||THCODE_SEQ.NEXTVAL, '돌고래 쇼', '위험에 빠진 딩딩이를 구하러 가는 코코의 모험!', 1, '60'||'분', '익스트림 존', 40, 7000, 'theater.png', 0);
@@ -66,7 +66,10 @@ SELECT * FROM THEATER
     WHERE thNAME = '돌고래 쇼';
 
 -- 4. 공연 삭제
-DELETE THEATER WHERE thCode = 'TH1';
+DELETE THEATER WHERE thCCODE = 'TH1';
+
+-- 5. 공연 좌석 확인
+SELECT THSEAT FROM THEATER WHERE thCODE = 'TH1';
 
 SELECT * FROM THEATER;
 --------------------------------- THEATER_RES ----------------------------------
@@ -80,9 +83,9 @@ UPDATE THEATER
     WHERE thCODE = 'TH1';
     --> 1-3. 예매 완료 시 구매 좌석 추가
 INSERT INTO THEATER_SEAT (SEATCODE, thrCODE)
-    VALUES ('A1', '230420TH11');
+    VALUES ('A1', '230502TH11');
 INSERT INTO THEATER_SEAT (SEATCODE, thrCODE)
-    VALUES ('A2', '230420TH11');
+    VALUES ('A2', '230502TH11');
     --> 1-4. 예매 완료된 좌석 막기
 SELECT SEATCODE 
     FROM THEATER_SEAT TS, THEATER_RES TR, THEATER T 

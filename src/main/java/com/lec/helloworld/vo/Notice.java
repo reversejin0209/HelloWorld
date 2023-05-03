@@ -30,4 +30,7 @@ public class Notice {
 	private int startRow;
 	private int endRow;
 	
+	// pre * next
+	private int prewrite;
+	private int nextwrite;
 }

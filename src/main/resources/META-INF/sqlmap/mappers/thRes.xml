@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lec.helloworld.dao.ThResDao">
+	<resultMap type="ThRes" id="ThResResult">
+		<result property="thrcode" column="thrcode"/>
+		<result property="mid" column="mid"/>
+		<result property="thcode" column="thcode"/>
+		<result property="thrcnt" column="thrcnt"/>
+		<result property="thrreview" column="thrreview"/>
+		<result property="thrtotprice" column="thrtotprice"/>
+		<result property="thrdate" column="thrdate"/>
+		<result property="thname" column="thname"/>
+		<result property="thcontent" column="thcontent"/>
+		<result property="thtime" column="thtime"/>
+		<result property="thloc" column="thloc"/>
+		<result property="thprice" column="thprice"/>
+		<result property="seatcode" column="seatcode"/>
+	</resultMap>
+	
+	<select id="thResInsert" parameterType="ThRes" resultType="int">
+		INSERT INTO THEATER_RES (thrCODE, mID, thCODE, thrCNT, thrORDERDATE, thrREVIEW, thrTOTPRICE, thrDATE)
+    VALUES (TO_CHAR(SYSDATE, 'YYMMDD')||#{thcode}||THRCODE_SEQ.NEXTVAL, #{mid}, #{thcode}, #{thrcnt}, SYSDATE, 0, #{thrtotprice}, SYSDATE)
+	</select>
+	
+</mapper>

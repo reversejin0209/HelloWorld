@@ -1,0 +1,73 @@
+@charset "UTF-8";
+* {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	text-decoration: none;
+}
+
+#wrap {
+	text-align: center;
+}
+
+.thResInsert{
+width: 100%;
+height: 100%;
+padding: 100px 0;
+background-color: #efefef;
+}
+
+.thResInsert_inner{
+	width: 600px;
+	border: 1px solid #a0a0a0;
+	border-radius: 10px;
+	margin: 0 auto; 
+	background-color: #ffffff; 
+}
+
+/* stage_Box */
+.stage_Box {
+	width: 300px;
+	margin: 80px auto;
+	height: 30px;
+	line-height: 30px;
+	background: repeating-linear-gradient(45deg, #444, #444 5px, #888 0, #888 10px);
+	color: white;
+}
+
+/* 좌석 */
+.seat_Box {
+	text-align: center;
+	height: 150px;
+}
+
+.small_font {
+	margin-right: 15px;
+	font-size: 13px;
+	color: gray;
+}
+
+.seat_Num{
+	/* margin: 2px; */
+}
+
+/* select_Seat */
+.select_Seat {
+	height: 100px;
+	text-align: center;
+}
+
+/* submit */
+.submit_Button {
+	text-align: right;
+	border-top: 1px solid gray;
+}
+
+.submit_Button input {
+	width: 100px;
+	height: 50px;
+	line-height: 50px;
+	cursor: pointer;
+	background-color: white;
+	border: 1px solid gray;
+}

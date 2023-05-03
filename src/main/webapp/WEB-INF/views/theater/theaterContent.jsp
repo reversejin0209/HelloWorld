@@ -9,73 +9,94 @@
 <meta charset="UTF-8">
 <title>Hello World</title>
 <link href="${conPath }/css/style.css" rel="stylesheet">
-<link href="${conPath }/css/theater/theater.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<link href="${conPath }/css/theater/theaterContent.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script>
-	$(document).ready(function() {
-
-	});
+	
 </script>
 </head>
 <body>
 	<jsp:include page="../main/header.jsp" />
-	<div id="wrap">
-		<h1 class="center">${thcon.thname }</h1>
-		
-		<!-- 게시판 -->
-		<table class="content_table">
-			<tr>
-				<th>상담구분</th>
-				<th class="title">상담제목</th>
-				<th>작성자</th>
-			</tr>
-			<tr>
-				<td>${qna.qacat }</td>
-				<td class="title">${qna.qatitle }</td>
-				<td>${qna.mid }</td>
-			</tr>
-			<tr>
-				<td colspan="3" class="content"><span class="qes">Q.</span>${qna.qacontent }</td>
-			</tr>
-			<!-- 첨부 이미지가 있는 경우 출력 -->
-			<c:if test="${not empty review.rphoto}">
-				<tr>
-					<td class="center" colspan="4"><img alt="첨부이미지" width="200px"
-						src="${conPath }/reviewBoardUp/${review.rphoto}"></td>
-				</tr>
-			</c:if>
-			<tr>
-				<td>작성일</td>
-				<td colspan="2"><fmt:formatDate value="${qna.qardate }" type="date"
-						pattern="yyyy-MM-dd HH:mm:ss" /></td>
-			</tr>
-			<tr>
-				<td>IP</td>
-				<td colspan="2">${qna.qaip }</td>
-			</tr>
-			
-			<!-- 회원: 자신이 작성한 글만 수정 및 삭제 가능 -->
-			<c:if test="${member.mid eq qna.mid}">
-				<tr>
-					<td colspan="3" class="btnBox">
-						<input type="button" onclick="location.href='${conPath}/qnaBoard/qBoardModify.do?qanum=${qna.qanum }&pageNum=${param.pageNum }'" value="수정" class="btn_submit">
-						<input type="button" onclick="location.href='${conPath}/qnaBoard/qBoardList.do?pageNum=${param.pageNum }&schItem=${param.schItem}&schWord=${param.schWord}'" value="목록" class="btn_submit">
-					</td>
-				</tr>
-			</c:if>
-			<!-- 관리자 계정: 답글 및 삭제 가능 -->
-		</table>
-		
-		<div class="notice_box">
-			<h3>1:1 문의내역</h3>
-			<br>
-			<p>
-				<b>상담시간</b>
-				<br>
-				평일(월 ~ 금) 10:00 ~ 17:00
-				<br>
-				(Off-time 12:30 ~ 13:30, 토/일/공휴일 휴무)
-			</p>
+		<div id="wrap">
+		<div class="ticketContent_wrap">
+
+			<!-- 좌측: 티켓 상세설명 -->
+			<div class="ticket_content">
+				<table class="ticketContent_table">
+					<tr>
+						<td colspan="3"><span class="flag_purple">공연 예매권</span> <br>
+							<br>
+							<h1>${thcon.thname }</h1>
+							<p>${thcon.thcontent }</p></td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<img class="theaterimg" src="${conPath }/theaterFileUp/${thcon.thimg1 }" alt="공연 이미지">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							요금 안내
+						</td>
+						<td>
+							R석
+						</td>
+						<td>
+							${thcon.thprice }
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3"><textarea readonly="readonly">${thcon.thcontent }</textarea></td>
+					</tr>
+
+					<!-- 공통 규정 안내 -->
+					<tr>
+						<td colspan="3">
+							<textarea readonly="readonly">
+[기본정보]
+※ 방문일지정 예약상품으로 지정한 날짜에 이용 가능합니다.
+
+※ 기침 등 증세가 있거나, 2주내 확진자와 접촉한 경우가 있는 고객은 마스크를 꼭 착용해 주시고,
+자율적인 방역 수칙 실천을 부탁드립니다.
+입장 전 에버랜드 APP에 이용권 등록 바랍니다. APP 미등록 시 일부 시설의 예약/탑승이 제한될 수 있습니다.
+
+[취소 및 환불 규정]
+* 유효기간 내 미사용티켓 100% 환불가능
+* 유효기간 종료 후 미사용티켓 100% 환불
+* 사용한 티켓은 환불 불가능합니다.</textarea>
+						</td>
+					</tr>
+				</table>
+			</div>
+
+			<!-- 우측: 주문 박스 -->
+			<div class="order_box">
+				<div class="order_box_top">
+					<h4>예매 날짜</h4>
+						<div class="flex_box">
+							<span>${param.schDate }</span>
+						</div>
+					<hr>
+					<h4>회차</h4>
+						<div class="flex_box">
+							<span class="thPartButton">1부 13:00</span>
+							<span class="thPartButton">2부 17:00</span>
+						</div>
+					<hr>
+					<h4>남은 좌석</h4>
+					<div class="flex_box">
+						<span>R석</span> <span style="font-size: 30px;">${param.thseat }</span>
+					</div>
+				</div>
+				<!-- div class="order_box" -->
+				<div class="order_box_bottom">
+					<div class="resButton" onclick="location.href='${conPath }/thRes/thReserve.do?thrdate=${param.schDate }&thcode=${param.thcode }'">
+						예약하기
+					</div>
+				</div>
+			</div>
+
 		</div>
 	</div>
 	<jsp:include page="../main/footer.jsp" />

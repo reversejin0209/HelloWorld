@@ -45,12 +45,12 @@ public class AdminController {
 
 	@RequestMapping(value = "allView", method=RequestMethod.GET)
 	public String memberList(Member member, String pageNum, Model model) {
-		model.addAttribute("admDto", adminService.memberList(pageNum, member, model));
-		return "admin/allview";
+		model.addAttribute("memberList", adminService.memberList(pageNum, member, model));
+		return "admin/allView";
 	}
 	@RequestMapping(value = "deleteMember", method=RequestMethod.GET)
 	public String deleteMember(String mid, Model model) {
 		model.addAttribute("dtMember", adminService.deleteMember(mid, model));
-		return "admin/allView";
+		return "main/main";
 	}
 }

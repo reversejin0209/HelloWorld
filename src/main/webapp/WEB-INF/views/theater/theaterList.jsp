@@ -12,10 +12,10 @@
 	<link href="${conPath }/css/theater/theater.css" rel="stylesheet">
 	<link href="${conPath }/css/style.css" rel="stylesheet">
 	<style type="text/css">
-		#theaterList_background {
-			background-image: url(${conPath}/img/theater_main1.jpg);
+		#head_background {
+			background-image: url('${conPath}/img/head_background_03.png');
 		}
-</style>
+	</style>
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -52,24 +52,24 @@
 	<fmt:formatDate value="${nowDate }" pattern="yyyy-MM-dd" var="today" />
 	<jsp:include page="../main/header.jsp" />
 	
-	<div id="theaterList_background">
-		<h2 class="cWhite">공연</h2>
-		<p class="h2Txt cWhite">
-			언제나 새롭고 즐거운 경험을 주는 Helloworld 공연을 소개합니다!
-		</p>
+	<!-- 상단 배경 이미지 -->
+	<div id="head_background">
+		<div class="head_background_inner">
+			<h1>공연</h1>
+			<p>우리의 추억이 더욱 특별해지는 꿈과 환상의 나라 헬로월드로 오세요!</p>
+		</div>
 	</div>
 	
 	<div id="wrap">
 		<div class="search_box">
-			<form action="${conPath }/theater/theaterList.do" method="get"
-				class="right">
+			<form action="${conPath }/theater/theaterList.do" method="get" class="right">
 				<div class="search">
 					<input type="hidden" name="thschedule" value="2">
-					<c:if test="${param.schWord != '' }">
-						<input type="text" name="schWord" id="datepicker" readonly="readonly" value="${param.schWord }">
+					<c:if test="${param.schDate != '' }">
+						<input type="text" name="schDate" id="datepicker" readonly="readonly" value="${param.schDate }">
 					</c:if>
-					<c:if test="${param.schWord == '' }">
-						<input type="text" name="schWord" id="datepicker" readonly="readonly" value="${today }">
+					<c:if test="${param.schDate == '' }">
+						<input type="text" name="schDate" id="datepicker" readonly="readonly" value="${today }">
 					</c:if>
 					<button id="schButton">
 						<img alt="검색 아이콘" src="${conPath }/img/search_FILL0_wght400_GRAD0_opsz24.svg">
@@ -77,7 +77,7 @@
 				</div>
 			</form>
 		</div>
-		
+		<c:set var="schDate" value="${param.schDate eq '' ? today:param.schDate}"/>
 		<table class="list_table"> 
 			<tr>
 				<th colspan="4">공연정보</th>
@@ -99,7 +99,9 @@
 						<td class="left" colspan="3">
 							<ul>
 								<li class="thTitle">
-									<a href="${conPath}/theater/theaterContent.do?thname=${theater.thname }" class="cBlack">${theater.thname }</a>
+									<a href="${conPath}/theater/theaterContent.do?thname=${theater.thname }
+									&schDate=${param.schDate eq '' ? today:param.schDate }&thcode=${theater.thcode }&thseat=${theater.thseat }" 
+									class="black">${theater.thname }</a>
 								</li>
 								<li>
 									${theater.thcontent }
@@ -112,7 +114,9 @@
 						<td colspan="2">
 							13:00 [1회차] <br>
 							17:00 [2회차] <br>
-							<button onclick="location.href='${conPath}/theater/theaterContent.do?thname=${theater.thname }'">공연 상세보기</button>
+							<button onclick="location.href='${conPath}/theater/theaterContent.do?thname=${theater.thname }&schDate=${param.schDate eq '' ? today:param.schDate }&thcode=${theater.thcode }&thseat=${theater.thseat }'">
+								공연 상세보기
+							</button>
 						</td>
 					</tr>
 				</c:forEach>
