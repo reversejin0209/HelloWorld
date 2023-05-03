@@ -17,7 +17,7 @@ SELECT * FROM TICKET
 -- id = tOrderReserve
 -- 주문 추가
 INSERT INTO TICKET_RES (TRCODE, MID, TRTOTPRICE)
-     VALUES ( TO_CHAR(SYSDATE, 'YYYYMMDD') || LPAD(TICKET_RES_SEQ.NEXTVAL, 4, 0)
+     VALUES ( TO_CHAR(SYSDATE, 'YYMMDD') || LPAD(TICKET_RES_SEQ.NEXTVAL, 4, 0)
             , 'aaa'
             , 198000);
             
@@ -26,7 +26,7 @@ select * from ticket_res;
 -- 예약한 티켓 정보 추가
 INSERT INTO TICKET_RESDETAIL (TRDCODE, TRCODE, TRDNAME, TRDTYPE ,TRDCNT, TRDDATE)
      VALUES (TICKET_RESDETAIL_SEQ.NEXTVAL
-           , TO_CHAR(SYSDATE, 'YYYYMMDD') || LPAD(TICKET_RES_SEQ.CURRVAL, 4, 0)
+           , TO_CHAR(SYSDATE, 'YYMMDD') || LPAD(TICKET_RES_SEQ.CURRVAL, 4, 0)
            , '헬로월드 종일권'
            , '소인'
            , 2
@@ -61,20 +61,37 @@ SELECT * FROM (SELECT ROWNUM RN, RES.*
                         WHERE MID = 'aaa') RES)
         WHERE RN BETWEEN 1 AND 4;
 
+SELECT * FROM (SELECT ROWNUM RN, RES.* 
+                 FROM (SELECT DISTINCT TR.*, TRDNAME
+                         FROM TICKET_RES TR, TICKET_RESDETAIL TRD
+                        WHERE TR.TRCODE = TRD.TRCODE
+                          AND MID = 'aaa') RES)
+        WHERE RN BETWEEN 1 AND 10;
+   
+SELECT DISTINCT TR.*, TRDNAME
+  FROM TICKET_RES TR, TICKET_RESDETAIL TRD
+ WHERE TR.TRCODE = TRD.TRCODE
+   AND MID = 'aaa';
+
     -- id = tMemberOrderListTotCnt
     -- 나의 주문 LIST(회원): 총 수량
     SELECT COUNT(*) FROM TICKET_RES WHERE MID = 'aaa';
 
+-- 주문 정보 가져오기
+-- id = getOrderDetail
+SELECT * FROM TICKET_RES
+        WHERE TRCODE = '2305030003';
+
 -- id = getTicketDetail     
 -- 주문 내역 상세보기
 SELECT * FROM TICKET_RESDETAIL
-        WHERE TRCODE = '202305020030';
+        WHERE TRCODE = '2305030003';
 
 -- id = tReserveCancel           
 -- 주문 취소
 UPDATE TICKET_RES 
    SET TRRESULT = 1
- WHERE TRCODE = '202305020001';
+ WHERE TRCODE = '2305030003';
 
 -- id = usedTicket           
 -- 사용 티켓으로 변경
@@ -245,6 +262,8 @@ DELETE FROM QNABOARD
 DELETE FROM QNABOARD
  WHERE QAGROUP = 2;
 
+
+rollback;
 --------------------------------------------------------------------------------
 SELECT * FROM TICKET;
 SELECT * FROM TICKET_RES;

@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+.background-color {
+	background-color: #fafafa;
+}
+
 /* myPage */
 #myPage {
 	width: 1140px;
@@ -9,15 +13,30 @@
 }
 
 /* left: myContent */
-#myPage .myContent ul{
+#myPage .myContent {
+	width: 240px;
+	background-color: #ffffff;
+	border-radius: 14px;
+	padding-top: 30px;
+	padding-left: 40px;
+	box-sizing: border-box;
+}
+
+#myPage .myContent ul {
 	margin: 20px 0;
 }
 
-#myPage .myContent ul li{
+#myPage .myContent ul li {
 	margin: 10px 0;
 }
 
-#myPage .myContent ul li a{
+/* 이름 */
+#myPage .myContent ul>li>h1>a {
+	color: #000000;
+}
+
+/* 소메뉴 */
+#myPage .myContent ul>li>a {
 	margin: 10px 0;
 	color: #838383;
 }
@@ -27,28 +46,27 @@
 	width: 860px;
 }
 
-#myPage .myPage_right .info_box{
+#myPage .myPage_right .info_box {
 	width: 100%;
-	height: 170px;
-	background-color: #fafafa;
+	height: 130px;
+	background-color: #b596ff;
+	color: #ffffff;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	border-top: 3px solid #8000ff;
-	border-bottom: 3px solid #8000ff;
 	padding: 30px;
+	border-radius: 14px;
 	box-sizing: border-box;
 }
 
-#myPage .myPage_right .info_box>div{
-	width: 370px;
-	padding: 0 30px;
-	height: 100%;
-	color: #353535;
+#myPage .myPage_right .info_box>.info_box_left {
+	width: 246px;
 }
 
-#myPage .myPage_right .info_box>.info_box_left{
-	border-right: 1px solid #dedede;
+#myPage .myPage_right .info_box>.info_box_right {
+	width: 246px;
+	padding-left: 30px;
+	border-left: 1px solid #dedede;
 }
 
 /* item_box */
@@ -60,14 +78,49 @@
 	justify-content: space-between;
 	align-content: space-between;
 	margin: 30px 0;
+	border-radius: 14px;
 }
 
 #myPage .myPage_right .item_box .sub_item {
-	width: 400px;
+	width: 415px;
 	height: 255px;
-	background-color: #efefef;
+	background-color: #ffffff;
 	border-radius: 14px;
 	box-sizing: border-box;
 	padding: 40px 30px;
 	overflow: hidden;
+}
+
+.myPage_right_white {
+	width: 860px;
+	background-color: #ffffff;
+	border-radius: 14px;
+	padding: 40px;
+	box-sizing: border-box;
+}
+
+/* 마이페이지 테이블 */
+.myPage_table {
+	width: 100%;
+	margin: 10px auto;
+	border-collapse: collapse;
+}
+
+.myPage_table tr {
+	padding: 30px 0;
+}
+
+.myPage_table td {
+	font-size: 16px;
+	color: #4d4d4d;
+	border-bottom: 1px solid #bfbfbf;
+	padding: 30px;
+}
+
+.myPage_table td>textarea {
+	width: 100%;
+	height: 170px;
+	border: 0px;
+	outline: none;
+	box-sizing: border-box;
 }

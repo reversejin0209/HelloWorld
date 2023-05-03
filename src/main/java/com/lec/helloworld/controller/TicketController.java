@@ -24,7 +24,7 @@ public class TicketController {
 	@RequestMapping(value = "ticketContent", method = RequestMethod.GET)
 	public String ticketContent(String tname, Model model) {
 		model.addAttribute("ticket", tService.getTicket(tname));
-		model.addAttribute("ticketType", tService.ticketContent(tname));
+		model.addAttribute("ticketList", tService.ticketContent(tname));
 		return "ticket/ticketContent";
 	}
 }

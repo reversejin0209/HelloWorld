@@ -12,11 +12,14 @@ import lombok.NoArgsConstructor;
 public class TicketRes {
 
 	// ticketRes
-	private String trcode;
+	private long trcode;
 	private String mid;
 	private Timestamp trorderDate;
 	private int trtotPrice;
-	private boolean trresult;
+	private int trresult;
+	
+	// ticketResDetail
+	private String trdname;
 	
 	// paging
 	private int startRow;

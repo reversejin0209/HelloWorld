@@ -5,7 +5,7 @@ import javax.servlet.http.HttpSession;
 import com.lec.helloworld.vo.Member;
 
 public interface MemberService {
-	public Member memberGetDetail(String mid);
+	public Member memberGetDetail(HttpSession httpSession);
 	public String loginChk(String mid, String mpw, HttpSession httpSession);
 	public void logout(HttpSession httpSession);
 	public int memberJoin(Member member, HttpSession httpSession);

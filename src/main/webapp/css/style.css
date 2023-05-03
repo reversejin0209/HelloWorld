@@ -25,8 +25,8 @@
 div#wrap {
 	width: 1140px;
 	min-height: 400px;
-	margin: 50px auto;
-	padding: 0;
+	margin: 0 auto;
+	padding: 50px;
 	/* 컨테이너가 세로로 배치 */
 	display: flex;
 	justify-content: center;

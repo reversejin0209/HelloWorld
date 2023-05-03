@@ -13,8 +13,8 @@ public interface TicketResDetailDao {
 	// 주문 상세 목록 추가
 	public int addTOrderDetail(TicketResDetail ticketResDetail);
 	
-	// 주문 상세 목록 조회
-	public List<TicketRes> getTOrderDetail(int trcode);
+	// 주문 내역 조회
+	public List<TicketRes> getTOrderDetail(long trcode);
 	
 	// 관리자: 입장 시 사용 티켓으로 변경
 	public int usedTicket(int trdcode);

@@ -32,7 +32,6 @@
 
 	<jsp:include page="../main/header.jsp" />
 	<div id="wrap">
-		${member.mid }
 		<form action="${conPath }/qnaBoard/qBoardWrite.do" method="post">
 			<table class="content_table">
 				<tr>
