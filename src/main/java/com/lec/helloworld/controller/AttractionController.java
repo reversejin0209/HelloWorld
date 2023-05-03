@@ -52,7 +52,7 @@ public class AttractionController {
 	
 	@RequestMapping(value = "modifyAtc", method = RequestMethod.GET)
 	public String modifyAtc(int atcode, Model model) {
-		model.addAttribute("updateAtc", attractionService.detailAtc(atcode));
+		model.addAttribute("modifyAtc", attractionService.detailAtc(atcode));
 		return "attraction/modifyAtc";
 	}
 	

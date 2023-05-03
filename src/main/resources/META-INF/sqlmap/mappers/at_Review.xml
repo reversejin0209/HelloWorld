@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lec.helloworld.dao.At_ReviewDao">
+	<resultMap type="At_Review" id="At_ReviewResult">
+		<result property="arvnum" column="arvnum"/>
+		<result property="arvrdate" column="arvnum"/>
+		<result property="arvcontent" column="arvnum"/>
+		<result property="arvrating" column="arvnum"/>
+		<result property="arvhit" column="arvnum"/>
+		<result property="arvip" column="arvip"/>
+		<result property="atcode" column="arvnum"/>
+		<result property="mid" column="arvnum"/>
+		<result property="writer" column="writer"/>
+	</resultMap>
+<select id="atRevList" parameterType="At_Review" resultMap="At_ReviewResult">
+	<!-- 전체출력 -->
+	<if test="schItem == null or schItem ==''">
+		SELECT M.*,
+		    (SELECT MNAME FROM MEMBER WHERE M.MID = MID)MNAME
+		    FROM (SELECT ROWNUM RN, B.*
+		        FROM (SELECT * FROM AT_REVIEW ORDER BY ARVNUM DESC) B)M
+		    WHERE ATCODE = #{atcode} AND RN BETWEEN #{startRow} AND #{endRow}
+	</if>
+	<if test="schItem == 'arvrating'">
+		SELECT M.*,
+		    (SELECT MNAME FROM MEMBER WHERE M.MID = MID)MNAME
+		    FROM (SELECT ROWNUM RN, B.*
+		        FROM (SELECT * FROM AT_REVIEW ORDER BY ARVRATING DESC) B)M
+		    WHERE ATCODE = #{atcode} AND RN BETWEEN #{startRow} AND #{endRow}
+	</if>
+	<if test="schItem == 'arvhit'">
+		
+	</if>
+</select>
+<select id="totCntatRev">
+</select>
+<update id="hitUpatRev">
+</update>
+<select id="atRevContent">
+
+</select>
+<insert id="atRevWrite">
+
+</insert>
+<delete id="atRevDelete">
+
+</delete>
+</mapper>

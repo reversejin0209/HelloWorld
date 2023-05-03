@@ -26,7 +26,6 @@ public class Attraction {
 	private double atlng;
 	private String atyoutube;
 	private int atnop;
-	private String adid;
 	private String zname;
 	private String zplace;
 	

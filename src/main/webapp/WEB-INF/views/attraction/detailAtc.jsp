@@ -38,7 +38,6 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ec6aa5d1142e93ea1eaaa8d7ee83b508&libraries=services"></script>
 </head>
 <body>
-	<input type="text" value="${detailAtc }"> 
 	<jsp:include page="../main/header.jsp" />
 	<!-- content 시작 -->
 	<div class="content">
@@ -130,7 +129,7 @@
 					onclick="location.href='${conPath}/attraction/listAtc.do?method=ListAtc&schItem=&schWord='">목록</button>
 				<c:if test="${not empty admin }">
 					<button class="btn_purple" style="cursor: pointer;"
-						onclick="location.href='${conPath}/attraction/modifyAtc.do?atcode=${detailAtc.atcode }'">수정</button>
+						onclick="location.href='${conPath}/attraction/modifyAtc.do?atcode=${detailAtc.atcode }&pageNum=${param.pageNum }'">수정</button>
 				</c:if>
 			</div>
 		</div>

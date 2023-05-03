@@ -17,7 +17,6 @@
 		<result property="atlng" column="atlng"/>
 		<result property="atyoutube" column="atyoutube"/>
 		<result property="atnop" column="atnop"/>
-		<result property="adid" column="adid"/>
 		<result property="zname" column="zname"/>
 		<result property="zplace" column="zplace"/>
 	</resultMap>
@@ -75,12 +74,10 @@
 	</select>
 
 	<!-- 기구 등록 -->
-	<insert id="insertAtc" parameterType="Attraction">>
-		INSERT INTO ATTRACTION 
-			(ATCODE, ATNAME, ATCONTENT, ATADDR, ATPOST, ATIMAGE, ATOLD
-			, ATHEIGHT, ATWEIGHT, ATLAT, ATLNG, ATYOUTUBE, ATNOP, ADID, ZNAME)
-				VALUES (ATTRACTION_SEQ.NEXTVAL
-					, #{atname}
+	<insert id="insertAtc" parameterType="Attraction">
+		INSERT INTO ATTRACTION (atCODE, atNAME, atCONTENT, atADDR, ATPOST, atIMAGE, atOLD, atHEIGHT, atWEIGHT, atLAT, atLNG, atYOUTUBE, atNOP, zNAME )
+    		VALUES (ATTRACTION_SEQ.NEXTVAL
+    				, #{atname}
 					, #{atcontent}
 					, #{ataddr}
 					, #{atpost}
@@ -92,22 +89,26 @@
 					, #{atlng}
 					, #{atyoutube}
 					, #{atnop}
-					, #{adid}
-					, #{zname}) 
+					, #{zname})
 	</insert>
-
+	
 	<!-- 기구 수정 -->
-	<update id="modifyAtc" parameterType="Attraction">
-		UPDATE ATTRACTION SET
-		    atNAME = #{atname},
-		    atCONTENT = #{atcontent},
-		    atADDR = #{ataddr},
-		    atOLD = #{atold},
-		    atHEIGHT = #{atheight},
-		    atLAT = #{atlat},
-		    atLNG = #{atlng},
-		    zNAME = #{zname}
-	    	WHERE atCODE = #{atcode}
+	<update id="modifyAtc" parameterType="Attraction" >
+		UPDATE ATTRACTION
+		    SET atNAME = #{atname},
+		        atCONTENT = #{atcontent},
+		        atADDR = #{ataddr},
+		        atPOST = #{atpost},
+		        atIMAGE = #{atimage},
+		        atOLD = #{atold},
+		        atHEIGHT = #{atheight},
+		        atWEIGHT = #{atweight},
+		        atLAT = #{atlat} ,
+		        atLNG = #{atlng} ,
+		        atYOUTUBE = #{atyoutube},
+		        atNOP = #{atnop},
+		        zname = #{zname}    
+		    WHERE atCODE = #{atcode}
 	</update>
 
 <!-- 기구 삭제 -->

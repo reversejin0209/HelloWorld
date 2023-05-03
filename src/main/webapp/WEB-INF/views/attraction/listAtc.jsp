@@ -13,7 +13,7 @@
 #atcList_background {
 	background-image: url(${conPath}/img/atcList_background.png);
 }
-</style>
+</style>	
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
@@ -85,8 +85,8 @@
 								<tr></tr>
 							</c:if>
 							<td>
-								<a href="${conPath }/attraction/detailAtc.do?atcode=${list.atcode}&pageNum=${paging.currentPage}"> <img
-									src="${conPath }/attractionImg/${list.atimage}" style="width: 200px; height: 282px;"> <br> ${list.atname }<br> ${list.zname } <br>
+								<a href="${conPath }/attraction/detailAtc.do?atcode=${list.atcode}&pageNum=${paging.currentPage}"> 
+								<img src="${conPath }/attractionImg/${list.atimage}" style="width: 200px; height: 282px;"> <br> ${list.atname }<br> ${list.zname } <br>
 								</a>
 							</td>
 						</c:forEach>
