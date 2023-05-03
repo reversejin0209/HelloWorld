@@ -10,10 +10,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Attraction {
+	
+	// Attraction
 	private int atcode;
 	private String atname;
 	private String atcontent;
 	private String ataddr;
+	private String atpost;
 	private String atimage;
 	private Date atrdate;
 	private int atold;
@@ -25,15 +28,20 @@ public class Attraction {
 	private int atnop;
 	private String adid;
 	private String zname;
+	private String zplace;
 	
 	// paging
 	private int startRow;
 	private int endRow;
 	
-	// admin
-	private String writer;
-	
-	// search
+	// search (item & word)
 	private String schItem;
-	private String schWord;
+	private String schItemZ;
+	private String schItemO;
+	private String schItemH;
+	private String schItemA;
+	private String schZname;
+	private String schOld;
+	private String scHeight;
+	private String schAtnop;
 }

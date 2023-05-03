@@ -8,10 +8,15 @@ import com.lec.helloworld.vo.Notice;
 
 @Mapper
 public interface NoticeDao {
-	public int totCntNotice();
+	
+	public List<Notice> noticeMain(Notice notice);
 	public List<Notice> noticeList(Notice notice);
-	public int noticeWriteView(Notice notice);
+	public int totCntNotice(Notice notice);
+	public int noticeWrite(Notice notice);
 	public Notice noticeContent(int nno);
-	public int noticeModifyView(Notice notice);
+	public int noticeModify(Notice notice);
 	public int noticeDelete(int nno);
+	public int noticeNext(int nno);
+	public int noticePre(int nno);
+	
 }

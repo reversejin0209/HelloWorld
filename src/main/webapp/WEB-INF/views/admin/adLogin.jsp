@@ -24,7 +24,7 @@
 			<table>
 				<caption>
 					<img alt="헬로월드 로고" src="${conPath }/img/logo.png" onclick="location.href='${conPath}/main.do'" style="size: 1.4em;"><br>
-					<span>관리자 하이</span>
+					<span>관리자님 오늘도 좋은 하루 보내세요</span>
 				</caption>
 				<tr>
 					<td>
