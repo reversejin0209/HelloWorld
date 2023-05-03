@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 
 import com.lec.helloworld.dao.TicketResDao;
 import com.lec.helloworld.dao.TicketResDetailDao;
+import com.lec.helloworld.util.Paging;
 import com.lec.helloworld.vo.Member;
 import com.lec.helloworld.vo.TicketRes;
 import com.lec.helloworld.vo.TicketResDetail;
@@ -51,27 +52,46 @@ public class TicketResServiceImpl implements TicketResService {
 	}
 
 	@Override
-	public List<TicketRes> tOrderList(TicketRes ticketRes) {
+	public List<TicketRes> tOrderList(HttpSession session, TicketRes ticketRes, String pageNum, Model model) {
+		Member member = (Member)session.getAttribute("member");
+		ticketRes.setMid(member.getMid());
+		
 		// 주문 목록 출력
-		return null;
+		Paging paging = new Paging(ticketResDao.tOrderTotCnt(ticketRes), pageNum, 10, 10);
+		ticketRes.setStartRow(paging.getStartRow());
+		ticketRes.setEndRow(paging.getEndRow());
+		model.addAttribute("paging", paging);
+		return ticketResDao.tOrderList(ticketRes);
+	}
+
+
+	@Override
+	public TicketRes getOrderDetail(long trcode) {
+		// 주문 정보 조회
+		return ticketResDao.getOrderDetail(trcode);
+	}
+	
+	@Override
+	public List<TicketRes> getTOrderDetail(long trcode) {
+		// 주문정보 > 주문 내역 조회
+		return ticketResDetailDao.getTOrderDetail(trcode);
 	}
 
 	@Override
-	public List<TicketRes> getTOrderDetail(int trcode) {
-		// 주문 상세 목록
-		return null;
-	}
-
-	@Override
-	public int tOrderCancel(int trcode) {
+	public void tOrderCancel(long trcode, Model model) {
 		// 주문 취소
-		return 0;
+		try {
+			ticketResDao.tOrderCancel(trcode);
+			model.addAttribute("successMsg", "주문 취소가 완료되었습니다.");
+		} catch (Exception e) {
+			model.addAttribute("failMsg", "주문 취소가 실패했습니다. 1:1 게시판에 문의해 주세요");
+		}
 	}
 
 	@Override
 	public int usedTicket(int trdcode) {
 		// 사용 티켓으로 변경
-		return 0;
+		return ticketResDetailDao.usedTicket(trdcode);
 	}
 
 

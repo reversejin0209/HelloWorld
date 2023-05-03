@@ -17,5 +17,5 @@ public class TicketResDetail {
 	private String trdtype;
 	private int trdcnt;
 	private Date trddate;
-	private boolean trdresult;
+	private int trdresult;
 }

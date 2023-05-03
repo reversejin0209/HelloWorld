@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="conPath" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html>
@@ -11,37 +11,40 @@
 <link href="${conPath }/css/ticket/ticket.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
-	$(document).ready(
-		function() {
-			$('.qtyplus').click(
-				function() {
-					fieldName = $(this).attr('field');
-					/* alert(fieldName); */
-					var currentVal = parseInt($(
-						'input[id=' + fieldName + ']').val());
-					if (!isNaN(currentVal)) {
-						$('input[id=' + fieldName + ']').val(
-								currentVal + 1);
-					} else {
-						$('input[id=' + fieldName + ']').val(0);
-					}
-					
-				});
+	$(document).ready(function() {
 
-			$(".qtyminus").click(
-				function() {
-					fieldName = $(this).attr('field');
-					/* alert(fieldName); */
-					var currentVal = parseInt($(
-							'input[id=' + fieldName + ']').val());
-					if (!isNaN(currentVal) && currentVal > 0) {
-						$('input[id=' + fieldName + ']').val(
-								currentVal - 1);
-					} else {
-						$('input[id=' + fieldName + ']').val(0);
-					}
-				});
+		// 총 금액, 총 수량
+		$('input[type="number"]').change(function() {
+			num = $(this).attr('class');
+			tprice = $('.tprice_'+num).val();
+			
+			var sum = 0;
+			var totcnt =0;
+			
+			$('input[type="number"]').each(function(idx, data) {
+				sum += ($(this).val() * 1 * tprice);
+				totcnt += ($(this).val() * 1);
+			});
+
+			$('input[name="trtotPrice"]').val(sum);
+			$('.totcnt').html(comma(totcnt));
+			$('.totprice').html(comma(sum));
 		});
+
+		// 세자리 수마다 콤마 
+		function comma(x) {
+			x = x + '';
+			var tempStr = '';
+			var len = x.length;
+			for (var i = 0; i < len; i++) {
+				tempStr += x[i];
+				if (((len - i - 1) % 3 == 0) && (i != (len - 1))) {
+					tempStr += ",";
+				}
+			}
+			return tempStr;
+		}
+	});
 </script>
 </head>
 <body>
@@ -54,8 +57,7 @@
 				<%-- <img alt="티켓 이미지" src="${conPath }/img/${ticket.timg }"> --%>
 				<table class="ticketContent_table">
 					<tr>
-						<td colspan="3"><span class="flag_purple">헬로월드 이용권</span> <br>
-							<br>
+						<td colspan="3"><span class="flag_purple">헬로월드 이용권</span> <br> <br>
 							<h1>${ticket.tname }</h1>
 							<p>${ticket.tsub }</p></td>
 					</tr>
@@ -65,7 +67,7 @@
 								${ticket.tname} ${ticket.ttype }<br>
 							</c:forEach></td>
 						<td><c:forEach var="ticket" items="${ticketType }">
-								<b>${ticket.tprice }</b>
+								<fmt:formatNumber pattern="###,###" value="${ticket.tprice }" />원
 								<br>
 							</c:forEach></td>
 					</tr>
@@ -106,33 +108,39 @@
 			<!-- 우측: 주문 박스 -->
 			<div class="order_box">
 				<form action="${conPath }/ticketRes/tOrderReserve.do">
-				<input type="hidden" name="trdname" value="${ticket.tname }">
-				<div class="order_box_top">
-					<h4>예약옵션을 선택해 주세요.</h4>
-					<hr>
-					<h4>날짜선택</h4>
-					<input type="date" name="trddate">
-					<hr>
-					<h4>상품선택</h4>
-					<c:forEach var="ticket" items="${ticketType }">
-						<div class="flex_box">
-							<span>${ticket.tname} ${ticket.ttype } X ${ticket.tprice }(${ticket.tcode })</span>
-							<div class="count_control">
+					<input type="hidden" name="trdname" value="${ticket.tname }">
+					<div class="order_box_top">
+						<h4>예약옵션을 선택해 주세요.</h4>
+						<hr>
+						<h4>날짜선택</h4>
+						<input type="date" name="trddate" required="required">
+						<hr>
+						<h4>상품선택</h4>
+						<c:set var="trtotPrice" value="0" />
+						<!-- 티켓 종류 출력 -->
+						<c:set var="i" value="1" />
+						<c:forEach var="ticket" items="${ticketList }">
+							<div class="flex_box cnt_controller_${i }">
+								<p>${ticket.tname} ${ticket.ttype } X ${ticket.tprice }</p>
+								
 								<input type="hidden" name="trdtype" value="${ticket.ttype }">
-								<input type="button" value="-" class="btn_plus_minus qtyminus" field="${ticket.ttype }" /><input 
-									   type="text" class="count_control" id="${ticket.ttype }" name="trdcnt" value="0"><input 
-									   type="button" value="+" class="btn_plus_minus qtyplus" field="${ticket.ttype }" />
+								<input type="hidden" class="tprice_type${i }" value="${ticket.tprice }" readonly="readonly">
+								<input type="number" class="type${i }" name="trdcnt" min="0" value="0">
 							</div>
+							<c:set var="i" value="${i +1}" />
+						</c:forEach>
+
+						<!-- 총 금액 -->
+						<hr>
+						<h4>총 금액</h4>
+						<div class="flex_box">
+							<input type="hidden" name="trtotPrice" value="0">
+							
+							<span>총 <span class="totcnt">0</span> 매</span>
+							<span>총 <span class="totprice">0</span>원</span>
 						</div>
-					</c:forEach>
-					<hr>
-					<h4>합계</h4>
-					<div class="flex_box">
-						<span>총 0매</span> <span style="font-size: 30px;">0 원</span>
-						<input type="hidden" name="trtotprice" value="0">
+						<button class="btn_submit">예약하기</button>
 					</div>
-					<button class="btn_submit">예약하기</button>
-				</div>
 				</form>
 				<!-- div class="order_box" -->
 

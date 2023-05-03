@@ -13,16 +13,20 @@ public interface TicketResService {
 	// 주문 추가
 	public void ticketReserve(TicketRes ticketRes, String trdname, Date trddate, String[] trdtype, int[] trdcnt, HttpSession session, Model model);
 	
-	// 주문 목록 출력
-	public List<TicketRes> tOrderList(TicketRes ticketRes);
+	// 회원, 관리자: 주문 목록 출력
+	public List<TicketRes> tOrderList(HttpSession session, TicketRes ticketRes, String pageNum, Model model);
 	
-	// 주문 상세보기 목록 출력
-	public List<TicketRes> getTOrderDetail(int trcode);
+	// 주문 정보 조회
+	public TicketRes getOrderDetail(long trcode);
 	
-	// 주문 취소
-	public int tOrderCancel(int trcode);
+	// 주문 내역 조회
+	public List<TicketRes> getTOrderDetail(long trcode);
+	
+	// 회원: 주문 취소
+	public void tOrderCancel(long trcode, Model model);
 	
 	// 관리자: 입장 시 사용 티켓으로 변경
 	public int usedTicket(int trdcode);
+
 	
 }

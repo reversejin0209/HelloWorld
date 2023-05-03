@@ -19,8 +19,10 @@ public class MemberServiceImpl implements MemberService {
 	private JavaMailSender mailSender;
 	
 	@Override
-	public Member memberGetDetail(String mid) {
+	public Member memberGetDetail(HttpSession session) {
 		/* 회원 아이디로 회원 정보 가져오기 */
+		Member member = (Member)session.getAttribute("member");
+		String mid = member.getMid();
 		return memberDao.memberGetDetail(mid);
 	}
 

@@ -17,12 +17,15 @@ public interface TicketResDao {
 	public int tOrderReserve(TicketRes ticketRes);
 	
 	// 주문 조회
-	public List<TicketRes> tOrderList();
+	public List<TicketRes> tOrderList(TicketRes ticketRes);
 	
 	// 주문 총 수량
-	public int tOrderTotCnt(String mid);
+	public int tOrderTotCnt(TicketRes ticketRes);
+	
+	// 주문 정보 조회
+	public TicketRes getOrderDetail(long trcode);
 	
 	// 주문 취소
-	public int tOrderCancel(int trcode);
+	public int tOrderCancel(long trcode);
 	
 }
