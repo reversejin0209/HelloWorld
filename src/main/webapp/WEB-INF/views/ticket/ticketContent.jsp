@@ -110,12 +110,12 @@
 				<form action="${conPath }/ticketRes/tOrderReserve.do">
 					<input type="hidden" name="trdname" value="${ticket.tname }">
 					<div class="order_box_top">
-						<h4>예약옵션을 선택해 주세요.</h4>
+						<h2>예약옵션을 선택해 주세요.</h2>
 						<hr>
-						<h4>날짜선택</h4>
+						<h2>날짜선택</h2>
 						<input type="date" name="trddate" required="required">
 						<hr>
-						<h4>상품선택</h4>
+						<h2>상품선택</h2>
 						<c:set var="trtotPrice" value="0" />
 						<!-- 티켓 종류 출력 -->
 						<c:set var="i" value="1" />
@@ -132,12 +132,12 @@
 
 						<!-- 총 금액 -->
 						<hr>
-						<h4>총 금액</h4>
+						<h2>결제 예정 금액</h2>
 						<div class="flex_box">
 							<input type="hidden" name="trtotPrice" value="0">
 							
 							<span>총 <span class="totcnt">0</span> 매</span>
-							<span>총 <span class="totprice">0</span>원</span>
+							<span><span class="totprice big">0</span>원</span>
 						</div>
 						<button class="btn_submit">예약하기</button>
 					</div>

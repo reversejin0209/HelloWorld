@@ -100,29 +100,15 @@
 	border-radius: 8px;
 }
 
+.order_box_top>h2 {
+	margin-bottom: 10px;
+}
+
 .order_box_top>.flex_box {
 	display: flex;
 	justify-content: space-between;
 	margin: 10px 0;
-}
-
-/* 상품선택 숫자 */
-.count_control>.btn_plus_minus {
-	width: 36px;
-	height: 36px;
-	/* box-sizing: border-box; */
-	border: 1px solid #b596ff;
-}
-
-.btn_plus_minus.qtyminus{
-	background-color: #ffffff;
-	color: #b596ff;
-	
-}
-
-.btn_plus_minus.qtyplus{
-	background-color: #b596ff;
-	color: #ffffff;
+	line-height: 40px;
 }
 
 .count_control>.count_control {
