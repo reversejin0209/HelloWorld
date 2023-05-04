@@ -243,6 +243,7 @@
 		<div id="notice_box">
 		&nbsp;
 		</div>
+		<div class="margin"></div>
 	</div>
 	<jsp:include page="../main/footer.jsp" />
 </body>

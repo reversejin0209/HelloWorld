@@ -19,16 +19,15 @@
 </head>
 <body>
 	<jsp:include page="../main/header.jsp" />
-	<div id="wrap">
+	<div id="wrap_padding">
 		<h1 class="center">QnA 질문게시판</h1>
-		<div class="notice_box">
+		<div class="notice_box flex_wide">
 			<h3>1:1 문의내역</h3>
 			<br>
 			<p>
 				<b>상담시간</b>
 				<br>
 				평일(월 ~ 금) 10:00 ~ 17:00
-				<br>
 				(Off-time 12:30 ~ 13:30, 토/일/공휴일 휴무)
 			</p>
 		</div>
@@ -69,12 +68,24 @@
 			<c:if test="${member.mid eq qna.mid}">
 				<tr>
 					<td colspan="3" class="btnBox">
-						<input type="button" onclick="location.href='${conPath}/qnaBoard/qBoardModify.do?qanum=${qna.qanum }&pageNum=${param.pageNum }'" value="수정" class="btn_submit">
-						<input type="button" onclick="location.href='${conPath}/qnaBoard/qBoardList.do?pageNum=${param.pageNum }&schItem=${param.schItem}&schWord=${param.schWord}'" value="목록" class="btn_submit">
+						<input type="button" onclick="location.href='${conPath}/qnaBoard/qBoardModify.do?qanum=${qna.qanum }&pageNum=${param.pageNum }'" value="수정" class="btn_grey">
+						<input type="button" onclick="location.href='${conPath}/qnaBoard/qBoardList.do?pageNum=${param.pageNum }&schItem=${param.schItem}&schWord=${param.schWord}'" value="목록" class="btn_grey">
 					</td>
 				</tr>
 			</c:if>
+			
 			<!-- 관리자 계정: 답글 및 삭제 가능 -->
+			<c:if test="${not empty admin}">
+				<tr>
+					<td colspan="3" class="btnBox">
+						<input type="button" onclick="location.href='${conPath}/qnaBoard/qBoardReply.do?qanum=${qna.qanum }&pageNum=${param.pageNum }'" value="답변글 작성" class="btn_grey">
+						<input type="button" onclick="location.href='${conPath}/qnaBoard/qBoardList.do?pageNum=${param.pageNum }&schItem=${param.schItem}&schWord=${param.schWord}'" value="목록" class="btn_grey">
+						<input type="button" onclick="location.href='${conPath}/qnaBoard/qBoardDelete.do?qagroup=${qna.qagroup }'"
+							value="삭제" class="btn_grey">
+					</td>
+				</tr>
+			</c:if>
+			
 		</table>
 	</div>
 	<jsp:include page="../main/footer.jsp" />
