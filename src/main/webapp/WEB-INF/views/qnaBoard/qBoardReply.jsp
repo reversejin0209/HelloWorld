@@ -56,7 +56,6 @@
 					<!-- CKEDITOR -->
 					<td colspan="2">
 						<textarea name="qacontent">${originBoard.qacontent }
-						
 [답변]
 안녕하세요. ${originBoard.writer }(${originBoard.mid })님, 언제나 즐거움이 가득한 헬로월드입니다.
 
