@@ -42,10 +42,18 @@
 			<tr>
 				<td>${qna.qacat }</td>
 				<td class="title">${qna.qatitle }</td>
-				<td>${qna.mid }</td>
+				<td>
+					<c:if test="${qna.mid != null }">
+						${qna.writer }
+					</c:if>
+					<c:if test="${qna.adid != null }">
+						관리자
+					</c:if>
+				</td>
 			</tr>
 			<tr>
-				<td colspan="3" class="content"><span class="qes">Q.</span>${qna.qacontent }</td>
+				<td><span class="qes">Q.</span></td>
+				<td colspan="2" class="content">${qna.qacontent }</td>
 			</tr>
 			<!-- 첨부 이미지가 있는 경우 출력 -->
 			<c:if test="${not empty review.rphoto}">

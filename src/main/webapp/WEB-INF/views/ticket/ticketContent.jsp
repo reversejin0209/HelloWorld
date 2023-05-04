@@ -16,11 +16,11 @@
 		// 총 금액, 총 수량
 		$('input[type="number"]').change(function() {
 			num = $(this).attr('class');
-			tprice = $('.tprice_'+num).val();
-			
+			tprice = $('.tprice_' + num).val();
+
 			var sum = 0;
-			var totcnt =0;
-			
+			var totcnt = 0;
+
 			$('input[type="number"]').each(function(idx, data) {
 				sum += ($(this).val() * 1 * tprice);
 				totcnt += ($(this).val() * 1);
@@ -31,6 +31,23 @@
 			$('.totprice').html(comma(sum));
 		});
 
+		// 수량 미선택 시 반환
+		$('form').submit(function() {
+			var trtotPrice = $('input[name="trtotPrice"]').val();
+			
+			if(${empty member}){
+				alert('티켓 구매는 로그인 후 이용 가능합니다.');
+				location.href='${conPath}/member/mLogin.do?after=../ticket/ticketContent.do?tname=${ticket.tname}';
+				return false;
+			}
+			
+			if (trtotPrice == 0) {
+				alert('수량을 선택해 주세요.');
+				$('.type1').focus();
+				return false;
+			}
+		});
+		
 		// 세자리 수마다 콤마 
 		function comma(x) {
 			x = x + '';
@@ -49,12 +66,12 @@
 </head>
 <body>
 	<jsp:include page="../main/header.jsp" />
-	<div id="wrap">
+	<div id="wrap_padding">
 		<div class="ticketContent_wrap">
 
 			<!-- 좌측: 티켓 상세설명 -->
 			<div class="ticket_content">
-				<%-- <img alt="티켓 이미지" src="${conPath }/img/${ticket.timg }"> --%>
+				<img alt="티켓 이미지" src="${conPath }/img/${ticket.timg }">
 				<table class="ticketContent_table">
 					<tr>
 						<td colspan="3"><span class="flag_purple">헬로월드 이용권</span> <br> <br>
@@ -63,10 +80,10 @@
 					</tr>
 					<tr>
 						<td>요금 안내</td>
-						<td><c:forEach var="ticket" items="${ticketType }">
-								${ticket.tname} ${ticket.ttype }<br>
+						<td><c:forEach var="t" items="${ticketList }">
+								${t.tname} ${t.ttype }<br>
 							</c:forEach></td>
-						<td><c:forEach var="ticket" items="${ticketType }">
+						<td><c:forEach var="ticket" items="${ticketList }">
 								<fmt:formatNumber pattern="###,###" value="${ticket.tprice }" />원
 								<br>
 							</c:forEach></td>
@@ -106,45 +123,60 @@
 			</div>
 
 			<!-- 우측: 주문 박스 -->
+
 			<div class="order_box">
 				<form action="${conPath }/ticketRes/tOrderReserve.do">
 					<input type="hidden" name="trdname" value="${ticket.tname }">
 					<div class="order_box_top">
-						<h2>예약옵션을 선택해 주세요.</h2>
-						<hr>
-						<h2>날짜선택</h2>
-						<input type="date" name="trddate" required="required">
-						<hr>
-						<h2>상품선택</h2>
-						<c:set var="trtotPrice" value="0" />
-						<!-- 티켓 종류 출력 -->
-						<c:set var="i" value="1" />
-						<c:forEach var="ticket" items="${ticketList }">
-							<div class="flex_box cnt_controller_${i }">
-								<p>${ticket.tname} ${ticket.ttype } X ${ticket.tprice }</p>
-								
-								<input type="hidden" name="trdtype" value="${ticket.ttype }">
-								<input type="hidden" class="tprice_type${i }" value="${ticket.tprice }" readonly="readonly">
-								<input type="number" class="type${i }" name="trdcnt" min="0" value="0">
-							</div>
-							<c:set var="i" value="${i +1}" />
-						</c:forEach>
+						<table class="ticketContent_table">
+							<tr>
+								<td>
+									<h2>예약옵션을 선택해 주세요.</h2>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h2>날짜선택</h2> <input type="date" name="trddate" required="required">
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h2>상품선택</h2> <!-- 티켓 종류 출력 --> <c:set var="i" value="1" /> <c:forEach var="ticket" items="${ticketList }">
+										<div class="flex_wide">
+											<span>${ticket.tname} ${ticket.ttype } X ${ticket.tprice }</span>
 
-						<!-- 총 금액 -->
-						<hr>
-						<h2>결제 예정 금액</h2>
-						<div class="flex_box">
-							<input type="hidden" name="trtotPrice" value="0">
-							
-							<span>총 <span class="totcnt">0</span> 매</span>
-							<span><span class="totprice big">0</span>원</span>
-						</div>
-						<button class="btn_submit">예약하기</button>
+											<input type="hidden" name="trdtype" value="${ticket.ttype }">
+											<input type="hidden" class="tprice_type${i }" value="${ticket.tprice }" readonly="readonly">
+											<input type="number" class="type${i }" name="trdcnt" min="0" value="0">
+										</div>
+										<c:set var="i" value="${i +1}" />
+									</c:forEach>
+								</td>
+							</tr>
+							<tr class="center">
+								<td><c:if test="${empty member }">
+								로그인 시 할인율을 확인할 수 있습니다.
+							</c:if> <c:if test="${not empty member }">
+								${member.mname }(${member.mid })님 <b>${member.grade }</b> 등급
+							</c:if></td>
+							</tr>
+							<tr>
+								<td>
+									<h2>결제 예정 금액</h2>
+									<div class="flex_wide">
+										&nbsp;
+										<input type="hidden" name="trtotPrice" value="0">
+										<span><span class="totprice big">0</span>원</span>
+									</div>
+								</td>
+							</tr>
+						</table>
 					</div>
+					<!-- div class="order_box" -->
+					<button class="order_box_bottom center">
+						총 <span class="totcnt eng font-32">0</span> 매 예약하기
+					</button>
 				</form>
-				<!-- div class="order_box" -->
-
-				<div class="order_box_bottom"></div>
 			</div>
 
 		</div>
