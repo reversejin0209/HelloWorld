@@ -30,8 +30,7 @@
 			<br>
 			<span>로그인 후 더 많은 서비스를 즐겨보세요.</span>
 			<form action="${conPath }/member/mLogin.do" method="post">
-
-			<input type="text" name="after" value="${param.after }">
+				<input type="hidden" name="after" value="${param.after }">
 				<table>
 					<tr>
 						<td><input type="text" name="mid" id="mid" required="required" autofocus="autofocus" value="${member.mid }" placeholder="아이디"></td>
