@@ -11,4 +11,5 @@ public interface ThResService {
 	public int reserveChk(ThRes thres, String thrdatetemp);
 	public List<String> seatList(ThRes thres);
 	public List<ThRes> thResList(ThRes thres, String pageNum, Model model);
+	public ThRes thResContent(String thrcode, Model model);
 }

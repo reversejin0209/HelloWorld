@@ -71,4 +71,11 @@
 	    WHERE RW BETWEEN #{startRow} AND #{endRow}
 	</select>
 	
+	<!-- 내 예매 내역 자세히보기 -->
+	<select id="thResContent" parameterType="String" resultMap="ThResResult">
+		SELECT *
+    	FROM THEATER_RES TR, THEATER T, THEATER_SEAT TS
+    	WHERE TR.thCODE = T.thCODE AND TR.thrCODE = TS.thrCODE AND TR.thrCODE = #{thrcode}
+	</select>
+	
 </mapper>

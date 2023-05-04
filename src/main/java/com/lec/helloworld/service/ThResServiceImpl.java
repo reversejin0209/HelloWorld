@@ -35,13 +35,16 @@ public class ThResServiceImpl implements ThResService {
 			System.out.println(thresDao.thResInsert(thres));
 			return false;
 		}
+		System.out.println("thrcode 확인");
 		int arrayCnt = seatCode.length;
 		System.out.println(arrayCnt);
 		int reserveCnt = 0;
 		for(String seatcode : seatCode) {
 			thres.setSeatcode(seatcode);
+			System.out.println("좌석 예약 정보 : " + thres);
 			reserveCnt += thresDao.seatReserve(thres);
 		}
+		System.out.println("for문 완료");
 		if(arrayCnt == reserveCnt) {
 			return true;
 		} else {
@@ -51,14 +54,12 @@ public class ThResServiceImpl implements ThResService {
 	
 	@Override
 	public int reserveChk(ThRes thres, String thrdatetemp) {
-		System.out.println(thrdatetemp);
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			thres.setThrdate(formatter.parse(thrdatetemp));
 		} catch (ParseException e) {
 			System.out.println(e.getMessage());
 		}
-		System.out.println(thres.getThrdate());
 		return thresDao.reserveChk(thres);
 	}
 
@@ -111,6 +112,11 @@ public class ThResServiceImpl implements ThResService {
 		thres.setEndRow(paging.getEndRow());
 		model.addAttribute("paging", paging);
 		return thresDao.thResList(thres);
+	}
+
+	@Override
+	public ThRes thResContent(String thrcode, Model model) {
+		return thresDao.thResContent(thrcode);
 	}
 
 }

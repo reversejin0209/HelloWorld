@@ -16,4 +16,5 @@ public interface ThResDao {
 	public int seatChk(ThRes thres);
 	public int thResListCnt(ThRes thres);
 	public List<ThRes> thResList(ThRes thres);
+	public ThRes thResContent(String thrcode);
 }

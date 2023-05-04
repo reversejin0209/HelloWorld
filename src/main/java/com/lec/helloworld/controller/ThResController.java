@@ -29,7 +29,7 @@ public class ThResController {
 	public String thReserve(ThRes thres, String thrdateStr, String[] seatCode, String thprice, Model model) {
 		model.addAttribute("thResResult", thresService.thResInsert(thres, thrdateStr, thprice, seatCode));
 		model.addAttribute("seatCode", seatCode);
-		return "member/myPage";
+		return "member/mMypage";
 	}
 	
 	/* 좌석 리스트 출력 */
@@ -43,9 +43,15 @@ public class ThResController {
 	@RequestMapping(value="thResList", method=RequestMethod.GET)
 	public String thResList(ThRes thres, String pageNum, Model model) {
 		model.addAttribute("thResListResult", thresService.thResList(thres, pageNum, model));
-		System.out.println(thres.getThrorderdate());
-		System.out.println(thres.getThrdate());
 		return "thRes/thResList";
+	}
+	
+	/* 내가 예매한 티켓 상세보기 */
+	@RequestMapping(value="thResContent", method=RequestMethod.GET)
+	public String thResContent(String thrcode, Model model) {
+		System.out.println("컨트롤러 진입");
+		model.addAttribute("thResContent", thresService.thResContent(thrcode, model));
+		return "thRes/thResContent";
 	}
 	
 }

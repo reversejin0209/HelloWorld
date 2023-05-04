@@ -14,15 +14,12 @@
 <script>
 $(document).ready(function() {
 	$('tr').click(function() {
-		var trcode = $(this).children().eq(2).text().trim();
-		/* if (!isNaN(trcode)) {
-			location.href='${conPath}/member/tOrderContent.do?trcode='+trcode;
-		} */
-		if (!isNaN(trcode)) {
+		var thrcode = $(this).children().eq(3).text().trim();
+		if (isNaN(thrcode)) {
 			$.ajax({
 				url : '${conPath}/thRes/thResContent.do',
 				type : 'get',
-				data : 'trcode=' + trcode,
+				data : 'thrcode=' + thrcode,
 				dataType : 'html',
 				success: function(data) {
 					$('.myPage_right_white').html(data);
