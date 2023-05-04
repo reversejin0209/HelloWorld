@@ -1,68 +1,67 @@
 @charset "UTF-8";
-#login_form {
-	width: 1000px; 
-	height:550px; 
-	margin: 20px auto 150px;
+
+.background-img {
+	padding: 60px;
+	background-image: url('../../img/head_background_04.png');
 }
-	
-#idConfirmResult, #pwChkResult, #emailConfirmResult{
-	text-align: left; 
+
+#login_form {
+	width: 600px;
+	height: 500px;
+	background-color: #ffffff;
+	margin: 0 auto;
+	border-radius: 10px;
+	padding: 20px;
+	box-sizing: border-box;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+#idConfirmResult, #pwChkResult, #emailConfirmResult {
+	text-align: left;
 	padding-left: 30px;
 }
 
-#login_form table {
-	width:70%; 
-	margin: 60px auto 0;
+#login_form table tr {
+	background-color: #FFFFFF;
+	height: 60px;
 }
 
-#login_form table tr { 
-	background-color: #FFFFFF; 
-	height: 80px; 
-}
-
-#login_form td, #content_form th {
-	text-align: center; 
+#login_form table tr:last-child {
+	height: 100px;
 }
 
 #login_form caption {
-	font-size: 2.6em; 
+	font-size: 2.6em;
 	padding: 10px;
 	margin-bottom: 10px;
 	color: #7800f8;
 }
 
-#login_form caption img {
-	height: 50px;
-	width: 200px;
-	cursor: pointer;
+#login_form h2, #content_form b {
+	text-align: center;
+	color: red;
 }
 
-#login_form caption span {
-	font-size: 16px; 
+#login_form a {
+	text-decoration: none;
 	color: black;
-}
-
-#login_form h2, #content_form b{
-	text-align: center; 
-	color:red;
-}
-
-#login_form a { 
-	text-decoration: none; 
-	color:black;
-}
-
-#login_form .left{
-	text-align: left;
 }
 
 #login_form .paging {
 	text-align: center;
 }
 
+#login_form>form{
+	margin-top: 30px;
+}
+
 #login_form input:not(.btn) {
-	width: 400px; 
-	height: 50px; 
+	width: 400px;
+	height: 50px;
 	border: 1px solid lightgray;
 	font-size: 1.1em;
 	font-weight: bold;
@@ -74,17 +73,17 @@
 }
 
 #login_form .btn {
-	color: #FFFFFF;        	
+	color: #FFFFFF;
 	background: #7800f8;
-	border: 0;              
-	width: 425px;              
+	border: 0;
+	width: 425px;
 	margin: 0 2px;
 	height: 50px;
 	cursor: pointer;
 }
 
 #login_form p {
-	margin: 30px 0 0 605px;
+	margin: 30px;
 	font-size: 0.8em;
 	color: #333333;
 }

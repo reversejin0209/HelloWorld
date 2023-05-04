@@ -18,45 +18,67 @@ public class QnaBoardController {
 	@Autowired
 	private QnaBoardService qBoardService;
 
+	// 게시글 목록
 	@RequestMapping(value = "qBoardList", method = { RequestMethod.GET, RequestMethod.POST })
 	public String qBoardList(QnaBoard qnaBoard, String pageNum, Model model) {
 		model.addAttribute("qnaList", qBoardService.qnaBoardList(qnaBoard, pageNum, model));
 		return "qnaBoard/qBoardList";
 	}
 
+	// 게시글 상세보기
 	@RequestMapping(value = "qBoardContent", method = RequestMethod.GET)
 	public String qBoardContent(int qanum, Model model) {
 		model.addAttribute("qna", qBoardService.contentQna(qanum));
 		return "qnaBoard/qBoardContent";
 	}
 
+	// 게시글 작성: GET
 	@RequestMapping(value = "qBoardWrite", method = RequestMethod.GET)
 	public String qBoardWrite() {
 		return "qnaBoard/qBoardWrite";
 	}
 
+	// 게시글 작성: POST
 	@RequestMapping(value = "qBoardWrite", method = RequestMethod.POST)
 	public String qBoardWrite(QnaBoard qnaBoard, HttpServletRequest request, Model model) {
 		qBoardService.writeQna(qnaBoard, request, model);
 		return "forward:qBoardList.do";
 	}
 
+	// 게시글 수정: GET
 	@RequestMapping(value = "qBoardModify", method = RequestMethod.GET)
 	public String qBoardModify(int qanum, Model model) {
 		model.addAttribute("modifyQna", qBoardService.contentQna(qanum));
 		return "qnaBoard/qBoardModify";
 	}
 
+	// 게시글 수정: POST
 	@RequestMapping(value = "qBoardModify", method = RequestMethod.POST)
 	public String qBoardModify(QnaBoard qnaBoard, HttpServletRequest request, Model model) {
 		qBoardService.modifyQna(qnaBoard, request, model);
 		return "forward:qBoardList.do";
 	}
-
+	
+	// 게시글 삭제
 	@RequestMapping(value = "qBoardDelete", method = RequestMethod.GET)
 	public String qBoardDelete(int qagroup, Model model) {
 		model.addAttribute("deleteResult", qBoardService.deleteQna(qagroup, model));
-		return "forward:qBoardList.do";
+		return "redirect:qBoardList.do";
 	}
+	
+	// 답변글 작성: GET
+	@RequestMapping(value = "qBoardReply", method = RequestMethod.GET)
+	public String boardReply(int qanum, Model model) {
+		model.addAttribute("qanum", qanum);
+		model.addAttribute("originBoard", qBoardService.contentQna(qanum));
+		return "qnaBoard/qBoardReply";
+	}
+	
+	// 답변글 작성: POST
+		@RequestMapping(value = "qBoardReply", method = RequestMethod.POST)
+		public String boardReply(QnaBoard qnaBoard, HttpServletRequest request, Model model) {
+			qBoardService.replyQna(qnaBoard, request, model);
+			return "forward:qBoardList.do";
+		}
 
 }

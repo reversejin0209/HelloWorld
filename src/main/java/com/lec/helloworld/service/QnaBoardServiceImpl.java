@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.google.gson.JsonObject;
 import com.lec.helloworld.dao.QnaBoardDao;
 import com.lec.helloworld.util.Paging;
+import com.lec.helloworld.vo.Admin;
 import com.lec.helloworld.vo.Member;
 import com.lec.helloworld.vo.QnaBoard;
 
@@ -85,12 +86,22 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 
 	@Override
 	public void replyQna(QnaBoard qnaBoard, HttpServletRequest request, Model model) {
+		String adid = null;
+		Admin admin = (Admin)request.getSession().getAttribute("admin");
+		if(admin!=null) {
+			adid = admin.getAdid();
+		}
+		qnaBoard.setAdid(adid);
+		
 		qnaBoard.setQaip(request.getLocalAddr());
 		
 		try {
+			qnaBoardDao.replyStepQna(qnaBoard);
 			qnaBoardDao.replyQna(qnaBoard);
 			model.addAttribute("successMsg", "1:1 답변 작성이 완료되었습니다");
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println(qnaBoard);
 			model.addAttribute("failMsg", "1:1 답변 작성이 실패했습니다");
 		}
 	}

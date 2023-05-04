@@ -79,10 +79,9 @@ public class MemberController {
 		return "member/mMailConfirm";
 	}
 
-	/* 마이페이지 */
+	/* 관리자페이지 */
 	@RequestMapping(value = "mMypage", method = RequestMethod.GET)
-	public String mMypage(HttpSession session, Model model) {
-		model.addAttribute("memberVo", memberService.memberGetDetail(session));
+	public String mMypage() {
 		return "member/mMypage";
 	}
 

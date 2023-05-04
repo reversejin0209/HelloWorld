@@ -39,7 +39,7 @@
 	</c:if>
 	
 	<jsp:include page="../main/header.jsp" />
-	<div id="wrap">
+	<div id="wrap_padding">
 		<h1 class="center">QnA 질문게시판</h1>
 
 		<div class="search_box">
