@@ -36,8 +36,9 @@
 			<p>우리의 추억이 더욱 특별해지는 꿈과 환상의 나라 헬로월드로 오세요!</p>
 		</div>
 	</div>
-
+	
 	<div id="wrap">
+		<div class="margin"></div>
 		<div class="title center">
 			<p>스마트 예약하고 빠르게 입장하세요</p>
 			<h1>헬로월드 스마트 예약</h1>

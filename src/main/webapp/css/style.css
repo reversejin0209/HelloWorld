@@ -11,6 +11,11 @@
 	text-decoration: none;
 }
 
+.background-color {
+	background-color: #fafafa;
+	padding: 60px;
+}
+
 .eng {
 	font-family: 'Poppins', sans-serif;
 	font-weight: bold;
@@ -26,11 +31,29 @@ div#wrap {
 	width: 1140px;
 	min-height: 400px;
 	margin: 0 auto;
-	padding: 50px;
+	/* padding: 50px; */
 	/* 컨테이너가 세로로 배치 */
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
+}
+
+div#wrap_padding {
+	width: 1140px;
+	min-height: 400px;
+	margin: 0 auto;
+	padding: 60px 0;
+	box-sizing:border-box;
+	/* padding: 50px; */
+	/* 컨테이너가 세로로 배치 */
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.margin {
+	width: 100%;
+	height: 60px;
 }
 
 /* 배치 */
@@ -93,7 +116,7 @@ hr {
 	font-weight: bold;
 	width: auto;
 	background: #fafafa;
-	padding: 6px 14px;
+	padding: 8px 18px;
 	margin: 0 auto;
 	color: #686868;
 	font-size: 14px;
@@ -102,6 +125,11 @@ hr {
 	border: 1px solid #686868;
 	border-radius: 6px;
 	cursor: pointer;
+	margin: 4px;
+}
+
+.btn_grey:active {
+	background: #dedede;
 }
 
 .btn_submit {
@@ -124,14 +152,13 @@ hr {
 }
 
 /* flag */
-.flag_purple{
+.flag_purple {
 	font-size: 14px;
 	color: white;
 	padding: 8px 15px;
 	background-color: #b596ff;
 	border-radius: 20px;
 }
-
 
 /* 글씨색 */
 .purple {
@@ -155,11 +182,11 @@ hr {
 }
 
 /* 글씨 사이즈 */
-.big{
+.big {
 	font-family: 'Poppins', sans-serif;
-    font-size: 42px;
-    font-weight: bold;
-    color: #a57ff4;
+	font-size: 42px;
+	font-weight: bold;
+	color: #a57ff4;
 }
 
 /* 페이지 상단 이미지 배경 */
@@ -170,7 +197,7 @@ hr {
 	background-color: yellow;
 }
 
-.head_background_inner{
+.head_background_inner {
 	height: 100%;
 	display: flex;
 	flex-direction: column;
@@ -180,11 +207,11 @@ hr {
 }
 
 .head_background_inner>h1 {
-	margin-bottom: 10px;	
+	margin-bottom: 10px;
 }
 
 /* input[type=number] */
-input[type = number]{
+input[type=number] {
 	height: 42px;
 	padding: 8px 12px;
 	box-sizing: border-box;
@@ -193,6 +220,13 @@ input[type = number]{
 	margin-left: 10px;
 	display: flex;
 	justify-content: flex-end;
-	align-items: center;	
+	align-items: center;
 	outline: none;
+}
+
+/* flex */
+.flex_wide {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }

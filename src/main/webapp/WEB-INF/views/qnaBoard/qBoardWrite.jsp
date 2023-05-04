@@ -26,12 +26,14 @@
 	<!-- 비회원: 로그인 페이지로 이동 -->
 	<c:if test="${empty member }">
 		<script type="text/javascript">
-			loation.href='${conPath }/member/mLogin.do';
+			location.href='${conPath }/member/mLogin.do';
 		</script>
 	</c:if>
 
 	<jsp:include page="../main/header.jsp" />
-	<div id="wrap">
+	<div id="wrap_padding">
+		<h1 class="center">1:1 문의글 작성</h1>
+		
 		<form action="${conPath }/qnaBoard/qBoardWrite.do" method="post">
 			<table class="content_table">
 				<tr>
@@ -80,8 +82,8 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2" class="btnBox"><input type="submit" value="글쓰기" class="btn_submit"> <input
-							type="button" value="글목록" class="btn_submit" onclick="history.back()'">
+					<td colspan="2" class="btnBox"><input type="submit" value="글쓰기" class="btn_grey"> <input
+							type="button" value="글목록" class="btn_grey" onclick="history.back()'">
 					</td>
 				</tr>
 			</table>

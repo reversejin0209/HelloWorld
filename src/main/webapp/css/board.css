@@ -100,18 +100,17 @@
 	text-align: left;
 }
 
-.content_table td>input:not(.btn_submit) {
-	height: 32px;
+.content_table td>input:not(.btn_submit, .btn_grey) {
 	padding: 6px 12px;
 	box-sizing: border-box;
 	border-radius: 6px;
 	border: 1px solid #686868;
 }
 
-.content_table td>input:not(.btn_submit):focus {
+/* .content_table td>input:not(.btn_submit):focus {
 	border: 0;
 	outline: 1px solid #7800f8;
-}
+} */
 
 .content_table td>textarea {
 	width: 100%;
