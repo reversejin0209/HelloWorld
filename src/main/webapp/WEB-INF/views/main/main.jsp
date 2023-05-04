@@ -164,7 +164,7 @@
 							<h2>HOT 어트랙션</h2>
 						</div>
 					</div>
-					<div class="sub_item item3" onclick="location.href='${conPath }/theater/theaterList.do?thschedule=${nowSchedule }&schWord='">
+					<div class="sub_item item3" onclick="location.href='${conPath }/theater/theaterList.do?thschedule=${nowSchedule }&schDate='">
 						<img alt="공연 아이콘" src="https://em-content.zobj.net/source/microsoft-teams/337/admission-tickets_1f39f-fe0f.png">
 						<div class="sub_item_text">
 							<p>
@@ -175,7 +175,7 @@
 							<h2>공연 정보 확인</h2>
 						</div>
 					</div>
-					<div class="sub_item item4">
+					<div class="sub_item item4" onclick="location.href='${conPath}/theater/theaterList.do?thschedule=${nowSchedule }&schDate='">
 						<img alt="이 달의 공연 아이콘" src="https://em-content.zobj.net/source/microsoft-teams/337/sparkles_2728.png">
 						<div class="sub_item_text">
 							<p>

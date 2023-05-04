@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Iterator;
 import java.util.List;
 
@@ -15,7 +17,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.lec.helloworld.dao.ThResDao;
 import com.lec.helloworld.dao.TheaterDao;
+import com.lec.helloworld.vo.ThRes;
 import com.lec.helloworld.vo.Theater;
 
 @Service
@@ -23,6 +27,9 @@ public class TheaterServiceImpl implements TheaterService {
 	
 	@Autowired
 	TheaterDao theaterDao;
+	
+	@Autowired
+	ThResDao thResDao;
 	
 	@Override
 	public List<Theater> theaterList(int thschedule, String schDate) {
@@ -87,6 +94,17 @@ public class TheaterServiceImpl implements TheaterService {
 		return theaterDao.theaterDelete(thcode);
 	}
 	
+	@Override
+	public int seatChk(ThRes thres, String schDate) {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			thres.setThrdate(formatter.parse(schDate));
+		} catch (ParseException e) {
+			System.out.println(e.getMessage());
+		}
+		return thResDao.seatChk(thres);
+	}
+	
 	private boolean fileCopy(String serverFile, String backupFile) {
 		boolean isCopy = false;
 		InputStream is = null; 
@@ -114,6 +132,5 @@ public class TheaterServiceImpl implements TheaterService {
 		}
 		return isCopy;
 	}
-
 
 }

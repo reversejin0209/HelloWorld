@@ -16,28 +16,36 @@ public class ThResController {
 	@Autowired
 	private ThResService thresService;
 	
-	/* 예약 진행 */
+	/* 예약 진행 뷰단 */
 	@RequestMapping(value="thReserve", method=RequestMethod.GET)
 	public String thReserveView(ThRes thres, String thrdatetemp, Model model) {
-		System.out.println("컨트롤러 진입");
 		model.addAttribute("reserveChk", thresService.reserveChk(thres, thrdatetemp));
-		System.out.println("컨트롤러 빠져나감" + thres + thresService.reserveChk(thres, thrdatetemp));
+		model.addAttribute("seats", thresService.seatList(thres));
 		return "thRes/thResInsert";
 	}
 	
+	/* 예약 진행 */
 	@RequestMapping(value="thReserve", method=RequestMethod.POST)
 	public String thReserve(ThRes thres, String thrdateStr, String[] seatCode, String thprice, Model model) {
-		System.out.println("thReserve 컨트롤러 진입" + thres);
 		model.addAttribute("thResResult", thresService.thResInsert(thres, thrdateStr, thprice, seatCode));
 		model.addAttribute("seatCode", seatCode);
-		System.out.println("thReserve 컨트롤러 빠져나감");
 		return "member/myPage";
 	}
 	
-	@RequestMapping(value="seatList")
+	/* 좌석 리스트 출력 */
+	@RequestMapping(value="seatList", method=RequestMethod.GET)
 	public String seatReservation(ThRes thres, Model model, String mid) {
 		model.addAttribute("seats", thresService.seatList(thres));
 		return "seatList";
+	}
+	
+	/* 내가 예매한 목록 */
+	@RequestMapping(value="thResList", method=RequestMethod.GET)
+	public String thResList(ThRes thres, String pageNum, Model model) {
+		model.addAttribute("thResListResult", thresService.thResList(thres, pageNum, model));
+		System.out.println(thres.getThrorderdate());
+		System.out.println(thres.getThrdate());
+		return "thRes/thResList";
 	}
 	
 }

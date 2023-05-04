@@ -22,6 +22,19 @@
 		</script>
 	</c:if>
 
+	<c:if test="${thResResult eq true }">
+		<script>
+			alert('예매 성공했습니다');
+		</script>
+	</c:if>
+	
+	<c:if test="${thResResult eq false }">
+		<script>
+			alert('예매 실패했습니다. \n다시 확인해주세요');
+			history.back();
+		</script>
+	</c:if>
+	
 	<jsp:include page="../main/header.jsp" />
 	<div class="background-color">
 		<div id="wrap">
@@ -38,7 +51,7 @@
 							<ul>
 								<li><h4>나의 활동관리</h4></li>
 								<li><a href="${conPath}/member/tOrderList.do">티켓 예매 내역</a></li>
-								<li><a href="">공연 예매 내역</a></li>
+								<li><a href="${conPath }/thRes/thResList.do?mid=${member.mid }">공연 예매 내역</a></li>
 								<li><a href="">공연 리뷰</a></li>
 								<li><a href="">어트랙션 리뷰</a></li>
 							</ul>
@@ -83,7 +96,7 @@
 							<h2>티켓 예매확인/취소</h2>
 						</div>
 						<div class="sub_item item2">
-							<div class="normal_box">
+							<div class="normal_box" onclick="location.href='${conPath }/thRes/thResList.do?mid=${member.mid }'">
 								<h2>공연 예매확인/취소</h2>
 							</div>
 						</div>

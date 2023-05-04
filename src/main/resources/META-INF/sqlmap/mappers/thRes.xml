@@ -8,6 +8,7 @@
 		<result property="mid" column="mid"/>
 		<result property="thcode" column="thcode"/>
 		<result property="thrcnt" column="thrcnt"/>
+		<result property="throrderdate" column="throrderdate"/>
 		<result property="thrreview" column="thrreview"/>
 		<result property="thrtotprice" column="thrtotprice"/>
 		<result property="thrdate" column="thrdate"/>
@@ -16,31 +17,58 @@
 		<result property="thtime" column="thtime"/>
 		<result property="thloc" column="thloc"/>
 		<result property="thprice" column="thprice"/>
-		<result property="seatcode" column="seatcode"/>
+		<result property="seatcode" column="seatcode"/> 
 	</resultMap>
 	
+	<!-- 예약 진행 -->
 	<insert id="thResInsert" parameterType="ThRes">
 		INSERT INTO THEATER_RES (thrCODE, mID, thCODE, thrCNT, thrORDERDATE, thrREVIEW, thrTOTPRICE, thrDATE)
     	VALUES (TO_CHAR(SYSDATE, 'YYMMDD')||#{thcode}||THRCODE_SEQ.NEXTVAL, #{mid}, #{thcode}, #{thrcnt}, SYSDATE, 0, #{thrtotprice}, #{thrdate})
 	</insert>
 	
+	<!-- 예약된 좌석 추가 -->
 	<insert id="seatReserve" parameterType="ThRes">
 		INSERT INTO THEATER_SEAT (SEATCODE, thrCODE)
     	VALUES (#{seatcode}, #{thrcode})
 	</insert>
 	
+	<!-- thrcode 불러오기 -->
 	<select id="thrcodeChk" parameterType="ThRes" resultType="String">
 		SELECT thrCODE FROM THEATER_RES WHERE mID = #{mid} AND thCODE = #{thcode} AND thrDATE = #{thrdate}
 	</select>
 	
+	<!-- 아이디로 공연 예매 확인 -->
 	<select id="reserveChk" parameterType="ThRes" resultType="int">
 		SELECT COUNT(*) FROM THEATER_RES WHERE mID = #{mid} AND thCODE = #{thcode} AND thrDATE = #{thrdate}
 	</select>
 	
+	<!-- 좌석 리스트 뿌리기 -->
 	<select id="seatList" parameterType="ThRes" resultType="String">
 		SELECT TS.SEATCODE 
     	FROM THEATER_SEAT TS, THEATER_RES TR
-   	 	WHERE TS.THRCODE = TR.THRCODE AND TS.THRCODE = #{thrcode} AND THRDATE = #{thrdate}
+   	 	WHERE TS.THRCODE = TR.THRCODE AND THCODE = #{thcode} AND THRDATE = #{thrdate}
+	</select>
+	
+	<!-- 좌석 확인 -->
+	<select id="seatChk" parameterType="ThRes" resultType="int">
+		SELECT COUNT(*)
+    	FROM THEATER_SEAT TS, THEATER_RES TR
+   	 	WHERE TS.THRCODE = TR.THRCODE AND THCODE = #{thcode} AND THRDATE = #{thrdate}
+	</select>
+	
+	<!-- 내 예매 내역 총 갯수 -->
+	<select id="thResListCnt" parameterType="ThRes" resultType="int">
+		SELECT COUNT(*) FROM THEATER_RES WHERE mID = #{mid}
+	</select>
+	
+	<!-- 내 예매 내역 목록 -->
+	<select id="thResList" parameterType="ThRes" resultMap="ThResResult">
+		SELECT *    
+	    FROM (SELECT ROWNUM RW, A.* FROM (SELECT TR.*, T.thNAME, T.thLOC 
+	                                        FROM THEATER_RES TR, THEATER T 
+	                                        WHERE TR.thCODE = T.thCODE AND mID = #{mid} 
+	                                        ORDER BY TR.thrDATE) A)
+	    WHERE RW BETWEEN #{startRow} AND #{endRow}
 	</select>
 	
 </mapper>

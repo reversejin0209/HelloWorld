@@ -20,7 +20,7 @@ $(document).ready(function() {
 		} */
 		if (!isNaN(trcode)) {
 			$.ajax({
-				url : '${conPath}/member/tOrderContent.do',
+				url : '${conPath}/thRes/thResContent.do',
 				type : 'get',
 				data : 'trcode=' + trcode,
 				dataType : 'html',
@@ -94,40 +94,33 @@ $(document).ready(function() {
 				<!-- myContent -->
 
 				<div class="myPage_right_white">
-					<h1 class="center">나의 티켓 예매 내역</h1>
+					<h1 class="center">나의 공연 예매 내역</h1>
 					<br> 총 수량 : ${paging.totCnt }
 					<table class="list_table">
 						<tr>
-							<th>주문일</th>
-							<th class="title">주문내역</th>
+							<th>공연일</th>
+							<th class="title">공연 이름</th>
+							<th>공연장소</th>
 							<th>주문번호</th>
 							<th>결제금액</th>
-							<th>상태</th>
 						</tr>
 
-						<!-- 주문 내역이 없는 경우 -->
+						<!-- 예매 내역이 없는 경우 -->
 						<c:if test="${ticketList.size() == 0}">
 							<tr>
 								<td colspan="5">
-									<h4>주문 내역이 없습니다.</h4>
+									<h4>예매 내역이 없습니다.</h4>
 								</td>
 							</tr>
 						</c:if>
 
-						<c:forEach var="ticket" items="${ticketList }">
+						<c:forEach var="thRes" items="${thResListResult }">
 							<tr>
-								<td class="eng"><fmt:formatDate value="${ticket.trorderDate }" pattern="yy.MM.dd hh:mm:ss" /></td>
-								<td>${ticket.trdname }</td>
-								<td class="eng">${ticket.trcode }</td>
-								<td class="eng">
-									<fmt:formatNumber pattern="###,###" value="${ticket.trtotPrice }" />
-								</td>
-								<td><c:if test="${ticket.trresult eq 0}">
-										주문완료
-									</c:if> <c:if test="${ticket.trresult eq 1}">
-										<b>취소완료</b>
-									</c:if>
-								</td>
+								<td class="eng"><fmt:formatDate value="${thRes.thrdate }" pattern="yy.MM.dd" /></td>
+								<td>${thRes.thname }</td>
+								<td class="eng">${thRes.thloc }</td>
+								<td class="eng">${thRes.thrcode }</td>
+								<td class="eng"><fmt:formatNumber pattern="###,###" value="${thRes.thrtotprice }" /></td>
 							</tr>
 						</c:forEach>
 					</table>
@@ -136,18 +129,18 @@ $(document).ready(function() {
 					<!-- 페이징 -->
 					<div id="paging">
 						<c:if test="${paging.startPage>paging.blockSize}">
-							<a href="${conPath }/qnaBoard/qBoardList.do?pageNum=${paging.startPage-1 }&schItem=${param.schItem }&schWord=${param.schWord}">이전</a>
+							<a href="${conPath }/thRes/thResList.do?pageNum=${paging.startPage-1 }&mid=${member.mid }">이전</a>
 						</c:if>
 						<c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage }">
 							<c:if test="${paging.currentPage==i }">
 								<span>${i }</span>
 							</c:if>
 							<c:if test="${paging.currentPage != i }">
-								<a href="${conPath }/qnaBoard/qBoardList.do?method=list&pageNum=${i }&schItem=${param.schItem }&schWord=${param.schWord}">${i }</a>
+								<a href="${conPath }/thRes/thResList.do?method=list&pageNum=${i }&mid=${member.mid }">${i }</a>
 							</c:if>
 						</c:forEach>
 						<c:if test="${paging.endPage<paging.pageCnt }">
-							<a href="${conPath }/qnaBoard/qBoardList.do&pageNum=${paging.endPage+1 }&schItem=${param.schItem }&schWord=${param.schWord}">다음</a>
+							<a href="${conPath }/thRes/thResList.do&pageNum=${paging.endPage+1 }&mid=${member.mid }">다음</a>
 						</c:if>
 					</div>
 

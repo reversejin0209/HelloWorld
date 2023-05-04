@@ -13,12 +13,20 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script>
-	
+	$(document).ready(function() {
+		$('.resButton').click(function(){
+			var sessionMember = ${sessionScope.member }
+			if(sessionMember == null){ // 체크함
+				alert('공연 예매 서비스는 로그인 후 이용 가능합니다.');
+				location.href="member/mLogin.do";
+			}
+		});
+	});
 </script>
 </head>
 <body>
 	<jsp:include page="../main/header.jsp" />
-		<div id="wrap">
+		<div id="wrap_padding">
 		<div class="ticketContent_wrap">
 
 			<!-- 좌측: 티켓 상세설명 -->
@@ -86,14 +94,21 @@
 					<hr>
 					<h4>남은 좌석</h4>
 					<div class="flex_box">
-						<span>R석</span> <span style="font-size: 30px;">${param.thseat }</span>
+						<span>R석</span> <span style="font-size: 30px;">${param.thseat - seatChk }</span>
 					</div>
 				</div>
 				<!-- div class="order_box" -->
 				<div class="order_box_bottom">
-					<div class="resButton" onclick="location.href='${conPath }/thRes/thReserve.do?thrdatetemp=${param.schDate }&thcode=${param.thcode }&thprice=${param.thprice }&mid=${member.mid }'">
-						예약하기
-					</div>
+					<c:if test="${not empty member }">
+						<div class="resButton" onclick="location.href='${conPath }/thRes/thReserve.do?thrdatetemp=${param.schDate }&thcode=${param.thcode }&thprice=${param.thprice }&mid=${member.mid }'">
+							예약하기
+						</div>
+					</c:if>
+					<c:if test="${empty member }">
+						<div class="resButton" onclick="location.href='${conPath }/member/mLogin.do'">
+							로그인 후 이용할 수 있습니다
+						</div>
+					</c:if>
 				</div>
 			</div>
 
