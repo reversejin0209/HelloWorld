@@ -42,7 +42,14 @@
 			<tr>
 				<td>${qna.qacat }</td>
 				<td class="title">${qna.qatitle }</td>
-				<td>${qna.mid }</td>
+				<td>
+					<c:if test="${qna.mid != null }">
+						${qna.writer }
+					</c:if>
+					<c:if test="${qna.adid != null }">
+						관리자
+					</c:if>
+				</td>
 			</tr>
 			<tr>
 				<td><span class="qes">Q.</span></td>

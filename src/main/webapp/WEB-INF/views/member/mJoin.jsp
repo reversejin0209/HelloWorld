@@ -106,7 +106,7 @@
   	  			return false;
   	  		} else if(emailConfirmResult != '사용 가능한 E-Mail입니다') {
   	  			alert('이메일을 확인하세요');
-  	  			$('#memail').fucos();
+  	  			$('#memail').focus();
   	  			return false;
   	  		}
   		});  		
