@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.lec.helloworld.dao.MemberDao;
 import com.lec.helloworld.vo.Member;
@@ -27,17 +28,15 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public String loginChk(String mid, String mpw, HttpSession httpSession) {
+	public void loginChk(String mid, String mpw, HttpSession httpSession, Model model) {
 		/* 로그인 확인 */
 		Member member = memberDao.memberGetDetail(mid);
-		String result = null;
 		if(member != null && member.getMpw().equals(mpw)) {
-			result = "로그인 성공";
+			// model.addAttribute("successMsg", "로그인 성공");
 			httpSession.setAttribute("member", member);
 		} else {
-			result = "ID 혹은 PW 오류";
+			model.addAttribute("failMsg", "아이디 또는 비밀번호가 일치하지 않습니다.");
 		}
-		return result;
 	}
 
 	@Override

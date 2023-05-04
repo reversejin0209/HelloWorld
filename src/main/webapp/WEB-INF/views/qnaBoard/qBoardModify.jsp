@@ -28,7 +28,9 @@
 			var qapw = ${modifyQna.qapw}
 				alert(qapw + ' / ' + qapwTemp);
 			
-			if(${modifyQna.qapw} == qapw){
+			if(qapw == qapwTemp){
+				alert('비밀번호가 일치합니다.');
+				return false;
 				location.href='${conPath}/qnaBoard/qBoardDelete.do?qagroup=${modifyQna.qagroup}&pageNum=${param.pageNum}';
 			} else {
 				alert('비밀번호가 일치하지 않습니다.');
@@ -76,7 +78,7 @@
 					<td>비밀번호<b class="purple"> *</b>
 					</td>
 					<td><input type="text" name="qapw" required="required"> <input type="button"
-							onclick="location.href='${conPath}/qnaBoard/qBoardDelete.do?qagroup=${qna.qagroup }'" value="삭제" class="qBoardDeleteBtn btn_grey">
+							value="삭제" class="qBoardDeleteBtn btn_grey">
 						&nbsp; 문의 글 삭제 시 답변글까지 모두 삭제됩니다.</td>
 				</tr>
 				<tr>

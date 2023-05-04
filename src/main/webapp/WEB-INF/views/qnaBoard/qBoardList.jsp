@@ -103,7 +103,7 @@
 							</c:if> <!-- 파일첨부 표시 --> <c:if test="${not empty review.rphoto}">&#128196;</c:if>
 						</td>
 						<td><c:if test="${not empty qna.mid }">
-								${qna.mid }
+								${qna.writer }
 							</c:if> <c:if test="${not empty qna.adid }">
 								관리자
 							</c:if></td>

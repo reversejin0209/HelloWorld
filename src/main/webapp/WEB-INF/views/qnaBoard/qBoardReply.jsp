@@ -25,7 +25,7 @@
 	<!-- 비회원: 로그인 페이지로 이동 -->
 	<c:if test="${empty admin }">
 		<script type="text/javascript">
-			loation.href='${conPath }/admin/adLogin.do';
+			location.href='${conPath }/admin/adLogin.do';
 		</script>
 	</c:if>
 
@@ -56,7 +56,10 @@
 					<!-- CKEDITOR -->
 					<td colspan="2">
 						<textarea name="qacontent">${originBoard.qacontent }
-A.</textarea>
+[답변]
+안녕하세요. ${originBoard.writer }(${originBoard.mid })님, 언제나 즐거움이 가득한 헬로월드입니다.
+
+</textarea>
 				</tr>
 				<tr>
 					<td>비밀번호<b class="purple"> *</b></td>

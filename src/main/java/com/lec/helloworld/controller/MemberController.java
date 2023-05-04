@@ -1,5 +1,8 @@
 package com.lec.helloworld.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -31,13 +34,17 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "mLogin", method = RequestMethod.POST)
-	public String mLoginChk(String mid, String mpw, Model model, HttpSession httpSession) {
-		String loginResult = memberService.loginChk(mid, mpw, httpSession);
-		if (loginResult.equals("로그인 성공")) {
+	public String mLoginChk(String mid, String mpw, HttpSession httpSession, String after, Model model) throws UnsupportedEncodingException {
+		// String loginResult = memberService.loginChk(mid, mpw, httpSession);
+		memberService.loginChk(mid, mpw, httpSession, model);
+		
+		if(after.equals("")) {
 			return "main/main";
 		} else {
-			model.addAttribute("loginResult", loginResult);
-			return "main/main";
+			String afterPre = after.substring(0, after.indexOf("=")+1);
+			String afterPost = after.substring(after.indexOf("=")+1);
+			afterPost = URLEncoder.encode(afterPost, "utf-8");
+			return "redirect:" + afterPre + afterPost;
 		}
 	}
 
@@ -121,7 +128,7 @@ public class MemberController {
 		model.addAttribute("ticketList", trservice.getTOrderDetail(trcode));
 		return "member/myTicketContent";
 	}
-	
+
 	/* 주문 취소 */
 	@RequestMapping(value = "tOrderCancel", method = RequestMethod.GET)
 	public String myTicketCancel(long trcode, Model model) {
