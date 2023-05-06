@@ -20,20 +20,13 @@ public class TicketResController {
 
 	@Autowired
 	private TicketResService trService;
-	
+
 	// 티켓 예약 주문
 	@RequestMapping(value = "tOrderReserve", method = RequestMethod.GET)
-	public String ticketList(TicketRes ticketRes, String trdname, Date trddate, String[] trdtype, int[] trdcnt, HttpSession session, Model model) {
-		Member member = (Member)session.getAttribute("member");
-
-		// 주문 생성
-		if(member != null) {
-			trService.ticketReserve(ticketRes, trdname, trddate, trdtype, trdcnt, session, model);
-		} else {
-			model.addAttribute("failMsg", "티켓 구매 서비스는 로그인 후 이용 가능합니다.");
-			return "member/login";
-		}
-		return "ticket/test";
+	public String ticketList(TicketRes ticketRes, String trdname, Date trddate, String[] trdtype, int[] trdcnt,
+			HttpSession session, Model model) {
+		trService.ticketReserve(ticketRes, trdname, trddate, trdtype, trdcnt, session, model);
+		return "ticket/ticketReservate";
 	}
-	
+
 }

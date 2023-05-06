@@ -89,17 +89,22 @@
 </head>
 <body>
 	<!-- 로그인 처리 -->
+	<c:if test="${not empty successMsg}">
+		<script>
+			alert('${successMsg}');
+		</script>
+	</c:if>
+	<c:if test="${not empty failMsg}">
+		<script>
+			alert('${failMsg}');
+			history.back();
+		</script>
+	</c:if>
+	
 	<c:if test="${member.mwith eq 1}">
 		<script>
 			alert("탈퇴 처리된 회원입니다.");
 			location.href="${conPath}/member/mLogout.do?after=member/login";
-		</script>
-	</c:if>
-	
-	<c:if test="${loginResult eq 'ID 혹은 PW 오류'}">
-		<script>
-			alert('${loginResult}');
-			history.back();
 		</script>
 	</c:if>
 	
@@ -164,7 +169,7 @@
 							<h2>HOT 어트랙션</h2>
 						</div>
 					</div>
-					<div class="sub_item item3" onclick="location.href='${conPath }/theater/theaterList.do?thschedule=${nowSchedule }&schWord='">
+					<div class="sub_item item3" onclick="location.href='${conPath }/theater/theaterList.do?thschedule=${nowSchedule }&schDate='">
 						<img alt="공연 아이콘" src="https://em-content.zobj.net/source/microsoft-teams/337/admission-tickets_1f39f-fe0f.png">
 						<div class="sub_item_text">
 							<p>
@@ -243,6 +248,7 @@
 		<div id="notice_box">
 		&nbsp;
 		</div>
+		<div class="margin"></div>
 	</div>
 	<jsp:include page="../main/footer.jsp" />
 </body>

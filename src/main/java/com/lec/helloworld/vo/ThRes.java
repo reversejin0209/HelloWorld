@@ -1,5 +1,6 @@
 package com.lec.helloworld.vo;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
@@ -16,6 +17,7 @@ public class ThRes {
 	private String mid;
 	private String thcode;
 	private int    thrcnt;
+	private Timestamp throrderdate;
 	private int    thrreview;
 	private int    thrtotprice;
 	private Date   thrdate;

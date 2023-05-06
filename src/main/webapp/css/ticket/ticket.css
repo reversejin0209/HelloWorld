@@ -30,7 +30,7 @@
 
 .itemBox>img {
 	width: 200px;
-	object-fit: none;
+	object-fit: cover;
 	border-right: 1px solid #686868;
 }
 
@@ -53,6 +53,10 @@
 	min-height: 400px;
 }
 
+.ticket_content>img{
+	border-radius: 10px; 
+}
+
 /* 티켓 상품 안내 테이블 */
 .ticketContent_table {
 	width: 100%;
@@ -60,15 +64,24 @@
 	border-collapse: collapse;
 }
 
-.ticketContent_table tr {
-	padding: 30px 0;
+.ticketContent_table h1{
+	margin: 10px 0;
+}
+
+.ticketContent_table h2{
+	margin: 5px 0;
+}
+
+
+.ticketContent_table tr:last-child td{
+	border: 0px;
 }
 
 .ticketContent_table td {
 	font-size: 16px;
 	color: #4d4d4d;
 	border-bottom: 1px solid #bfbfbf;
-	padding: 30px;
+	padding: 16px;
 }
 
 .ticketContent_table td>textarea {
@@ -82,9 +95,9 @@
 /* 주문 박스 */
 .ticketContent_wrap>.order_box {
 	width: 550px;
-	height: 300px;
+	height: 810px;
 	position: sticky;
-	top: 110px;
+	top: 0px;
 	display: block;
 }
 
@@ -97,7 +110,18 @@
 	padding: 40px 30px;
 	box-sizing: border-box;
 	border: 1px solid #b089ff;
-	border-radius: 8px;
+	border-radius: 12px;
+}
+
+button.order_box_bottom{
+	width: 550px;
+	padding: 30px;
+	box-sizing: border-box;
+	border: 1px solid #b089ff;
+	border-radius: 12px;
+	background-color: #b596ff;
+	color: #ffffff;
+	font-size: 22px;
 }
 
 .order_box_top>h2 {

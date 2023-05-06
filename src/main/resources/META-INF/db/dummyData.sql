@@ -2,21 +2,21 @@
 -- MEMBER ----------------------------------------------------------------------
 -- MEMBER GRADE
 INSERT INTO MEMBER_GRADE (GRADE, LOWVI, HIGHVI, DISC)
-     VALUES ('WELCOME', 0, 9, 0);     
+     VALUES ('WELCOME', 0, 9, 1);     
 INSERT INTO MEMBER_GRADE (GRADE, LOWVI, HIGHVI, DISC)
      VALUES ('FAMILY', 10, 29, 20);
 INSERT INTO MEMBER_GRADE (GRADE, LOWVI, HIGHVI, DISC)
      VALUES ('VIP', 30, 999, 40);
     
 -- MEMBER
-INSERT INTO MEMBER (MID, MMAIL, MPW, MNAME, MTEL)
-     VALUES ('aaa', 'aaa.gmail.com', '111', '김길동', '010-2381-2378');
-INSERT INTO MEMBER (mID, mMAIL, mPW, mNAME, mTEL)
-    VALUES ('bbb', 'bbb@naver.com', '111', '이길동', '010-4902-9483');
-INSERT INTO MEMBER (MID, MMAIL, MPW, MNAME, MTEL)
-    VALUES ('ccc', 'ccc@gmail.com', '111', '삼길동', '010-3849-4104');
-INSERT INTO MEMBER (MID, MMAIL, MPW, MNAME, MTEL)
-    VALUES ('ddd', 'ddd@naver.com', '111', '사길동', '010-4908-2898');
+INSERT INTO MEMBER (MID, MMAIL, MPW, MNAME, MTEL, MVISIT)
+     VALUES ('aaa', 'aaa.gmail.com', '111', '김길동', '010-2381-2378', 1);
+INSERT INTO MEMBER (mID, mMAIL, mPW, mNAME, MTEL, MVISIT)
+    VALUES ('bbb', 'bbb@naver.com', '111', '이길동', '010-4902-9483', 10);
+INSERT INTO MEMBER (MID, MMAIL, MPW, MNAME, MTEL, MVISIT)
+    VALUES ('ccc', 'ccc@gmail.com', '111', '삼길동', '010-3849-4104', 25);
+INSERT INTO MEMBER (MID, MMAIL, MPW, MNAME, MTEL, MVISIT)
+    VALUES ('ddd', 'ddd@naver.com', '111', '사길동', '010-4908-2898', 35);
     
 -- ADMIN -----------------------------------------------------------------------
 INSERT INTO ADMIN (ADID, ADPW, ADNAME, ADNUM, ADEMAIL)

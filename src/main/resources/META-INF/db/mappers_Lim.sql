@@ -101,7 +101,7 @@ SELECT *
 -- 3. 예매 내역 상세보기
 SELECT *
     FROM THEATER_RES TR, THEATER T, THEATER_SEAT TS
-    WHERE TR.thCODE = T.thCODE AND TR.thrCODE = TS.thrCODE AND TR.thrCODE = '230419TH11';
+    WHERE TR.thCODE = T.thCODE AND TR.thrCODE = TS.thrCODE AND TR.thrCODE = '230504TH37';
 
 -- 4. 예매 취소 (시간이 지난 예매권은 삭제 불가)
     --> 4-1. 좌석 테이블 데이터 삭제

@@ -39,7 +39,7 @@
 	</c:if>
 	
 	<jsp:include page="../main/header.jsp" />
-	<div id="wrap">
+	<div id="wrap_padding">
 		<h1 class="center">QnA 질문게시판</h1>
 
 		<div class="search_box">
@@ -103,7 +103,7 @@
 							</c:if> <!-- 파일첨부 표시 --> <c:if test="${not empty review.rphoto}">&#128196;</c:if>
 						</td>
 						<td><c:if test="${not empty qna.mid }">
-								${qna.mid }
+								${qna.writer }
 							</c:if> <c:if test="${not empty qna.adid }">
 								관리자
 							</c:if></td>

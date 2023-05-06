@@ -14,38 +14,37 @@
 		<result property="grade" column="grade"/>
 	</resultMap>
 	
+	<!-- 회원 아이디로 회원 정보 가져오기 -->
 	<select id="memberGetDetail" parameterType="String" resultType="Member">
-		<!-- 회원 아이디로 회원 정보 가져오기 -->
-		<!-- SELECT * FROM MEMBER WHERE mID = #{mid} -->
 		SELECT *
 	      FROM MEMBER, MEMBER_GRADE
 	     WHERE MVISIT BETWEEN LOWVI AND HIGHVI
 	       AND mID = #{mid}	
 	</select>
 	
+	<!-- 회원 가입 -->
 	<insert id="memberJoin" parameterType="Member">
-		<!-- 회원 가입 -->
 		INSERT INTO MEMBER (MID, MMAIL, MPW, MNAME, MTEL)
     		 VALUES (#{mid}, #{mmail}, #{mpw}, #{mname}, #{mtel})
 	</insert>
 	
+	<!-- id 중복확인 -->
 	<select id="memberIdConfirm" parameterType="String" resultType="int">
-		<!-- id 중복확인 -->
 		SELECT COUNT(*) FROM MEMBER WHERE mID = #{mid}
 	</select>
 	
-    <select id="memberTelConfirm" parameterType="String" resultType="int">
-		<!-- tel 중복확인 -->
+	<!-- tel 중복확인 -->
+  <select id="memberTelConfirm" parameterType="String" resultType="int">
 		SELECT COUNT(*) FROM MEMBER WHERE mTEL = #{mtel}
 	</select>
 	
+	<!-- email 중복확인 -->
 	<select id="memberEmConfirm" parameterType="String" resultType="int">
-		<!-- email 중복확인 -->
 		SELECT COUNT(*) FROM MEMBER WHERE mMAIL = #{mmail}
 	</select>
 	
+	<!-- 회원 정보 수정 -->
 	<update id="memberModify" parameterType="Member">
-		<!-- 회원 정보 수정 -->
 		UPDATE MEMBER  
 			SET mMAIL = #{mmail, jdbcType=VARCHAR},
 			<if test="mpw!=null and mpw!=''">
@@ -56,20 +55,20 @@
 		    WHERE mID = #{mid}
 	</update>
 	
+	<!-- 회원 탈퇴 처리 -->
 	<update id="memberWithdrawal" parameterType="String">
-		<!-- 회원 탈퇴 처리 -->
 		UPDATE MEMBER 
 		    SET mWITH = 1
 		    WHERE mID = #{mid}
 	</update>
 	
+	<!-- 전체 회원 수 -->
 	<select id="memberTotCnt">
-		<!-- 전체 회원 수 -->
 		SELECT COUNT(*) FROM MEMBER 
 	</select>
 	
+	<!-- 전체 회원 리스트 출력 -->
 	<select id="memberList" parameterType="Member" resultMap="MemberResult">
-		<!-- 전체 회원 리스트 출력 -->
 		SELECT * 
 			FROM (SELECT ROWNUM RN, A.*
 					FROM (SELECT * 

@@ -60,7 +60,7 @@
 		</div>
 	</div>
 	
-	<div id="wrap">
+	<div id="wrap_padding">
 		<div class="search_box">
 			<form action="${conPath }/theater/theaterList.do" method="get" class="right">
 				<div class="search">

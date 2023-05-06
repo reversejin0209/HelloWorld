@@ -25,8 +25,8 @@
 		<!-- 전체 출력 -->
 		<if test="schItem == null or schItem == ''">
 			SELECT LIST.*,
-		           (SELECT MID FROM MEMBER WHERE LIST.MID = MID) ||
-		           (SELECT ADID FROM ADMIN WHERE LIST.ADID = ADID) WRITER
+		           (SELECT MNAME FROM MEMBER WHERE LIST.MID = MID) ||
+		           (SELECT ADNAME FROM ADMIN WHERE LIST.ADID = ADID) WRITER
 		      FROM (SELECT ROWNUM RN, QNA.* 
 		              FROM (SELECT * FROM QNABOARD 
 		                     ORDER BY QAGROUP DESC, QASTEP) QNA) LIST
@@ -36,8 +36,8 @@
 		<!-- 검색 -->
 		<if test="schItem == 'all'">
 			SELECT LIST.*,
-		           (SELECT MID FROM MEMBER WHERE LIST.MID = MID) ||
-		           (SELECT ADID FROM ADMIN WHERE LIST.ADID = ADID) WRITER
+		           (SELECT MNAME FROM MEMBER WHERE LIST.MID = MID) ||
+		           (SELECT ADNAME FROM ADMIN WHERE LIST.ADID = ADID) WRITER
 		      FROM (SELECT ROWNUM RN, QNA.* 
 		              FROM (SELECT * 
 		                      FROM QNABOARD 
@@ -48,8 +48,8 @@
 		</if>
 		<if test="schItem == 'title'">
 			SELECT LIST.*,
-		           (SELECT MID FROM MEMBER WHERE LIST.MID = MID) ||
-		           (SELECT ADID FROM ADMIN WHERE LIST.ADID = ADID) WRITER
+		           (SELECT MNAME FROM MEMBER WHERE LIST.MID = MID) ||
+		           (SELECT ADNAME FROM ADMIN WHERE LIST.ADID = ADID) WRITER
 		      FROM (SELECT ROWNUM RN, QNA.* 
 		              FROM (SELECT * 
 		                      FROM QNABOARD 
@@ -59,8 +59,8 @@
 		</if>
 		<if test="schItem == 'writer'">
 			SELECT LIST.*,
-		           (SELECT MID FROM MEMBER WHERE LIST.MID = MID) ||
-		           (SELECT ADID FROM ADMIN WHERE LIST.ADID = ADID) WRITER
+		           (SELECT MNAME FROM MEMBER WHERE LIST.MID = MID) ||
+		           (SELECT ADNAME FROM ADMIN WHERE LIST.ADID = ADID) WRITER
 		      FROM (SELECT ROWNUM RN, QNA.* 
 		              FROM (SELECT * 
 		                      FROM QNABOARD 
@@ -105,8 +105,12 @@
 	
 	<!-- 게시글 상세보기 -->
 	<select id="contentQna" parameterType="int" resultType="QnaBoard">
-		SELECT * FROM QNABOARD
-        		WHERE QANUM = #{qanum}
+		SELECT QNA.*,
+		       (SELECT MNAME FROM MEMBER WHERE QNA.MID = MID) ||
+		       (SELECT ADNAME FROM ADMIN WHERE QNA.ADID = ADID) WRITER
+		  FROM (SELECT QNABOARD.*
+		          FROM QNABOARD
+		         WHERE QANUM = #{qanum}) QNA
 	</select>
 	
 	<!-- 게시글 작성: 회원 -->
