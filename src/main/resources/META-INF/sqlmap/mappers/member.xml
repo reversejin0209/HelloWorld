@@ -62,11 +62,6 @@
 		    WHERE mID = #{mid}
 	</update>
 	
-	<!-- 전체 회원 수 -->
-	<select id="memberTotCnt">
-		SELECT COUNT(*) FROM MEMBER 
-	</select>
-	
 	<!-- 전체 회원 리스트 출력 -->
 	<select id="memberList" parameterType="Member" resultMap="MemberResult">
 		SELECT * 
@@ -77,4 +72,8 @@
 					WHERE RN BETWEEN #{startRow} AND #{endRow} 
 	</select>
 	
+	<!-- 전체 회원 수 -->
+	<select id="memberTotCnt" parameterType="Member" resultType="int">
+		SELECT COUNT(*) FROM MEMBER 
+	</select>
 </mapper>

@@ -21,53 +21,42 @@
 		<result property="zplace" column="zplace"/>
 	</resultMap>
 	
-	<!-- 기구 리스트 보기 출력 (새로 등록 된 기구 순 startRow~endRow번째 까지) -->
-	<select id="listAtc" parameterType="Attraction" resultMap="AttractionResult">
-		<if test="schItem == null or schItem == ''">
-		    SELECT A.*,
-		        (SELECT ZPLACE FROM ZONE WHERE A.ZNAME = ZNAME)ZPLACE
-		        FROM (SELECT ROWNUM RN, Z.*
-		            FROM (SELECT * FROM ATTRACTION ORDER BY ATCODE) Z)A
-		        WHERE RN BETWEEN #{startRow} AND #{endRow}
-		</if>
-		<if test="schItem == 'all'">
-		    SELECT A.*,
-		        (SELECT ZPLACE FROM ZONE WHERE A.ZNAME = ZNAME)ZPLACE
-		        FROM (SELECT ROWNUM RN, Z.*
-		            FROM (SELECT * FROM ATTRACTION WHERE ZNAME LIKE '%'||#{schZname}||'%' OR ATOLD
-					         LIKE '%'||#{schOld}||'%' OR ATHEIGHT LIKE '%'||#{scHeight}||'%' OR ATNOP LIKE '%'||#{schAtnop}||'%' ORDER BY ATCODE) Z)A
-		        WHERE RN BETWEEN #{startRow} AND #{endRow}
-		</if>	
-	</select>
-	
-	<!-- 페이징을 위한 schitem 별 목록갯수-->
-	<select id="totCntAtc" resultType="int">
-		<if test="schItem == null or schItem == ''">
-			SELECT COUNT(*) FROM ATTRACTION
-		</if>
-		<if test="schItem=='all'">
-			SELECT COUNT(*) FROM ATTRACTION A, ZONE Z WHERE ATOLD >=#{atold, jdbcType=VARCHAR} AND ATHEIGHT>=#{atheight, jdbcType=VARCHAR} AND Z.ZNAME = #{zname} AND  A.ZNAME = Z.ZNAME
-		</if>
-		<if test="schItem=='zname'">
-			SELECT COUNT(*) FROM ATTRACTION A, ZONE Z WHERE  A.ZNAME = Z.ZNAME AND Z.ZNAME = #{zname}
-		</if>
-		<if test="schItem=='atold'">
-			SELECT COUNT(*) FROM ATTRACTION A, ZONE Z WHERE  A.ZNAME = Z.ZNAME AND ATOLD >= #{atold, jdbcType=VARCHAR}
-		</if>
-		<if test="schItem=='atheight'">
-			SELECT COUNT(*) FROM ATTRACTION A, ZONE Z WHERE  A.ZNAME = Z.ZNAME AND ATHEIGHT>=#{atheight, jdbcType=VARCHAR}
-		</if>
-		<if test="schItem== 'zname' and 'atold' ">
-			SELECT COUNT(*) FROM ATTRACTION A, ZONE Z WHERE  A.ZNAME = Z.ZNAME AND Z.ZNAME = #{zname} AND ATOLD >=#{atold, jdbcType=VARCHAR}
-		</if>
-		<if test="schItem== 'zname' and 'atheight' ">
-			SELECT COUNT(*) FROM ATTRACTION A, ZONE Z WHERE  A.ZNAME = Z.ZNAME AND Z.ZNAME = #{zname} AND ATHEIGHT>=#{atheight, jdbcType=VARCHAR}
-		</if>
-		<if test="schItem== 'atold' and 'atheight' ">
-			SELECT COUNT(*) FROM ATTRACTION A, ZONE Z WHERE  A.ZNAME = Z.ZNAME AND ATOLD >=#{atold, jdbcType=VARCHAR} AND ATHEIGHT>=#{atheight, jdbcType=VARCHAR}
-		</if>
-	</select>
-	
+<!-- 기구 리스트 보기 출력 (새로 등록 된 기구 순 startRow~endRow번째 까지) -->
+<select id="listAtc" parameterType="Attraction" resultMap="AttractionResult">
+ 	<if test="schItem == null or schItem == ''">
+	    SELECT A.*,
+	        (SELECT ZPLACE FROM ZONE WHERE A.ZNAME = ZNAME)ZPLACE
+	        FROM (SELECT ROWNUM RN, Z.*
+	            FROM (SELECT * FROM ATTRACTION ORDER BY ATCODE) Z)A
+	        WHERE RN BETWEEN #{startRow} AND #{endRow}
+ 	</if>
+ 	<if test="schItem != null and schOld != null and schHeight != null and schAtnop != null">
+	    SELECT A.*,
+	        (SELECT ZPLACE FROM ZONE WHERE A.ZNAME = ZNAME)ZPLACE
+	        FROM (SELECT ROWNUM RN, Z.*
+	            FROM (SELECT * FROM ATTRACTION ORDER BY ATCODE) Z)A
+	        WHERE ZNAME=#{zname}
+	              AND ATOLD <![CDATA[<]]>= #{schOld}
+	              AND ATHEIGHT <![CDATA[<]]>= #{schHeight}
+	              AND ATNOP <![CDATA[<]]>= #{schAtnop}
+	              AND RN BETWEEN #{startRow} AND #{endRow}
+	             
+ 	</if>
+</select>
+
+<!-- 페이징을 위한 schitem 별 목록갯수-->
+<select id="totCntAtc" parameterType="Attraction" resultType="int">
+	<if test="schItem == null or schItem == ''">
+		SELECT COUNT(*) FROM ATTRACTION
+	</if>
+	<if test="schItem != null and schOld != null and schHeight != null and schAtnop != null">
+    SELECT COUNT(*) FROM ATTRACTION
+        WHERE ZNAME=#{zname}
+	          AND ATOLD <![CDATA[<]]>= #{schOld}
+	          AND ATHEIGHT <![CDATA[<]]>= #{schHeight}
+	          AND ATNOP <![CDATA[<]]>= #{schAtnop}
+	</if>
+</select>
 	<!-- 기구 상세보기 -->
 	<select id="detailAtc" parameterType="int" resultType="Attraction">
 		SELECT * FROM ATTRACTION WHERE ATCODE = #{atcode}
@@ -103,11 +92,11 @@
 		        atOLD = #{atold},
 		        atHEIGHT = #{atheight},
 		        atWEIGHT = #{atweight},
-		        atLAT = #{atlat} ,
-		        atLNG = #{atlng} ,
+		        atLAT = #{atlat},
+		        atLNG = #{atlng},
 		        atYOUTUBE = #{atyoutube},
 		        atNOP = #{atnop},
-		        zname = #{zname}    
+		        zname = #{zname} 
 		    WHERE atCODE = #{atcode}
 	</update>
 

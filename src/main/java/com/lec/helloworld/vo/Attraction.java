@@ -35,12 +35,7 @@ public class Attraction {
 	
 	// search (item & word)
 	private String schItem;
-	private String schItemZ;
-	private String schItemO;
-	private String schItemH;
-	private String schItemA;
-	private String schZname;
-	private String schOld;
-	private String scHeight;
-	private String schAtnop;
+	private int schOld;
+	private int schHeight;
+	private int schAtnop;
 }

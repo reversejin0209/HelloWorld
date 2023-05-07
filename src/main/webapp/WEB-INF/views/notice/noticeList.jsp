@@ -27,6 +27,7 @@
 </script>
 </head>
 <body>
+	<input type="hidden" name="adid" value="${admin.adid }">
 	<c:set var="SUCCESS" value="1" />
 	<c:set var="FAIL" value="0" />
 
@@ -37,8 +38,19 @@
 		</script>
 	</c:if>
 	
+	<c:if test="${not empty successMsg }">
+		<script>
+			alert('${successMsg}');
+		</script>
+	</c:if>
+	<c:if test="${not empty failMsg}">
+		<script>
+			alert('${failMsg}');
+		</script>
+	</c:if>
+	
 	<jsp:include page="../main/header.jsp" />
-	<div id="wrap">
+	<div id="wrap_padding">
 		<h1 class="center">공지사항</h1>
 	
 		<div class="search_box">
@@ -59,7 +71,7 @@
 					<input type="text" name="schWord" value="${param.schWord }"
 						placeholder="검색어를 입력하세요">
 					<button>
-						<span class="material-symbols-rounded">검색</span>
+						<img alt="검색 아이콘" src="${conPath }/img/search_FILL0_wght400_GRAD0_opsz24.svg">
 					</button>
 				</div>
 			</form>
@@ -95,6 +107,11 @@
 				</c:forEach>
 			</c:if>
 		</table>
+		<div class="center">
+			<c:if test="${not empty admin }">
+				<button onclick="location.href='${conPath}/notice/noticeWrite.do'" class="btn_submit">공지등록</button>
+			</c:if>
+		</div>
 	</div>
 	<div id="paging">
          <c:if test="${paging.startPage>paging.blockSize}">

@@ -26,7 +26,6 @@ public class At_Review {
     //search
     
     private String schItem;
-    private String schWord;
     
     //paging
     

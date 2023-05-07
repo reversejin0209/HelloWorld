@@ -1,5 +1,7 @@
 package com.lec.helloworld.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.lec.helloworld.service.AdminService;
+import com.lec.helloworld.vo.Admin;
 import com.lec.helloworld.vo.Member;
 
 @Controller
@@ -18,7 +21,7 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 	
-	// 관리자 로그인, 로그아웃
+	// 관리자 로그인, 로그 아웃
 	@RequestMapping(value = "adLogin", method = RequestMethod.GET)
 	public String adloginCheck() {
 		return "admin/adLogin";
@@ -40,12 +43,6 @@ public class AdminController {
 		return "main/main";
 	}
 
-	// 관리자 페이지 이동
-	@RequestMapping(value = "aMypage", method=RequestMethod.GET)
-	public String aMypage(HttpSession httpSession) {
-		return "admin/aMypage";
-	}
-	
 	@RequestMapping(value = "allView", method=RequestMethod.GET)
 	public String memberList(Member member, String pageNum, Model model) {
 		model.addAttribute("memberList", adminService.memberList(pageNum, member, model));

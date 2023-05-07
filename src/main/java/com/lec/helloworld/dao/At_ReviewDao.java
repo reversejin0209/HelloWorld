@@ -12,5 +12,5 @@ public interface At_ReviewDao {
 	public void hitUpatRev(int arvnum);
 	public At_Review atRevContent(int arvnum);
 	public int atRevWrite(At_Review at_Review);
-	public int atRevDelete(At_Review at_Review);
+	public int atRevDelete(int arvnum);
 }

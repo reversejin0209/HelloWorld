@@ -81,8 +81,12 @@
 	
 	<!-- 공지사항 입력하기 -->
 	<insert id="noticeWrite" parameterType="Notice">
-		INSERT INTO NOTICE(NNO, NTITLE, NTYPE, ADID)
-    VALUES(NOTICE_SEQ.NEXTVAL, #{ntitle}, #{ntype}, #{adid))
+		INSERT INTO NOTICE(NNO, NTITLE, NCONTENT, NTYPE, ADID)
+    		VALUES(NOTICE_SEQ.NEXTVAL
+    		, #{ntitle}
+    		, #{ncontent}
+    		, #{ntype}
+    		, #{adid})
 	</insert>
 	
 	<!-- 공지사항 상세보기 -->
