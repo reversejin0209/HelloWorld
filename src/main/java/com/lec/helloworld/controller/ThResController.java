@@ -46,12 +46,26 @@ public class ThResController {
 		return "thRes/thResList";
 	}
 	
-	/* 내가 예매한 티켓 상세보기 */
+	/* 내가 예매한 공연 상세보기 */
 	@RequestMapping(value="thResContent", method=RequestMethod.GET)
 	public String thResContent(String thrcode, Model model) {
-		System.out.println("컨트롤러 진입");
 		model.addAttribute("thResContent", thresService.thResContent(thrcode, model));
+		model.addAttribute("thResContentSeat", thresService.thResContentSeat(thrcode, model));
 		return "thRes/thResContent";
+	}
+	
+	/* 내 예매권 취소 */
+	@RequestMapping(value="thResCancel", method=RequestMethod.GET)
+	public String thResCancel(String thrcode, Model model) {
+		model.addAttribute("thResCancelResult", thresService.thResCancel(thrcode));
+		return "member/mMypage";
+	}
+	
+	/* 공연 삭제 */
+	@RequestMapping(value="theaterDelete", method=RequestMethod.GET)
+	public String theaterDelete(String thcode, Model model) {
+		model.addAttribute("thDeleteResult", thresService.theaterDelete(thcode));
+		return "admin/aMypage";
 	}
 	
 }

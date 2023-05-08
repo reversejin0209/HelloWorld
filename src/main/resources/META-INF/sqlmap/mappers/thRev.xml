@@ -5,11 +5,63 @@
 <mapper namespace="com.lec.helloworld.dao.ThRevDao">
 	<resultMap type="ThRev" id="ThRevResult">
 		<result property="thrnum" column="thrnum"/>
+		<result property="mid" column="mid"/>
 		<result property="thrcode" column="thrcode"/>
 		<result property="thrtitle" column="thrtitle"/>
 		<result property="thrcontent" column="thrcontent"/>
 		<result property="thrrdate" column="thrrdate"/>
 	</resultMap>
 	
+	<!-- 공연 리뷰 쓰기 -->
+	<insert id="thRevWrite" parameterType="ThRev">
+		INSERT INTO THREVIEW (thrNUM, thrCODE, mID, thrTITLE, thrCONTENT, thrRDATE) 
+    	VALUES (THREVIEW_SEQ.NEXTVAL, #{thrcode}, #{mid}, #{thrtitle}, #{thrcontent}, SYSDATE)
+	</insert>
+	
+	<!-- 공연 리뷰 작성 성공시 값 수정 -->
+	<update id="thRevWriteUpdate" parameterType="ThRev">
+		UPDATE THEATER_RES
+    	SET THRREVIEW = 1
+    	WHERE thrCODE = #{thrcode}
+	</update>
+	
+	<!-- 공연 리뷰 상세보기 -->
+	<select id="thRevContent" parameterType="ThRev" resultType="ThRev">
+		SELECT * FROM THREVIEW WHERE thrNUM = #{thrnum}
+	</select>
+	
+	<!-- 마이페이지 공연 리뷰 갯수 -->
+	<select id="mthRevListTotCnt" parameterType="ThRev" resultType="int">
+		SELECT COUNT(*) 
+    	FROM THREVIEW TV, THEATER_RES TR 
+    	WHERE TV.thrCODE = TR.thrCODE AND TR.mID = #{mid}
+	</select>
+	
+	<!-- 마이페이지 공연 리뷰 리스트 -->
+	<select id="mthRevList" parameterType="ThRev" resultMap="ThRevResult">
+		SELECT * FROM (SELECT ROWNUM RW, A.*
+                    FROM (SELECT TV.*
+                            FROM THREVIEW TV, THEATER_RES TR 
+                            WHERE TV.thrCODE = TR.thrCODE AND TR.mID = #{mid}
+                            ORDER BY thrRDATE DESC) A)
+    	WHERE RW BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<!-- 특정 공연 리뷰 갯수 -->
+	<select id="thRevListTotCnt" parameterType="ThRev" resultType="int">
+		SELECT COUNT(*) 
+    	FROM THREVIEW TV, THEATER_RES TR 
+    	WHERE TV.thrCODE = TR.thrCODE AND thCODE = #{thcode}
+	</select>
+	
+	<!-- 특정 공연 리뷰 리스트 -->
+	<select id="thRevList" parameterType="ThRev" resultMap="ThRevResult">
+		SELECT * FROM (SELECT ROWNUM RW, A.*
+                    FROM (SELECT TV.*
+                             FROM THREVIEW TV, THEATER_RES TR 
+                             WHERE TV.thrCODE = TR.thrCODE AND thCODE = #{thcode}
+                             ORDER BY thrRDATE DESC) A)
+    	WHERE RW BETWEEN #{startRow} AND #{endRow}
+	</select>
 	
 </mapper>

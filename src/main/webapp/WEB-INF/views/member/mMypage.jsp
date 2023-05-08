@@ -21,7 +21,8 @@
 			location.href = '${conPath }/member/mLogin.do';
 		</script>
 	</c:if>
-
+	
+	<!-- 예매 처리 -->
 	<c:if test="${thResResult eq true }">
 		<script>
 			alert('예매 성공했습니다');
@@ -31,6 +32,34 @@
 	<c:if test="${thResResult eq false }">
 		<script>
 			alert('예매 실패했습니다. \n다시 확인해주세요');
+			history.back();
+		</script>
+	</c:if>
+	
+	<!-- 예매권 취소 -->
+	<c:if test="${thResCancelResult eq true }">
+		<script>
+			alert('예매가 취소되었습니다.');
+		</script>
+	</c:if>
+	
+	<c:if test="${thResCancelResult eq false }">
+		<script>
+			alert('당일 공연 혹은 공연 시간이 지난 예매는 취소가 불가능합니다.');
+			history.back();
+		</script>
+	</c:if>
+	
+	<!-- 예매권 리뷰 작성 -->
+	<c:if test="${thRevWriteResult eq 1 }">
+		<script>
+			alert('리뷰가 작성되었습니다.');
+		</script>
+	</c:if>
+	
+	<c:if test="${thRevWriteResult eq 0 }">
+		<script>
+			alert('리뷰 작성 실패되었습니다. 다시 확인해주세요.');
 			history.back();
 		</script>
 	</c:if>

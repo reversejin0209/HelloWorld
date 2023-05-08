@@ -11,8 +11,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ThRev {
 	private int thrnum;
+	private String mid;
 	private String thrcode;
 	private String thrtitle;
 	private String thrcontent;
 	private Date thrrdate;
+	private String thcode;
+	// 페이징
+	private int startRow;
+	private int endRow;
 }

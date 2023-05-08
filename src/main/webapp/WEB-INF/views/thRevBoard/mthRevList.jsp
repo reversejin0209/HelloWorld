@@ -13,20 +13,7 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
 $(document).ready(function() {
-	$('tr').click(function() {
-		var thrcode = $(this).children().eq(3).text().trim();
-		if (thrcode != '주문번호') {
-			$.ajax({
-				url : '${conPath}/thRes/thResContent.do',
-				type : 'get',
-				data : 'thrcode=' + thrcode,
-				dataType : 'html',
-				success: function(data) {
-					$('.myPage_right_white').html(data);
-				},
-			});
-		}
-	});
+	
 });
 </script>
 </head>
@@ -91,53 +78,49 @@ $(document).ready(function() {
 				<!-- myContent -->
 
 				<div class="myPage_right_white">
-					<h1 class="center">나의 공연 예매 내역</h1>
-					<br> 총 수량 : ${paging.totCnt }
+					<h1 class="center">나의 공연 리뷰 내역</h1>
+					<br> 총 리뷰 수 : ${paging.totCnt }
 					<table class="list_table">
 						<tr>
-							<th>공연일</th>
-							<th class="title">공연 이름</th>
-							<th>공연장소</th>
-							<th>주문번호</th>
-							<th>결제금액</th>
+							<th>리뷰 번호</th>
+							<th class="title">작성일</th>
+							<th>리뷰제목</th>
 						</tr>
 
 						<!-- 예매 내역이 없는 경우 -->
 						<c:if test="${ticketList.size() == 0}">
 							<tr>
-								<td colspan="5">
+								<td colspan="3">
 									<h4>예매 내역이 없습니다.</h4>
 								</td>
 							</tr>
 						</c:if>
 
-						<c:forEach var="thRes" items="${thResListResult }">
+						<c:forEach var="thRev" items="${thRevList }">
 							<tr>
-								<td class="eng"><fmt:formatDate value="${thRes.thrdate }" pattern="yy.MM.dd" /></td>
-								<td>${thRes.thname }</td>
-								<td class="eng">${thRes.thloc }</td>
-								<td class="eng">${thRes.thrcode }</td>
-								<td class="eng"><fmt:formatNumber pattern="###,###" value="${thRes.thrtotprice }" /></td>
+								<td>${thRev.thrnum }</td>
+								<td class="eng"><fmt:formatDate value="${thRev.thrrdate }" pattern="yy.MM.dd" /></td>
+								<td>${thRev.thrtitle }</td>
 							</tr>
 						</c:forEach>
 					</table>
 					<br>
-
+					
 					<!-- 페이징 -->
 					<div id="paging">
 						<c:if test="${paging.startPage>paging.blockSize}">
-							<a href="${conPath }/thRes/thResList.do?pageNum=${paging.startPage-1 }&mid=${member.mid }">이전</a>
+							<a href="${conPath }/thRes/thRevList.do?pageNum=${paging.startPage-1 }&mid=${member.mid }">이전</a>
 						</c:if>
 						<c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage }">
 							<c:if test="${paging.currentPage==i }">
 								<span>${i }</span>
 							</c:if>
 							<c:if test="${paging.currentPage != i }">
-								<a href="${conPath }/thRes/thResList.do?method=list&pageNum=${i }&mid=${member.mid }">${i }</a>
+								<a href="${conPath }/thRes/thRevList.do?method=list&pageNum=${i }&mid=${member.mid }">${i }</a>
 							</c:if>
 						</c:forEach>
 						<c:if test="${paging.endPage<paging.pageCnt }">
-							<a href="${conPath }/thRes/thResList.do&pageNum=${paging.endPage+1 }&mid=${member.mid }">다음</a>
+							<a href="${conPath }/thRes/thRevList.do&pageNum=${paging.endPage+1 }&mid=${member.mid }">다음</a>
 						</c:if>
 					</div>
 

@@ -91,6 +91,7 @@
 		</script>
 	</c:if>
 	
+	<!-- 회원 탈퇴 처리 -->
 	<c:if test="${member.mwith eq 1}">
 		<script>
 			alert("탈퇴 처리된 회원입니다.");
@@ -98,7 +99,6 @@
 		</script>
 	</c:if>
 	
-	<!-- 회원 탈퇴 처리 -->
 	<c:if test="${withdrawalResult eq 1}">
 		<script>
 			alert('회원 탈퇴 성공하였습니다');

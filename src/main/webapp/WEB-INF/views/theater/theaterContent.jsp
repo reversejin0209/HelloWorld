@@ -6,23 +6,57 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Hello World</title>
-<link href="${conPath }/css/style.css" rel="stylesheet">
-<link href="${conPath }/css/theater/theaterContent.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-<script>
-	$(document).ready(function() {
-		$('.resButton').click(function(){
-			var sessionMember = ${sessionScope.member }
-			if(sessionMember == null){ // 체크함
-				alert('공연 예매 서비스는 로그인 후 이용 가능합니다.');
-				location.href="member/mLogin.do";
-			}
+	<meta charset="UTF-8">
+	<title>Hello World</title>
+	<link href="${conPath }/css/style.css" rel="stylesheet">
+	<link href="${conPath }/css/theater/theaterContent.css" rel="stylesheet">
+	    <style>@font-face {
+	        font-family: 'LeferiPoint-WhiteObliqueA';
+	        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff') format('woff');
+	        font-weight: normal;
+	        font-style: normal;
+	    }
+	
+	    body {
+	        font-family: LeferiPoint-WhiteObliqueA;
+	    }
+	
+	    details {
+	        border-bottom: 1px solid #efefef;
+	        color: #666;
+	        font-size: 16px;
+	        padding: 15px;
+	    }
+	
+	
+	    details[open] summary {
+	        font-weight: 800;
+	    }
+	    
+	    details[open] p {
+	        font-size: 14px;
+	    }
+	
+	    details > summary {
+	        color: #333;
+	        font-size: 16px;
+	        padding: 10px 0;
+	        cursor: pointer;
+	    }
+	    </style>
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('.resButton').click(function(){
+				var sessionMember = ${sessionScope.member }
+				if(sessionMember == null){ // 체크함
+					alert('공연 예매 서비스는 로그인 후 이용 가능합니다.');
+					location.href="member/mLogin.do";
+				}
+			});
 		});
-	});
-</script>
+	</script>
 </head>
 <body>
 	<jsp:include page="../main/header.jsp" />
@@ -61,18 +95,30 @@
 					<!-- 공통 규정 안내 -->
 					<tr>
 						<td colspan="3">
-							<textarea readonly="readonly">
-[기본정보]
-※ 방문일지정 예약상품으로 지정한 날짜에 이용 가능합니다.
-
-※ 기침 등 증세가 있거나, 2주내 확진자와 접촉한 경우가 있는 고객은 마스크를 꼭 착용해 주시고,
-자율적인 방역 수칙 실천을 부탁드립니다.
-입장 전 에버랜드 APP에 이용권 등록 바랍니다. APP 미등록 시 일부 시설의 예약/탑승이 제한될 수 있습니다.
-
-[취소 및 환불 규정]
-* 유효기간 내 미사용티켓 100% 환불가능
-* 유효기간 종료 후 미사용티켓 100% 환불
-* 사용한 티켓은 환불 불가능합니다.</textarea>
+							공연리뷰
+							<c:forEach var="thRevList" items="${thRevList }">
+								<details>
+							    <summary>${thRevList.thrtitle }</summary>
+							    <p><fmt:formatDate value="${thRevList.thrrdate }" pattern="yy.MM.dd" /> <span class="lightgray">ㅣ</span> ${thRevList.mid }</p>
+							   	<p>${thRevList.thrcontent }</p>
+								</details>
+							</c:forEach>
+							<div id="paging">
+								<c:if test="${paging.startPage>paging.blockSize}">
+									<a href="${conPath }/theater/theaterContent.do?pageNum=${paging.startPage-1 }&thname=${param.thname }&schDate=${param.schDate }&thcode=${param.thcode }&thseat=${param.thseat }&thprice=${param.thprice }">이전</a>
+								</c:if>
+								<c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage }">
+									<c:if test="${paging.currentPage==i }">
+										<span>${i }</span>
+									</c:if>
+									<c:if test="${paging.currentPage != i }">
+										<a href="${conPath }/theater/theaterContent.do?method=list&pageNum=${i }&thname=${param.thname }&schDate=${param.schDate }&thcode=${param.thcode }&thseat=${param.thseat }&thprice=${param.thprice }">${i }</a>
+									</c:if>
+								</c:forEach>
+								<c:if test="${paging.endPage<paging.pageCnt }">
+									<a href="${conPath }/theater/theaterContent.do?pageNum=${paging.endPage+1 }&thname=${param.thname }&schDate=${param.schDate }&thcode=${param.thcode }&thseat=${param.thseat }&thprice=${param.thprice }">다음</a>
+								</c:if>
+							</div>
 						</td>
 					</tr>
 				</table>
@@ -99,14 +145,19 @@
 				</div>
 				<!-- div class="order_box" -->
 				<div class="order_box_bottom">
-					<c:if test="${not empty member }">
+					<c:if test="${not empty member && empty admin }">
 						<div class="resButton" onclick="location.href='${conPath }/thRes/thReserve.do?thrdatetemp=${param.schDate }&thcode=${param.thcode }&thprice=${param.thprice }&mid=${member.mid }'">
 							예약하기
 						</div>
 					</c:if>
-					<c:if test="${empty member }">
+					<c:if test="${empty member && empty admin }">
 						<div class="resButton" onclick="location.href='${conPath }/member/mLogin.do'">
 							로그인 후 이용할 수 있습니다
+						</div>
+					</c:if>
+					<c:if test="${empty member && not empty admin }">
+						<div class="resButton" onclick="location.href='${conPath }/thRes/theaterDelete.do?thcode=${param.thcode }'">
+							공연 삭제하기
 						</div>
 					</c:if>
 				</div>

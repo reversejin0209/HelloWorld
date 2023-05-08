@@ -22,7 +22,20 @@
 			location.href = '${conPath }/admin/adLogin.do';
 		</script>
 	</c:if>
-
+	
+	<!-- 공연 삭제 처리 -->
+	<c:if test="${thDeleteResult eq 1 }">
+		<script>
+			alert('공연 삭제가 완료되었습니다.');
+		</script>
+	</c:if>
+	<c:if test="${thDeleteResult eq 0 }">
+		<script>
+			alert('공연 삭제가 실패되었습니다. 다시 확인해주세요.');
+			history.back();
+		</script>
+	</c:if>
+	
 	<jsp:include page="../main/header.jsp" />
 	<div class="background-color">
 		<div id="wrap">
@@ -56,7 +69,7 @@
 							<ul>
 								<li><h4>공연 관리</h4></li>
 								<li><a href="">공연 목록</a></li>
-								<li><a href="">공연 등록</a></li>
+								<li><a href="${conPath }/theater/theaterInsert.do">공연 등록</a></li>
 								<li><a href="">공연 예매 현황</a></li>
 							</ul>
 

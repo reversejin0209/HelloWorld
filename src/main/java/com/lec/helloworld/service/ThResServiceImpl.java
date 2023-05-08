@@ -119,4 +119,40 @@ public class ThResServiceImpl implements ThResService {
 		return thresDao.thResContent(thrcode);
 	}
 
+	@Override
+	public List<ThRes> thResContentSeat(String thrcode, Model model) {
+		return thresDao.thResContentSeat(thrcode);
+	}
+
+	@Override
+	public boolean thResCancel(String thrcode) {
+		int cancelChk = thresDao.thResCancelChk(thrcode);
+		if(cancelChk != 0) {
+			thresDao.thResCancelSeat(thrcode);
+			thresDao.thResCancel(thrcode);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public int theaterDelete(String thcode) {
+		List<ThRes> thrcodeList = thresDao.getThrcode(thcode);
+		System.out.println("서비스 진입 list : " + thrcodeList);
+		int thrcodelength = thrcodeList.size();
+		int templength = 0;
+		for(ThRes thrcode : thrcodeList) {
+			thresDao.deleteSeat(thrcode.getThrcode());
+			thresDao.deleteThRev(thrcode.getThrcode());
+			templength += 1;
+		}
+		System.out.println("for문 완료");
+		if(thrcodelength==templength) {
+			thresDao.deleteThRes(thcode);
+		}
+		System.out.println("if문 완료");
+		return thresDao.theaterDelete(thcode);
+	}
+
 }
