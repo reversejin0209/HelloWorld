@@ -12,4 +12,5 @@ public interface ThRevService {
 	public ThRev thRevContent(ThRev threv);
 	public List<ThRev> mthRevList(ThRev threv, String pageNum, Model model);
 	public List<ThRev> thRevList(ThRev threv, String pageNum, Model model);
+	public List<ThRev> thRevMainList();
 }

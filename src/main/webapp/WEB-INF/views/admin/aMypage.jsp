@@ -12,7 +12,7 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
 	$(document).ready(function() {
-
+		
 	});
 </script>
 </head>
@@ -35,6 +35,13 @@
 			history.back();
 		</script>
 	</c:if>
+	
+	<!-- 공연 추가 처리 -->
+	<c:if test="${not empty insertResult }">
+		<script>
+			alert('${insertResult }');
+		</script>
+	</c:if>	
 	
 	<jsp:include page="../main/header.jsp" />
 	<div class="background-color">
@@ -118,6 +125,7 @@
 								<c:forEach var="qna" items="${qnaList }" end="4">
 								<li class="flex_wide">
 									<span>${qna.qatitle }</span>
+									<span>하이</span>
 									<fmt:formatDate value="${qna.qardate }" pattern="yy.MM.dd hh:mm:ss"/>
 								</li>
 								</c:forEach>

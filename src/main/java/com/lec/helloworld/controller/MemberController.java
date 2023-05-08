@@ -52,7 +52,7 @@ public class MemberController {
 	@RequestMapping(value = "mLogout", method = RequestMethod.GET)
 	public String mLogout(String after, HttpSession httpSession) {
 		memberService.logout(httpSession);
-		return after;
+		return "forward:../"+after;
 	}
 
 	/* 회원가입 */

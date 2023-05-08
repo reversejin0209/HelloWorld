@@ -20,4 +20,6 @@ public class ThRev {
 	// 페이징
 	private int startRow;
 	private int endRow;
+	// 메인 출력 용도
+	private String thname;
 }

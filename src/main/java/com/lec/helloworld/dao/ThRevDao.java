@@ -15,4 +15,5 @@ public interface ThRevDao {
 	public List<ThRev> mthRevList(ThRev threv);
 	public int thRevListTotCnt(ThRev threv);
 	public List<ThRev> thRevList(ThRev threv);
+	public List<ThRev> thRevMainList();
 }

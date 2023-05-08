@@ -31,7 +31,7 @@
 				<c:if test="${not empty sessionScope.member }">
 					<ul>
 						<li><a href="${conPath }/member/mMypage.do">${member.mname }님 ▾</a><li>
-						<li><a href="${conPath }/member/mLogout.do?after=main/main">로그아웃</a></li>
+						<li><a href="${conPath }/member/mLogout.do?after=main.do">로그아웃</a></li>
 					</ul>
 				</c:if>
 				<c:if test="${not empty sessionScope.admin }">

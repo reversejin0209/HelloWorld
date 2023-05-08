@@ -49,6 +49,7 @@ public class TheaterController {
 	@RequestMapping(value="theaterInsert", method = RequestMethod.POST)
 	public String theaterInsert(Theater theater, MultipartHttpServletRequest mRequest, Model model) {
 		theaterService.theaterInsert(theater, mRequest, model);
+		model.addAttribute("insertResult", "공연 추가가 완료되었습니다.");
 		return "admin/aMypage";
 	}
 	

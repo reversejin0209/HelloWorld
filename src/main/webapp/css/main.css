@@ -137,11 +137,10 @@ h1.main_clock {
 /* main_news */
 #main_news {
 	width: 1020px;
-	margin: 0 auto;
-	height: 260px;
+	margin: 30px auto;
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
+	align-items: flex-start;
 }
 
 #main_news .list_box li:first-child {

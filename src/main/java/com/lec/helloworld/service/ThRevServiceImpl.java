@@ -63,5 +63,11 @@ public class ThRevServiceImpl implements ThRevService {
 		return threvDao.thRevList(threv);
 	}
 
+	@Override
+	public List<ThRev> thRevMainList() {
+		System.out.println("서비스 진입");
+		return threvDao.thRevMainList();
+	}
+
 
 }

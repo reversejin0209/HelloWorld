@@ -10,6 +10,7 @@
 		<result property="thrtitle" column="thrtitle"/>
 		<result property="thrcontent" column="thrcontent"/>
 		<result property="thrrdate" column="thrrdate"/>
+		<result property="thname" column="thname"/>
 	</resultMap>
 	
 	<!-- 공연 리뷰 쓰기 -->
@@ -62,6 +63,14 @@
                              WHERE TV.thrCODE = TR.thrCODE AND thCODE = #{thcode}
                              ORDER BY thrRDATE DESC) A)
     	WHERE RW BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<!-- 리뷰 최근 순 출력 -->
+	<select id="thRevMainList" resultMap="ThRevResult">
+		SELECT TR.*, T.thNAME
+    	FROM THREVIEW TR, THEATER_RES TS, THEATER T
+    	WHERE TR.thrCODE = TS.thrCODE AND TS.thCODE = T.thCODE
+    	ORDER BY THRRDATE DESC
 	</select>
 	
 </mapper>

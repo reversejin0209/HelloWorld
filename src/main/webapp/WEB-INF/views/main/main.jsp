@@ -226,13 +226,18 @@
 				</ul>
 			</div>
 			<div class="main_news_right">
-				<ul class="list_box">
-					<li class="flex_wide"><b>BEST 공연 후기</b>+</li>
-					<li>01</li>
-					<li>02</li>
-					<li>03</li>
-					<li>04</li>
-				</ul>
+				<div class="sub_item item3">
+							<h2 class="flex_wide"><span>최근 리뷰 내역</span> +</h2>
+							<ul class="list_box">
+								<c:forEach var="threvList" items="${threvMainList }" end="4">
+								<li class="flex_wide">
+									<span>${threvList.thrtitle }</span>
+									<span>${threvList.thname }</span>
+									<fmt:formatDate value="${threvList.thrrdate }" pattern="yy.MM.dd"/>
+								</li>
+								</c:forEach>
+							</ul>
+						</div>
 			</div>
 		</div>
 		<!-- main_notice -->
