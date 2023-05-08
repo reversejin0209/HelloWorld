@@ -8,6 +8,8 @@ import com.lec.helloworld.vo.QnaBoard;
 
 @Mapper
 public interface QnaBoardDao {
+	// 상위 네다섯개 노출 용도
+	public List<QnaBoard> qnaBoardMainList();
 	
 	// 게시글 목록
 	public List<QnaBoard> qnaBoardList(QnaBoard qnaBoard);
@@ -35,4 +37,10 @@ public interface QnaBoardDao {
 	
 	// 게시글 삭제(답변글까지 삭제)
 	public int deleteQna(int qagroup);
+	
+	// 마이페이지: 나의 문의글 + 답변글
+	public List<QnaBoard> myQnaBoardList(QnaBoard qnaBoard);
+	
+	// 마이페이지: 글 갯수
+	public int totCntMyQna(QnaBoard qnaBoard);
 }

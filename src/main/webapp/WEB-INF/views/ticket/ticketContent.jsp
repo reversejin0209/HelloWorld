@@ -10,6 +10,7 @@
 <link href="${conPath }/css/style.css" rel="stylesheet">
 <link href="${conPath }/css/ticket/ticket.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script type="text/javascript" src="${conPath }/js/calender.js"></script>
 <script>
 	$(document).ready(function() {
 
@@ -40,7 +41,7 @@
 				discPrice = (totPrice * ((100 - disc) / 100)); 
 			});
 
-			$('input[name="trtotPrice"]').val(totPrice);
+			$('input[name="trtotPrice"]').val(discPrice);
 			$('.totcnt').html(comma(totcnt));
 			$('.totprice').html(comma(totPrice));
 			$('.discprice').html(comma(discPrice));
@@ -138,24 +139,49 @@
 			</div>
 
 			<!-- 우측: 주문 박스 -->
-
 			<div class="order_box">
-				<form action="${conPath }/ticketRes/tOrderReserve.do">
+				<form action="${conPath }/ticket/tOrderReserve.do">
 					<input type="hidden" name="trdname" value="${ticket.tname }">
-					<input type="hidden" name="disc" value="${member.disc}">
-					
+					<input type="hidden" class="disc" value="${member.disc}">
+
 					<div class="order_box_top">
 						<table class="ticketContent_table">
 							<tr>
 								<td>
-									<h2>예매옵션을 선택해 주세요.</h2>
+									<h2>예매 옵션을 선택해 주세요.</h2>
 								</td>
 							</tr>
 							<tr>
 								<td>
-									<h2>날짜 선택</h2> <input type="date" name="trddate" required="required">
+									<h2>날짜 선택</h2>
 								</td>
 							</tr>
+						</table>
+						
+						<!-- 달력 -->
+						<table class="Calendar">
+							<thead>
+								<tr>
+									<td onClick="prevCalendar();" style="cursor: pointer">&#60;</td>
+									<td colspan="5"><span id="calYear"></span>년 <span id="calMonth"></span>월</td>
+									<td onClick="nextCalendar();" style="cursor: pointer">&#62;</td>
+								</tr>
+								<tr>
+									<td>일</td>
+									<td>월</td>
+									<td>화</td>
+									<td>수</td>
+									<td>목</td>
+									<td>금</td>
+									<td>토</td>
+								</tr>
+							</thead>
+							<tbody></tbody>
+						</table>
+						<input type="hidden" name="trddate" class="trddate" required="required">
+
+						<table class="ticketContent_table">
+							<tr><td></td></tr>
 							<tr>
 								<td>
 									<h2>상품 선택</h2> <!-- 티켓 종류 출력 --> <c:set var="i" value="1" /> <c:forEach var="ticket" items="${ticketList }">
@@ -179,13 +205,13 @@
 									</td>
 								</tr>
 							</c:if>
+							
 							<c:if test="${not empty member }">
 								<tr>
 									<td>
 										<h2>등급 할인</h2>
 										<div class="flex_wide">
-											<span>${member.mname }(${member.mid })님
-												<b>${member.grade }</b> 등급
+											<span>${member.mname }(${member.mid })님 <b>${member.grade }</b> 등급
 											</span>
 											<div>
 												<span class="big">${member.disc }</span> % 할인
@@ -197,28 +223,23 @@
 
 							<tr>
 								<td>
-									<h2>결제 예정 금액</h2>
-									
-									<!-- 비회원: 가격 확인 -->
+									<h2>결제 예정 금액</h2> <!-- 비회원: 가격 확인 --> 
+									<input type="hidden" name="trtotPrice" value="0">
 									<c:if test="${empty member }">
 										<div class="flex_wide">
 											&nbsp;
-											<input type="hidden" name="trtotPrice" value="0">
 											<div>
 												<span class="totprice big">0</span> 원
 											</div>
 										</div>
-									</c:if>
-									
-									<!-- 회원: 할인 가격 확인 -->
-									<c:if test="${not empty member }">
+									</c:if> <!-- 회원: 할인 가격 확인 --> <c:if test="${not empty member }">
 										<div class="flex_wide">
 											&nbsp;
-											<input type="hidden" name="trtotPrice" value="0">
 											<div>
-												<del><span class="totprice"></span></del>
-												&nbsp;
-												<span class="discprice big">0</span>원
+												<del>
+													<span class="totprice"></span>
+												</del>
+												&nbsp; <span class="discprice big">0</span>원
 											</div>
 										</div>
 									</c:if>

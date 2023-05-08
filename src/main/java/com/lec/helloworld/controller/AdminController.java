@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.lec.helloworld.service.AdminService;
+import com.lec.helloworld.service.QnaBoardService;
 import com.lec.helloworld.vo.Member;
 
 @Controller
@@ -18,19 +19,23 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 	
+	@Autowired
+	private QnaBoardService qBoardService;
+	
 	// 관리자 로그인, 로그아웃
 	@RequestMapping(value = "adLogin", method = RequestMethod.GET)
 	public String adloginCheck() {
 		return "admin/adLogin";
 	}
+	
 	@RequestMapping(value = "adLogin", method = RequestMethod.POST)
 	public String adloginCheck(String adid, String adpw, String after, Model model , HttpSession httpsession) {
-		String adLoginResult = adminService.adLoginCheck(adid, adpw, httpsession);
-		if(adLoginResult.equals("관리자 로그인성공")) {
-			return "main/main";
+		String adLoginResult = adminService.adLoginCheck(adid, adpw, httpsession, model);
+		if(adLoginResult.equals("로그인 성공")) {
+			return "redirect: aMypage.do";
 		} else {
 			model.addAttribute("adLoginResult", adLoginResult);
-			return "main/main";
+			return "admin/adLogin";
 		}
 	}
 	
@@ -42,7 +47,8 @@ public class AdminController {
 
 	// 관리자 페이지 이동
 	@RequestMapping(value = "aMypage", method=RequestMethod.GET)
-	public String aMypage(HttpSession httpSession) {
+	public String aMypage(HttpSession httpSession, Model model) {
+		model.addAttribute("qnaList", qBoardService.qnaBoardMainList());
 		return "admin/aMypage";
 	}
 	

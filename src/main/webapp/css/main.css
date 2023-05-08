@@ -58,17 +58,16 @@
 	cursor: pointer;
 }
 
-#main #visual .visual_items .item_box .sub_item>img{
+#main #visual .visual_items .item_box .sub_item>img {
 	width: 40px;
 	margin-bottom: 20px;
-}	
+}
 
-#main #visual .visual_items .item_box .sub_item .sub_item_text >p{
+#main #visual .visual_items .item_box .sub_item .sub_item_text>p {
 	margin: 10px 0;
-}	
+}
 
-
-.sub_item.item2, .sub_item.item3{
+.sub_item.item2, .sub_item.item3 {
 	background-color: #ffffff;
 }
 
@@ -139,10 +138,23 @@ h1.main_clock {
 #main_news {
 	width: 1020px;
 	margin: 0 auto;
-	height: 300px;
+	height: 260px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+}
+
+#main_news .list_box li:first-child {
+	padding: 8px 0;
+	border-bottom: 1px solid #dedede;
+}
+
+#main_news .list_box li {
+	margin: 10px 0;
+}
+
+#main_news .list_box li a {
+	color: #1d1d1d;
 }
 
 #main_news>div {
@@ -155,5 +167,16 @@ h1.main_clock {
 	height: 200px;
 	display: block;
 	margin: 0 auto;
-	
 }
+
+.list_box {
+	overflow: hidden;
+}
+
+.date {
+	float: right;
+}
+
+#notice_box{
+			background-image: url(../img/main_ticket.png);
+		{

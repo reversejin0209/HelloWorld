@@ -14,12 +14,12 @@
 <script>
 	$(document).ready(function() {
 		$('tr').click(function() {
-			var trcode = $(this).children().eq(3).text().trim();
-			if (!isNaN(trcode)) {
+			var qanum = $(this).children().eq(0).text().trim();
+			if (!isNaN(qanum)) {
 				$.ajax({
-					url : '${conPath}/ticket/tOrderContent.do',
+					url : '${conPath}/qnaBoard/myQnaBoardContent.do',
 					type : 'get',
-					data : 'trcode=' + trcode,
+					data : 'qanum=' + qanum,
 					dataType : 'html',
 					success : function(data) {
 						$('.myPage_right_white').html(data);
@@ -33,7 +33,7 @@
 <body>
 	<c:if test="${empty member }">
 		<script>
-			location.href = '${conPath }/member/mLogin.do';
+			loation.href = '${conPath }/member/mLogin.do';
 		</script>
 	</c:if>
 
@@ -91,62 +91,61 @@
 				<!-- myContent -->
 
 				<div class="myPage_right_white">
-					<h1 class="center">나의 티켓 예매 내역</h1>
+					<h1 class="center">나의 1:1 문의 내역</h1>
 					<br>
-					총 수량 : ${paging.totCnt }
+					글 갯수 : ${paging.totCnt }
 					<table class="list_table">
 						<tr>
-							<th>주문일</th>
-							<th colspan="2" class="title">주문내역</th>
-							<th>주문번호</th>
-							<th>결제금액</th>
-							<th>상태</th>
+							<th>글번호</th>
+							<th>카테고리</th>
+							<th class="title">제목</th>
+							<th>작성일</th>
 						</tr>
 
-						<!-- 주문 내역이 없는 경우 -->
+						<!-- 예매 내역이 없는 경우 -->
 						<c:if test="${ticketList.size() == 0}">
 							<tr>
 								<td colspan="5">
-									<h4>주문 내역이 없습니다.</h4>
+									<h4>예매 내역이 없습니다.</h4>
 								</td>
 							</tr>
 						</c:if>
 
-						<c:forEach var="ticket" items="${ticketList }">
+						<c:forEach var="qna" items="${qnaList }">
 							<tr>
-								<td class="eng">
-									<fmt:formatDate value="${ticket.trorderDate }" pattern="yy.MM.dd" /><br>
-									<fmt:formatDate value="${ticket.trorderDate }" pattern="hh:mm:ss" />
-								</td>
-								<td><img alt="주문내역 이미지" src="../img/${ticket.timg }" style="height: 80px; width: 80px; object-fit: cover;"></td>
-								<td>${ticket.tname }</td>
-								<td class="eng">${ticket.trcode }</td>
-								<td class="eng"><fmt:formatNumber pattern="###,###" value="${ticket.trtotPrice }" /></td>
-								<td><c:if test="${ticket.trresult eq 0}">
-										주문완료
-									</c:if> <c:if test="${ticket.trresult eq 1}">
-										<b>취소완료</b>
-									</c:if></td>
+								<td class="eng">${qna.qanum }</td>
+								<td>${qna.qacat }</td>
+								<td class="title left"><c:forEach var="i" begin="1" end="${qna.qaindent }">
+										<c:if test="${i != qna.qaindent }">
+											 &nbsp; &nbsp; 
+										</c:if>
+										<c:if test="${i == qna.qaindent }">
+											 ㄴ
+										</c:if>
+									</c:forEach> ${qna.qatitle }</td>
+								<td class="eng"><fmt:formatDate value="${qna.qardate }" type="date" dateStyle="short" /></td>
 							</tr>
 						</c:forEach>
 					</table>
-					<br>
+					<div class="right">
+						<button onclick="location.href='${conPath}/qnaBoard/qBoardWrite.do'" class="btn_submit">글쓰기</button>
+					</div>
 
 					<!-- 페이징 -->
 					<div id="paging">
 						<c:if test="${paging.startPage>paging.blockSize}">
-							<a href="${conPath}/ticket/tOrderList.do?pageNum=${paging.startPage-1 }">이전</a>
+							<a href="${conPath }/qnaBoard/myQnaBoardList.do?pageNum=${paging.startPage-1 }">이전</a>
 						</c:if>
 						<c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage }">
 							<c:if test="${paging.currentPage==i }">
 								<span>${i }</span>
 							</c:if>
 							<c:if test="${paging.currentPage != i }">
-								<a href="${conPath}/ticket/tOrderList.do?pageNum=${i }">${i }</a>
+								<a href="${conPath }/qnaBoard/myQnaBoardList.do?method=list&pageNum=${i }">${i }</a>
 							</c:if>
 						</c:forEach>
 						<c:if test="${paging.endPage<paging.pageCnt }">
-							<a href="${conPath }/ticket/tOrderList.do&pageNum=${paging.endPage+1 }">다음</a>
+							<a href="${conPath }/qnaBoard/myQnaBoardList.do&pageNum=${paging.endPage+1 }">다음</a>
 						</c:if>
 					</div>
 

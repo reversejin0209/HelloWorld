@@ -18,7 +18,7 @@
 <body>
 	<c:if test="${empty member }">
 		<script>
-			loation.href = '${conPath }/member/mLogin.do';
+			location.href = '${conPath }/member/mLogin.do';
 		</script>
 	</c:if>
 
@@ -50,7 +50,7 @@
 						<li>
 							<ul>
 								<li><h4>나의 활동관리</h4></li>
-								<li><a href="${conPath}/member/tOrderList.do">티켓 예매 내역</a></li>
+								<li><a href="${conPath}/ticket/tOrderList.do">티켓 예매 내역</a></li>
 								<li><a href="${conPath }/thRes/thResList.do?mid=${member.mid }">공연 예매 내역</a></li>
 								<li><a href="">공연 리뷰</a></li>
 								<li><a href="">어트랙션 리뷰</a></li>
@@ -64,7 +64,7 @@
 
 							<ul>
 								<li><h4>고객센터</h4></li>
-								<li><a href="">1:1 문의내역</a></li>
+								<li><a href="${conPath }/qnaBoard/myQnaBoardList.do">1:1 문의내역</a></li>
 								<li><a href="">어트랙션 문의내역</a></li>
 								<li><a href="">공지사항</a></li>
 								<li><a href="">FAQ</a></li>
@@ -86,14 +86,21 @@
 							<h1>${member.grade }</h1>
 						</div>
 						<div class="info_box_right">
-							<h1>${(member.highvi +1) - member.mvisit }회</h1> 추가 방문 시 등급 UP!
+							<c:if test="${member.grade != 'VIP'}">
+								<h1>${(member.highvi +1) - member.mvisit }회</h1> 추가 방문 시 등급 UP!
+							</c:if>
+							<c:if test="${member.grade eq 'VIP'}">
+								${member.mname } 님은
+								<h1>최고 등급입니다</h1>
+							</c:if>
+							
 						</div>
 					</div><!-- info_box -->
 
 					<!-- main_item -->
 					<div class="item_box">
-						<div class="sub_item item1" onclick="location.href='${conPath}/member/tOrderList.do'">
-							<h2>티켓 예매확인/취소</h2>
+						<div class="sub_item item1" onclick="location.href='${conPath}/ticket/tOrderList.do'">
+							<h2>티켓 예매확인/취소 </h2>
 						</div>
 						<div class="sub_item item2">
 							<div class="normal_box" onclick="location.href='${conPath }/thRes/thResList.do?mid=${member.mid }'">
@@ -101,7 +108,7 @@
 							</div>
 						</div>
 						<div class="sub_item item3">
-							<div class="normal_box">
+							<div class="normal_box" onclick="location.href='${conPath }/qnaBoard/myQnaBoardList.do'">
 								<h2>1:1 문의내역</h2>
 							</div>
 						</div>

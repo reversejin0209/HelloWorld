@@ -7,6 +7,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.lec.helloworld.dao.AdminDao;
 import com.lec.helloworld.dao.MemberDao;
@@ -22,13 +24,17 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	private MemberDao memberDao;
 	
+	@Autowired
+	private QnaBoardService qBoardService;
+	
 	@Override 
 	public Admin getAdmin(String adid) { // 관리자 아이디로 관리자 정보 받기
 		return adminDao.getAdmin(adid);
 	}
 	
 	@Override // 관리자 로그인 확인
-	public String adLoginCheck(String adid, String adpw, HttpSession httpsession) {
+	public String adLoginCheck(String adid, String adpw, HttpSession httpsession, Model model) {
+		// 
 		Admin admin = adminDao.getAdmin(adid);
 		String result = null;
 		if(admin != null && admin.getAdpw().equals(adpw)) {
@@ -69,6 +75,13 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int memberTotCnt(Member member) {
 		return memberDao.memberTotCnt(member);
+	}
+	
+	/* 관리자페이지 */
+	@RequestMapping(value = "aMypage", method = RequestMethod.GET)
+	public String mMypage(HttpSession httpsession, Model model) {
+		model.addAttribute("qnaList", qBoardService.qnaBoardMainList());
+		return "member/mMypage";
 	}
 	
 }
