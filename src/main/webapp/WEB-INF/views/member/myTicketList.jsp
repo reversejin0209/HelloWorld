@@ -17,7 +17,7 @@
 			var trcode = $(this).children().eq(3).text().trim();
 			if (!isNaN(trcode)) {
 				$.ajax({
-					url : '${conPath}/ticket/tOrderContent.do',
+					url : '${conPath}/ticket/myTicketContent.do',
 					type : 'get',
 					data : 'trcode=' + trcode,
 					dataType : 'html',
@@ -58,16 +58,14 @@
 					<ul>
 						<li>
 							<h3>안녕하세요!</h3>
-							<h1>
-								<a href="${conPath }/member/mMypage.do?mid=${mid}">${member.mname } 님</a>
-							</h1> <br>
+							<h1><a href="${conPath }/member/mMypage.do?mid=${mid}">${member.mname } 님</a></h1> <br>
 						</li>
 						<li>
 							<ul>
 								<li><h4>나의 활동관리</h4></li>
-								<li><a href="${conPath}/ticket/tOrderList.do">티켓 예매 내역</a></li>
+								<li><a href="${conPath}/ticket/myTicketList.do">티켓 예매 내역</a></li>
 								<li><a href="${conPath }/thRes/thResList.do?mid=${member.mid }">공연 예매 내역</a></li>
-								<li><a href="">공연 리뷰</a></li>
+								<li><a href="${conPath }/thRev/mthRevList.do?mid=${member.mid }">공연 리뷰</a></li>
 								<li><a href="">어트랙션 리뷰</a></li>
 							</ul>
 
@@ -87,8 +85,7 @@
 							</ul>
 						</li>
 					</ul>
-				</div>
-				<!-- myContent -->
+				</div><!-- myContent -->
 
 				<div class="myPage_right_white">
 					<h1 class="center">나의 티켓 예매 내역</h1>
@@ -106,7 +103,7 @@
 						<!-- 주문 내역이 없는 경우 -->
 						<c:if test="${ticketList.size() == 0}">
 							<tr>
-								<td colspan="5">
+								<td colspan="6">
 									<h4>주문 내역이 없습니다.</h4>
 								</td>
 							</tr>
@@ -118,7 +115,7 @@
 									<fmt:formatDate value="${ticket.trorderDate }" pattern="yy.MM.dd" /><br>
 									<fmt:formatDate value="${ticket.trorderDate }" pattern="hh:mm:ss" />
 								</td>
-								<td><img alt="주문내역 이미지" src="../img/${ticket.timg }" style="height: 80px; width: 80px; object-fit: cover;"></td>
+								<td><img alt="주문내역 이미지" src="../img/${ticket.timg }" style="height: 70px; width: 70px; object-fit: cover;"></td>
 								<td>${ticket.tname }</td>
 								<td class="eng">${ticket.trcode }</td>
 								<td class="eng"><fmt:formatNumber pattern="###,###" value="${ticket.trtotPrice }" /></td>
@@ -135,18 +132,18 @@
 					<!-- 페이징 -->
 					<div id="paging">
 						<c:if test="${paging.startPage>paging.blockSize}">
-							<a href="${conPath}/ticket/tOrderList.do?pageNum=${paging.startPage-1 }">이전</a>
+							<a href="${conPath}/ticket/myTicketList.do?pageNum=${paging.startPage-1 }">이전</a>
 						</c:if>
 						<c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage }">
 							<c:if test="${paging.currentPage==i }">
 								<span>${i }</span>
 							</c:if>
 							<c:if test="${paging.currentPage != i }">
-								<a href="${conPath}/ticket/tOrderList.do?pageNum=${i }">${i }</a>
+								<a href="${conPath}/ticket/myTicketList.do?pageNum=${i }">${i }</a>
 							</c:if>
 						</c:forEach>
 						<c:if test="${paging.endPage<paging.pageCnt }">
-							<a href="${conPath }/ticket/tOrderList.do&pageNum=${paging.endPage+1 }">다음</a>
+							<a href="${conPath }/ticket/myTicketList.do&pageNum=${paging.endPage+1 }">다음</a>
 						</c:if>
 					</div>
 

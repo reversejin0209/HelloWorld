@@ -137,19 +137,22 @@ h1.main_clock {
 /* main_news */
 #main_news {
 	width: 1020px;
-	margin: 30px auto;
+	margin: 60px auto 20px;
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-start;
 }
 
+#main_news h2 {
+	padding: 6px 0;
+}
+
 #main_news .list_box li:first-child {
-	padding: 8px 0;
-	border-bottom: 1px solid #dedede;
+	border-top: 1px solid #dedede;
 }
 
 #main_news .list_box li {
-	margin: 10px 0;
+	padding: 6px 0;
 }
 
 #main_news .list_box li a {
@@ -157,7 +160,7 @@ h1.main_clock {
 }
 
 #main_news>div {
-	width: 490px;
+	width: 480px;
 }
 
 /* notice_box */
@@ -176,6 +179,7 @@ h1.main_clock {
 	float: right;
 }
 
-#notice_box{
-			background-image: url(../img/main_ticket.png);
-		{
+#notice_box {
+	background-image: url(../img/main_ticket.png);
+}
+{

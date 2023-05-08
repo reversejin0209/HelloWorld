@@ -74,7 +74,9 @@ public class TicketServiceImpl implements TicketService {
 	@Override
 	public List<TicketRes> tOrderList(HttpSession session, TicketRes ticketRes, String pageNum, Model model) {
 		Member member = (Member)session.getAttribute("member");
-		ticketRes.setMid(member.getMid());
+		if(member != null) {
+			ticketRes.setMid(member.getMid());
+		}
 		
 		// 주문 목록 출력
 		Paging paging = new Paging(ticketResDao.tOrderTotCnt(ticketRes), pageNum, 5, 10);
@@ -107,11 +109,23 @@ public class TicketServiceImpl implements TicketService {
 			model.addAttribute("failMsg", "주문 취소가 실패했습니다. 1:1 게시판에 문의해 주세요");
 		}
 	}
+	
+	@Override
+	public List<TicketResDetail> tOrderDetailList(TicketResDetail ticketResDetail, String pageNum, Model model) {
+		// 관리자: 티켓 상품 정보 전체 출력
+		Paging paging = new Paging(ticketResDetailDao.tOrderDeatailTotCnt(), pageNum, 10, 10);
+		ticketResDetail.setStartRow(paging.getStartRow());
+		ticketResDetail.setEndRow(paging.getEndRow());
+		model.addAttribute("paging", paging);
+		return ticketResDetailDao.tOrderDetailList(ticketResDetail);
+	}
 
 	@Override
-	public int usedTicket(int trdcode) {
+	public void usedTicket(int trdcode, String mid) {
 		// 사용 티켓으로 변경
-		return ticketResDetailDao.usedTicket(trdcode);
+		ticketResDetailDao.usedTicket(trdcode);
+		ticketResDetailDao.visitUp(mid);
 	}
+
 	
 }

@@ -95,4 +95,11 @@ public class QnaBoardController {
 		model.addAttribute("qna", qBoardService.contentQna(qanum));
 		return "member/myQnaBoardContent";
 	}
+	
+	// 관리자: 관리자 페이지 > 작성된 문의 리스트
+	@RequestMapping(value = "adQnaBoardList", method = RequestMethod.GET)
+	public String adQnaBoardList(QnaBoard qnaBoard, String pageNum, Model model) {
+		model.addAttribute("qnaList", qBoardService.qnaBoardList(qnaBoard, pageNum, model));
+		return "admin/adQnaBoardList";
+	}
 }

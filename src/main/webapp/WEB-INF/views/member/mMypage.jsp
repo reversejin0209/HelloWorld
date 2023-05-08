@@ -79,9 +79,9 @@
 						<li>
 							<ul>
 								<li><h4>나의 활동관리</h4></li>
-								<li><a href="${conPath}/ticket/tOrderList.do">티켓 예매 내역</a></li>
+								<li><a href="${conPath}/ticket/myTicketList.do">티켓 예매 내역</a></li>
 								<li><a href="${conPath }/thRes/thResList.do?mid=${member.mid }">공연 예매 내역</a></li>
-								<li><a href="">공연 리뷰</a></li>
+								<li><a href="${conPath }/thRev/mthRevList.do?mid=${member.mid }">공연 리뷰</a></li>
 								<li><a href="">어트랙션 리뷰</a></li>
 							</ul>
 
@@ -128,7 +128,7 @@
 
 					<!-- main_item -->
 					<div class="item_box">
-						<div class="sub_item item1" onclick="location.href='${conPath}/ticket/tOrderList.do'">
+						<div class="sub_item item1" onclick="location.href='${conPath}/ticket/myTicketList.do'">
 							<h2>티켓 예매확인/취소 </h2>
 						</div>
 						<div class="sub_item item2">

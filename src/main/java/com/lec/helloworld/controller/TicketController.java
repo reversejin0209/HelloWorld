@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.lec.helloworld.service.TicketService;
+import com.lec.helloworld.vo.Member;
 import com.lec.helloworld.vo.TicketRes;
+import com.lec.helloworld.vo.TicketResDetail;
 
 @Controller
 @RequestMapping(value = "ticket")
@@ -45,17 +47,17 @@ public class TicketController {
 		return "ticket/ticketReservate";
 	}
 
-	// 마이페이지
+	// 회원: 마이페이지
 	/* 나의 티켓 예매 목록 */
-	@RequestMapping(value = "tOrderList", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "myTicketList", method = { RequestMethod.GET, RequestMethod.POST })
 	public String myTicketList(HttpSession session, TicketRes ticketRes, String pageNum, Model model) {
 		model.addAttribute("ticketList", tService.tOrderList(session, ticketRes, pageNum, model));
 		return "member/myTicketList";
 	}
 
 	/* 나의 티켓 상세보기 */
-	@RequestMapping(value = "tOrderContent", method = RequestMethod.GET)
-	public String myTicketContent(long trcode, Model model) {
+	@RequestMapping(value = "myTicketContent", method = RequestMethod.GET)
+	public String myTicketContent(long trcode, Member member, Model model) {
 		// 주문 상세
 		model.addAttribute("order", tService.getOrderDetail(trcode));
 		// 주문 상품 정보
@@ -69,5 +71,26 @@ public class TicketController {
 		tService.tOrderCancel(trcode, model);
 		return "forward: tOrderList.do";
 	}
+	
+	// 관리자: 마이페이지
+	/* 전회원 예매 내역 확인*/
+	@RequestMapping(value = "orderTicketList", method = RequestMethod.GET)
+	public String orderTicketList(HttpSession session, TicketRes ticketRes, String pageNum, Model model) {
+		model.addAttribute("ticketList", tService.tOrderList(session, ticketRes, pageNum, model));
+		return "admin/orderTicketList";
+	}
 
+	/* 전회원 예매 정보 출력 */
+	@RequestMapping(value = "tOrderDetailList", method = RequestMethod.GET)
+	public String tOrderDetailList(TicketResDetail ticketResDetail, String pageNum, Model model) {
+		model.addAttribute("ticketDetailList", tService.tOrderDetailList(ticketResDetail, pageNum, model));
+		return "admin/orderTicketDetailList";
+	}
+
+	/* 티켓 사용 */
+	@RequestMapping(value = "usedTicket", method = RequestMethod.GET)
+	public String usedTicket(int trdcode, String mid, Model model) {
+		tService.usedTicket(trdcode, mid);
+		return "redirect: tOrderDetailList.do";
+	}
 }
