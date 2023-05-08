@@ -18,4 +18,7 @@ public class TicketResDetail {
 	private int trdcnt;
 	private Date trddate;
 	private int trdresult;
+
+	// ticket
+	private String timg;
 }

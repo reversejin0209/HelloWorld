@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.lec.helloworld.service.MemberService;
-import com.lec.helloworld.service.TicketResService;
+import com.lec.helloworld.service.TicketService;
 import com.lec.helloworld.vo.Member;
 import com.lec.helloworld.vo.TicketRes;
 
@@ -25,7 +25,7 @@ public class MemberController {
 	private MemberService memberService;
 
 	@Autowired
-	private TicketResService trservice;
+	private TicketService tservice;
 
 	/* 로그인 */
 	@RequestMapping(value = "mLogin", method = RequestMethod.GET)
@@ -39,7 +39,7 @@ public class MemberController {
 		memberService.loginChk(mid, mpw, httpSession, model);
 		
 		if(after.equals("")) {
-			return "main/main";
+			return "redirect:../main.do";
 		} else {
 			String afterPre = after.substring(0, after.indexOf("=")+1);
 			String afterPost = after.substring(after.indexOf("=")+1);
@@ -86,7 +86,7 @@ public class MemberController {
 		return "member/mMailConfirm";
 	}
 
-	/* 관리자페이지 */
+	/* 마이페이지 */
 	@RequestMapping(value = "mMypage", method = RequestMethod.GET)
 	public String mMypage() {
 		return "member/mMypage";
@@ -113,26 +113,4 @@ public class MemberController {
 		return "main/main";
 	}
 
-	// 마이페이지
-	/* 나의 티켓 예매 목록 */
-	@RequestMapping(value = "tOrderList", method = { RequestMethod.GET, RequestMethod.POST })
-	public String myTicketList(HttpSession session, TicketRes ticketRes, String pageNum, Model model) {
-		model.addAttribute("ticketList", trservice.tOrderList(session, ticketRes, pageNum, model));
-		return "member/myTicketList";
-	}
-
-	/* 나의 티켓 상세보기 */
-	@RequestMapping(value = "tOrderContent", method = RequestMethod.GET)
-	public String myTicketContent(long trcode, Model model) {
-		model.addAttribute("order", trservice.getOrderDetail(trcode));
-		model.addAttribute("ticketList", trservice.getTOrderDetail(trcode));
-		return "member/myTicketContent";
-	}
-
-	/* 주문 취소 */
-	@RequestMapping(value = "tOrderCancel", method = RequestMethod.GET)
-	public String myTicketCancel(long trcode, Model model) {
-		trservice.tOrderCancel(trcode, model);
-		return "forward: tOrderList.do";
-	}
 }

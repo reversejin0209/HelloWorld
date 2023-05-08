@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="conPath" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html>
@@ -53,7 +54,7 @@
 				<li><a href="#">이용정보</a></li>
 				<li><a href="#">요금/프로모션</a>
 					<ul class="drop-menu">
-						<li><a href="#">이용요금</a></li>
+						<li><a href="${conPath }/ticket/ticketList.do">이용요금</a></li>
 						<li><a href="${conPath }/ticket/ticketList.do">이달의 혜택</a></li>
 						<li><a href="#">연간이용</a></li>
 						<li><a href="#">운영/운휴</a></li>
@@ -62,7 +63,11 @@
 					<div class="mega-box">
 						<div class="content">
 							<div class="row">
-								<img src="" alt="">
+								<img alt="시계 아이콘" src="https://em-content.zobj.net/source/microsoft-teams/337/ferris-wheel_1f3a1.png">
+								<c:set var="now" value="<%=new java.util.Date()%>" />
+								<h4>오늘의 파크 운영시간</h4>
+								<h1 class="eng">10:00 - 22:00</h1>
+								<fmt:formatDate value="${now }" dateStyle="long" />
 							</div>
 							<div class="row">
 								<header>어트랙션</header>

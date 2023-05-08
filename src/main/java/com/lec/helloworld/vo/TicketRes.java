@@ -18,8 +18,9 @@ public class TicketRes {
 	private int trtotPrice;
 	private int trresult;
 	
-	// ticketResDetail
-	private String trdname;
+	// ticket
+	private String tname;
+	private String timg;
 	
 	// paging
 	private int startRow;

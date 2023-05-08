@@ -20,7 +20,7 @@
 <body>
 	<jsp:include page="../main/header.jsp" />
 	<div id="wrap_padding">
-		<h1 class="center">QnA 질문게시판</h1>
+		<h1 class="center">1:1 문의게시판</h1>
 		<div class="notice_box flex_wide">
 			<h3>1:1 문의내역</h3>
 			<br>

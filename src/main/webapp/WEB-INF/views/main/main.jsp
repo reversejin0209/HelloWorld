@@ -10,20 +10,8 @@
 	<title>Hello World</title>
 	<link href="${conPath }/css/style.css" rel="stylesheet" type="text/css">
 	<link href="${conPath }/css/main.css" rel="stylesheet" type="text/css">
-	<style type="text/css">
-		.list_box {
-			overflow: hidden;
-		}
-		.date {
-			float: right;
-		}
-		#notice_box{
-			background-image: url(${conPath}/img/main_ticket.png);
-		{
-		 
-	</style>
 	<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
-	
+
 	<!-- 메인 item 경로 -->
 	<script>
 		$(document).ready(function(){
@@ -64,6 +52,8 @@
 								} else if(item.category=='SKY' && item.fcstValue<=2) {
 									pty = '<td>' + '맑음' + '</td>'; 
 								} else if(item.category=='SKY' && item.fcstValue>2) {
+									pty = '<td>' + '흐림' + '</td>'; 
+								} else{
 									pty = '<td>' + '흐림' + '</td>'; 
 								}
 							}
@@ -218,9 +208,11 @@
 		<hr>
 		<div id="main_news">
 			<div class="main_news_left">
-				<b onclick="location.href='${conPath }/notice/noticeList.do'">공지사항</b>
-				<hr>
 				<ul class="list_box">
+					<li class="flex_wide">
+						<b onclick="location.href='${conPath }/notice/noticeList.do'">공지사항</b>
+						<a href="${conPath }/notice/noticeList.do">+</a>
+					</li>
 					<c:forEach var="nList" items="${noticeMain}">
 						<li>
 							<span class="text"> 
@@ -234,9 +226,8 @@
 				</ul>
 			</div>
 			<div class="main_news_right">
-				뉴스
-				<hr>
-				<ul>
+				<ul class="list_box">
+					<li class="flex_wide"><b>BEST 공연 후기</b>+</li>
 					<li>01</li>
 					<li>02</li>
 					<li>03</li>

@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="conPath" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html>
@@ -12,14 +12,14 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
 	$(document).ready(function() {
-		
+
 	});
 </script>
 </head>
 <body>
 	<c:if test="${empty admin }">
 		<script>
-			loation.href = '${conPath }/admin/adLogin.do';
+			location.href = '${conPath }/admin/adLogin.do';
 		</script>
 	</c:if>
 
@@ -33,7 +33,9 @@
 					<ul>
 						<li>
 							<h3>안녕하세요!</h3>
-							<h1><a href="${conPath }/admin/AMypage.do">${admin.adname } 님</a></h1> <br>
+							<h1>
+								<a href="${conPath }/admin/AMypage.do">${admin.adname } 님</a>
+							</h1> <br>
 						</li>
 						<li>
 							<ul>
@@ -79,7 +81,8 @@
 							</ul>
 						</li>
 					</ul>
-				</div><!-- myContent -->
+				</div>
+				<!-- myContent -->
 
 				<div class="myPage_right">
 					<!-- main_item -->
@@ -92,20 +95,33 @@
 								<h2>공연 예매확인/취소</h2>
 							</div>
 						</div>
-						<div class="sub_item item3">
-							<div class="normal_box">
-								<h2>1:1 문의내역</h2>
-							</div>
-						</div>
-						<div class="sub_item item4">
-							<div class="normal_box">
-								<h2>나의 후기</h2>
-							</div>
-						</div>
 					</div>
 					<!-- main_item -->
-				</div>
 
+					<div id="main_news">
+						<div class="main_news_left">
+							<ul class="list_box">
+								<li class="flex_wide"><b>1:1 문의내역</b>+</li>
+								<c:forEach var="qna" items="${qnaList }" end="4">
+								<li class="flex_wide">
+									<span>${qna.qatitle }</span>
+									<fmt:formatDate value="${qna.qardate }" pattern="yy.MM.dd hh:mm:ss"/>
+								</li>
+								</c:forEach>
+							</ul>
+						</div>
+						<div class="main_news_right">
+							<ul class="list_box">
+								<li class="flex_wide"><b>공지사항</b>+</li>
+								<li>01</li>
+								<li>02</li>
+								<li>03</li>
+								<li>04</li>
+							</ul>
+						</div>
+					</div><!-- main_news -->
+
+				</div><!-- myPage_right -->
 			</div>
 		</div>
 	</div>
