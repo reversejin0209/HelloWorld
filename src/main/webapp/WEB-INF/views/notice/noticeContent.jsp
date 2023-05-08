@@ -43,7 +43,7 @@
 		<hr>
 		<div class="txtArea" style="word-wrap: break-word;">
 			<div style="text-align: center;">
-				<img alt="공지사항 내용" src="http://adventure.lotteworld.com/common/images/180725_ticket_notice.jpg" style="height: auto; max-width: 100%;" />
+				<img alt="공지사항 내용" src="${conPath }/noticeImg/${noticeCn.ncontent }" style="height: auto; max-width: 100%;" />
 			</div>
 		</div>
 		<div class="prevNext">

@@ -38,9 +38,9 @@ INSERT INTO THEATER_RES (thrCODE, mID, thCODE, thrCNT, thrORDERDATE, thrREVIEW, 
 -- 3. THREVIEW: 공연 리뷰 글 쓰기
 INSERT INTO THREVIEW (thrNUM, thrCODE, mID, thrTITLE, thrCONTENT, thrRDATE) 
     VALUES (THREVIEW_SEQ.NEXTVAL, '230420TH11', 'aaa', '하이하이', '본문임', SYSDATE);
-
+   
 -- NOTICE  ---------------------------------------------------------------------
-
+-- 1. 공지사항 등록
 INSERT INTO NOTICE (NNO, NTITLE, NTYPE, ADID)
     VALUES (NOTICE_SEQ.NEXTVAL, '새로운 이벤트 개최', '이벤트', 'admin');
 INSERT INTO NOTICE (NNO, NTITLE, NTYPE, ADID)

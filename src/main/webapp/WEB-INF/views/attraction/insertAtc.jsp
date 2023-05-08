@@ -17,8 +17,10 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
 	$(document).ready(function() {
-
-});
+		CKEDITOR.replace('atcontent', {
+			filebrowserUploadUrl : '${conPath }/fileUpAtc.do'
+		});
+	});
 </script>
 <style>
 .inputSt {display: block; width: 96%;}
@@ -31,11 +33,11 @@
 			window.history.back(-1)
 		</script>
 	</c:if>
-	
 	<jsp:include page="../main/header.jsp" />
 		<div id="wrap">
+			<h1>기구 등록</h1>
 			<form action="${conPath }/attraction/insertAtc.do" method="post" enctype="multipart/form-data" >
-				<table class="content_table">
+				<table class="content_table"> 
 					<tr>
 						<td>기구이름 <b class="purple"> *</b></td>
 						<td><input type="text" name="atname" required="required" class="inputSt"></td>
@@ -56,39 +58,37 @@
 						</td>
 					</tr>
 					<tr>
-						<td>기구관련<b class="purple"> *</b></td>
-						<td>
-							<input type="text" id="sample4_postcode" name="atpost" class="text_box"  placeholder="기구위치">
-							<input type="button" onclick="sample4_execDaumPostcode()" value="기구위치 찾기">
-						</td>
-						<td>기구주소<b class="purple"> *</b></td>
-						<td>
-							<input type="text" id="sample4_roadAddress" name="ataddr"  placeholder="기구주소">
-							<input type="hidden" id="sample4_jibunAddress" placeholder="지번주소">
-							<span id="guide"></span>
-						</td>
-					</tr>
-					<tr>
-
-					</tr>
-					<tr>
 						<td>인원 제한<b class="purple"> *</b></td>
 						<td>
-							<input type="number" name="atnop" placeholder="인원">
+							<input type="number" name="atnop" class="inputSt" placeholder="( ex : 40명이하 탑승가능 )">
 						</td>
 						<td>나이 제한<b class="purple"> *</b></td>
 						<td>
-							<input type="number" name="atold" placeholder="나이">
+							<input type="number" name="atold" class="inputSt" placeholder="( ex : 6살이상 탑승가능 )">
 						</td>
 					</tr>
 					<tr>
 						<td>키 제한<b class="purple"> *</b></td>
 						<td>
-							<input type="number" name="atheight" placeholder="키">
+							<input type="number" name="atheight" class="inputSt" placeholder="( ex : 100cm 이하 탑승가능 )">
 						</td>
 						<td>몸무게 제한<b class="purple"> *</b></td>
 						<td>
-							<input type="number" name="atweight" placeholder="몸무게">
+							<input type="number" name="atweight" class="inputSt" placeholder="( ex : 100kg이하 탑승가능 )">
+						</td>
+					</tr>
+					<tr>
+						<td>기구관련<b class="purple"> *</b></td>
+						<td>
+							<input type="text" id="sample4_postcode" name="atpost" class="text_box"  placeholder="주소입력">
+							<input type="button" onclick="sample4_execDaumPostcode()" value="기구주소 찾기">
+						</td>
+						<td>상세위치<b class="purple"> *</b></td>
+						<td>
+							<input type="text" id="sample4_roadAddress" name="ataddr"  placeholder="상세위치 ( 자동출력 )">
+							<input type="hidden" id="sample4_jibunAddress" placeholder="지번주소"><br>
+							<span id="guide" style="font-size: 0.8em;"></span>
+							<br>
 						</td>
 					</tr>
 					<tr>

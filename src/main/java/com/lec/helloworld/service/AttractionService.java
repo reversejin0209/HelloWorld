@@ -18,9 +18,6 @@ public interface AttractionService {
 	public void insertAtc(Attraction attraction, MultipartHttpServletRequest mRequest, Model model);
 	public void modifyAtc(Attraction attraction, MultipartHttpServletRequest mRequest, Model model);
 	public int deleteAtc(int atcode, Model model);
-	/*
-	 * public void imageUpAtc(HttpServletRequest request, HttpServletResponse
-	 * response, MultipartHttpServletRequest multiFile);
-	 */
+	public void imageUpAtc(HttpServletRequest request, HttpServletResponse response, MultipartHttpServletRequest multiFile);
 }
 

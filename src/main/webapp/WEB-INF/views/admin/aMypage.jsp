@@ -40,7 +40,7 @@
 						<li>
 							<ul>
 								<li><h4>회원관리</h4></li>
-								<li><a href="">회원 현황 확인</a></li>
+								<li><a href="${conPath }/admin/allView.do">회원 현황 확인</a></li>
 								<li><a href="">블랙회원 관리</a></li>
 								<li><a href="">등급관리</a></li>
 							</ul>

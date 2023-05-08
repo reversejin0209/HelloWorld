@@ -13,7 +13,7 @@
 #atcList_background {
 	background-image: url(${conPath}/img/atcList_background.png);
 }
-</style>
+</style>	
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
@@ -44,30 +44,23 @@
 				<h3 class="center">나에게 맞는 어트랙션을 찾아보세요!</h3>
 				<ul class="atc_schBox_row">
 					<li>
-						<h3>위치</h3> <select name="schItem">
-							<option value="" 
-								<c:if test="${param.zname == ''}">selected="selected"</c:if>>
-							</option>
-							<option value="익스트림존" 
-								<c:if test="${param.zname == '익스트림존'}">selected="selected"</c:if>>익스트림존</option>
+						<h3>위치</h3> 
+						<select name="zname">
+							<option value="" <c:if test="${param.zname == ''}">selected="selected"</c:if>>전체</option>
+							<option value="익스트림존" <c:if test="${param.zname == '익스트림존' }">selected="selected"</c:if>>익스트림존</option>
 							<option value="매지컬랜드" <c:if test="${param.zname == '매지컬랜드' }">selected="selected"</c:if>>매지컬랜드</option>
 							<option value="어드벤처존" <c:if test="${param.zname == '어드벤처존' }">selected="selected"</c:if>>어드벤처존</option>
 							<option value="워터월드존" <c:if test="${param.zname == '워터월드존' }">selected="selected"</c:if>>워터월드존</option>
-					</select>
+						</select>
 					</li>
 					<li>
-						<h3>나이</h3> <select name="schItem">
-							<option value="" <c:if test="${param.atold == ''}">selected="selected"</c:if>></option>
-							<option value="0~5세" <c:if test="${param.atold == '0~5세' }">selected="selected"</c:if>>0~5세</option>
-							<option value="6~65세" <c:if test="${param.atold == '6~65세' }">selected="selected"</c:if>>6~65세</option>
-							<option value="66세" <c:if test="${param.atold == '66세' }">selected="selected"</c:if>>66세</option>
-					</select>
+						<h3>나이</h3> <input type="number" name="schOld " value="${param.schOld  }" placeholder="나이를 입력해주세요">
 					</li>
 					<li>
-						<h3>키</h3> <input type="text" name="schWord" value="${param.schWord }" placeholder="키를 입력해주세요">
+						<h3>키</h3> <input type="number" name="schHeight " value="${param.schHeight  }" placeholder="키를 입력해주세요">
 					</li>
 					<li>
-						<h3>인원제한</h3> <input type="text" name="schWord" value="${param.schWord }" placeholder="인원 수를 입력해주세요">
+						<h3>인원제한</h3> <input type="number" name="schAtnop " value="${param.schAtnop  }" placeholder="인원 수를 입력해주세요">
 					</li>
 				</ul>
 				<div class="serchBox center">
@@ -85,8 +78,8 @@
 								<tr></tr>
 							</c:if>
 							<td>
-								<a href="${conPath }/attraction/detailAtc.do?atcode=${list.atcode}&pageNum=${paging.currentPage}"> <img
-									src="${conPath }/attractionImg/${list.atimage}" style="width: 200px; height: 282px;"> <br> ${list.atname }<br> ${list.zname } <br>
+								<a href="${conPath }/attraction/detailAtc.do?atcode=${list.atcode}&pageNum=${paging.currentPage}"> 
+								<img src="${conPath }/attractionImg/${list.atimage}" style="width: 200px; height: 282px;"> <br> ${list.atname }<br> ${list.zname } <br>
 								</a>
 							</td>
 						</c:forEach>
@@ -103,7 +96,7 @@
 	<!-- 페이징 -->
 	<div id="paging">
 		<c:if test="${paging.startPage>paging.blockSize}">
-			<a href="${conPath }/attraction/listAtc.do?pageNum=${paging.startPage-1 }&schItem=${param.schItem }&schWord=${param.schWord}">이전</a>
+			<a href="${conPath }/attraction/listAtc.do?pageNum=${paging.startPage-1 }">이전</a>
 		</c:if>
 		<c:forEach var="i" begin="${paging.startPage}"
 			end="${paging.endPage }">
@@ -111,11 +104,11 @@
 				<span>${i }</span>
 			</c:if>
 			<c:if test="${paging.currentPage != i }">
-				<a href="${conPath }/attraction/listAtc.do?method=list&pageNum=${i }&schItem=${param.schItem }&schWord=${param.schWord}">${i }</a>
+				<a href="${conPath }/attraction/listAtc.do?method=list&pageNum=${i }">${i }</a>
 			</c:if>
 			</c:forEach>
 			<c:if test="${paging.endPage<paging.pageCnt }">
-				<a href="${conPath }/attraction/listAtc.do?pageNum=${paging.endPage+1 }&schItem=${param.schItem }&schWord=${param.schWord}">다음</a>
+				<a href="${conPath }/attraction/listAtc.do?pageNum=${paging.endPage+1 }">다음</a>
 			</c:if>
 		</div>
 	<jsp:include page="../main/footer.jsp" />

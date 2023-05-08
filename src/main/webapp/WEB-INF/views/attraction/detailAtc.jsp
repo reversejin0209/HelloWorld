@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="conPath" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html>
@@ -36,9 +37,72 @@
 }
 </style>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ec6aa5d1142e93ea1eaaa8d7ee83b508&libraries=services"></script>
+<script>
+	var locked = 0;
+	function show(star) {
+		if(locked)
+			return;
+		var i;
+		var img;
+		var e;
+		var e = document.getElementById('startext');
+		var stateMsg
+		
+		for (i = 1; i<= star; i++) {
+			img = 'img' + i;
+			el = document.getElementById(image);
+			el.src = "atRevImg/star1.png";
+		}
+		
+		switch (star) {
+		case 1:
+			stateMsg = "재미없었어요";
+			break;
+		case 2:
+			stateMsg = "기대하지 말아요";
+			break;
+		case 3:
+			stateMsg = "무난했어요";
+			break;
+		case 4:
+			stateMsg = "기대해도 좋아요";
+			break;
+		case 5:
+			stateMsg = "너무 재밌는 놀이기구였어요";
+			break;
+		default:
+			stateMsg = "";
+		}
+		e.innerHTML = stateMsg;
+	}
+	
+	function noshow(star) {
+		if(lokced)
+			return;
+		var i;
+		var img;
+		var el;
+		
+		for(i = 1; i <= star; i++) {
+			img = 'img' + i;
+			el = document.getElementById(img);
+			el.src = "atRevImg/star0.png";
+		}
+	}
+	
+	function lock(star) {
+		show(star);
+		locked = 1;
+	}
+	
+	function mark(star) {
+		lock(star);
+		alert("선택2"+star);
+		document.cmtform.star.value=star;
+	}
+</script>
 </head>
 <body>
-	<input type="text" value="${detailAtc }"> 
 	<jsp:include page="../main/header.jsp" />
 	<!-- content 시작 -->
 	<div class="content">
@@ -52,6 +116,21 @@
 				<iframe src='${detailAtc.atyoutube }' frameborder='0'
 					allowfullscreen></iframe>
 			</div>
+		</div>
+		<div class="reviewArea">
+			<table>
+				<tr>
+					<c:forEach var="list" items="${arvList}" varStatus="status">
+						<c:if test="${status.index%2==0}">
+							<tr></tr>
+						</c:if>
+						<td>
+							<a href="${conPath }/attraction/atRevList.do?atcode=${list.atcode}&pageNum=${paging.currentPage}"> </a>
+						</td>
+					</c:forEach>
+				</tr>
+			</table>
+			<b onclick="location.href='${conPath }/attraction/atRevList.do?atcode=${param.atcode }&atname=${detailAtc.atname }'">리뷰보기</b>					
 		</div>
 		<div class="rideInfo">
 			<div class="cardArea">
@@ -130,7 +209,7 @@
 					onclick="location.href='${conPath}/attraction/listAtc.do?method=ListAtc&schItem=&schWord='">목록</button>
 				<c:if test="${not empty admin }">
 					<button class="btn_purple" style="cursor: pointer;"
-						onclick="location.href='${conPath}/attraction/modifyAtc.do?atcode=${detailAtc.atcode }'">수정</button>
+						onclick="location.href='${conPath}/attraction/modifyAtc.do?atcode=${detailAtc.atcode }&pageNum=${param.pageNum }'">수정</button>
 				</c:if>
 			</div>
 		</div>

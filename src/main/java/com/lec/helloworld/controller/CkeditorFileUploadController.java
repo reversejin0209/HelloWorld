@@ -28,11 +28,10 @@ public class CkeditorFileUploadController {
 		qnaBoardService.imageUpload(req, resp, multiFile);
 	}
 	
-	/*
-	 * @RequestMapping(value="fileUpAtc", method=RequestMethod.POST)
-	 * 
-	 * @ResponseBody public void attractionImageUpload(HttpServletRequest request,
-	 * HttpServletResponse response, MultipartHttpServletRequest multiFile) {
-	 * attractionService.imageUpAtc(request, response, multiFile); }
-	 */
+	
+	@RequestMapping(value="fileUpAtc", method=RequestMethod.POST)
+	@ResponseBody 
+	public void attractionImageUpload(HttpServletRequest request,HttpServletResponse response, MultipartHttpServletRequest multiFile) {
+	  attractionService.imageUpAtc(request, response, multiFile); }
+	 
 }

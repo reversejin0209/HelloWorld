@@ -19,12 +19,14 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.lec.helloworld.dao.NoticeDao;
 import com.lec.helloworld.util.Paging;
+import com.lec.helloworld.vo.Admin;
 import com.lec.helloworld.vo.Notice;
 @Service
 public class NoticeServiceImpl implements NoticeService {
 	
 	@Autowired
 	private NoticeDao noticeDao;
+	
 	String noticePath = "D:/JINYOONJIN/source/10_2ndTeamProject/helloworld/src/main/webapp/noticeImg";
 	
 	@Override
@@ -88,6 +90,12 @@ public class NoticeServiceImpl implements NoticeService {
 
 	@Override
 	public int noticeModify(Notice notice, MultipartHttpServletRequest mRequest) {
+		String adid = null;
+		Admin admin = (Admin) mRequest.getSession().getAttribute("admin");
+		if(admin!=null) {
+			adid = admin.getAdid();
+		}
+		notice.setAdid(adid);
 		String noticeupPath = mRequest.getRealPath("noticeImg/");
 		Iterator<String> params = mRequest.getFileNames();
 		String[] nimg = new String[1];
