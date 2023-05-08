@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.lec.helloworld.service.MemberService;
 import com.lec.helloworld.service.TicketService;
 import com.lec.helloworld.vo.Member;
-import com.lec.helloworld.vo.TicketRes;
 
 @Controller
 @RequestMapping(value = "member")
@@ -23,9 +22,6 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
-
-	@Autowired
-	private TicketService tservice;
 
 	/* 로그인 */
 	@RequestMapping(value = "mLogin", method = RequestMethod.GET)
@@ -39,7 +35,7 @@ public class MemberController {
 		memberService.loginChk(mid, mpw, httpSession, model);
 		
 		if(after.equals("")) {
-			return "redirect:../main.do";
+			return "forward:../main.do";
 		} else {
 			String afterPre = after.substring(0, after.indexOf("=")+1);
 			String afterPost = after.substring(after.indexOf("=")+1);

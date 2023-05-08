@@ -32,7 +32,7 @@
 	<!-- 리뷰 작성 확인 -->	
 	<c:if test="${writeViewResult eq 1 }">
 		<script>
-			alert('공연이 끝난 다음날부터 리뷰 작성이 가능합니다.');
+			alert('공연 당일 부터 리뷰 작성이 가능합니다.');
 			history.back();
 		</script>
 	</c:if>
