@@ -184,7 +184,7 @@
 							<h1>티켓 예매</h1>
 						</div>
 					</div>
-					<div class="sub_item item2">
+					<div class="sub_item item2" onclick="location.href='${conPath }/attraction/listAtc.do'">
 						<img alt="회전목마 아이콘" src="https://em-content.zobj.net/source/microsoft-teams/337/carousel-horse_1f3a0.png">
 						<div class="sub_item_text">
 							<p>
