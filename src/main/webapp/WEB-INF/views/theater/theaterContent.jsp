@@ -63,7 +63,7 @@
 		<div id="wrap_padding">
 		<div class="ticketContent_wrap">
 
-			<!-- 좌측: 티켓 상세설명 -->
+			<!-- 좌측: 공연 상세설명 -->
 			<div class="ticket_content">
 				<table class="ticketContent_table">
 					<tr>

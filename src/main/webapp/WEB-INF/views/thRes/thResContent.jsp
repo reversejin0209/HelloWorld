@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div id="myTicketContent">
-		<h1 class="center">나의 티켓 예매 내역</h1>
+		<h1 class="center">나의 공연 예매 내역</h1>
 		<table class="content_table">
 			<tr>
 				<td style="text-align: left;" colspan="5">주문번호: ${thResContent.thrcode }</td>

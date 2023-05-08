@@ -32,29 +32,48 @@ INSERT INTO THEATER (thCODE, thNAME, thCONTENT, thTIME, thLOC, thSEAT, thPRICE, 
     VALUES ('TH'||THCODE_SEQ.NEXTVAL, '락큰롤 빅 밴드 쇼', '락큰롤 빅 밴드 쇼', '40'||'분', '매지컬 랜드', 40, 5000, 'theater3.png', 0);
 
 -- 2. THEATER_RES: 공연 예매
+    --> 예매 진행
 INSERT INTO THEATER_RES (thrCODE, mID, thCODE, thrCNT, thrORDERDATE, thrREVIEW, thrTOTPRICE, thrDATE)
-    VALUES (TO_CHAR(SYSDATE, 'YYMMDD')||'TH1'||THRCODE_SEQ.NEXTVAL, 'aaa', 'TH1', 2, SYSDATE, 0, 14000, SYSDATE);
+    VALUES ('230502'||'TH1'||THRCODE_SEQ.NEXTVAL, 'aaa', 'TH1', 2, SYSDATE, 0, 14000, SYSDATE);
     --> 예매 좌석 추가
 INSERT INTO THEATER_SEAT (SEATCODE, thrCODE)
-    VALUES ('A1', '230508TH11');
+    VALUES ('A1', '230502TH11');
 INSERT INTO THEATER_SEAT (SEATCODE, thrCODE)
-    VALUES ('A2', '230508TH11');
+    VALUES ('A2', '230502TH11');
+    --> 예매 진행
 INSERT INTO THEATER_RES (thrCODE, mID, thCODE, thrCNT, thrORDERDATE, thrREVIEW, thrTOTPRICE, thrDATE)
-    VALUES (TO_CHAR(SYSDATE, 'YYMMDD')||'TH2'||THRCODE_SEQ.NEXTVAL, 'bbb', 'TH2', 1, SYSDATE, 0, 9000, SYSDATE);
+    VALUES ('230501'||'TH2'||THRCODE_SEQ.NEXTVAL, 'bbb', 'TH2', 1, SYSDATE, 0, 9000, SYSDATE);
     --> 예매 좌석 추가
 INSERT INTO THEATER_SEAT (SEATCODE, thrCODE)
-    VALUES ('C5', '230508TH22');
+    VALUES ('C5', '230501TH22');
+    --> 예매 진행
 INSERT INTO THEATER_RES (thrCODE, mID, thCODE, thrCNT, thrORDERDATE, thrREVIEW, thrTOTPRICE, thrDATE)
-    VALUES (TO_CHAR(SYSDATE, 'YYMMDD')||'TH3'||THRCODE_SEQ.NEXTVAL, 'ccc', 'TH3', 1, SYSDATE, 0, 5000, SYSDATE);
+    VALUES ('230506'||'TH3'||THRCODE_SEQ.NEXTVAL, 'ccc', 'TH3', 1, SYSDATE, 0, 5000, SYSDATE);
     --> 예매 좌석 추가
 INSERT INTO THEATER_SEAT (SEATCODE, thrCODE)
-    VALUES ('D4', '230508TH33');
+    VALUES ('D4', '230506TH33');
+    --> 예매 진행
+INSERT INTO THEATER_RES (thrCODE, mID, thCODE, thrCNT, thrORDERDATE, thrREVIEW, thrTOTPRICE, thrDATE)
+    VALUES ('230504'||'TH3'||THRCODE_SEQ.NEXTVAL, 'ddd', 'TH3', 1, SYSDATE, 0, 5000, SYSDATE);
+    --> 예매 좌석 추가
+INSERT INTO THEATER_SEAT (SEATCODE, thrCODE)
+    VALUES ('A4', '230504TH36');
+    --> 예매 진행
+INSERT INTO THEATER_RES (thrCODE, mID, thCODE, thrCNT, thrORDERDATE, thrREVIEW, thrTOTPRICE, thrDATE)
+    VALUES ('230511'||'TH2'||THRCODE_SEQ.NEXTVAL, 'aaa', 'TH2', 1, SYSDATE, 0, 5000, SYSDATE);
+    --> 예매 좌석 추가
+INSERT INTO THEATER_SEAT (SEATCODE, thrCODE)
+    VALUES ('A10', '230511TH25');
 
 -- 3. THREVIEW: 공연 리뷰 글 쓰기
 INSERT INTO THREVIEW (thrNUM, thrCODE, mID, thrTITLE, thrCONTENT, thrRDATE) 
-    VALUES (THREVIEW_SEQ.NEXTVAL, '230508TH11', 'aaa', '놀이공원보다 재밌는 공연', '본문임', SYSDATE);
+    VALUES (THREVIEW_SEQ.NEXTVAL, '230502TH11', 'aaa', '놀이공원보다 재밌는 공연', '놀이공원와서 공연이 제일 재밌었습니다', SYSDATE);
 INSERT INTO THREVIEW (thrNUM, thrCODE, mID, thrTITLE, thrCONTENT, thrRDATE) 
-    VALUES (THREVIEW_SEQ.NEXTVAL, '230420TH11', 'ccc', '너무 재밌는 공연이었습니다', '본문임', SYSDATE);
+    VALUES (THREVIEW_SEQ.NEXTVAL, '230506TH33', 'ccc', '너무 재밌는 공연이었습니다', '공연이 너무 재밌었어요!!', SYSDATE);
+INSERT INTO THREVIEW (thrNUM, thrCODE, mID, thrTITLE, thrCONTENT, thrRDATE) 
+    VALUES (THREVIEW_SEQ.NEXTVAL, '230501TH22', 'bbb', '자리가 조금 아쉬워요', '자리가 조금 넓었으면 좋겠습니다.', SYSDATE);
+INSERT INTO THREVIEW (thrNUM, thrCODE, mID, thrTITLE, thrCONTENT, thrRDATE) 
+    VALUES (THREVIEW_SEQ.NEXTVAL, '230504TH34', 'ddd', '거리가 너무 멀어요...', '거리가 조금 멀어 가족들과 가기 힘들었어요 ㅠㅠ', SYSDATE);
    
 -- NOTICE  ---------------------------------------------------------------------
 -- 1. 공지사항 등록
