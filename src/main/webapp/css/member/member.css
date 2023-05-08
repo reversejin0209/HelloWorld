@@ -11,7 +11,7 @@
 /* left: myContent */
 #myPage .myContent {
 	width: 240px;
-	background-color: #ffffff;
+	background-color: #def0c7;
 	border-radius: 14px;
 	padding-top: 30px;
 	padding-left: 40px;
@@ -34,7 +34,7 @@
 /* 소메뉴 */
 #myPage .myContent ul>li>a {
 	margin: 10px 0;
-	color: #838383;
+	color: #4d4d4d;
 }
 
 /* right: myInfo */
@@ -86,6 +86,7 @@
 	box-sizing: border-box;
 	padding: 40px 30px;
 	overflow: hidden;
+	margin-bottom: 30px;
 }
 
 .myPage_right_white {
@@ -122,27 +123,16 @@
 	box-sizing: border-box;
 }
 
-/* main_news */
-#main_news {
-	width: 100%;
-	margin: 0 auto;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+/* list_box */
+.list_box li:first-child{
+	padding-top: 14px;
+	border-top: 1px solid #dedede;
 }
 
-#main_news .list_box li:first-child{
-	padding: 10px 0;
-	border-bottom: 1px solid #dedede;
-}
-
-#main_news .list_box li{
+.list_box li{
 	margin: 8px 0;
 }
 
-#main_news .list_box li a{
+.list_box li a{
 	color: #1d1d1d;
-}
-#main_news>div {
-	width: 415px;
 }

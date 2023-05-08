@@ -8,11 +8,25 @@
 <meta charset="UTF-8">
 <title>Hello World</title>
 <link href="${conPath }/css/style.css" rel="stylesheet">
+<link href="${conPath }/css/board.css" rel="stylesheet">
 <link href="${conPath }/css/member/member.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
 	$(document).ready(function() {
-
+		$('tr').click(function() {
+			var trcode = $(this).children().eq(4).text().trim();
+			if (!isNaN(trcode)) {
+				$.ajax({
+					url : '${conPath}/ticket/myTicketContent.do',
+					type : 'get',
+					data : 'trcode=' + trcode,
+					dataType : 'html',
+					success : function(data) {
+						$('.myPage_right_white').html(data);
+					},
+				});
+			}
+		});
 	});
 </script>
 </head>
@@ -23,23 +37,14 @@
 		</script>
 	</c:if>
 
-	<!-- 공연 삭제 처리 -->
-	<c:if test="${thDeleteResult eq 1 }">
+	<c:if test="${not empty successMsg }">
 		<script>
-			alert('공연 삭제가 완료되었습니다.');
+			alert('${successMsg}');
 		</script>
 	</c:if>
-	<c:if test="${thDeleteResult eq 0 }">
+	<c:if test="${not empty failMsg}">
 		<script>
-			alert('공연 삭제가 실패되었습니다. 다시 확인해주세요.');
-			history.back();
-		</script>
-	</c:if>
-
-	<!-- 공연 추가 처리 -->
-	<c:if test="${not empty insertResult }">
-		<script>
-			alert('${insertResult }');
+			alert('${failMsg}');
 		</script>
 	</c:if>
 
@@ -103,47 +108,70 @@
 				</div>
 				<!-- myContent -->
 
-				<div class="myPage_right">
-					<!-- main_item -->
-					<div class="item_box">
-						<div class="sub_item item1" onclick="location.href='${conPath}/member/tOrderList.do'">
-							<h2>티켓 예매확인/취소</h2>
-						</div>
+				<div class="myPage_right_white">
+					<h1 class="center">티켓 예매 현황</h1>
+					<br>
+					총 수량 : ${paging.totCnt }
+					<table class="list_table">
+						<tr>
+							<th>주문일</th>
+							<th>회원아이디</th>
+							<th colspan="2" class="title">주문내역</th>
+							<th>주문번호</th>
+							<th>결제금액</th>
+							<th>상태</th>
+						</tr>
 
-						<div class="sub_item item2">
-							<div class="normal_box">
-								<h2>공연 예매확인/취소</h2>
-							</div>
-						</div>
+						<!-- 주문 내역이 없는 경우 -->
+						<c:if test="${ticketList.size() == 0}">
+							<tr>
+								<td colspan="7">
+									<h4>주문 내역이 없습니다.</h4>
+								</td>
+							</tr>
+						</c:if>
 
-						<div class="sub_item item3" onclick="location.href='${conPath}/qnaBoard/adQnaBoardList.do'">
-							<h2 class="flex_wide">
-								<span>1:1 문의내역</span> +
-							</h2>
-							<ul class="list_box">
-								<c:forEach var="qna" items="${qnaList }" end="3">
-									<li class="flex_wide"><span>${qna.qatitle }</span> <fmt:formatDate value="${qna.qardate }" pattern="yy.MM.dd hh:mm" /></li>
-								</c:forEach>
-							</ul>
-						</div>
+						<c:forEach var="ticket" items="${ticketList }">
+							<tr>
+								<td class="eng">
+									<fmt:formatDate value="${ticket.trorderDate }" pattern="yy.MM.dd" /><br>
+									<fmt:formatDate value="${ticket.trorderDate }" pattern="hh:mm:ss" />
+								</td>
+								<td class="eng">${ticket.mid }</td>
+								<td><img alt="주문내역 이미지" src="../img/${ticket.timg }" style="height: 70px; width: 70px; object-fit: cover;"></td>
+								<td>${ticket.tname }</td>
+								<td class="eng">${ticket.trcode }</td>
+								<td class="eng"><fmt:formatNumber pattern="###,###" value="${ticket.trtotPrice }" /></td>
+								<td><c:if test="${ticket.trresult eq 0}">
+										주문완료
+									</c:if> <c:if test="${ticket.trresult eq 1}">
+										<b>취소완료</b>
+									</c:if></td>
+							</tr>
+						</c:forEach>
+					</table>
+					<br>
 
-						<div class="sub_item item4" onclick="">
-							<h2 class="flex_wide">
-								<span>공지사항</span> +
-							</h2>
-							<ul class="list_box">
-								<li>01</li>
-								<li>02</li>
-								<li>03</li>
-								<li>04</li>
-							</ul>
-						</div>
-
+					<!-- 페이징 -->
+					<div id="paging">
+						<c:if test="${paging.startPage>paging.blockSize}">
+							<a href="${conPath}/ticket/orderTicketList.do?pageNum=${paging.startPage-1 }">이전</a>
+						</c:if>
+						<c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage }">
+							<c:if test="${paging.currentPage==i }">
+								<span>${i }</span>
+							</c:if>
+							<c:if test="${paging.currentPage != i }">
+								<a href="${conPath}/ticket/orderTicketList.do?pageNum=${i }">${i }</a>
+							</c:if>
+						</c:forEach>
+						<c:if test="${paging.endPage<paging.pageCnt }">
+							<a href="${conPath }/ticket/orderTicketList.do&pageNum=${paging.endPage+1 }">다음</a>
+						</c:if>
 					</div>
-					<!-- main_item -->
 
 				</div>
-				<!-- myPage_right -->
+
 			</div>
 		</div>
 	</div>

@@ -31,9 +31,9 @@
 </script>
 </head>
 <body>
-	<c:if test="${empty member }">
+	<c:if test="${empty admin }">
 		<script>
-			location.href = '${conPath }/member/mLogin.do';
+			location.href = '${conPath }/admin/adLogin.do';
 		</script>
 	</c:if>
 
@@ -58,37 +58,59 @@
 					<ul>
 						<li>
 							<h3>안녕하세요!</h3>
-							<h1><a href="${conPath }/member/mMypage.do?mid=${mid}">${member.mname } 님</a></h1> <br>
+							<h1>
+								<a href="${conPath }/admin/aMypage.do">${admin.adname } 님</a>
+							</h1> <br>
 						</li>
 						<li>
 							<ul>
-								<li><h4>나의 활동관리</h4></li>
-								<li><a href="${conPath}/ticket/myTicketList.do">티켓 예매 내역</a></li>
-								<li><a href="${conPath }/thRes/thResList.do?mid=${member.mid }">공연 예매 내역</a></li>
-								<li><a href="${conPath }/thRev/mthRevList.do?mid=${member.mid }">공연 리뷰</a></li>
-								<li><a href="">어트랙션 리뷰</a></li>
+								<li><h4>회원관리</h4></li>
+								<li><a href="${conPath }/admin/allView.do">회원 현황 확인</a></li>
+								<li><a href="">블랙회원 관리</a></li>
+								<li><a href="">등급관리</a></li>
 							</ul>
 
 							<ul>
-								<li><h4>나의 계정설정</h4></li>
-								<li><a href="${conPath }/member/mModify.do">회원정보 수정</a></li>
-								<li><a href="">회원등급</a></li>
+								<li><h4>티켓 관리</h4></li>
+								<li><a href="">티켓 목록</a></li>
+								<li><a href="">티켓 등록</a></li>
+								<li><a href="${conPath }/ticket/orderTicketList.do">티켓 예매 현황</a></li>
+								<li><a href="">입장 티켓 확인</a></li>
+							</ul>
+
+							<ul>
+								<li><h4>공연 관리</h4></li>
+								<li><a href="">공연 목록</a></li>
+								<li><a href="">공연 등록</a></li>
+								<li><a href="">공연 예매 현황</a></li>
+							</ul>
+
+							<ul>
+								<li><h4>어트랙션 관리</h4></li>
+								<li><a href="">어트랙션 목록</a></li>
+								<li><a href="">어트랙션 등록</a></li>
+							</ul>
+
+							<ul>
+								<li><h4>후기 관리</h4></li>
+								<li><a href="">공연 후기 확인</a></li>
+								<li><a href="">어트랙션 후기 확인</a></li>
 							</ul>
 
 							<ul>
 								<li><h4>고객센터</h4></li>
-								<li><a href="${conPath }/qnaBoard/myQnaBoardList.do">1:1 문의내역</a></li>
-								<li><a href="">어트랙션 문의내역</a></li>
+								<li><a href="${conPath }/qnaBoard/orderQnaBoardList.do">1:1 문의내역</a></li>
 								<li><a href="">공지사항</a></li>
 								<li><a href="">FAQ</a></li>
 								<li><a href="">고객의 소리</a></li>
 							</ul>
 						</li>
 					</ul>
-				</div><!-- myContent -->
+				</div>
+				<!-- myContent -->
 
 				<div class="myPage_right_white">
-					<h1 class="center">나의 1:1 문의 내역</h1>
+					<h1 class="center">1:1 문의 내역</h1>
 					<br>
 					글 갯수 : ${paging.totCnt }
 					<table class="list_table">
@@ -124,10 +146,8 @@
 							</tr>
 						</c:forEach>
 					</table>
-					<div class="right">
-						<button onclick="location.href='${conPath}/qnaBoard/qBoardWrite.do'" class="btn_submit">글쓰기</button>
-					</div>
-
+					<br>
+					
 					<!-- 페이징 -->
 					<div id="paging">
 						<c:if test="${paging.startPage>paging.blockSize}">

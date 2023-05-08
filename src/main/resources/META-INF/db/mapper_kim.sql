@@ -54,6 +54,18 @@ SELECT * FROM (SELECT ROWNUM RN, RES.*
 -- id = tMemberOrderList
 SELECT * FROM TICKET_RES;
 
+-- 관리자
+SELECT * 
+  FROM (SELECT ROWNUM RN, RES.* 
+          FROM (SELECT DISTINCT TR.*, T.*
+  FROM TICKET_RES TR
+     , TICKET_RESDETAIL TRD
+     , (SELECT DISTINCT TNAME, TIMG FROM TICKET) T
+ WHERE TR.TRCODE = TRD.TRCODE
+   AND TRDNAME = T.TNAME
+ ORDER BY TR.TRCODE DESC) RES)
+        WHERE RN BETWEEN 1 AND 10;
+
 -- 나의 주문 LIST(회원)
 SELECT * 
   FROM (SELECT ROWNUM RN, RES.* 
@@ -63,7 +75,8 @@ SELECT *
      , (SELECT DISTINCT TNAME, TIMG FROM TICKET) T
  WHERE TR.TRCODE = TRD.TRCODE
    AND TRDNAME = T.TNAME
-   AND MID = 'aaa') RES)
+   AND MID = 'aaa'
+ ORDER BY TR.TRCODE DESC) RES)
         WHERE RN BETWEEN 1 AND 10;
 
 SELECT DISTINCT TR.*, T.*
@@ -81,7 +94,12 @@ SELECT DISTINCT TR.*, T.*
     -- trcode로 조회
     SELECT * FROM TICKET_RES
             WHERE TRCODE = '2305070003';
-    
+            
+    -- 회원 정보까지 조회
+    SELECT RES.*, MNAME, MTEL, MMAIL FROM TICKET_RES RES, MEMBER
+            WHERE RES.MID = MEMBER.MID
+              AND TRCODE = '2305070003';
+            
     -- 구매 직후 정보 조회        
     SELECT * FROM TICKET_RES
             WHERE TRCODE = (SELECT MAX(TRCODE) FROM TICKET_RES);        
@@ -101,11 +119,27 @@ UPDATE TICKET_RES
    SET TRRESULT = 1
  WHERE TRCODE = '2305030003';
 
+-- id = TOrderDetailList
+-- 상품 정보 전체 출력(입장 확인 용)
+SELECT *
+  FROM (SELECT ROWNUM RN, LIST.* 
+          FROM (SELECT TD.*, MID, TRRESULT FROM TICKET_RESDETAIL TD, TICKET_RES TR
+         WHERE TD.TRCODE = TR.TRCODE
+         ORDER BY TD.TRDCODE DESC) LIST)
+ WHERE RN BETWEEN 1 AND 10;
+ 
+-- 상품 정보 전체 글 갯수
+SELECT COUNT(*) FROM TICKET_RESDETAIL;
+
 -- id = usedTicket           
 -- 사용 티켓으로 변경
 UPDATE TICKET_RESDETAIL
    SET TRDRESULT = 1
  WHERE TRDCODE = '1';
+
+UPDATE MEMBER
+   SET MVISIT = MVISIT + 1
+ WHERE MID = 'aaa';
 
 -- QNABOARD --------------------------------------------------------------------
 -- id = registerQnA

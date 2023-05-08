@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div id="myTicketContent">
-		<h1 class="center">티켓 예매 내역</h1>
+		<h1 class="center">나의 티켓 예매 내역</h1>
 
 		<h2>주문 상세 내역</h2>
 		<table class="content_table">
@@ -26,14 +26,11 @@
 			<tr>
 				<td>${order.trcode }</td>
 				<td><fmt:formatDate value="${order.trorderDate }" pattern="yy.MM.dd hh:mm:ss" /></td>
-				<c:if test="${not empty member and order.trresult eq 0}">
+				<c:if test="${order.trresult eq 0}">
 					<td>주문완료</td>
 					<td>
 						<button class="btn_submit" onclick="location.href='${conPath}/ticket/tOrderCancel.do?trcode=${order.trcode}'">주문취소</button>
 					</td>
-				</c:if>
-				<c:if test="${empty member and order.trresult eq 0}">
-					<td>주문완료</td>
 				</c:if>
 				<c:if test="${order.trresult eq 1}">
 					<td><b>취소완료</b></td>
@@ -75,16 +72,14 @@
 		<h2>구매자 정보</h2>
 		<table class="content_table">
 			<tr>
-				<th>구매자 아이디</th>
-				<th>구매자 이름</th>
+				<th>주문자</th>
 				<th>전화번호</th>
 				<th>이메일주소</th>
 			</tr>
 			<tr>
-				<td>${order.mid}</td>
-				<td>${order.mname}</td>
-				<td>${order.mtel}</td>
-				<td>${order.mmail}</td>
+				<td>${member.mname}</td>
+				<td>${member.mtel}</td>
+				<td>${member.mmail}</td>
 			</tr>
 		</table>
 

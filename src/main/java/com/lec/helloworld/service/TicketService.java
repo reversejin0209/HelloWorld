@@ -9,9 +9,10 @@ import org.springframework.ui.Model;
 
 import com.lec.helloworld.vo.Ticket;
 import com.lec.helloworld.vo.TicketRes;
+import com.lec.helloworld.vo.TicketResDetail;
 
 public interface TicketService {
-	
+
 	// 티켓 리스트
 	public List<Ticket> ticketList();
 
@@ -37,6 +38,9 @@ public interface TicketService {
 	// 회원: 주문 취소
 	public void tOrderCancel(long trcode, Model model);
 
+	// 관리자: 티켓 상품 정보 전체 출력
+	public List<TicketResDetail> tOrderDetailList(TicketResDetail ticketResDetail, String pageNum, Model model);
+
 	// 관리자: 입장 시 사용 티켓으로 변경
-	public int usedTicket(int trdcode);
+	public void usedTicket(int trdcode, String mid);
 }

@@ -151,6 +151,17 @@ hr {
 	color: #ffffff;
 }
 
+.btn_small{
+	padding: 2px 6px;
+	border-radius: 5px;
+	background-color: #fafafa;
+	border: 1px solid #686868;
+}
+
+.btn_small:active{
+	background-color: #dedede;
+	}
+
 /* flag */
 .flag_purple {
 	font-size: 14px;
