@@ -1,0 +1,76 @@
+@charset "UTF-8";
+.atRevWrite {
+    position: relative;
+    background-color: #fff;
+}
+.arvList {
+	text-align: center;
+}
+.numTh, .ratingTh, .idTh, .contentTh, .rdateTh{
+	height:49px;
+}
+.numTh {
+	width: 80px;
+}
+.ratingTh {
+	width: 177.66px;
+}
+.idTh {
+	width: 203.42px;
+}
+.contentTh {
+	width: 715px;
+}
+.rdateTh {
+	width: 145px;
+}
+.list_table {
+	width: 100%;
+	margin: 10px 0;
+	border-collapse: collapse;
+}
+
+.list_table tr {
+	text-align: center;
+	cursor: pointer;
+}
+
+.list_table th, .content_table th {
+	font-size: 16px;
+	background-color: #fafafa;
+	border-top: 1px solid #282828;
+	color: #686868;
+	padding: 16px;
+}
+
+.list_table td {
+	font-size: 16px;
+	color: #686868;
+	border-bottom: 1px solid #bfbfbf;
+	padding: 12px;
+}
+
+.list_table td.title> a{
+	color: #686868;
+}
+
+.list_table tr td.title:hover {
+	text-decoration: underline;
+}
+	.star-ratings {
+	  color: #aaa9a9; 
+	  position: relative;
+	  unicode-bidi: bidi-override;
+	  width: max-content;
+	  }
+	.star-ratings-fill {
+	    color: gold;
+	  }
+	  .star-ratings-empty {
+	    color: #ddd;
+	  }
+a { text-decoration: none; color: white; }
+a:visited { text-decoration: none; }
+a:hover { text-decoration: none; }
+a:focus { text-decoration: none; }
+a:hover, a:active { text-decoration: none; }

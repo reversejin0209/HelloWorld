@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lec.helloworld.dao.At_ReviewDao">
+	<resultMap type="At_Review" id="At_ReviewResult">
+		<result property="arvnum" column="arvnum"/>
+		<result property="arvrdate" column="arvrdate"/>
+		<result property="arvcontent" column="arvcontent"/>
+		<result property="arvrating" column="arvrating"/>
+		<result property="arvhit" column="arvhit"/>
+		<result property="arvip" column="arvip"/>
+		<result property="atcode" column="atcode"/>
+		<result property="mid" column="mid"/>
+		<result property="writer" column="writer"/>
+	</resultMap>
+	
+<select id="atRevList" parameterType="At_Review" resultMap="At_ReviewResult">
+	<!-- 전체출력 -->
+	<if test="schItem == null or schItem ==''">
+	    SELECT M.*,
+	        (SELECT MNAME FROM MEMBER WHERE M.MID = MID)MNAME
+	        FROM (SELECT ROWNUM RN, B.*
+	            FROM (SELECT * FROM AT_REVIEW WHERE ATCODE = #{atcode} ORDER BY ARVNUM DESC) B)M
+	        WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</if>
+	<if test="schItem == 'arvrating'">
+	    SELECT M.*,
+	        (SELECT MNAME FROM MEMBER WHERE M.MID = MID)MNAME
+	        FROM (SELECT ROWNUM RN, B.*
+	            FROM (SELECT * FROM AT_REVIEW WHERE ATCODE = #{atcode} ORDER BY ARVRATING DESC) B)M
+	        WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</if>
+	<if test="schItem == 'arvhit'">
+	    SELECT M.*,
+	        (SELECT MNAME FROM MEMBER WHERE M.MID = MID)MNAME
+	        FROM (SELECT ROWNUM RN, B.*
+	            FROM (SELECT * FROM AT_REVIEW WHERE ATCODE = #{atcode} ORDER BY ARVHIT DESC) B)M
+	        WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</if>
+</select>
+
+<select id="totCntatRev" parameterType="At_Review" resultType="int">
+<!-- 전체 리뷰 갯수 -->
+	SELECT COUNT(*) FROM AT_REVIEW WHERE ATCODE = #{atcode}
+</select>
+
+<update id="hitUpatRev" parameterType="int">
+<!-- 리뷰 조회수 증가   -->
+	UPDATE AT_REVIEW SET arvHIT = arvHIT +1
+    	WHERE ARVNUM=#{arvnum}
+</update>
+
+<select id="atRevContent" parameterType="int" resultType="At_Review">
+<!-- 리뷰 상세보기 -->
+	SELECT M.*,
+    (SELECT MNAME FROM MEMBER WHERE M.MID = MID)MNAME
+    FROM (SELECT ROWNUM RN, B.*
+        FROM (SELECT * FROM AT_REVIEW WHERE ARVNUM=#{arvnum} ORDER BY ARVNUM DESC) B)M
+</select>
+
+<insert id="atRevWrite" parameterType="At_Review">
+<!-- 리뷰 등록하기 -->
+	INSERT INTO AT_REVIEW (ARVNUM, ARVCONTENT, ARVRATING, ATCODE, MID)
+	    VALUES(AT_REVIEW_SEQ.NEXTVAL
+	    		, #{arvcontent}
+	    		, #{arvrating}
+	    		, #{atcode}
+	    		, #{mid})
+</insert>
+
+<delete id="atRevDelete" parameterType="int">
+<!-- 리뷰 삭제하기 -->
+	DELETE FROM AT_REVIEW WHERE ARVNUM=#{arvnum}
+</delete>
+
+</mapper>

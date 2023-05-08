@@ -1,5 +1,6 @@
 package com.lec.helloworld.vo;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 import lombok.AllArgsConstructor;
@@ -14,12 +15,17 @@ public class At_Review {
 	// At_Review
 	
     private int arvnum;
-    private Timestamp arvrdate;
+    private Date arvrdate;
     private String arvcontent;
     private int arvrating;
     private int arvhit;
+    private String arvip;
     private int atcode;
     private String mid;
+    
+    //search
+    
+    private String schItem;
     
     //paging
     
