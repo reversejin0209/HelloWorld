@@ -208,36 +208,35 @@
 		<hr>
 		<div id="main_news">
 			<div class="main_news_left">
-				<ul class="list_box">
-					<li class="flex_wide">
-						<b onclick="location.href='${conPath }/notice/noticeList.do'">공지사항</b>
-						<a href="${conPath }/notice/noticeList.do">+</a>
-					</li>
-					<c:forEach var="nList" items="${noticeMain}">
-						<li>
-							<span class="text"> 
-								<a href="${conPath }/notice/noticeContent.do?nno=${nList.nno }&pageNum=${pageNum}">${nList.ntitle } </a>
+				<div class="sub_item item3">
+					<h2 class="flex_wide"><span onclick="location.href='${conPath }/notice/noticeList.do'">공지사항</span> <span onclick="location.href='${conPath }/notice/noticeList.do'">+</span></h2>
+					<ul class="list_box">
+						<c:forEach var="nList" items="${noticeMain }" end="4">
+						<li class="flex_wide">
+							<span>
+								<a href="${conPath }/notice/noticeContent.do?nno=${nList.nno }&pageNum=${pageNum}">${nList.ntitle }</a>
 							</span>
-							<span class="date">
-							 	<fmt:formatDate value="${nList.nrdate }" pattern="yyyy.MM.dd"/>
+							<span>
+								<fmt:formatDate value="${nList.nrdate }" pattern="yyyy.MM.dd"/>
 							</span>
 						</li>
-					</c:forEach>
-				</ul>
+						</c:forEach>
+					</ul>
+				</div>
 			</div>
 			<div class="main_news_right">
 				<div class="sub_item item3">
-							<h2 class="flex_wide"><span>최근 리뷰 내역</span> +</h2>
-							<ul class="list_box">
-								<c:forEach var="threvList" items="${threvMainList }" end="4">
-								<li class="flex_wide">
-									<span>${threvList.thrtitle }</span>
-									<span>${threvList.thname }</span>
-									<fmt:formatDate value="${threvList.thrrdate }" pattern="yy.MM.dd"/>
-								</li>
-								</c:forEach>
-							</ul>
-						</div>
+					<h2 class="flex_wide"><span>최근 리뷰 내역</span> +</h2>
+					<ul class="list_box">
+						<c:forEach var="threvList" items="${threvMainList }" end="4">
+						<li class="flex_wide">
+							<span>${threvList.thrtitle }</span>
+							<span>${threvList.thname }</span>
+							<fmt:formatDate value="${threvList.thrrdate }" pattern="yy.MM.dd"/>
+						</li>
+						</c:forEach>
+					</ul>
+				</div>
 			</div>
 		</div>
 		<!-- main_notice -->
