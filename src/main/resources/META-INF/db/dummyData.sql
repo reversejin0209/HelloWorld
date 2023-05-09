@@ -1,4 +1,3 @@
-
 -- MEMBER ----------------------------------------------------------------------
 -- MEMBER GRADE
 INSERT INTO MEMBER_GRADE (GRADE, LOWVI, HIGHVI, DISC)
@@ -32,48 +31,29 @@ INSERT INTO THEATER (thCODE, thNAME, thCONTENT, thTIME, thLOC, thSEAT, thPRICE, 
     VALUES ('TH'||THCODE_SEQ.NEXTVAL, '락큰롤 빅 밴드 쇼', '락큰롤 빅 밴드 쇼', '40'||'분', '매지컬 랜드', 40, 5000, 'theater3.png', 0);
 
 -- 2. THEATER_RES: 공연 예매
-    --> 예매 진행
 INSERT INTO THEATER_RES (thrCODE, mID, thCODE, thrCNT, thrORDERDATE, thrREVIEW, thrTOTPRICE, thrDATE)
-    VALUES ('230502'||'TH1'||THRCODE_SEQ.NEXTVAL, 'aaa', 'TH1', 2, SYSDATE, 0, 14000, SYSDATE);
+    VALUES (TO_CHAR(SYSDATE, 'YYMMDD')||'TH1'||THRCODE_SEQ.NEXTVAL, 'aaa', 'TH1', 2, SYSDATE, 0, 14000, SYSDATE);
     --> 예매 좌석 추가
 INSERT INTO THEATER_SEAT (SEATCODE, thrCODE)
-    VALUES ('A1', '230502TH11');
+    VALUES ('A1', '230508TH11');
 INSERT INTO THEATER_SEAT (SEATCODE, thrCODE)
-    VALUES ('A2', '230502TH11');
-    --> 예매 진행
+    VALUES ('A2', '230508TH11');
 INSERT INTO THEATER_RES (thrCODE, mID, thCODE, thrCNT, thrORDERDATE, thrREVIEW, thrTOTPRICE, thrDATE)
-    VALUES ('230501'||'TH2'||THRCODE_SEQ.NEXTVAL, 'bbb', 'TH2', 1, SYSDATE, 0, 9000, SYSDATE);
+    VALUES (TO_CHAR(SYSDATE, 'YYMMDD')||'TH2'||THRCODE_SEQ.NEXTVAL, 'bbb', 'TH2', 1, SYSDATE, 0, 9000, SYSDATE);
     --> 예매 좌석 추가
 INSERT INTO THEATER_SEAT (SEATCODE, thrCODE)
-    VALUES ('C5', '230501TH22');
-    --> 예매 진행
+    VALUES ('C5', '230508TH22');
 INSERT INTO THEATER_RES (thrCODE, mID, thCODE, thrCNT, thrORDERDATE, thrREVIEW, thrTOTPRICE, thrDATE)
-    VALUES ('230506'||'TH3'||THRCODE_SEQ.NEXTVAL, 'ccc', 'TH3', 1, SYSDATE, 0, 5000, SYSDATE);
+    VALUES (TO_CHAR(SYSDATE, 'YYMMDD')||'TH3'||THRCODE_SEQ.NEXTVAL, 'ccc', 'TH3', 1, SYSDATE, 0, 5000, SYSDATE);
     --> 예매 좌석 추가
 INSERT INTO THEATER_SEAT (SEATCODE, thrCODE)
-    VALUES ('D4', '230506TH33');
-    --> 예매 진행
-INSERT INTO THEATER_RES (thrCODE, mID, thCODE, thrCNT, thrORDERDATE, thrREVIEW, thrTOTPRICE, thrDATE)
-    VALUES ('230504'||'TH3'||THRCODE_SEQ.NEXTVAL, 'ddd', 'TH3', 1, SYSDATE, 0, 5000, SYSDATE);
-    --> 예매 좌석 추가
-INSERT INTO THEATER_SEAT (SEATCODE, thrCODE)
-    VALUES ('A4', '230504TH36');
-    --> 예매 진행
-INSERT INTO THEATER_RES (thrCODE, mID, thCODE, thrCNT, thrORDERDATE, thrREVIEW, thrTOTPRICE, thrDATE)
-    VALUES ('230511'||'TH2'||THRCODE_SEQ.NEXTVAL, 'aaa', 'TH2', 1, SYSDATE, 0, 5000, SYSDATE);
-    --> 예매 좌석 추가
-INSERT INTO THEATER_SEAT (SEATCODE, thrCODE)
-    VALUES ('A10', '230511TH25');
+    VALUES ('D4', '230508TH33');
 
 -- 3. THREVIEW: 공연 리뷰 글 쓰기
 INSERT INTO THREVIEW (thrNUM, thrCODE, mID, thrTITLE, thrCONTENT, thrRDATE) 
-    VALUES (THREVIEW_SEQ.NEXTVAL, '230502TH11', 'aaa', '놀이공원보다 재밌는 공연', '놀이공원와서 공연이 제일 재밌었습니다', SYSDATE);
+    VALUES (THREVIEW_SEQ.NEXTVAL, '230508TH11', 'aaa', '놀이공원보다 재밌는 공연', '본문임', SYSDATE);
 INSERT INTO THREVIEW (thrNUM, thrCODE, mID, thrTITLE, thrCONTENT, thrRDATE) 
-    VALUES (THREVIEW_SEQ.NEXTVAL, '230506TH33', 'ccc', '너무 재밌는 공연이었습니다', '공연이 너무 재밌었어요!!', SYSDATE);
-INSERT INTO THREVIEW (thrNUM, thrCODE, mID, thrTITLE, thrCONTENT, thrRDATE) 
-    VALUES (THREVIEW_SEQ.NEXTVAL, '230501TH22', 'bbb', '자리가 조금 아쉬워요', '자리가 조금 넓었으면 좋겠습니다.', SYSDATE);
-INSERT INTO THREVIEW (thrNUM, thrCODE, mID, thrTITLE, thrCONTENT, thrRDATE) 
-    VALUES (THREVIEW_SEQ.NEXTVAL, '230504TH34', 'ddd', '거리가 너무 멀어요...', '거리가 조금 멀어 가족들과 가기 힘들었어요 ㅠㅠ', SYSDATE);
+    VALUES (THREVIEW_SEQ.NEXTVAL, '230508TH33', 'ccc', '너무 재밌는 공연이었습니다', '본문임', SYSDATE);
    
 -- NOTICE  ---------------------------------------------------------------------
 -- 1. 공지사항 등록
@@ -117,51 +97,206 @@ INSERT INTO AT_RPLY (APYNUM, ADID, MID, ATCODE, APYTITLE, APYCONTENT, APYRDATE, 
     VALUES(AT_RPLY_SEQ.NEXTVAL, 'admin', 'aaa', '1', '제목임', '만6세부터 이용 가능합니다 감사합니다', SYSDATE, 0, 0, 0, '123-123');
 
 -- TICKET ----------------------------------------------------------------------
--- 1. TICKET: 티켓 종류
+-- 종일권
 INSERT INTO TICKET (TCODE, TNAME, TSUB, TTYPE, TPRICE, TCONTENT, TIMG)
      VALUES ('ti' || LPAD(TICKET_SEQ.NEXTVAL, 4, 0)
-           , '헬로월드 종일권'
-           , '헬로월드에서의 즐거운 하루'
+           , '헬로 종일권'
+           , '매표소에 줄 서지 않고 바로 입장하세요'
            , '대인'
            , '68000'
-           , '헬로월드 종일권 본문'
-           , 'ticket_timg_01.png');
-           
+           , '매표소에 줄 서지 않고 바로 입장하는 특권!
+스마트 예약하시고 빠르게 입장하세요.
+
+※ 제휴카드 할인 이용권은 "종일권(제휴카드 할인)" 메뉴에서 예약하셔야 합니다.
+※ 스마트줄서기 등 원활한 파크 이용을 위해 에버랜드 APP에 이용권을 등록해주세요.
+※ 헬로월드 이용권을 삼성페이에 추가하여 편리하게 이용할 수 있습니다.'
+           , 'ticket_timg_02.png');
+
 INSERT INTO TICKET (TCODE, TNAME, TSUB, TTYPE, TPRICE, TCONTENT, TIMG)
      VALUES ('ti' || LPAD(TICKET_SEQ.NEXTVAL, 4, 0)
-           , '헬로월드 종일권'
-           , '헬로월드에서의 즐거운 하루'
+           , '헬로 종일권'
+           , '매표소에 줄 서지 않고 바로 입장하세요'
            , '청소년'
            , '62000'
-           , '헬로월드 종일권 본문'
-           , 'ticket_timg_01.png'); 
+           , '매표소에 줄 서지 않고 바로 입장하는 특권!
+스마트 예약하시고 빠르게 입장하세요.
+
+※ 제휴카드 할인 이용권은 "종일권(제휴카드 할인)" 메뉴에서 예약하셔야 합니다.
+※ 스마트줄서기 등 원활한 파크 이용을 위해 에버랜드 APP에 이용권을 등록해주세요.
+※ 헬로월드 이용권을 삼성페이에 추가하여 편리하게 이용할 수 있습니다.'
+           , 'ticket_timg_02.png');
            
 INSERT INTO TICKET (TCODE, TNAME, TSUB, TTYPE, TPRICE, TCONTENT, TIMG)
      VALUES ('ti' || LPAD(TICKET_SEQ.NEXTVAL, 4, 0)
-           , '헬로월드 종일권'
-           , '헬로월드에서의 즐거운 하루'
+           , '헬로 종일권'
+           , '매표소에 줄 서지 않고 바로 입장하세요'
            , '영유아'
-           , '52000'
-           , '헬로월드 종일권 본문'
+           , '58000'
+           , '매표소에 줄 서지 않고 바로 입장하는 특권!
+스마트 예약하시고 빠르게 입장하세요.
+
+※ 제휴카드 할인 이용권은 "종일권(제휴카드 할인)" 메뉴에서 예약하셔야 합니다.
+※ 스마트줄서기 등 원활한 파크 이용을 위해 에버랜드 APP에 이용권을 등록해주세요.
+※ 헬로월드 이용권을 삼성페이에 추가하여 편리하게 이용할 수 있습니다.'
+           , 'ticket_timg_02.png');
+
+-- 오후권(3시 입장)
+INSERT INTO TICKET (TCODE, TNAME, TSUB, TTYPE, TPRICE, TCONTENT, TIMG)
+     VALUES ('ti' || LPAD(TICKET_SEQ.NEXTVAL, 4, 0)
+           , '오후권(3시 입장)'
+           , '오후 3시부터 입장~ 마감시간까지 자유롭게!'
+           , '대인'
+           , '40000'
+           , '[구매 및 사용]
+- 오후 3시부터 입장 가능합니다.
+- 2매 이상 구매하더라도 QR코드는 1개만 발송되므로 반드시 함께 입장하셔야 합니다.
+- 방문예정일 기준 30일 전부터 방문 당일까지 예약 가능합니다.
+- 중고생/대학(원)생 오후권 입장 시 에버랜드 APP에 등록하신 이용권 QR코드와 함께 중/고/대학(원)생임을 증명할 수 있는 증빙 서류(학생증 등)를 근무자에게 제시해 주세요. (증명서류 미지참 시 입장 불가 / 촬영본 가능)
+- 타 제휴카드 및 쿠폰 등과 중복 우대되지 않습니다.
+- 예약 문자를 받지 못한 경우, 헬로월드 APP 스마트예약 페이지 또는 홈페이지 > 마이 페이지 > 예매 조회의 상세 보기를 조회하면, QR코드 및 이용안내/유의사항을 확인하실 수 있습니다.'
+           , 'ticket_timg_03.png'); 
+           
+INSERT INTO TICKET (TCODE, TNAME, TSUB, TTYPE, TPRICE, TCONTENT, TIMG)
+     VALUES ('ti' || LPAD(TICKET_SEQ.NEXTVAL, 4, 0)
+           , '오후권(3시 입장)'
+           , '오후 3시부터 입장~ 마감시간까지 자유롭게!'
+           , '청소년'
+           , '35000'
+           , '[구매 및 사용]
+- 오후 3시부터 입장 가능합니다.
+- 2매 이상 구매하더라도 QR코드는 1개만 발송되므로 반드시 함께 입장하셔야 합니다.
+- 방문예정일 기준 30일 전부터 방문 당일까지 예약 가능합니다.
+- 중고생/대학(원)생 오후권 입장 시 에버랜드 APP에 등록하신 이용권 QR코드와 함께 중/고/대학(원)생임을 증명할 수 있는 증빙 서류(학생증 등)를 근무자에게 제시해 주세요. (증명서류 미지참 시 입장 불가 / 촬영본 가능)
+- 타 제휴카드 및 쿠폰 등과 중복 우대되지 않습니다.
+- 예약 문자를 받지 못한 경우, 헬로월드 APP 스마트예약 페이지 또는 홈페이지 > 마이 페이지 > 예매 조회의 상세 보기를 조회하면, QR코드 및 이용안내/유의사항을 확인하실 수 있습니다.'
+           , 'ticket_timg_03.png'); 
+           
+INSERT INTO TICKET (TCODE, TNAME, TSUB, TTYPE, TPRICE, TCONTENT, TIMG)
+     VALUES ('ti' || LPAD(TICKET_SEQ.NEXTVAL, 4, 0)
+           , '오후권(3시 입장)'
+           , '오후 3시부터 입장~ 마감시간까지 자유롭게!'
+           , '영유아'
+           , '32000'
+           , '[구매 및 사용]
+- 오후 3시부터 입장 가능합니다.
+- 2매 이상 구매하더라도 QR코드는 1개만 발송되므로 반드시 함께 입장하셔야 합니다.
+- 방문예정일 기준 30일 전부터 방문 당일까지 예약 가능합니다.
+- 중고생/대학(원)생 오후권 입장 시 에버랜드 APP에 등록하신 이용권 QR코드와 함께 중/고/대학(원)생임을 증명할 수 있는 증빙 서류(학생증 등)를 근무자에게 제시해 주세요. (증명서류 미지참 시 입장 불가 / 촬영본 가능)
+- 타 제휴카드 및 쿠폰 등과 중복 우대되지 않습니다.
+- 예약 문자를 받지 못한 경우, 헬로월드 APP 스마트예약 페이지 또는 홈페이지 > 마이 페이지 > 예매 조회의 상세 보기를 조회하면, QR코드 및 이용안내/유의사항을 확인하실 수 있습니다.'
+           , 'ticket_timg_03.png'); 
+
+-- 유아/초등 키즈 PKG
+INSERT INTO TICKET (TCODE, TNAME, TSUB, TTYPE, TPRICE, TCONTENT, TIMG)
+     VALUES ('ti' || LPAD(TICKET_SEQ.NEXTVAL, 4, 0)
+           , '유아/초등 키즈 PKG'
+           , '4시부터 폐장까지 짧고 굵게 놀자!'
+           , '유아'
+           , '80000'
+           , '- 유아 키즈PKG	대인 종일권 1매 + 유아(소인) 종일권 1매
+- 초등 키즈PKG	대인 종일권 1매 + 초등(소인) 종일권 1매
+           
+※ 나이 기준 : 유아(36개월~7세), 초등(8~13세)
+
+[음료컵 교환권]
+★ 해당컵으로 탄산음료 구매시 1,500원에 리필 제공★
+- 교환 : 뉴욕센트럴, 아마존스낵, 멀린스스낵, 카페정글캠프, 매직타임(11:00~18:00)
+- 방문 당일 근무자에게 문자 메시지(QR코드)를 제시해 주세요.
+- 지정 품목 외 타 품목 교환은 불가합니다.
+- 지정 품목 수령 후 교환이나 환불은 불가합니다.
+- 당일에 한하여 사용 가능하며, 미교환 시 환불은 불가합니다.
+
+※ 입장 시 해당 QR코드와 소인 나이를 증명할 수 있는 서류를 제시해주세요. (주민등록등본, 건강보험증, 여권 등)
+※ 원활한 파크 이용을 위해 방문 당일 에버랜드 APP에 이용권을 등록해 주세요.
+※ 이용권을 삼성페이에 추가하여 편리하게 이용할 수 있습니다.'
            , 'ticket_timg_01.png');
 
 INSERT INTO TICKET (TCODE, TNAME, TSUB, TTYPE, TPRICE, TCONTENT, TIMG)
      VALUES ('ti' || LPAD(TICKET_SEQ.NEXTVAL, 4, 0)
-           , '헬로월드 오후권'
+           , '유아/초등 키즈 PKG'
            , '4시부터 폐장까지 짧고 굵게 놀자!'
-           , '대인'
-           , '46000'
-           , '헬로월드 오후권 본문'
-           , 'ticket_timg_02.png');
+           , '초등키즈'
+           , '86000'
+           , '- 유아 키즈PKG	대인 종일권 1매 + 유아(소인) 종일권 1매
+- 초등 키즈PKG	대인 종일권 1매 + 초등(소인) 종일권 1매
+           
+※ 나이 기준 : 유아(36개월~7세), 초등(8~13세)
 
+[음료컵 교환권]
+★ 해당컵으로 탄산음료 구매시 1,500원에 리필 제공★
+- 교환 : 뉴욕센트럴, 아마존스낵, 멀린스스낵, 카페정글캠프, 매직타임(11:00~18:00)
+- 방문 당일 근무자에게 문자 메시지(QR코드)를 제시해 주세요.
+- 지정 품목 외 타 품목 교환은 불가합니다.
+- 지정 품목 수령 후 교환이나 환불은 불가합니다.
+- 당일에 한하여 사용 가능하며, 미교환 시 환불은 불가합니다.
+
+※ 입장 시 해당 QR코드와 소인 나이를 증명할 수 있는 서류를 제시해주세요. (주민등록등본, 건강보험증, 여권 등)
+※ 원활한 파크 이용을 위해 방문 당일 에버랜드 APP에 이용권을 등록해 주세요.
+※ 이용권을 삼성페이에 추가하여 편리하게 이용할 수 있습니다.'
+           , 'ticket_timg_01.png');
+
+-- 판다월드 PKG
 INSERT INTO TICKET (TCODE, TNAME, TSUB, TTYPE, TPRICE, TCONTENT, TIMG)
      VALUES ('ti' || LPAD(TICKET_SEQ.NEXTVAL, 4, 0)
-           , '헬로월드 오후권'
-           ,'4시부터 폐장까지 짧고 굵게 놀자!'
+           , '판다월드 사파리 PKG'
+           , '판다월드 사파리와 이용권을 한번에 구매할 수 있는 상품'
+           , '대인'
+           , '57000'
+           , '[운영기간]
+- 4/1~5/14 (방문일 기준)
+
+[상품구성]
+- 오후권 1매 + 나이트사파리 체험권 1매
+* 오후권은 3시 입장 가능합니다.
+* 나이트 사파리 트램 체험 시 스마트예약 후 전송된 QR을 사파리월드 앞 근무자에게 반드시 제시해 주세요.
+
+※ 본 프로모션은 당사 사정에 의하여 조기 종료될 수 있습니다.
+※ 스마트줄서기 등 원활한 파크 이용을 위해 에버랜드 APP에 이용권을 등록해주세요.
+※ 나이트사파리 트램 체험은 인원제한이 있는 CAPA상품으로 스마트예약 시 지정한 시간 외 사용은 불가합니다.'
+           , 'ticket_timg_06.png');
+           
+           INSERT INTO TICKET (TCODE, TNAME, TSUB, TTYPE, TPRICE, TCONTENT, TIMG)
+     VALUES ('ti' || LPAD(TICKET_SEQ.NEXTVAL, 4, 0)
+           , '판다월드 사파리 PKG'
+           , '판다월드 사파리와 이용권을 한번에 구매할 수 있는 상품'
            , '청소년'
-           , '42000'
-           , '헬로월드 오후권 본문'
-           , 'ticket_timg_02.png');
+           , '54000'
+           , '[운영기간]
+- 4/1~5/14 (방문일 기준)
+
+[상품구성]
+- 오후권 1매 + 나이트사파리 체험권 1매
+* 오후권은 3시 입장 가능합니다.
+* 나이트 사파리 트램 체험 시 스마트예약 후 전송된 QR을 사파리월드 앞 근무자에게 반드시 제시해 주세요.
+
+※ 본 프로모션은 당사 사정에 의하여 조기 종료될 수 있습니다.
+※ 스마트줄서기 등 원활한 파크 이용을 위해 에버랜드 APP에 이용권을 등록해주세요.
+※ 나이트사파리 트램 체험은 인원제한이 있는 CAPA상품으로 스마트예약 시 지정한 시간 외 사용은 불가합니다.'
+           , 'ticket_timg_06.png');
+
+-- 삼성카드 : 전회원 패키지 프로모션
+INSERT INTO TICKET (TCODE, TNAME, TSUB, TTYPE, TPRICE, TCONTENT, TIMG)
+     VALUES ('ti' || LPAD(TICKET_SEQ.NEXTVAL, 4, 0)
+           , '삼성카드 : 전회원 패키지 프로모션'
+           , '판다컵/츄러스/T익스프레스 Q패스 패키지'
+           , '대인'
+           , '32000'
+           , '[대상카드]
+- 삼성카드(신용/체크/법인/가족 포함, 선불/충전/기프트 제외)
+
+※ T익스프레스 패키지는 일 50매 한정 수량으로, 조기 소진 시 구매가 어려울 수 있습니다.
+※ 스마트줄서기 등 원활한 파크 이용을 위해 에버랜드 APP에 이용권을 등록해 주세요.
+
+- 금융상품 이용 전 상품설명서, 홈페이지, 약관을 통해 이용조건을 확인해주시기 바랍니다.
+- 금융소비자는 해당 상품 또는 서비스에 대하여 설명을 받을 권리가 있습니다.
+- 신용카드 발급이 부적정한 경우(개인신용평점 낮음 등) 카드 발급이 제한될 수 있습니다.
+- 카드 이용대금과 이에 수반되는 모든 수수료를 지정된 대금 결제일에 상환합니다.
+- 상환 능력에 비해 신용카드 사용액이 과도할 경우 귀하의 개인신용평점이 하락할 수 있습니다.
+- 개인신용평점 하락 시 금융거래 관련된 불이익이 발생할 수 있습니다.
+- 일정 기간 원리금을 연체할 경우, 모든 원리금을 변제할 의무가 발생할 수 있습니다.
+- 준법심의필 I3119-23-1971 (2023.05.04 ~ 2024.05.03)'
+           , 'ticket_timg_05.png');
+
 
 -- 2. TICKET_RES: 티켓 주문
 INSERT INTO TICKET_RES (TRCODE, MID, TRTOTPRICE)
@@ -194,3 +329,4 @@ INSERT INTO QNABOARD (QANUM, MID, QACAT, QATITLE, QACONTENT
            , '195.0.0.1'); 
 
 COMMIT;
+
