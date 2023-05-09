@@ -11,7 +11,7 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
 	$(document).ready(function() {
-		
+
 	});
 </script>
 </head>
@@ -21,49 +21,49 @@
 			location.href = '${conPath }/member/mLogin.do';
 		</script>
 	</c:if>
-	
+
 	<!-- 예매 처리 -->
 	<c:if test="${thResResult eq true }">
 		<script>
 			alert('예매 성공했습니다');
 		</script>
 	</c:if>
-	
+
 	<c:if test="${thResResult eq false }">
 		<script>
 			alert('예매 실패했습니다. \n다시 확인해주세요');
 			history.back();
 		</script>
 	</c:if>
-	
+
 	<!-- 예매권 취소 -->
 	<c:if test="${thResCancelResult eq true }">
 		<script>
 			alert('예매가 취소되었습니다.');
 		</script>
 	</c:if>
-	
+
 	<c:if test="${thResCancelResult eq false }">
 		<script>
 			alert('당일 공연 혹은 공연 시간이 지난 예매는 취소가 불가능합니다.');
 			history.back();
 		</script>
 	</c:if>
-	
+
 	<!-- 예매권 리뷰 작성 -->
 	<c:if test="${thRevWriteResult eq 1 }">
 		<script>
 			alert('리뷰가 작성되었습니다.');
 		</script>
 	</c:if>
-	
+
 	<c:if test="${thRevWriteResult eq 0 }">
 		<script>
 			alert('리뷰 작성 실패되었습니다. 다시 확인해주세요.');
 			history.back();
 		</script>
 	</c:if>
-	
+
 	<jsp:include page="../main/header.jsp" />
 	<div class="background-color">
 		<div id="wrap">
@@ -74,7 +74,9 @@
 					<ul>
 						<li>
 							<h3>안녕하세요!</h3>
-							<h1><a href="${conPath }/member/mMypage.do?mid=${mid}">${member.mname } 님</a></h1> <br>
+							<h1>
+								<a href="${conPath }/member/mMypage.do?mid=${mid}">${member.mname } 님</a>
+							</h1> <br>
 						</li>
 						<li>
 							<ul>
@@ -101,7 +103,8 @@
 							</ul>
 						</li>
 					</ul>
-				</div><!-- myContent -->
+				</div>
+				<!-- myContent -->
 
 				<!-- right: myInfo -->
 				<div class="myPage_right">
@@ -122,26 +125,31 @@
 								${member.mname } 님은
 								<h1>최고 등급입니다</h1>
 							</c:if>
-							
+
 						</div>
-					</div><!-- info_box -->
+					</div>
+					<!-- info_box -->
 
 					<!-- main_item -->
 					<div class="item_box">
 						<div class="sub_item item1" onclick="location.href='${conPath}/ticket/myTicketList.do'">
-							<h2>티켓 예매확인/취소 </h2>
+							<img alt="티켓 예매 아이콘" src="https://em-content.zobj.net/source/microsoft-teams/337/ticket_1f3ab.png" >
+							<h2>티켓 예매확인/취소</h2>
 						</div>
 						<div class="sub_item item2">
+							<img alt="공연 아이콘" src="https://em-content.zobj.net/source/microsoft-teams/337/admission-tickets_1f39f-fe0f.png">
 							<div class="normal_box" onclick="location.href='${conPath }/thRes/thResList.do?mid=${member.mid }'">
 								<h2>공연 예매확인/취소</h2>
 							</div>
 						</div>
 						<div class="sub_item item3">
+							<img alt="문의 아이콘" src="https://em-content.zobj.net/source/microsoft-teams/337/open-mailbox-with-raised-flag_1f4ec.png">
 							<div class="normal_box" onclick="location.href='${conPath }/qnaBoard/myQnaBoardList.do'">
 								<h2>1:1 문의내역</h2>
 							</div>
 						</div>
 						<div class="sub_item item4">
+							<img alt="후기 아이콘" src="https://em-content.zobj.net/source/microsoft-teams/337/pencil_270f-fe0f.png">
 							<div class="normal_box">
 								<h2>나의 후기</h2>
 							</div>

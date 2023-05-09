@@ -87,6 +87,14 @@
 	padding: 40px 30px;
 	overflow: hidden;
 	margin-bottom: 30px;
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+}
+
+#myPage .myPage_right .item_box .sub_item>img{
+	width: 80px;
+	height: 80px;
 }
 
 .myPage_right_white {
@@ -124,15 +132,15 @@
 }
 
 /* list_box */
-.list_box li:first-child{
+.list_box li:first-child {
 	padding-top: 14px;
 	border-top: 1px solid #dedede;
 }
 
-.list_box li{
+.list_box li {
 	margin: 8px 0;
 }
 
-.list_box li a{
+.list_box li a {
 	color: #1d1d1d;
 }

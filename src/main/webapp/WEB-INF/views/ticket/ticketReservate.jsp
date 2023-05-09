@@ -23,7 +23,7 @@
 			<div id="ticketRes_inner">
 				<h1 class="center">${successMsg }${failMsg }</h1>
 
-				<h2>주문 상세 내역</h2>
+				<%-- <h2>주문 상세 내역</h2>
 				<table class="content_table">
 					<tr>
 						<th>주문번호</th>
@@ -48,7 +48,7 @@
 							<td><b>취소완료</b></td>
 						</c:if>
 					</tr>
-				</table>
+				</table> --%>
 				<br>
 
 				<div class="flex_wide">
