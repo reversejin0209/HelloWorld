@@ -64,17 +64,19 @@
 					</tr>
 
 					<c:forEach var="ticket" items="${ticketList }">
-						<tr>
-							<td><img alt="주문내역 이미지" src="../img/${ticket.timg }" style="height: 80px; width: 80px; object-fit: cover;"></td>
-							<td>${ticket.trdname }/${ticket.trdtype }</td>
-							<td>${ticket.trdcnt }매</td>
-							<td><fmt:formatDate value="${ticket.trddate }" pattern="yy년 MM월 dd일"/></td>
-							<td><c:if test="${ticket.trdresult eq 0}">
-									<b>사용 전</b>
-								</c:if> <c:if test="${ticket.trdresult eq 1}">
-									<b>사용 후</b>
-								</c:if></td>
-						</tr>
+						<c:if test="${ticket.trdcnt != 0}">
+							<tr>
+								<td><img alt="주문내역 이미지" src="../img/${ticket.timg }" style="height: 80px; width: 80px; object-fit: cover;"></td>
+								<td>${ticket.trdname }/${ticket.trdtype }</td>
+								<td>${ticket.trdcnt }매</td>
+								<td><fmt:formatDate value="${ticket.trddate }" pattern="yy년 MM월 dd일"/></td>
+								<td><c:if test="${ticket.trdresult eq 0}">
+										<b>사용 전</b>
+									</c:if> <c:if test="${ticket.trdresult eq 1}">
+										<b>사용 후</b>
+									</c:if></td>
+							</tr>
+						</c:if>
 					</c:forEach>
 				</table>
 				<br>

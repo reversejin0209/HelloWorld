@@ -132,8 +132,7 @@
 
 								<!-- 사용 전 취소 및 사용 여부 확인 -->
 								<c:if test="${ticket.trresult eq 1 }">
-									<td><b>취소 완료</b></td>
-									<td></td>
+									<td colspan="2"><b>취소 완료</b></td>
 								</c:if>
 								<c:if test="${ticket.trresult eq 0 }">
 									<c:if test="${ticket.trdresult eq 0 }">
@@ -141,8 +140,7 @@
 										<td><button class="btn_small">사용 확인</button></td>
 									</c:if>
 									<c:if test="${ticket.trdresult eq 1 }">
-										<td><b>사용 완료</b></td>
-										<td></td>
+										<td colspan="2"><b>사용 완료</b></td>
 									</c:if>
 								</c:if>
 							</tr>
