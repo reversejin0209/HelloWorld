@@ -260,10 +260,14 @@
 					<span>최근 리뷰 내역</span> +
 				</h2>
 				<ul class="list_box">
-					<c:forEach var="threvList" items="${threvMainList }" end="4">
+					<%-- <c:forEach var="threvList" items="${threvMainList }" end="4">
 						<li class="flex_wide"><span>${threvList.thrtitle }</span> <span>${threvList.thname }</span> <fmt:formatDate value="${threvList.thrrdate }"
 								pattern="yy.MM.dd" /></li>
-					</c:forEach>
+					</c:forEach> --%>
+					<li class="flex_wide"><span>좋아요 추천합니다</span><span class="grey">락큰롤 빅 밴드 쇼</span><span>23.05.08</span></li>
+					<li class="flex_wide"><span>가장 기억에 남아요</span><span class="grey">코코의 모험:코딩어드벤처</span><span>23.05.06</span></li>
+					<li class="flex_wide"><span>아이들이 좋아해요</span><span class="grey">로티의 스프링 어드벤처</span><span>23.05.02</span></li>
+					<li class="flex_wide"><span>어른에게는 아쉬워요</span><span class="grey">코코의 모험:코딩어드벤처</span><span>23.05.02</span></li>
 				</ul>
 			</div>
 		</div>
