@@ -3,7 +3,7 @@
 ![helloWorld_README_01](https://github.com/Dsilv118/HelloWorld-2ndTeamProject/assets/119287211/11622ea5-df76-4bed-9da6-e34d2700dc72)
 
 - **프로젝트명**  HelloWorld / 놀이동산 운영 관리 시스템 개발
-- **인원**  4명
+- **인원**  3명
 - **기간**  2023.04.19 ~ 2023.05.04
 - **DBMS**  Oracle 11g Express Edition
 - **언어**  Java SE 8 Platform / HTML5 / CSS / JavaScript
