@@ -71,11 +71,67 @@
 	    WHERE RW BETWEEN #{startRow} AND #{endRow}
 	</select>
 	
-	<!-- 내 예매 내역 자세히보기 -->
-	<select id="thResContent" parameterType="String" resultMap="ThResResult">
-		SELECT *
-    	FROM THEATER_RES TR, THEATER T, THEATER_SEAT TS
-    	WHERE TR.thCODE = T.thCODE AND TR.thrCODE = TS.thrCODE AND TR.thrCODE = #{thrcode}
+	<!-- 내 예매 내역 자세히 보기 -->
+	<select id="thResContent" parameterType="String" resultType="ThRes">
+		SELECT TR.thrCODE, thrREVIEW, thrTOTPRICE, thrDATE, thNAME, thLOC
+    	FROM THEATER_RES TR, THEATER T
+   		WHERE TR.thCODE = T.thCODE AND TR.thrCODE = #{thrcode}
 	</select>
+	
+	<!-- 내 예매 내역 좌석 보기 -->
+	<select id="thResContentSeat" parameterType="String" resultMap="ThResResult">
+		SELECT SEATCODE FROM THEATER_RES TR, THEATER_SEAT TS
+    	WHERE TR.THRCODE = TS.THRCODE AND TR.THRCODE = #{thrcode}
+	</select>
+	
+	<!-- 예매 취소 시간 확인 -->
+	<select id="thResCancelChk" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM THEATER_RES
+    	WHERE thrCODE = #{thrcode} AND 
+    	<![CDATA[TO_CHAR(thrDATE, 'YYYY/MM/DD') > TO_CHAR(SYSDATE, 'YYYY/MM/DD')]]>
+	</select>
+	
+	<!-- 예매 좌석 삭제 -->
+	<delete id="thResCancelSeat" parameterType="String">
+		DELETE THEATER_SEAT 
+   		WHERE thrCODE = #{thrcode}
+	</delete>
+	
+	<!-- 예매권 취소 -->
+	<delete id="thResCancel" parameterType="String">
+		DELETE THEATER_RES 
+    	WHERE thrCODE = #{thrcode}
+	</delete>	
+	
+	<!-- 공연 예매 코드 모으기 -->
+	<select id="getThrcode" parameterType="String" resultMap="ThResResult">
+		SELECT thrCODE 
+    	FROM THEATER T, THEATER_RES TR
+    	WHERE T.thCODE = #{thcode}
+	</select>
+	
+	<!-- 공연 예매 코드로 좌석 삭제 -->
+	<delete id="deleteSeat" parameterType="String">
+		DELETE THEATER_SEAT
+    	WHERE thrCODE = #{thrcode}
+	</delete>
+	
+	<!-- 공연 예매 코드로 리뷰 삭제 -->
+	<delete id="deleteThRev" parameterType="String">
+		DELETE THREVIEW
+    	WHERE thrCODE = #{thrcode}
+	</delete>
+	
+	<!-- 공연 예매권 삭제 -->
+	<delete id="deleteThRes" parameterType="String">
+		DELETE THEATER_RES
+    	WHERE thCODE = #{thcode}
+	</delete>
+	
+	<!-- 공연 삭제 -->
+	<delete id="theaterDelete" parameterType="String">
+		DELETE THEATER 
+    	WHERE thCODE = #{thcode}
+	</delete>
 	
 </mapper>

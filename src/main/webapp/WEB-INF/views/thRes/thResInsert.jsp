@@ -48,8 +48,9 @@
 					<div class="stage_Box">
 						<b>S T A G E<b>
 					</div>
-					
 					<div class="seat_Box">
+					
+						<b class="small_font">A</b>
 						<c:forEach var="i" begin="0" end="9">
 							<!-- A석 -->
 							<c:if test="${i < 10 }">
@@ -73,7 +74,7 @@
 						</c:forEach>
 						
 						<br>
-						
+						<b class="small_font">B</b>
 						<c:forEach var="i" begin="10" end="19">	
 							<!-- B석 -->
 							<c:if test="${i < 20 }">
@@ -97,7 +98,7 @@
 						</c:forEach>
 						
 						<br>
-						
+						<b class="small_font">C</b>
 						<c:forEach var="i" begin="20" end="29">	
 							<!-- C석 -->
 							<c:if test="${i < 30 }">
@@ -120,7 +121,7 @@
 						</c:forEach>
 						
 						<br>
-						
+						<b class="small_font">D</b>
 						<c:forEach var="i" begin="30" end="39">	
 							<!-- D석 -->
 							<c:if test="${i < 40 }">

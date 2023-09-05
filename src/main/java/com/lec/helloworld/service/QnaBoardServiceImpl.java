@@ -12,6 +12,7 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,12 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 
 	@Autowired
 	private QnaBoardDao qnaBoardDao;
+	
+
+	@Override
+	public List<QnaBoard> qnaBoardMainList() {
+		return qnaBoardDao.qnaBoardMainList();
+	}
 
 	@Override
 	public List<QnaBoard> qnaBoardList(QnaBoard qnaBoard, String pageNum, Model model) {
@@ -40,11 +47,6 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 		qnaBoard.setEndRow(paging.getEndRow());
 		model.addAttribute("paging", paging);
 		return qnaBoardDao.qnaBoardList(qnaBoard);
-	}
-
-	@Override
-	public int totCntQna(QnaBoard qnaBoard) {
-		return qnaBoardDao.totCntQna(qnaBoard);
 	}
 
 	@Override
@@ -118,6 +120,20 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 		return result;
 	}
 
+
+	@Override
+	public List<QnaBoard> myQnaBoardList(HttpSession session, QnaBoard qnaBoard, String pageNum, Model model) {
+		Member member = (Member)session.getAttribute("member");
+		if(member!=null) {
+			qnaBoard.setMid(member.getMid());
+		}
+		Paging paging = new Paging(qnaBoardDao.totCntMyQna(qnaBoard), pageNum, 10, 10);
+		qnaBoard.setStartRow(paging.getStartRow());
+		qnaBoard.setEndRow(paging.getEndRow());
+		model.addAttribute("paging", paging);
+		return qnaBoardDao.myQnaBoardList(qnaBoard);
+	}
+	
 	private int filecopy(String serverFile, String backupFile) {
 		int isCopy = 0;
 		FileInputStream is = null;

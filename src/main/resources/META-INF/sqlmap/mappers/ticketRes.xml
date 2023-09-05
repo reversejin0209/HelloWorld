@@ -9,6 +9,8 @@
 		<result property="trorderDate" column="trorderDate"/>
 		<result property="trtotPrice" column="trtotPrice"/>
 		<result property="trresult" column="trresult"/>
+		<result property="tname" column="tname"/>
+		<result property="timg" column="timg"/>
 	</resultMap>
 
 	<!-- 회원: 주문 추가 -->
@@ -21,15 +23,19 @@
 	
 	<!-- 총 주문 리스트 출력: 회원, 비회원 -->
 	<select id="tOrderList" parameterType="TicketRes" resultMap="TicketResResult">
-		SELECT * FROM (SELECT ROWNUM RN, RES.* 
-                 FROM (SELECT DISTINCT TR.*, TRDNAME
-                         FROM TICKET_RES TR, TICKET_RESDETAIL TRD
-                        WHERE TR.TRCODE = TRD.TRCODE
+		SELECT * 
+		  FROM (SELECT ROWNUM RN, RES.* 
+		          FROM (SELECT DISTINCT TR.*, T.*
+		  FROM TICKET_RES TR
+		     , TICKET_RESDETAIL TRD
+		     , (SELECT DISTINCT TNAME, TIMG FROM TICKET) T
+		 WHERE TR.TRCODE = TRD.TRCODE
+		   AND TRDNAME = T.TNAME
 		<!-- 회원: 나의 주문 리스트 -->
-		<if test="mid != null or mid != ''">
-                          AND MID = #{mid}
+		<if test="mid != null">
+           AND MID = #{mid}
 		</if>
-                          	  ) RES)
+          ORDER BY TR.TRCODE DESC) RES)
          WHERE RN BETWEEN #{startRow} AND #{endRow}
 	</select>
 	
@@ -37,15 +43,16 @@
 	<select id="tOrderTotCnt" parameterType="String" resultType="int">
 		SELECT COUNT(*) FROM TICKET_RES
 		<!-- 회원: 나의 총 주문 수량 -->
-		<if test="mid != null or mid != ''">
+		<if test="mid != null">
                        WHERE MID = #{mid}
 		</if>
 	</select>
 	
 	<!-- 주문 정보 조회 -->
 	<select id="getOrderDetail" parameterType="long" resultType="TicketRes">
-		SELECT * FROM TICKET_RES
-         WHERE TRCODE = #{trcode}
+		SELECT RES.*, MNAME, MTEL, MMAIL FROM TICKET_RES RES, MEMBER
+            WHERE RES.MID = MEMBER.MID
+              AND TRCODE = #{trcode}
 	</select>
 	
 	<!-- 주문 취소: 회원 -->

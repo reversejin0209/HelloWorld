@@ -20,6 +20,14 @@
 		<result property="writer" column="writer"/>
 	</resultMap>
 	
+	<!-- 상위 네다섯개만 출력 용도 -->
+	<select id="qnaBoardMainList" resultMap="QnaBoardResult">
+		SELECT * FROM QNABOARD
+	     WHERE QASTEP = 0
+	     ORDER BY QANUM DESC
+	</select>
+	
+	
 	<!-- Qna게시판 목록 -->
 	<select id="qnaBoardList" parameterType="QnaBoard" resultMap="QnaBoardResult">
 		<!-- 전체 출력 -->
@@ -171,4 +179,19 @@
 		DELETE FROM QNABOARD
 			  WHERE QAGROUP = #{qagroup}
 	</delete>
+	
+	<!-- 마이페이지: 내가 작성한 문의글 + 답변글 -->
+	<select id="myQnaBoardList" parameterType="QnaBoard" resultMap="QnaBoardResult">
+		SELECT * FROM (SELECT ROWNUM RN, LIST.* 
+		  FROM (SELECT * FROM QNABOARD, (SELECT QANUM REPLY FROM QNABOARD WHERE MID = #{mid})
+		         WHERE QAGROUP = REPLY
+		         ORDER BY QAGROUP DESC, QASTEP) LIST)
+		 WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="totCntMyQna" parameterType="QnaBoard" resultType="int">
+		SELECT COUNT(*) FROM QNABOARD, (SELECT QANUM REPLY FROM QNABOARD WHERE MID = #{mid})
+     	 WHERE QAGROUP = REPLY
+	</select>
+	
 </mapper>

@@ -18,4 +18,15 @@ public class TicketResDetail {
 	private int trdcnt;
 	private Date trddate;
 	private int trdresult;
+
+	// ticket
+	private String timg;
+
+	// ticket_res
+	private String mid;
+	private int trresult;
+
+	// paging
+	private int startRow;
+	private int endRow;
 }

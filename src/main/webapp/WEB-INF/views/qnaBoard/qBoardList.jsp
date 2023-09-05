@@ -40,7 +40,7 @@
 	
 	<jsp:include page="../main/header.jsp" />
 	<div id="wrap_padding">
-		<h1 class="center">QnA 질문게시판</h1>
+		<h1 class="center">1:1 문의게시판</h1>
 
 		<div class="search_box">
 			<form action="${conPath }/qnaBoard/qBoardList.do" method="get"
@@ -75,7 +75,7 @@
 				<th class="title">제목</th>
 				<th>작성자</th>
 				<th>조회수</th>
-				<th>날짜</th>
+				<th>작성일</th>
 			</tr>
 			<c:if test="${qnaList.size() == 0}">
 				<tr>
