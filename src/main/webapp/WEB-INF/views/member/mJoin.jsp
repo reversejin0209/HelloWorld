@@ -19,7 +19,7 @@
   			if(mid == "") {
   				$('#idConfirmResult').html('&nbsp; &nbsp; &nbsp;');
   			} else if(mid.length<3 || mid.length>13) {
-  				$('#idConfirmResult').html('<b class="purple">아이디는 3글자 이상 혹은 13글자 이하로 입력해주세요</b>');
+  				$('#idConfirmResult').html('<b class="red">아이디는 3글자 이상 혹은 13글자 이하로 입력해주세요</b>');
   			} else {
   				$.ajax({
   					url : '${conPath }/member/mIdConfirm.do',
@@ -39,7 +39,7 @@
   			if(mtel == "") {
   				$('#telConfirmResult').html('&nbsp; &nbsp; &nbsp;');
   			} else if(!mtel.match(patternTel)) {
-  				$('#telConfirmResult').html('<b class="purple">연락처 형식을 지켜주세요</b>');
+  				$('#telConfirmResult').html('<b class="red">연락처 형식을 지켜주세요</b>');
   			} else {
 	  			$.ajax({
 	  				url : '${conPath}/member/mTelConfirm.do',
@@ -59,7 +59,7 @@
   			if(mmail==""){
   				$('#emailConfirmResult').html('&nbsp; &nbsp; &nbsp;');
   			} else if(!mmail.match(patternMemail) || mmail.length>40){
-  				$('#emailConfirmResult').html('<b class="purple">메일 형식을 지켜 주세요</b>');
+  				$('#emailConfirmResult').html('<b class="red">메일 형식을 지켜 주세요</b>');
   			} else{
   				$.ajax({
   					url : '${conPath}/member/mEmConfirm.do',
@@ -78,13 +78,13 @@
   			var mpw = $('#mpw').val().trim();
   			var pwChk = $('#mpwChk').val().trim();  			
   			if(!mpw.match(patternPw)) {
-  				$('#pwChkResult').html('<b class="purple">숫자 또는 문자 6~12자리 이내로 입력해주세요</b>'); 
+  				$('#pwChkResult').html('<b class="red">숫자 또는 문자 6~12자리 이내로 입력해주세요</b>'); 
   			} else if(mpw=="" && pwChk=="") {
   				$('#pwChkResult').html('&nbsp; &nbsp; &nbsp;');
   			} else if(mpw == pwChk) {
-  				$('#pwChkResult').text('비밀번호 일치');
+  				$('#pwChkResult').html('<b class="purple">비밀번호 일치</b>');
   			} else if(mpw != pwChk){
-  				$('#pwChkResult').html('<b class="purple">비밀번호 불일치</b>');
+  				$('#pwChkResult').html('<b class="red">비밀번호 불일치</b>');
   			} 
   		}); 
   		// submit 조건
@@ -94,7 +94,7 @@
   	  		var telConfirmResult   = $('#telConfirmResult').text().trim();
   	  		var emailConfirmResult = $('#emailConfirmResult').text().trim();
   	  		if(idConfirmResult != '사용 가능한 ID입니다') {
-  	  			alert('ID를 확인하세요');
+  	  			alert('ID를 확인하세요' + '/' + idConfirmResult );
   	  			return false; // submit 제한
   	  		} else if(pwChkResult != '비밀번호 일치') {
   	  			alert('비밀번호를 확인하세요');

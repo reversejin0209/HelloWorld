@@ -18,8 +18,14 @@ public class TicketRes {
 	private int trtotPrice;
 	private int trresult;
 	
-	// ticketResDetail
-	private String trdname;
+	// ticket
+	private String tname;
+	private String timg;
+	
+	// member
+	private String mname;
+	private String mtel;
+	private String mmail;
 	
 	// paging
 	private int startRow;

@@ -10,11 +10,26 @@
 <link href="${conPath }/css/attraction/attraction.css" rel="stylesheet">
 <link href="${conPath }/css/board.css" rel="stylesheet">
 <style type="text/css">
-#atcList_background {
-	background-image: url(${conPath}/img/atcList_background.png);
+#head_background {
+	background-image: url('${conPath}/img/head_background_02.png');
 }
-</style>	
+</style>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+	$(document)
+			.ready(
+					function() {
+						$('.atcBox')
+								.click(
+										function() {
+											var atcode = $(this).children().eq(
+													0).val().trim();
+											location.href = '${conPath }/attraction/detailAtc.do?atcode='
+													+ atcode
+													+ '&pageNum=${paging.currentPage}';
+										});
+					});
+</script>
 </head>
 <body>
 	<c:if test="${not empty successMsg }">
@@ -28,23 +43,31 @@
 			history.back();
 		</script>
 	</c:if>
+
+
 	<jsp:include page="../main/header.jsp" />
-	<div id="atcList_background">
-		<h2 class="cWhite">어트랙션</h2>
-		<p class="h2Txt cWhite">
-			언제나 새롭고 즐거운 경험을 주는 Helloworld 어트랙션을 소개합니다!
-		</p>
+
+	<!-- 상단 배경 이미지 -->
+	<div id="head_background">
+		<div class="head_background_inner">
+			<h1>어트랙션</h1>
+			<p>언제나 새롭고 즐거운 경험을 주는 Helloworld 어트랙션을 소개합니다!</p>
+			<div class="margin"></div>
+			<div class="margin"></div>
+		</div>
 	</div>
+
+
 	<div id="wrap">
-		<div id="content">
+
 		<!-- 검색박스 -->
-		<div class="atc_schBox">
-			<!-- ** 경로 수정 ** -->
-			<form action="${conPath }/attraction/listAtc.do" method="get">
-				<h3 class="center">나에게 맞는 어트랙션을 찾아보세요!</h3>
-				<ul class="atc_schBox_row">
-					<li>
-						<h3>위치</h3> 
+		<form action="${conPath }/attraction/listAtc.do" method="get">
+			<div class="atc_schBox">
+				<h2 class="center">나에게 맞는 어트랙션을 찾아보세요!</h2>
+
+				<div class="flex_wide">
+					<div class="schBox_row">
+						<h3>위치</h3>
 						<select name="zname">
 							<option value="" <c:if test="${param.zname == ''}">selected="selected"</c:if>>전체</option>
 							<option value="익스트림존" <c:if test="${param.zname == '익스트림존' }">selected="selected"</c:if>>익스트림존</option>
@@ -52,65 +75,71 @@
 							<option value="어드벤처존" <c:if test="${param.zname == '어드벤처존' }">selected="selected"</c:if>>어드벤처존</option>
 							<option value="워터월드존" <c:if test="${param.zname == '워터월드존' }">selected="selected"</c:if>>워터월드존</option>
 						</select>
-					</li>
-					<li>
-						<h3>나이</h3> <input type="number" name="schOld " value="${param.schOld  }" placeholder="나이를 입력해주세요">
-					</li>
-					<li>
-						<h3>키</h3> <input type="number" name="schHeight " value="${param.schHeight  }" placeholder="키를 입력해주세요">
-					</li>
-					<li>
-						<h3>인원제한</h3> <input type="number" name="schAtnop " value="${param.schAtnop  }" placeholder="인원 수를 입력해주세요">
-					</li>
-				</ul>
-				<div class="serchBox center">
-					<input type="submit" value="검색" class="btn_white">
-					&nbsp;
-					<input type="reset" value="되돌리기" class="btn_white">
+					</div>
+					<div class="schBox_row">
+						<h3>나이</h3>
+						<input type="number" name="schOld " value="${param.schOld  }" placeholder="나이를 입력해주세요">
+					</div>
+					<div class="schBox_row">
+						<h3>키</h3>
+						<input type="number" name="schHeight " value="${param.schHeight  }" placeholder="키를 입력해주세요">
+					</div>
+					<div class="schBox_row">
+						<h3>인원제한</h3>
+						<input type="number" name="schAtnop " value="${param.schAtnop  }" placeholder="인원 수를 입력해주세요">
+					</div>
 				</div>
-			</form>
-		</div>
-			<div id="listAtc">
-				<table>
-					<tr>
-						<c:forEach var="list" items="${listAtc}" varStatus="status">
-							<c:if test="${status.index%5==0}">
-								<tr></tr>
-							</c:if>
-							<td>
-								<a href="${conPath }/attraction/detailAtc.do?atcode=${list.atcode}&pageNum=${paging.currentPage}"> 
-								<img src="${conPath }/attractionImg/${list.atimage}" style="width: 200px; height: 282px;"> <br> ${list.atname }<br> ${list.zname } <br>
-								</a>
-							</td>
-						</c:forEach>
-					</tr>
-				</table>
+				<div class="center">
+					<input type="submit" value="조회하기" class="schBox_btn">
+					&nbsp;
+					<input type="submit" value="되돌리기" class="schBox_btn">
+				</div>
+			</div>
+		</form>
+		<!-- <div class="atc_schBox"> -->
+
+		<!-- 놀이기구 출력 3xa -->
+		<div class="atcList">
+			<c:forEach var="atc" items="${listAtc}" varStatus="status">
+				<div class="atcBox">
+					<input type="hidden" name="atcode" value="${atc.atcode }">
+					<div class="atcBox_img">
+						<img src="${conPath }/attractionImg/${atc.atimage}">
+					</div>
+					<div class="atcBox_content">
+						<h2>${atc.atname }</h2>
+						<p>${atc.zname }</p>
+					</div>
+				</div>
+			</c:forEach>
+
 			<div class="center">
 				<c:if test="${not empty admin }">
 					<button onclick="location.href='${conPath}/attraction/insertAtc.do'" class="btn_submit">기구등록</button>
 				</c:if>
 			</div>
-			</div>
-		</div>
+		</div><!-- <div class="atcList"> -->
 	</div>
+
+	<br>
 	<!-- 페이징 -->
 	<div id="paging">
 		<c:if test="${paging.startPage>paging.blockSize}">
 			<a href="${conPath }/attraction/listAtc.do?pageNum=${paging.startPage-1 }">이전</a>
 		</c:if>
-		<c:forEach var="i" begin="${paging.startPage}"
-			end="${paging.endPage }">
+		<c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage }">
 			<c:if test="${paging.currentPage==i }">
 				<span>${i }</span>
 			</c:if>
 			<c:if test="${paging.currentPage != i }">
 				<a href="${conPath }/attraction/listAtc.do?method=list&pageNum=${i }">${i }</a>
 			</c:if>
-			</c:forEach>
-			<c:if test="${paging.endPage<paging.pageCnt }">
-				<a href="${conPath }/attraction/listAtc.do?pageNum=${paging.endPage+1 }">다음</a>
-			</c:if>
-		</div>
+		</c:forEach>
+		<c:if test="${paging.endPage<paging.pageCnt }">
+			<a href="${conPath }/attraction/listAtc.do?pageNum=${paging.endPage+1 }">다음</a>
+		</c:if>
+	</div>
+	<div class="margin"></div>
 	<jsp:include page="../main/footer.jsp" />
 </body>
 </html>

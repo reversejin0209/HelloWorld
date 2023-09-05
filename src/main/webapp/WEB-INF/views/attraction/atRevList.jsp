@@ -27,7 +27,7 @@
 	</script>
 	<style>
 	  #head_background {
-	  		background-image: url('${conPath}/img/head_background_06.png');
+	  		background-image: url('${conPath}/img/head_background_02.png');
 	  }
 	</style>
 

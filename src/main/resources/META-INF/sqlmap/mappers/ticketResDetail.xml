@@ -10,6 +10,9 @@
 		<result property="trdcnt" column="trdcnt"/>
 		<result property="trddate" column="trddate"/>
 		<result property="trdresult" column="trdresult"/>
+		<result property="timg" column="timg"/>
+		<result property="mid" column="mid"/>
+		<result property="trresult" column="trresult"/>
 	</resultMap>
 
 	<!-- 회원: 예약한 티켓 정보 추가 -->
@@ -25,8 +28,32 @@
 
 	<!-- 주문 내역 상세보기 -->
 	<select id="getTOrderDetail" parameterType="long" resultMap="TicketResDetailResult">
-		SELECT * FROM TICKET_RESDETAIL
-        		WHERE TRCODE = #{trcode}
+		SELECT DISTINCT TRD.*, TIMG FROM TICKET_RESDETAIL TRD, TICKET
+         <if test="trcode != 0">
+         WHERE TRCODE = #{trcode}
+         </if>
+         <if test="trcode == 0">
+         WHERE TRCODE = (SELECT MAX(TRCODE) FROM TICKET_RES)
+         </if>
+           AND TRD.TRDNAME = TNAME
+	</select>
+	
+	<!-- 관리자: 티켓 상품 정보 전체 출력 -->
+	<select id="tOrderDetailList" parameterType="TicketResDetail" resultMap="TicketResDetailResult">
+		SELECT *
+		  FROM (SELECT ROWNUM RN, LIST.* 
+		          FROM (SELECT TD.*
+		          	  		 , MID
+		          	  		 , TRRESULT 
+		          	      FROM TICKET_RESDETAIL TD, TICKET_RES TR
+		         WHERE TD.TRCODE = TR.TRCODE
+		         ORDER BY TD.TRDCODE DESC) LIST)
+		 WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<!-- 관리자: 상품 정보 전체 글 갯수 -->
+	<select id="tOrderDeatailTotCnt" resultType="int">
+		SELECT COUNT(*) FROM TICKET_RESDETAIL
 	</select>
 	
 	<!-- 관리자: 사용 티켓으로 변경 -->
@@ -34,6 +61,12 @@
 		UPDATE TICKET_RESDETAIL
 		   SET TRDRESULT = 1
 		 WHERE TRDCODE = #{trdcode}
+	</update>
+
+	<update id="visitUp" parameterType="String">
+		UPDATE MEMBER
+ 		   SET MVISIT = MVISIT + 1
+ 		 WHERE MID = #{mid}
 	</update>
 	
 </mapper>		

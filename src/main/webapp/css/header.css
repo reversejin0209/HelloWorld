@@ -17,12 +17,12 @@
 	color: #838383;
 }
 
-.util .utill_inner .login ul li{
+.util .utill_inner .login ul li {
 	float: left;
 	padding: 0 10px;
 }
 
-.util .utill_inner .login ul li a{
+.util .utill_inner .login ul li a {
 	font-size: 13px;
 	color: #838383;
 }
@@ -110,7 +110,7 @@ nav .nav_inner {
 }
 
 .drop-menu li>a {
-	width: 100% - 20px;
+	width: 100%- 20px;
 	display: block;
 	padding: 0 0 0 20px;
 	font-weight: 300;
@@ -141,6 +141,7 @@ nav .nav_inner {
 	width: 100%;
 	justify-content: space-between;
 	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+	color: #ffffff;
 }
 
 .mega-box .content .row {
@@ -154,11 +155,12 @@ nav .nav_inner {
 }
 
 .content .row img {
-	/* width: 100%;
-	height: 100%; */
-	width: 254px;
-	height: 200px;
-	object-fit: cover;
+	width: 80px;
+	/* object-fit: cover; */
+}
+
+.content .row h1 {
+	font-size: 34px;
 }
 
 .content .row header {
@@ -187,6 +189,6 @@ nav .nav_inner {
 	line-height: 0px;
 }
 
-.nav_inner .promotion img{
+.nav_inner .promotion img {
 	height: 40px;
 }

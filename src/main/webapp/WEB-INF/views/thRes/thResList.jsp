@@ -15,7 +15,7 @@
 $(document).ready(function() {
 	$('tr').click(function() {
 		var thrcode = $(this).children().eq(3).text().trim();
-		if (isNaN(thrcode)) {
+		if (thrcode != '주문번호') {
 			$.ajax({
 				url : '${conPath}/thRes/thResContent.do',
 				type : 'get',
@@ -67,7 +67,7 @@ $(document).ready(function() {
 								<li><h4>나의 활동관리</h4></li>
 								<li><a href="${conPath}/member/tOrderList.do">티켓 예매 내역</a></li>
 								<li><a href="${conPath }/thRes/thResList.do?mid=${member.mid }">공연 예매 내역</a></li>
-								<li><a href="">공연 리뷰</a></li>
+								<li><a href="${conPath }/thRev/mthRevList.do?mid=${member.mid }">공연 리뷰</a></li>
 								<li><a href="">어트랙션 리뷰</a></li>
 							</ul>
 
@@ -122,7 +122,7 @@ $(document).ready(function() {
 						</c:forEach>
 					</table>
 					<br>
-					
+
 					<!-- 페이징 -->
 					<div id="paging">
 						<c:if test="${paging.startPage>paging.blockSize}">

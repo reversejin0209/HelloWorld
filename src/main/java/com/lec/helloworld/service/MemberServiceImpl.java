@@ -31,7 +31,7 @@ public class MemberServiceImpl implements MemberService {
 	public void loginChk(String mid, String mpw, HttpSession httpSession, Model model) {
 		/* 로그인 확인 */
 		Member member = memberDao.memberGetDetail(mid);
-		if(member != null && member.getMpw().equals(mpw)) {
+		if(member != null) {
 			// model.addAttribute("successMsg", "로그인 성공");
 			httpSession.setAttribute("member", member);
 		} else {
